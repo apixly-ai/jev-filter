@@ -30,7 +30,8 @@ def test_markdown_relative_links_exist():
         for target in re.findall(r"\]\(([^)]+)\)", p.read_text(encoding="utf-8")):
             if "://" in target or target.startswith("#"):
                 continue
-            assert (p.parent / target.split("#")[0]).exists(), (p, target)
+            # A query (?lang=zh) or anchor selects a view of the file; the path must exist.
+            assert (p.parent / re.split(r"[?#]", target)[0]).exists(), (p, target)
 
 
 def test_schema_matches_documented_examples():

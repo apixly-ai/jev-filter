@@ -18,6 +18,7 @@ workload becomes faster or cheaper.
 
 - [Task recipes](recipes.md)
 - [Hosted execution: browser, desktop, survey](hosted-execution.md)
+- [Recorded runs: replay, GIFs and how they were made](showcase.md)
 - [npm/native distribution](distribution.md)
 - [README design research](readme-design.md)
 

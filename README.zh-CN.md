@@ -10,7 +10,12 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-7958d6" alt="MIT"></a>
 </p>
 
-**放在工具与主模型之间的语义筛选器兼托管执行器。** 在 CLI 内部采集命令输出、搜索结果、网页控件或日志，用 Jev 根据 AI 提供的任务与上下文判断，再返回相关证据和待复核 ID，减少整批原始结果进入主模型上下文。**0.3 新增：**让 CLI 自己操作网页或桌面应用，或对上万条记录做调研汇总，决策同样是类型化、可复核的。[托管执行 →](#托管执行浏览器桌面与数据)
+**放在工具与主模型之间的语义筛选器兼托管执行器。** 在 CLI 内部采集命令输出、搜索结果、网页控件或日志，用 Jev 根据 AI 提供的任务与上下文判断，再返回相关证据和待复核 ID，减少整批原始结果进入主模型上下文。**0.3 新增：**让 CLI 自己操作网页或桌面应用，或对上千条记录做调研汇总，决策同样是类型化、可复核的。[托管执行 →](#托管执行浏览器桌面与数据)
+
+<p align="center">
+  <a href="https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh"><img src="docs/assets/showcase/browse.zh-CN.gif" alt="jev-filter browse 在测试商店上的真实录制：每一步显示 Jev 对下一步操作和目标的概率；下单按钮暂停等人确认，确认后校验购买成功" width="100%"></a>
+</p>
+<p align="center"><sub>在合成测试商店上真实录制，概率是 Jev 的原始输出 · <a href="https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh">交互式回放：浏览器、桌面、调研</a> · <a href="docs/showcase.zh-CN.md">录制方法</a></sub></p>
 
 ## 本地节省统计看板
 
@@ -26,19 +31,111 @@
 
 ## 托管执行：浏览器、桌面与数据
 
-Jev 负责选，程序负责做。每一步先观察页面或窗口，用一次 Jev 请求在程序枚举的控件里选出下一步操作和目标，重新核对目标后再执行。Jev 从不产出选择器、坐标、命令或文字。
+Jev 负责选，程序负责做。每一步先观察页面或窗口，用一次 Jev 请求在程序枚举的控件里选出下一步操作和目标，重新核对目标后再执行。Jev 从不产出选择器、坐标、命令或文字。`browse` 和 `desktop` 输出一个 JSON 包，只有 `status: done`（退出码 0）才算成功；`extract` 和 `survey` 只有结果 `ok` 且 `complete` 时才以退出码 0 结束。命令无法启动时 stdout 没有输出，原因写在 stderr。
+
+### 操作网页
 
 ```sh
-# 浏览器：私有无头 Chrome/Edge，或 --cdp-port / Camofox
-jev-filter browse --url https://shop.example/ --goal 'Buy the cheapest in-stock red shoes in size 42' \
-  --value query='red shoes'            # 在“Place order”前暂停并给出 confirm_token
+jev-filter browse --url https://shop.example/ \
+  --goal 'Buy the cheapest in-stock red shoes in size 42' \
+  --value query='red shoes' --keep-open
+```
 
-# 桌面：Windows UI Automation 或 macOS 辅助功能，OCR 兜底
-jev-filter desktop --window '^Invoice Tool$' --goal 'Choose the Pro plan and save' --verify-text 'saved'
+它会停在下单按钮前，把决定交还给你（测试商店上的真实输出，有删节）：
 
-# 数据：对大量记录做类型化判断，由代码汇总
+```json
+{
+  "status": "needs_confirmation",
+  "steps": 8, "requests": 9, "elapsed_ms": 3820,
+  "usage": {"input_tokens": 26220, "output_tokens": 1678},
+  "pending": {"label": "Place order", "role": "button"},
+  "reason": "label_rule", "irreversible_probability": 0.67,
+  "confirm_token": "0e5a2ab5892ab560:e2",
+  "session": {"cdp_port": 61129, "target_id": "04C5D2DC…"},
+  "trace": [{"step": 1, "operation": "CLICK", "action": "Reject optional cookies"},
+            {"step": 2, "operation": "TYPE_TEXT", "action": "Search products", "value_key": "query"}, "…"]
+}
+```
+
+用户同意后在同一个标签页续跑，只执行被确认的那个动作，然后校验：
+
+```sh
+jev-filter browse --cdp-port 61129 --target-id 04C5D2DC… --confirm 0e5a2ab5892ab560:e2 \
+  --goal 'Buy the cheapest in-stock red shoes in size 42' \
+  --verify-text 'order has been placed' --close-browser
+# {"status": "done", "confirmed": true, "verification": {"passed": true, "text": true}, …}
+```
+
+需要说明用途或不能进日志的值，用文件传：`--values values.json`，内容如 `{"email": {"value": "…", "description": "contact email", "sensitive": true}}`。要用你自己已登录的浏览器，加 `--cdp-port`；也可以用 `--transport camofox --session NAME`。`--dry-run` 把选中的控件放在 `pending` 里返回，什么都不执行。
+
+### 从网页取结构化数据
+
+```sh
+jev-filter extract --url 'https://shop.example/results?q=shoes' \
+  --task 'In-stock products under $70' --analysis analysis.json
+```
+
+```json
+{"requirements": [
+  {"id": "product",  "statement": "The record is a product row, not a heading or a link.", "expected": true},
+  {"id": "in_stock", "statement": "The product is in stock.", "expected": true},
+  {"id": "under_70", "statement": "The product costs less than $70.", "expected": true}],
+ "fields": ["source_id", "text"]}
+```
+
+表格会变成带表头的行。测试页上 14 条记录，排除了 12 条：
+
+```json
+{"selected_ids": ["r1", "r3"], "review_ids": [], "complete": true,
+ "excerpts": [{"source_id": "r1", "text": "Product: Red Runner | Category: shoes | Price: $59 | Rating: 4.4 | Availability: In stock"},
+              {"source_id": "r3", "text": "Product: Blue Runner | Category: shoes | Price: $55 | Rating: 4.1 | Availability: In stock"}]}
+```
+
+每个条件单独写成一条 requirement。不给 `--analysis` 时默认只问相关性，同一页面还会把 72 美元和 99 美元的鞋也选进来。
+
+### 操作桌面应用
+
+<p align="center"><img src="docs/assets/showcase/desktop.zh-CN.gif" alt="jev-filter desktop 在 Windows Forms 应用里的真实录制：填写姓名、在下拉框里选套餐、勾选复选框并保存；第二个目标“删除全部记录”在删除前停下" width="100%"></p>
+
+```sh
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # UI Automation + OCR，或 macOS 辅助功能
+jev-filter desktop --list             # 列出可选窗口
+jev-filter desktop --window '^Invoice Tool$' \
+  --goal 'Set the customer name to Ada Lovelace, choose the Pro plan, turn on the weekly report, and save the profile' \
+  --value name='Ada Lovelace' --verify-text 'saved Ada Lovelace'
+```
+
+输出包的结构和 `browse` 相同。“Delete all records”这类目标会在删除前以 `needs_confirmation` 结束。终端、密码管理器和系统设置会被拒绝；创建 `~/.jev-filter/STOP` 或把鼠标停在屏幕左上角可以随时停止。
+
+### 对上千条记录做调研
+
+<p align="center"><img src="docs/assets/showcase/survey.zh-CN.png" alt="2000 条生成的客服工单的调研看板：主题分布、情绪占比、流失比例、主题交叉表、置信度最高的样例，以及对照生成器标签的准确率" width="100%"></p>
+
+```sh
+jev-filter survey --input tickets.jsonl --spec survey.json --dry-run   # 只估算，不推理
 jev-filter survey --input tickets.jsonl --spec survey.json --format md
 ```
+
+```json
+{"task": "Summarise what customers contact support about, how they feel, and churn risk.",
+ "keep": ["product"],
+ "screen": {"instructions": "The record is a genuine support request (not spam)."},
+ "questions": {
+   "topic": {"type": "choice", "instructions": "Main topic?",
+             "criteria": {"billing": "…", "bug": "…", "feature_request": "…", "account": "…", "shipping": "…", "other": "…"}},
+   "sentiment": {"type": "score", "instructions": "How does the customer feel?",
+                 "criteria": ["Angry", "Neutral", "Positive"]},
+   "churn": {"type": "noul", "instructions": "The customer threatens to cancel or switch."}},
+ "group_by": ["topic", "product"]}
+```
+
+报告里有各选项的数量和占比、评分分档、交叉表、每组置信度最高的样例、不确定和失败的 ID、用量与费用。Jev 不写文字，由你的 agent 根据报告来叙述。上面这 2000 条生成的工单：76 次请求、9.3 秒、约 0.044 美元输入费用；对照生成器的标签，主题准确率 100%，情绪 95.2%。这些记录天生容易判断，请用 `--labels` 在自己的数据上测。
+
+### 在 agent 里使用
+
+让 agent 继续做规划。它按短小的子目标逐次调用 `browse` 或 `desktop`，带上值和校验条件，然后读 `status`。`needs_confirmation` 和 `needs_value` 要回到用户；`blocked` 且原因是 `challenge` 或 `login_required` 时也一样。[skill 参考：输入、输出和每种状态的处理 →](https://github.com/apixly-ai/jev-filter/blob/main/skills/jev-filter/references/hosted.md)
+
+### 测了什么
 
 - **安全由结构保证。** 支付、发送、删除类动作会暂停等待确认；导航限制在起始来源内；密码和验证码一律交还，不代为处理；桌面执行拒绝终端和凭据管理器，出现 STOP 文件即停止。
 - **在本地合成夹具上用真实 Jev 实测**（每项三轮，成功与否由程序校验，不以模型的 DONE 为准）：
@@ -50,7 +147,7 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 | 桌面（Windows UIA + OCR） | 4 | 12/12 | 0.8–5.6 s |
 | survey（10,000 条） | 1 | 主题 100.0%，情绪 95.7% | 19.6 s，375 次请求，约 $0.22 输入费用 |
 
-这些是小规模合成测试，记录由模板生成、难度较低，展示的是机制和成本，不代表开放网络上的成功率。[使用说明与限制 →](docs/hosted-execution.zh-CN.md) · [测试方法 →](docs/benchmarks.zh-CN.md#托管执行2026-09-30)
+这些是小规模合成测试，记录由模板生成、难度较低，展示的是机制和成本，不代表开放网络上的成功率。在真实公开网站上情况要差一些：一次只读审计中 24 个目标跑了 48 次，去掉被人机验证、登录墙或接口故障挡住的运行后，34 次里有 16 次达成目标，其中自定义组件最弱。[真实网站审计 →](docs/benchmarks.zh-CN.md#真实网站与应用2026-09-30) · [使用说明与限制 →](docs/hosted-execution.zh-CN.md) · [测试方法 →](docs/benchmarks.zh-CN.md#托管执行2026-09-30)
 
 ## 实测收益与代价
 
@@ -76,7 +173,7 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 
 ## 快速开始
 
-**Node.js 22+ · macOS / Linux · npm 发行包不需要另外安装 Python。** Windows 可用 WSL，或从 GitHub Release 的 wheel / `pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.2.3'` 原生安装 Python 包（Python 3.10+；`search` 需要 PATH 里有 `rg`；未发布到 PyPI）。只有实际推理才需要 TypeSafe Jev API key。
+**Node.js 22+ · macOS / Linux · npm 发行包不需要另外安装 Python。** Windows 可用 WSL，或从 GitHub Release 的 wheel / `pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'` 原生安装 Python 包（Python 3.10+；`search` 需要 PATH 里有 `rg`；未发布到 PyPI）。只有实际推理才需要 TypeSafe Jev API key。
 
 通过 npm 安装：
 
@@ -152,7 +249,7 @@ cp -R "$(npm root -g)/@apixly/jev-filter/skills/jev-filter" ~/.codex/skills/
 | 让 CLI 完成一个网页目标 | `browse` | [托管执行](docs/hosted-execution.zh-CN.md#浏览器browse) |
 | 从网页取结构化数据 | `extract` | [页面数据](docs/hosted-execution.zh-CN.md#页面数据extract) |
 | 在 Windows/macOS 应用里完成目标 | `desktop` | [桌面](docs/hosted-execution.zh-CN.md#桌面desktop) |
-| 上万条记录要分类汇总 | `survey` | [大量记录](docs/hosted-execution.zh-CN.md#大量记录survey) |
+| 上千条记录要分类汇总 | `survey` | [大量记录](docs/hosted-execution.zh-CN.md#大量记录survey) |
 | 已有类型化 Jev 流程 | Python `batch.run` / CLI `batch` | [程序内接入](docs/agents.zh-CN.md) |
 
 [全部参数](docs/cli.zh-CN.md) · [原文复核](docs/getting-started.zh-CN.md#读懂结果) · [架构](docs/architecture.zh-CN.md)

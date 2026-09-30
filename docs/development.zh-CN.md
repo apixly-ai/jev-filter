@@ -12,6 +12,8 @@ npm test
 
 CI 检查 Python 版本矩阵、macOS、格式、至少 80% 行覆盖率、包构建/安装、公开内容检查、离线规划、
 文档示例和浏览器行为。真实模型测试必须显式启用，不在外部 PR 中运行。
+桌面测试（`-m desktop`）会打开真实窗口并抢占键盘焦点，所以默认跳过，只有设置 `JEV_DESKTOP_TESTS=1`
+才运行；CI 的 `desktop-windows` 和 `desktop-macos` 作业会设置它。请在没人使用的机器上运行。
 
 ## 发布流程
 

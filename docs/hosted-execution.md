@@ -122,7 +122,7 @@ projection behave identically. Nothing is clicked.
 ## Desktop: `desktop`
 
 ```sh
-pip install 'jev-filter[desktop]'          # Windows: UI Automation + OCR; macOS: pyobjc
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # Windows: UI Automation + OCR; macOS: pyobjc
 jev-filter desktop --list                  # candidate windows
 jev-filter desktop --window '^Invoice Tool$' \
   --goal 'Set the customer name to Ada Lovelace, choose the Pro plan and save' \
@@ -239,7 +239,22 @@ latencies.
 - Camofox clicks by CSS selector in the top document, so controls inside frames are not offered
   there. Each Camofox click also waits about 1.7 s inside Camofox.
 - Desktop coverage depends on what an application exposes to accessibility APIs. Electron and
-  Chromium windows are large (hundreds of controls, about 1.5 s per observation on Windows).
+  Chromium windows expose page content only with renderer accessibility on (for example
+  `--force-renderer-accessibility`); then they are large (hundreds of controls, about 1.5 s per
+  observation on Windows).
 - macOS support is tested with a fake accessibility tree offline and on macOS runners when
   Accessibility can be granted; it was not exercised on a physical Mac during development.
+- Measured gaps on real sites (0.3.0, [audit](benchmarks.md#real-websites-and-applications-2026-09-30)):
+  clickable elements without an ARIA role and native inputs hidden with `opacity: 0` are not
+  offered, which hurts custom widgets and many Chinese sites. Only the viewport is observed, so a
+  link below the fold or in a scrolled sidebar needs a scroll first. Links that open a new tab
+  are not followed. Challenge pages with a localized title (for example Cloudflare's check page
+  in a Chinese-language browser) or from other vendors end as `model_blocked` rather than
+  `challenge`. Very link-dense pages can
+  exceed the provider's input limit and end as `error`. `--verify-question` sees page text, not
+  checked or pressed state.
+- Desktop gaps measured on real applications: list items scrolled out of view are not offered
+  and there is no scroll action. Qt menu-bar items need Expand rather than Invoke. Qt builds
+  without accessibility fall back to OCR, which may merge a menu bar into one target. Chromium and
+  Electron windows hide page content unless started with `--force-renderer-accessibility`.
 - Page text, control labels and record text are sent to TypeSafe for inference.

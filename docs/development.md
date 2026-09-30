@@ -11,6 +11,9 @@ pip install -e '.[code,dev]'
 
 CI checks Linux/Python versions, macOS, lint/format, >=80% line coverage, package
 build/install, public-content hygiene, offline benchmark planning, documentation examples. Live model tests are opt-in and never run on fork PRs.
+Desktop tests (`-m desktop`) open real windows and take keyboard focus, so they are skipped
+unless `JEV_DESKTOP_TESTS=1`; the `desktop-windows` and `desktop-macos` CI jobs set it. Run them on
+a machine nobody is using.
 
 Release procedure:
 

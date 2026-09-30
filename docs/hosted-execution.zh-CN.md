@@ -80,7 +80,7 @@ jev-filter extract --url 'https://shop.example/results?q=red' \
 ## 桌面：`desktop`
 
 ```sh
-pip install 'jev-filter[desktop]'          # Windows：UI Automation + OCR；macOS：pyobjc
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # Windows：UI Automation + OCR；macOS：pyobjc
 jev-filter desktop --list                  # 列出候选窗口
 jev-filter desktop --window '^Invoice Tool$' \
   --goal 'Set the customer name to Ada Lovelace, choose the Pro plan and save' \
@@ -155,6 +155,8 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 - 控件超过 250 个的页面在单步里会被截断（`omitted_actions`），请滚动或缩小目标。
 - 不支持画布、封闭式 shadow root、跨域 iframe、拖放、文件上传、验证码和登录表单。密码框永不填写：请使用已登录的配置（`--cdp-port`、Camofox）。
 - Camofox 在顶层文档里按 CSS 选择器点击，所以 iframe 内的控件在该传输下不提供；每次点击在 Camofox 内部还要等约 1.7 秒。
-- 桌面覆盖面取决于应用向无障碍接口暴露了什么。Electron 和 Chromium 窗口很大（数百个控件，Windows 上每次观察约 1.5 秒）。
+- 桌面覆盖面取决于应用向无障碍接口暴露了什么。Electron 和 Chromium 窗口只有开启渲染器无障碍（例如 `--force-renderer-accessibility`）时才暴露网页内容，此时控件很多（数百个，Windows 上每次观察约 1.5 秒）。
 - macOS 支持在离线测试中用模拟的无障碍树验证，并在可授权辅助功能的 macOS runner 上运行；开发期间没有在实体 Mac 上跑过。
+- 在真实网站上实测到的缺口（0.3.0，[审计](benchmarks.zh-CN.md#真实网站与应用2026-09-30)）：没有 ARIA 角色的可点元素、用 `opacity: 0` 藏起来的原生输入不会提供，这会影响自定义组件和很多中文站点。只观察视口，所以折叠线以下或滚动侧栏里的链接需要先滚动。在新标签页打开的链接不会跟随。标题被本地化的验证页（例如 Cloudflare 的"请稍候…"）或其他厂商的验证页会以 `model_blocked` 而不是 `challenge` 结束。链接非常密集的页面可能超过接口输入上限，以 `error` 结束。`--verify-question` 只看页面文字，看不到勾选、按下等状态。
+- 在真实桌面应用上实测到的缺口：滚出可视区域的列表项不会提供，也没有滚动动作；Qt 菜单栏项需要 Expand 而不是 Invoke；未开启无障碍的 Qt 程序会退回 OCR，可能把整条菜单栏合成一个目标；Chromium 和 Electron 窗口除非用 `--force-renderer-accessibility` 启动，否则网页内容不可见。
 - 页面文本、控件标签和记录文本会发送给 TypeSafe 用于推理。

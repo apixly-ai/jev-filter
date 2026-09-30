@@ -13,7 +13,7 @@ of a 0.x API (minor releases may make documented breaking changes).
   operation and a target per operation (design adapted from browser-use/jev-ultrafast, MIT).
   Named values (`--value`), optional text model (`--text-model`), origin limits, dialog handling,
   `--verify-text/--verify-url/--verify-question`, `--dry-run`, and pause/resume for irreversible
-  actions with a one-time `confirm_token` (`--keep-open`, `--cdp-port`/`--target-id`, `--confirm`).
+  actions with a `confirm_token` bound to the page state and the action (`--keep-open`, `--cdp-port`/`--target-id`, `--confirm`).
 - `extract`: structures a page into header-labelled table rows, blocks and links, then applies the
   `query` contract.
 - `desktop`: the same loop in one Windows (UI Automation) or macOS (Accessibility) application,
@@ -24,8 +24,11 @@ of a 0.x API (minor releases may make documented breaking changes).
   concurrent evaluation, code-side aggregation (distributions, crosstabs, examples, uncertain and
   failed IDs), pre-flight budgets (`--max-usd`, `--max-requests`), `--labels` calibration and
   optional category proposal from a fixed-seed sample.
-- `doctor` reports hosted-execution readiness. `pip install 'jev-filter[desktop]'` adds the
-  desktop backends.
+- `doctor` reports hosted-execution readiness. The `desktop` extra adds the desktop backends
+  (install it from the Git tag; there is no PyPI package).
+- Recorded runs: an interactive replay page (browser, desktop, survey; English and Chinese),
+  GIFs and videos made from real runs with live Jev on the fixtures, and README usage examples
+  with real output. `python -m benchmarks.showcase.record` / `render` reproduce them.
 - Agent skill: `skills/jev-filter/references/hosted.md` explains how to build `browse`,
   `desktop`, `extract` and `survey` inputs (values files, survey specs, labels) and how to act on
   each output status.
