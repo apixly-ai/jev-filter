@@ -1,0 +1,10 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Account</title>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}label{display:block;margin-top:8px}</style></head><body>
+<h1>Sign in</h1>
+<form id="f"><label>Email <input id="email" type="email" autocomplete="username"></label>
+<label>Password <input id="pw" type="password" autocomplete="current-password"></label>
+<label>One-time code <input id="otp" autocomplete="one-time-code"></label>
+<button type="submit">Sign in</button></form><p id="msg" role="status"></p>
+<script>document.getElementById('f').onsubmit = e => { e.preventDefault();
+  document.getElementById('msg').textContent = document.getElementById('email').value ? 'Signed in as ' + document.getElementById('email').value : 'Email is required.'; };</script>
+</body></html>

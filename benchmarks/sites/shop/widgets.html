@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Widgets</title>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}iframe{width:420px;height:90px;border:1px solid #999}</style></head><body>
+<h1>Widgets</h1><p id="out" role="status">Nothing yet.</p>
+<shadow-card></shadow-card>
+<iframe id="frame" title="Embedded panel" src="frame.html"></iframe>
+<p><button id="confirm-btn">Archive notes</button></p>
+<script>
+customElements.define('shadow-card', class extends HTMLElement { connectedCallback() {
+  const r = this.attachShadow({mode: 'open'}); r.innerHTML = '<section aria-label="Shadow card"><button id="s">Shadow action</button></section>';
+  r.getElementById('s').onclick = () => document.getElementById('out').textContent = 'Shadow action done.'; } });
+document.getElementById('confirm-btn').onclick = () => { const ok = confirm('Archive notes?');
+  document.getElementById('out').textContent = ok ? 'Archived.' : 'Archive cancelled.'; };
+</script></body></html>

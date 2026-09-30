@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Product</title><script src="common.js"></script>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}</style></head><body>
+<h1 id="name"></h1><p id="meta"></p>
+<label for="size">Size</label><select id="size"><option value="">Choose a size</option><option>40</option><option>41</option><option>42</option><option>43</option></select>
+<button id="add">Add to cart</button><p id="status" role="status"></p>
+<p><a href="cart.html">View cart</a> · <a href="index.html">Home</a></p>
+<script>
+const x = PRODUCTS.find(p => String(p.id) === params().get('id')) || PRODUCTS[0];
+document.getElementById('name').textContent = x.name; document.title = x.name;
+document.getElementById('meta').textContent = `$${x.price} · rating ${x.rating} · ${x.stock ? 'In stock' : 'Out of stock'}`;
+document.getElementById('add').onclick = () => {
+  const size = document.getElementById('size').value;
+  if (!size) { document.getElementById('status').textContent = 'Please choose a size first.'; return; }
+  saveCart([...cart(), {id: x.id, size}]); document.getElementById('status').textContent = `Added ${x.name} (size ${size}) to cart.`;
+};
+</script></body></html>

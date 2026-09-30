@@ -127,6 +127,27 @@ def save_archive(payload, destination=None):
     return str(path)
 
 
+def _act_main():
+    from .act.cli import main as act_main
+
+    return act_main
+
+
+def _survey_main():
+    from .survey import main as survey_main
+
+    return lambda argv: survey_main(argv[1:])
+
+
+HOSTED = {"browse": _act_main, "extract": _act_main, "desktop": _act_main, "survey": _survey_main}
+HOSTED_HELP = {
+    "browse": "Hosted browser execution toward a goal",
+    "extract": "Structure a web page into records and select relevant ones",
+    "desktop": "Hosted desktop execution in one Windows/macOS application",
+    "survey": "Typed judgments over many records, aggregated into an evidence report",
+}
+
+
 def _utf8_stdio():
     """Windows consoles default to the locale codepage (e.g. GBK); records and output are UTF-8."""
     for stream in (sys.stdin, sys.stdout):
@@ -146,6 +167,8 @@ def main():
         from .tools import main as semantic_main
 
         return semantic_main(sys.argv[1:])
+    if len(sys.argv) > 1 and sys.argv[1] in HOSTED:
+        return HOSTED[sys.argv[1]]()(sys.argv[1:])
     from . import __version__
 
     parser = argparse.ArgumentParser(description=__doc__)
@@ -220,6 +243,8 @@ def main():
             add_help=False,
             help="Specialized collection and semantic analysis; see " + name + " --help",
         )
+    for name, text in HOSTED_HELP.items():
+        commands.add_parser(name, add_help=False, help=text + "; see " + name + " --help")
     commands.add_parser("stats", help="Local usage ledger and savings dashboard")
     doctor = commands.add_parser(
         "doctor", help="Check local setup; --live makes one billable synthetic request"

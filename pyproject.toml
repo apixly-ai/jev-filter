@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jev-filter"
-version = "0.2.4"
+version = "0.3.0"
 description = "Evidence-preserving semantic tools for AI agents, powered by Jev"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -21,6 +21,21 @@ dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "build>=1.2,<2", 
 docs = ["matplotlib>=3.10,<4", "markdown>=3.7,<4"]
 bundle = ["pyinstaller>=6.16,<7", "tiktoken>=0.9,<1"]
 browser-test = ["playwright>=1.51,<2"]
+desktop = [
+  "uiautomation>=2.0.20,<3; sys_platform == 'win32'",
+  "winrt-runtime>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Media.Ocr>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Graphics.Imaging>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Storage.Streams>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Globalization>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Foundation>=3,<4; sys_platform == 'win32'",
+  "winrt-Windows.Foundation.Collections>=3,<4; sys_platform == 'win32'",
+  "pyobjc-framework-ApplicationServices>=10; sys_platform == 'darwin'",
+  "pyobjc-framework-Quartz>=10; sys_platform == 'darwin'",
+  "pyobjc-framework-Vision>=10; sys_platform == 'darwin'",
+  "pyobjc-framework-Cocoa>=10; sys_platform == 'darwin'",
+  "mss>=9,<11",
+]
 
 [project.scripts]
 jev-filter = "jev_context.cli:entrypoint"
@@ -40,10 +55,15 @@ include = [".github/workflows", "src", "tests", "docs", "examples", "skills", "b
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
-markers = ["browser: local browser tests, no external account"]
+markers = [
+  "browser: local browser tests, no external account",
+  "desktop: local desktop automation tests (Windows UIA, macOS AX), no external account",
+]
 
 [tool.coverage.run]
 source = ["jev_context"]
+# Windows-only live backends; measured by the Windows desktop CI job (UI Automation + OCR).
+omit = ["*/jev_context/act/desktop_windows.py", "*/jev_context/act/ocr.py"]
 [tool.coverage.report]
 show_missing = true
 fail_under = 80

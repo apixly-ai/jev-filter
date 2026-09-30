@@ -17,6 +17,7 @@ workload becomes faster or cheaper.
 - [中文使用说明](getting-started.zh-CN.md)
 
 - [Task recipes](recipes.md)
+- [Hosted execution: browser, desktop, survey](hosted-execution.md)
 - [npm/native distribution](distribution.md)
 - [README design research](readme-design.md)
 

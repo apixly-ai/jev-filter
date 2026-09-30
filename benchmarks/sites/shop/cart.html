@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Cart</title><script src="common.js"></script>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}</style></head><body>
+<h1>Your cart</h1><ul id="items"></ul><p id="total"></p>
+<button id="order">Place order</button> <a href="index.html">Continue shopping</a>
+<script>
+function render() {
+  const items = cart(), list = document.getElementById('items');
+  list.replaceChildren();
+  items.forEach((it, i) => {
+    const x = PRODUCTS.find(p => p.id === it.id), li = document.createElement('li'), b = document.createElement('button');
+    li.append(`${x.name} size ${it.size} — $${x.price} `);
+    b.className = 'rm'; b.textContent = `Remove ${x.name}`;
+    b.onclick = () => { const c = cart(); c.splice(i, 1); saveCart(c); render(); };
+    li.append(b); list.append(li);
+  });
+  if (!items.length) { const li = document.createElement('li'); li.textContent = 'Your cart is empty.'; list.append(li); }
+  document.getElementById('total').textContent = 'Total: $' + items.reduce((s, it) => s + PRODUCTS.find(p => p.id === it.id).price, 0);
+}
+document.getElementById('order').onclick = () => { if (!cart().length) return; saveCart([]); location.href = 'thanks.html'; };
+render();
+</script></body></html>

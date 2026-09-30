@@ -9,6 +9,7 @@ Jev Filter 在程序采集与主模型之间加入明确、可复核的语义判
 |---|---|
 | 安装并跑通第一个例子 | [快速开始](getting-started.zh-CN.md) |
 | 按实际任务选用法 | [任务配方](recipes.zh-CN.md) |
+| 让 Jev Filter 自己执行：浏览器、桌面、大量数据 | [托管执行](hosted-execution.zh-CN.md) |
 | 让 AI 或已有程序调用 | [接入指南](agents.zh-CN.md) |
 | 自定义分析内容与输出 | [上下文契约](context-contract.zh-CN.md) |
 | 查看全部参数与边界 | [CLI 参考](cli.zh-CN.md) |

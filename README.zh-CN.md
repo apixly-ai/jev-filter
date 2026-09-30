@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-7958d6" alt="MIT"></a>
 </p>
 
-**放在工具与主模型之间的语义筛选器。** 在 CLI 内部采集命令输出、搜索结果、网页控件或日志，用 Jev 根据 AI 提供的任务与上下文判断，再返回相关证据和待复核 ID，减少整批原始结果进入主模型上下文。
+**放在工具与主模型之间的语义筛选器兼托管执行器。** 在 CLI 内部采集命令输出、搜索结果、网页控件或日志，用 Jev 根据 AI 提供的任务与上下文判断，再返回相关证据和待复核 ID，减少整批原始结果进入主模型上下文。**0.3 新增：**让 CLI 自己操作网页或桌面应用，或对上万条记录做调研汇总，决策同样是类型化、可复核的。[托管执行 →](#托管执行浏览器桌面与数据)
 
 ## 本地节省统计看板
 
@@ -23,6 +23,34 @@
 - **规则由 AI 控制，结果可复核。** 自定义上下文、问题与输出；缺事实保留 `REVIEW`。**8/8 组测试结果正确**，三条已安装流程通过验收。[公开数据](benchmarks/results/2026-09-22-live.json) · [集成证据](benchmarks/results/2026-09-22-migration.json)
 
 适合 **记录多、语义判断重复、标准明确** 的任务。精确路径、ID、selector、计算和少量短结果优先用原生工具；开放推理和写作仍交给主模型。
+
+## 托管执行：浏览器、桌面与数据
+
+Jev 负责选，程序负责做。每一步先观察页面或窗口，用一次 Jev 请求在程序枚举的控件里选出下一步操作和目标，重新核对目标后再执行。Jev 从不产出选择器、坐标、命令或文字。
+
+```sh
+# 浏览器：私有无头 Chrome/Edge，或 --cdp-port / Camofox
+jev-filter browse --url https://shop.example/ --goal 'Buy the cheapest in-stock red shoes in size 42' \
+  --value query='red shoes'            # 在“Place order”前暂停并给出 confirm_token
+
+# 桌面：Windows UI Automation 或 macOS 辅助功能，OCR 兜底
+jev-filter desktop --window '^Invoice Tool$' --goal 'Choose the Pro plan and save' --verify-text 'saved'
+
+# 数据：对大量记录做类型化判断，由代码汇总
+jev-filter survey --input tickets.jsonl --spec survey.json --format md
+```
+
+- **安全由结构保证。** 支付、发送、删除类动作会暂停等待确认；导航限制在起始来源内；密码和验证码一律交还，不代为处理；桌面执行拒绝终端和凭据管理器，出现 STOP 文件即停止。
+- **在本地合成夹具上用真实 Jev 实测**（每项三轮，成功与否由程序校验，不以模型的 DONE 为准）：
+
+| 线 | 任务数 | 通过 | 单任务耗时中位范围 |
+|---|---:|---:|---|
+| 浏览器（Camofox） | 5 | 15/15 | 0.7–13.7 s |
+| 浏览器（Chromium，CDP） | 6 | 18/18 | 0.7–3.9 s |
+| 桌面（Windows UIA + OCR） | 4 | 12/12 | 0.8–5.6 s |
+| survey（10,000 条） | 1 | 主题 100.0%，情绪 95.7% | 19.6 s，375 次请求，约 $0.22 输入费用 |
+
+这些是小规模合成测试，记录由模板生成、难度较低，展示的是机制和成本，不代表开放网络上的成功率。[使用说明与限制 →](docs/hosted-execution.zh-CN.md) · [测试方法 →](docs/benchmarks.zh-CN.md#托管执行2026-09-30)
 
 ## 实测收益与代价
 
@@ -121,6 +149,10 @@ cp -R "$(npm root -g)/@apixly/jev-filter/skills/jev-filter" ~/.codex/skills/
 | 广泛关键词命中的源代码 | `code-search` | [完整代码符号](docs/recipes.zh-CN.md) |
 | 本地 Camofox 页面上的控件 | `locate` | [网页选择](docs/recipes.zh-CN.md) |
 | 多请求的 JSON/JSONL 日志 | `triage` | [关联事件](docs/recipes.zh-CN.md) |
+| 让 CLI 完成一个网页目标 | `browse` | [托管执行](docs/hosted-execution.zh-CN.md#浏览器browse) |
+| 从网页取结构化数据 | `extract` | [页面数据](docs/hosted-execution.zh-CN.md#页面数据extract) |
+| 在 Windows/macOS 应用里完成目标 | `desktop` | [桌面](docs/hosted-execution.zh-CN.md#桌面desktop) |
+| 上万条记录要分类汇总 | `survey` | [大量记录](docs/hosted-execution.zh-CN.md#大量记录survey) |
 | 已有类型化 Jev 流程 | Python `batch.run` / CLI `batch` | [程序内接入](docs/agents.zh-CN.md) |
 
 [全部参数](docs/cli.zh-CN.md) · [原文复核](docs/getting-started.zh-CN.md#读懂结果) · [架构](docs/architecture.zh-CN.md)
@@ -132,7 +164,7 @@ cp -R "$(npm root -g)/@apixly/jev-filter/skills/jev-filter" ~/.codex/skills/
 - **不使用结果缓存。** 明确上下文、采集边界、失败项和模型用量。
 - **受保护的发布。** 必须通过 CI/安全检查，发布标签不可改写，安装包附校验和与来源证明。
 - **可复用的内核。** Python library 与 npm CLI；自动合批，最多 30 个在途请求。
-- **明确的边界。** 参与推理的输入会发送给 TypeSafe；`exec` 执行你提供的命令，不是沙箱；判断结果不替代操作授权。[安全说明 →](SECURITY.zh-CN.md)
+- **明确的边界。** 参与推理的输入会发送给 TypeSafe；`exec` 执行你提供的命令，不是沙箱；托管执行只执行程序枚举出的动作，不可逆动作会先暂停。[安全说明 →](SECURITY.zh-CN.md)
 
 完成一次 npm 包信任配置后，GitHub Release 成功会自动通过 OIDC 发布五个包，并从注册表全新安装验收，无需保存长期 npm token。参见[首次配置与续办](docs/distribution.zh-CN.md#首次-npm-信任配置)。
 

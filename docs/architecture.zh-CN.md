@@ -29,3 +29,27 @@ flowchart LR
 
 原文可能包含提示词注入或错误声明。类型化输出和程序校验缩小了执行面，但不能证明模型答案为真。
 命令由调用者授权，不由 Jev 生成。[完整安全边界](../SECURITY.zh-CN.md)。
+
+## 托管执行
+
+```mermaid
+flowchart LR
+  S[对象：浏览器页面或桌面窗口] -->|观察| T[编号控件与可见文本]
+  T --> Q[space.py：一次请求，操作题加各操作目标题]
+  Q --> K[kernel.py：门禁、预算、打转与卡死检测]
+  K -->|目标仍新鲜| S
+  K -->|暂停| H[调用方：确认、提供值或登录]
+```
+
+| 模块 | 职责 |
+|---|---|
+| `act/cdp.py` | 标准库实现的 DevTools WebSocket 客户端与私有无头浏览器启动器 |
+| `act/page.js` | 页面内观察、新鲜度校验、目标解析与结构化提取 |
+| `act/browser.py` | `CDPPage` 与 `CamofoxPage` 两种传输，同一套观察、校验、执行接口 |
+| `act/desktop*.py` | 桌面对象、Windows UI Automation 与 macOS AX 后端、安全门禁 |
+| `act/ocr.py` | OCR 兜底（Windows.Media.Ocr、Vision），点击前按像素哈希校验 |
+| `act/space.py` | 动作空间、出题、不可逆判定 |
+| `act/kernel.py` | 观察、决策、执行、校验的循环 |
+| `survey.py` | 流式输入、筛选、打包推理与代码侧汇总 |
+
+执行循环的每次 Jev 请求都复用 `provider.py`，凭据、重试与用量统计和过滤类命令完全一致。行为与限制见[托管执行](hosted-execution.zh-CN.md)。

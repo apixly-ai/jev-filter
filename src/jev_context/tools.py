@@ -344,7 +344,7 @@ def browser_call(session, tab, policy, op="observe", **kwargs):
         + ")"
     )
     request = urllib.request.Request(
-        "http://localhost:9377/tabs/" + urllib.parse.quote(tab, safe="") + "/evaluate",
+        "http://127.0.0.1:9377/tabs/" + urllib.parse.quote(tab, safe="") + "/evaluate",
         data=json.dumps({"userId": "camofox-" + session, "expression": expression}).encode(),
         headers={"Content-Type": "application/json"},
     )

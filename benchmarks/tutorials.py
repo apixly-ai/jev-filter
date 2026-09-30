@@ -221,7 +221,7 @@ def main():
             assert packet["target_guard"]["ok"] and packet["target_guard"]["dom_id"] == "target"
         finally:
             if tab:
-                api("DELETE", f"/tabs/{tab}?userId={user}")
+                api("DELETE", f"/tabs/{tab}", {"userId": user})
             server.shutdown()
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(

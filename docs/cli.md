@@ -12,6 +12,10 @@ Use `jev-filter --help` and `<command> --help` for exact flags.
 | `code-search PATTERN --root PATH --task TEXT` | Expand candidate hits to complete code symbols |
 | `locate --session S --tab T --origin URL --task TEXT` | Read-only Camofox control selection and freshness guard |
 | `triage --input FILE --task TEXT` | Group JSON/JSONL events by request ID, then judge |
+| `browse --url URL --goal TEXT [--value k=v]` | Hosted browser execution toward a goal ([guide](hosted-execution.md#browser-browse)) |
+| `extract --url URL --task TEXT` | Structure a page into records, then judge like `query` |
+| `desktop --window REGEX --goal TEXT` | Hosted execution in one Windows/macOS application; `--list` shows windows |
+| `survey --input PATH --spec FILE` | Typed questions over many records, aggregated into a report |
 | `batch --input FILE` | Native typed request contracts, packed when compatible |
 | `read ARCHIVE --id ID` / `list ARCHIVE` | Recover retained input without inference |
 | `doctor [--live]` | Local setup checks; optional billable live check |
@@ -55,7 +59,7 @@ source. Unsupported/invalid code stays reviewable. Contained spans are deduplica
 changed file revisions are rejected before returning a match. It is a lexical
 shortlist, not exhaustive semantic indexing.
 
-The locator uses an existing local Camofox-compatible server on localhost:9377 and
+The locator uses an existing local Camofox-compatible server on 127.0.0.1:9377 and
 an explicitly named session/tab/origin. It observes reachable controls, omits input
 values, strips URL credentials/query/fragment, and verifies the selected Node before
 returning a selector. Duplicate indistinguishable controls, stale nodes and ambiguous

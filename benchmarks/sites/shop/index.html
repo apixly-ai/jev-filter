@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Fixture Shop</title>
+<style>body{font:16px system-ui;margin:0}header,main{padding:16px 24px}#suggest{list-style:none;padding:0;margin:0;border:1px solid #ccc;position:absolute;background:#fff;width:300px}#suggest li{padding:6px}#suggest li:hover{background:#eef}</style>
+<script src="common.js"></script></head><body>
+<header><h1>Fixture Shop</h1><nav><a href="index.html">Home</a> · <a href="cart.html">Cart</a> · <a href="account.html">Account</a> · <a href="form.html">Contact</a></nav></header>
+<main>
+<form id="search" action="results.html" method="get" role="search" aria-label="Product search">
+  <label for="q">Search products</label>
+  <input id="q" name="q" type="text" role="combobox" aria-autocomplete="list" aria-controls="suggest" aria-expanded="false" autocomplete="off" style="width:300px">
+  <ul id="suggest" role="listbox" hidden></ul>
+  <label for="cat">Category</label>
+  <select id="cat" name="cat"><option value="">All categories</option><option value="shoes">Shoes</option><option value="jackets">Jackets</option><option value="hats">Hats</option></select>
+  <label><input type="checkbox" name="stock" value="1"> In stock only</label>
+  <button type="submit">Search</button>
+</form>
+<section aria-label="Featured"><h2>Featured</h2><p>New season running shoes are here.</p></section>
+</main>
+<script>
+consentBanner();
+const q = document.getElementById('q'), list = document.getElementById('suggest');
+q.addEventListener('input', () => {
+  const v = q.value.trim().toLowerCase();
+  list.innerHTML = '';
+  const hits = v ? SUGGESTIONS.filter(s => s.startsWith(v.slice(0, 3))) : [];
+  setTimeout(() => {
+    hits.forEach((s, i) => { const li = document.createElement('li'); li.setAttribute('role', 'option'); li.id = 'opt' + i; li.textContent = s;
+      li.onclick = () => { q.value = s; list.hidden = true; q.setAttribute('aria-expanded', 'false'); }; list.appendChild(li); });
+    list.hidden = !hits.length; q.setAttribute('aria-expanded', String(!!hits.length));
+  }, 60);
+});
+</script></body></html>
