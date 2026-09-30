@@ -23,6 +23,7 @@ nav = [
     ("agent-quickstart", "Agent quickstart", "Agent 快速接入"),
     ("recipes", "Recipes", "任务配方"),
     ("hosted-execution", "Hosted execution", "托管执行"),
+    ("showcase", "Recorded runs", "录制回放"),
     ("agents", "Integrations", "完整集成"),
     ("context-contract", "Context contract", "上下文契约"),
     ("cli", "CLI reference", "命令参考"),

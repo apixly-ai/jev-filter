@@ -5,11 +5,12 @@
 ## 0.3.0 — 2026-09-30
 
 - 托管执行：Jev Filter 不只过滤，也能执行。Jev 在程序枚举的动作里选择，程序执行，执行前重新核对目标，执行后校验结果。
-- `browse`：通过标准库实现的 DevTools 客户端（私有无头 Chrome/Edge/Chromium，或 `--cdp-port` 挂接已有浏览器）或本机 Camofox 完成网页目标。每步一次请求同时问操作和各操作的目标（设计来自 browser-use/jev-ultrafast，MIT）。支持具名值 `--value`、可选文字模型 `--text-model`、来源限制、弹窗处理、`--verify-text/--verify-url/--verify-question`、`--dry-run`，以及不可逆动作的暂停与凭一次性 `confirm_token` 续跑（`--keep-open`、`--cdp-port`/`--target-id`、`--confirm`）。
+- `browse`：通过标准库实现的 DevTools 客户端（私有无头 Chrome/Edge/Chromium，或 `--cdp-port` 挂接已有浏览器）或本机 Camofox 完成网页目标。每步一次请求同时问操作和各操作的目标（设计来自 browser-use/jev-ultrafast，MIT）。支持具名值 `--value`、可选文字模型 `--text-model`、来源限制、弹窗处理、`--verify-text/--verify-url/--verify-question`、`--dry-run`，以及不可逆动作的暂停与凭绑定页面状态和动作的 `confirm_token` 续跑（`--keep-open`、`--cdp-port`/`--target-id`、`--confirm`）。
 - `extract`：把页面结构化成带表头的表格行、文本块和链接，再按 `query` 契约判断。
 - `desktop`：在一个 Windows（UI Automation）或 macOS（辅助功能）应用里运行同样的循环，自绘界面用 OCR（Windows.Media.Ocr、Vision）兜底，`--list` 列出窗口。确定性安全门禁会拒绝终端、凭据管理器和系统设置，拒绝已锁定的会话和已提权的目标，并在出现 STOP 文件或鼠标停在左上角时停止。
 - `survey`：对 JSONL/CSV/JSON/文本输入做类型化判断，可选先筛选，打包并发推理，由代码汇总（分布、交叉表、代表样本、不确定与失败 ID），运行前预算检查（`--max-usd`、`--max-requests`），`--labels` 校准，可选用固定种子样本提出类别。
-- `doctor` 报告托管执行是否就绪；`pip install 'jev-filter[desktop]'` 安装桌面后端。
+- `doctor` 报告托管执行是否就绪；`desktop` 可选依赖安装桌面后端（从 Git 标签安装；没有 PyPI 包）。
+- 录制回放：交互式回放页（浏览器、桌面、调研，中英文）、由真实 Jev 在夹具上的真实运行生成的 GIF 和视频，以及 README 中带真实输出的用法示例；可用 `python -m benchmarks.showcase.record` / `render` 复现。
 - agent skill：新增 `skills/jev-filter/references/hosted.md`，说明 `browse`、`desktop`、`extract`、`survey` 的输入怎么构造（值文件、survey 规格、标注文件），以及每种输出状态该怎么处理。
 - 基准：`python -m benchmarks.hosted --live` 用合成的浏览器、桌面、survey 夹具，结果由程序校验，数据在 `benchmarks/results/2026-09-30-hosted.json`。
 - 修复：Camofox 改用 `127.0.0.1` 访问，去掉 Windows 上每次请求约 2 秒的 IPv6 回退（`locate` 教程 5059 ms → 1192 ms）；基准清理标签页时按 Camofox 2.4.8 的要求把 `userId` 放进 DELETE 请求体；Windows 提权检测改用指针宽度的句柄，读不到自身令牌时不再拒绝所有已提权目标；未安装 `winrt` 时 `doctor` 不再报错；`needs_value` 的输出保留全部被跳过的 `fields`；macOS 查找窗口时能看到首次查询之后才启动的应用。

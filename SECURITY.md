@@ -35,8 +35,8 @@ See CHANGELOG.md and GitHub Releases for fixes.
   from caller-supplied values or an explicitly enabled text model.
 - Every target is re-checked immediately before input (identity, state, visibility,
   occlusion). Stale decisions are discarded, not retried; a mutation is never retried blindly.
-- Pay/send/delete-like actions pause with a one-time confirmation token bound to the page or
-  window fingerprint unless `--allow-irreversible` is given for that run.
+- Pay/send/delete-like actions pause with a confirmation token bound to the page or window
+  fingerprint and the action (it goes stale when either changes) unless `--allow-irreversible` is given for that run.
 - Browser navigation is limited to the start origin plus `--allow-origin`. The DevTools client
   accepts loopback `ws://` endpoints only. `--cdp-port` attaches to a browser profile you
   control, including its signed-in sessions: only attach to a profile you intend to use.

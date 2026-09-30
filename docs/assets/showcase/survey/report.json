@@ -1,0 +1,427 @@
+{
+ "demo": "survey",
+ "records": 2000,
+ "spam_records": 184,
+ "spec": {
+  "task": "Summarise what customers contact support about, how they feel, and churn risk.",
+  "keep": [
+   "product"
+  ],
+  "screen": {
+   "instructions": "The record is a genuine customer support request about a product or service (not spam or advertising)."
+  },
+  "questions": {
+   "topic": {
+    "type": "choice",
+    "instructions": "What is the main topic of this support request?",
+    "criteria": {
+     "billing": "Charges, refunds, invoices, prices, payments.",
+     "bug": "Something in the product is broken, crashes, errors or malfunctions.",
+     "feature_request": "Asks for new functionality or an improvement.",
+     "account": "Login, password, account settings, locked or merged accounts.",
+     "shipping": "Delivery, tracking, damaged or misdelivered orders.",
+     "other": "None of the above."
+    }
+   },
+   "sentiment": {
+    "type": "score",
+    "instructions": "How does the customer feel?",
+    "criteria": [
+     "Angry or very frustrated",
+     "Neutral or matter-of-fact",
+     "Positive or appreciative"
+    ]
+   },
+   "churn": {
+    "type": "noul",
+    "instructions": "The customer threatens or considers cancelling, leaving or switching to a competitor."
+   }
+  },
+  "group_by": [
+   "topic",
+   "product"
+  ],
+  "confidence_floor": 0.6,
+  "examples_per_group": 2
+ },
+ "exit_code": 0,
+ "accuracy": {
+  "topic": {
+   "correct": 1789,
+   "total": 1789,
+   "accuracy": 1.0
+  },
+  "sentiment": {
+   "correct": 1703,
+   "total": 1789,
+   "accuracy": 0.9519
+  },
+  "churn": {
+   "correct": 1789,
+   "total": 1789,
+   "accuracy": 1.0
+  },
+  "screen": {
+   "correct": 1973,
+   "total": 2000,
+   "accuracy": 0.9865
+  }
+ },
+ "report": {
+  "records": 2000,
+  "evaluated": 1789,
+  "failed": 0,
+  "failed_ids": [],
+  "uncertain_records": 238,
+  "uncertain_ids": [
+   "t00003",
+   "t00007",
+   "t00023",
+   "t00045",
+   "t00049",
+   "t00051",
+   "t00052",
+   "t00058",
+   "t00059",
+   "t00084",
+   "t00106",
+   "t00113",
+   "t00122",
+   "t00134",
+   "t00139",
+   "t00140",
+   "t00150",
+   "t00164",
+   "t00186",
+   "t00190",
+   "t00208",
+   "t00214",
+   "t00233",
+   "t00242",
+   "t00254",
+   "t00257",
+   "t00266",
+   "t00270",
+   "t00278",
+   "t00286",
+   "t00290",
+   "t00291",
+   "t00302",
+   "t00308",
+   "t00312",
+   "t00318",
+   "t00325",
+   "t00326",
+   "t00332",
+   "t00339",
+   "t00346",
+   "t00360",
+   "t00367",
+   "t00369",
+   "t00370",
+   "t00374",
+   "t00399",
+   "t00406",
+   "t00418",
+   "t00428"
+  ],
+  "questions": {
+   "topic": {
+    "type": "choice",
+    "answered": 1789,
+    "uncertain": 0,
+    "counts": {
+     "billing": 351,
+     "bug": 357,
+     "feature_request": 341,
+     "account": 359,
+     "shipping": 381,
+     "other": 0
+    },
+    "share": {
+     "billing": 0.1962,
+     "bug": 0.1996,
+     "feature_request": 0.1906,
+     "account": 0.2007,
+     "shipping": 0.213,
+     "other": 0.0
+    },
+    "mean_confidence": 0.9994
+   },
+   "sentiment": {
+    "type": "score",
+    "answered": 1789,
+    "uncertain": 238,
+    "mean": 0.8682,
+    "levels": {
+     "0": {
+      "label": "Angry or very frustrated",
+      "count": 553
+     },
+     "1": {
+      "label": "Neutral or matter-of-fact",
+      "count": 892
+     },
+     "2": {
+      "label": "Positive or appreciative",
+      "count": 344
+     }
+    }
+   },
+   "churn": {
+    "type": "noul",
+    "answered": 1789,
+    "uncertain": 0,
+    "yes": 321,
+    "yes_share": 0.1794,
+    "mean_probability": 0.2099
+   }
+  },
+  "crosstabs": {
+   "topic": {
+    "shipping": {
+     "n": 381,
+     "sentiment_mean": 0.7698,
+     "churn_yes_share": 0.1837
+    },
+    "account": {
+     "n": 359,
+     "sentiment_mean": 0.9223,
+     "churn_yes_share": 0.1894
+    },
+    "bug": {
+     "n": 357,
+     "sentiment_mean": 0.8513,
+     "churn_yes_share": 0.1625
+    },
+    "billing": {
+     "n": 351,
+     "sentiment_mean": 0.7973,
+     "churn_yes_share": 0.1595
+    },
+    "feature_request": {
+     "n": 341,
+     "sentiment_mean": 1.0121,
+     "churn_yes_share": 0.2023
+    }
+   },
+   "product": {
+    "Orbit Phone": {
+     "n": 375,
+     "topic": {
+      "shipping": 73,
+      "feature_request": 73,
+      "bug": 87,
+      "account": 74,
+      "billing": 68
+     },
+     "sentiment_mean": 0.8482,
+     "churn_yes_share": 0.168
+    },
+    "Kite Tablet": {
+     "n": 371,
+     "topic": {
+      "bug": 75,
+      "billing": 69,
+      "account": 73,
+      "shipping": 84,
+      "feature_request": 70
+     },
+     "sentiment_mean": 0.8015,
+     "churn_yes_share": 0.1941
+    },
+    "Atlas Router": {
+     "n": 358,
+     "topic": {
+      "shipping": 74,
+      "account": 69,
+      "billing": 73,
+      "bug": 72,
+      "feature_request": 70
+     },
+     "sentiment_mean": 0.8732,
+     "churn_yes_share": 0.1872
+    },
+    "Pulse Watch": {
+     "n": 345,
+     "topic": {
+      "shipping": 72,
+      "bug": 70,
+      "billing": 71,
+      "account": 72,
+      "feature_request": 60
+     },
+     "sentiment_mean": 0.8753,
+     "churn_yes_share": 0.1826
+    },
+    "Nimbus Cloud Drive": {
+     "n": 340,
+     "topic": {
+      "account": 71,
+      "shipping": 78,
+      "feature_request": 68,
+      "bug": 53,
+      "billing": 70
+     },
+     "sentiment_mean": 0.9507,
+     "churn_yes_share": 0.1647
+    }
+   }
+  },
+  "representatives": {
+   "topic": {
+    "shipping": [
+     {
+      "id": "t01991",
+      "confidence": 1.0,
+      "excerpt": "The Kite Tablet I received was damaged in transit. Let me know."
+     },
+     {
+      "id": "t01984",
+      "confidence": 1.0,
+      "excerpt": "The Nimbus Cloud Drive I received was damaged in transit. Really appreciate your help, the team is fantastic."
+     }
+    ],
+    "account": [
+     {
+      "id": "t02000",
+      "confidence": 1.0,
+      "excerpt": "I want to merge two Atlas Router accounts into one."
+     },
+     {
+      "id": "t01992",
+      "confidence": 1.0,
+      "excerpt": "How do I change the email address on my Kite Tablet account?"
+     }
+    ],
+    "bug": [
+     {
+      "id": "t01983",
+      "confidence": 1.0,
+      "excerpt": "Battery drains within two hours on Kite Tablet, it used to last a whole day. Thanks."
+     },
+     {
+      "id": "t01971",
+      "confidence": 1.0,
+      "excerpt": "The sync button in Atlas Router does nothing and shows error code 0x80. This is unacceptable and I'm furious. I'm seriously thinking about switching to a competitor."
+     }
+    ],
+    "billing": [
+     {
+      "id": "t01999",
+      "confidence": 1.0,
+      "excerpt": "Kite Tablet 这个月扣了我两次费，请退还重复的款项。 This is unacceptable and I'm furious."
+     },
+     {
+      "id": "t01997",
+      "confidence": 1.0,
+      "excerpt": "I was charged twice for Atlas Router this month. Please refund the duplicate payment. Thanks."
+     }
+    ],
+    "feature_request": [
+     {
+      "id": "t01998",
+      "confidence": 1.0,
+      "excerpt": "Please add an export to CSV option in Kite Tablet."
+     },
+     {
+      "id": "t01990",
+      "confidence": 1.0,
+      "excerpt": "I'd love a keyboard shortcut to switch accounts in Orbit Phone. Thanks, you've always been great."
+     }
+    ]
+   },
+   "product": {
+    "Orbit Phone": [
+     {
+      "id": "t01996",
+      "confidence": 1,
+      "excerpt": "Orbit Phone 这个月扣了我两次费，请退还重复的款项。 Honestly this is the worst service I've had."
+     },
+     {
+      "id": "t01993",
+      "confidence": 1,
+      "excerpt": "I was charged twice for Orbit Phone this month. Please refund the duplicate payment. 太让人生气了，完全不能接受。 不解决的话我就退订了。"
+     }
+    ],
+    "Kite Tablet": [
+     {
+      "id": "t01999",
+      "confidence": 1,
+      "excerpt": "Kite Tablet 这个月扣了我两次费，请退还重复的款项。 This is unacceptable and I'm furious."
+     },
+     {
+      "id": "t01998",
+      "confidence": 1,
+      "excerpt": "Please add an export to CSV option in Kite Tablet."
+     }
+    ],
+    "Atlas Router": [
+     {
+      "id": "t02000",
+      "confidence": 1,
+      "excerpt": "I want to merge two Atlas Router accounts into one."
+     },
+     {
+      "id": "t01997",
+      "confidence": 1,
+      "excerpt": "I was charged twice for Atlas Router this month. Please refund the duplicate payment. Thanks."
+     }
+    ],
+    "Pulse Watch": [
+     {
+      "id": "t01994",
+      "confidence": 1,
+      "excerpt": "I'd love a keyboard shortcut to switch accounts in Pulse Watch. Thanks."
+     },
+     {
+      "id": "t01987",
+      "confidence": 1,
+      "excerpt": "How do I change the email address on my Pulse Watch account? I'm really angry about this."
+     }
+    ],
+    "Nimbus Cloud Drive": [
+     {
+      "id": "t01988",
+      "confidence": 1,
+      "excerpt": "The tax on my Nimbus Cloud Drive receipt looks wrong, can you correct the invoice? Thanks."
+     },
+     {
+      "id": "t01984",
+      "confidence": 1,
+      "excerpt": "The Nimbus Cloud Drive I received was damaged in transit. Really appreciate your help, the team is fantastic."
+     }
+    ]
+   }
+  },
+  "task": "Summarise what customers contact support about, how they feel, and churn risk.",
+  "input": {
+   "files": 1,
+   "rows": 2000,
+   "parse_errors": 0,
+   "truncated_texts": 0,
+   "truncated": false
+  },
+  "screened_out": 211,
+  "usage": {
+   "input_tokens": 1041281,
+   "output_tokens": 214427
+  },
+  "usage_complete": true,
+  "requests": 76,
+  "elapsed_ms": 9285,
+  "category_proposal": null,
+  "estimated_input_usd": 0.043734,
+  "preflight": {
+   "requests": 79,
+   "deferred": 0,
+   "input_tokens_estimate": 1207253,
+   "input_usd_estimate": 0.050705,
+   "basis": "utf8_bytes/3, upper bound"
+  },
+  "calibrated": false,
+  "calibration_note": "Thresholds are uncalibrated; pass --labels with a labelled sample from your own data before relying on confidence floors.",
+  "complete": true,
+  "ok": true
+ }
+}

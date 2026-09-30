@@ -70,6 +70,76 @@ python -m benchmarks.hosted --live --lines browser,desktop,survey --repeats 3 \
 python -m benchmarks.hosted_report /tmp/hosted.json
 ```
 
+## Real websites and applications: 2026-09-30
+
+The fixture results above show the mechanics. This read-only audit asks how far the same code
+gets on real public websites and real Windows applications. Nothing was bought, posted or signed
+in to, and nothing was changed in the code during the audit. Summary data:
+[2026-09-30-real-world.json](../benchmarks/results/2026-09-30-real-world.json). The observation
+probe is `python -m benchmarks.real_world_coverage`.
+
+Setup: one Windows 11 machine on one network in mainland China, headless Chrome at 1280x900 with a
+zh-CN browser language, `jev-1.13.0`. Results depend on region, IP reputation and time, and bot
+checks in particular will differ elsewhere.
+
+**Observation coverage.** On 40 public pages, an independent in-page script listed everything a
+person could click in the viewport. It then checked which of those the executor's observation
+offered. One page failed to launch. Seven were bot checks, error pages or a risk overlay.
+
+| Pages | Clickable elements found | Median page recall | Pooled recall | Pages at 95% or more |
+|---|---:|---:|---:|---:|
+| 32 content pages | 1,582 | 97.2% | 94.4% | 24/32 |
+| of which 25 non-Chinese sites | | 100% | 97.1% | 21/25 |
+| of which 7 Chinese sites | | 82.1% | 85.0% | 3/7 |
+
+The misses are mostly clickable elements without a role (58, 51 of them on Chinese sites) and
+native inputs made fully transparent under a styled control (23, on 7 sites, for example
+Wikipedia's menus). The metric only counts the viewport. Targets below the fold or inside a
+scrolled container are a separate gap.
+
+**Live goals.** 24 read-only goals (search, open a page, set a widget) ran twice each, about 12
+runs in parallel. "Reached" is a reviewer's judgment from final URLs, titles and archives, not
+the verifier's.
+
+| Goal type | Goals | Runs | `done` | Reached | Bot check or sign-in wall | Provider outage | Reached of the rest |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Site search | 12 | 24 | 7 | 7 | 8 | 3 | 7/13 |
+| Link navigation | 7 | 14 | 4 | 5 | 2 | 1 | 5/11 |
+| Widget state | 5 | 10 | 0 | 4 | 0 | 0 | 4/10 |
+| **Total** | 24 | 48 | 11 | 16 | 10 | 4 | **16/34 (47%)** |
+
+The 95% interval for 16 of 34 is roughly 31–63%. One `done` was likely false: a DuckDuckGo run
+whose URL check also matched the bot-check page. Six runs reached the goal without `done`,
+mostly because the verifier sees page text but not widget state.
+
+**Desktop.** Eight Windows applications were observed, and five live goals ran once each; two
+passed.
+
+| Application | Toolkit | Controls observed | Live goal | Result |
+|---|---|---:|---|---|
+| Calculator | WinUI/UWP | 34 | 12 × 34 | passed |
+| File Explorer | Shell/XAML | 78 | open a folder | passed |
+| Character Map | Win32 | 9 | choose a font | failed: off-screen list items are not offered and there is no scroll action |
+| cmake-gui | Qt, no accessibility | 0 (OCR) | open Help | failed: OCR merged the menu bar into one target |
+| DB Browser for SQLite | Qt with accessibility | 63 | open Help | failed: Invoke does nothing on Qt menu items; Expand would work |
+| Paint | WinUI 3 | 113 | observe only | the canvas is not exposed |
+| Beyond Compare | Delphi VCL | 67 | observe only | custom-painted text is invisible |
+| Chrome | Chromium | 22 | observe only | page content is hidden unless Chrome runs with `--force-renderer-accessibility` |
+
+**What failed, by goals affected.** A counterfactual check means the change was applied in memory
+and replayed. None of these fixes is in 0.3.0.
+
+| Failure | Goals | Checked fix |
+|---|---:|---|
+| Provider timeouts end the run, and the error code is dropped | 7 | Reruns of the same requests succeeded; a retry for side-effect-free decision requests is untested |
+| Localized or non-Cloudflare bot checks and sign-in walls are not recognized (JD's sign-in redirect ends as `origin_blocked`); an invisible reCAPTCHA v3 frame on a normal page is flagged as a challenge | 6 | Untested |
+| Role-less clickable elements and transparent native inputs are not offered | 3 (widgets) | MUI and Element Plus succeeded in memory |
+| Settle races: DONE before navigation commits, a stale autocomplete list, a self-reloading page that crashes the CLI without a packet | 3 | The crash reproduced; the fixes are untested |
+| Targets below the fold or in a scrolled sidebar are never offered | 2 | MDN and Python docs picked the right link in replay |
+| The verifier cannot see checked, pressed or selected state | 2 | Scores rose from 0.19–0.33 to 0.67–0.98; one rephrased question scored 0.67–0.73, at the 0.7 pass threshold |
+| Link-dense pages exceed the provider's input limit (Hacker News, about 33.6k tokens) | 1 | Removing duplicated row text gave HTTP 200 and the right click |
+| Links that open a new tab are not followed | 1 | Untested |
+
 ## Whole-operation benchmark: 48 agent runs
 
 ![Whole-operation context, cost and latency results](assets/operations.png)

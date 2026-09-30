@@ -1,0 +1,967 @@
+{
+ "demo": "browse",
+ "goal": "Buy the cheapest in-stock red shoes in size 42",
+ "values": {
+  "query": "red shoes"
+ },
+ "surface": "Chromium, headless, over DevTools",
+ "viewport": [
+  960,
+  600
+ ],
+ "site": "synthetic shop fixture (benchmarks/sites/shop)",
+ "summary": {
+  "requests": 9,
+  "input_tokens": 26251,
+  "input_usd": 0.0011,
+  "elapsed_ms": 5509,
+  "jev_p50_ms": 322,
+  "actions": 9
+ },
+ "events": [
+  {
+   "type": "start",
+   "t": 1019,
+   "goal": "Buy the cheapest in-stock red shoes in size 42"
+  },
+  {
+   "type": "observe",
+   "t": 1250,
+   "frame": "f001.jpg",
+   "url": "http://127.0.0.1:60474/index.html",
+   "title": "Fixture Shop",
+   "controls": 2
+  },
+  {
+   "type": "decide",
+   "t": 1992,
+   "latency_ms": 742,
+   "input_tokens": 1677,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.98
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.02
+    },
+    {
+     "op": "BACK",
+     "p": 0.0
+    },
+    {
+     "op": "WAIT",
+     "p": 0.0
+    },
+    {
+     "op": "DONE",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "CLICK": [
+     {
+      "option": "1",
+      "label": "[1] Reject optional cookies",
+      "p": 1.0
+     },
+     {
+      "option": "2",
+      "label": "[2] Accept all cookies",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.13,
+   "value": null,
+   "candidates": 2
+  },
+  {
+   "type": "act",
+   "t": 1993,
+   "frame": "f001.jpg",
+   "action": {
+    "id": "e1",
+    "kind": "click",
+    "label": "Reject optional cookies",
+    "role": "button"
+   },
+   "rect": {
+    "x": 330,
+    "y": 531,
+    "w": 153,
+    "h": 21
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 2060,
+   "frame": "f002.jpg",
+   "url": "http://127.0.0.1:60474/index.html",
+   "title": "Fixture Shop",
+   "controls": 11
+  },
+  {
+   "type": "decide",
+   "t": 2391,
+   "latency_ms": 331,
+   "input_tokens": 3673,
+   "operation": "TYPE_TEXT",
+   "operations": [
+    {
+     "op": "TYPE_TEXT",
+     "p": 0.68
+    },
+    {
+     "op": "SELECT",
+     "p": 0.16
+    },
+    {
+     "op": "CLICK",
+     "p": 0.12
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.04
+    },
+    {
+     "op": "BACK",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "CLICK": [
+     {
+      "option": "5",
+      "label": "[5] Open Search products",
+      "p": 0.56
+     },
+     {
+      "option": "7",
+      "label": "[7] In stock only",
+      "p": 0.43
+     },
+     {
+      "option": "8",
+      "label": "[8] Search",
+      "p": 0.01
+     },
+     {
+      "option": "3",
+      "label": "[3] Account",
+      "p": 0.0
+     },
+     {
+      "option": "4",
+      "label": "[4] Contact",
+      "p": 0.0
+     }
+    ],
+    "TYPE_TEXT": [
+     {
+      "option": "5",
+      "label": "[5] Search products",
+      "p": 1.0
+     }
+    ],
+    "SELECT": [
+     {
+      "option": "6:1",
+      "label": "[6:1] Category → Shoes",
+      "p": 1.0
+     },
+     {
+      "option": "6:3",
+      "label": "[6:3] Category → Hats",
+      "p": 0.0
+     },
+     {
+      "option": "6:2",
+      "label": "[6:2] Category → Jackets",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.08,
+   "value": "query",
+   "candidates": 11
+  },
+  {
+   "type": "act",
+   "t": 2393,
+   "frame": "f002.jpg",
+   "action": {
+    "id": "e5",
+    "kind": "fill",
+    "label": "Search products",
+    "role": "combobox"
+   },
+   "rect": {
+    "x": 152,
+    "y": 153,
+    "w": 308,
+    "h": 21
+   },
+   "text": "red shoes"
+  },
+  {
+   "type": "observe",
+   "t": 2511,
+   "frame": "f003.jpg",
+   "url": "http://127.0.0.1:60474/index.html",
+   "title": "Fixture Shop",
+   "controls": 14
+  },
+  {
+   "type": "decide",
+   "t": 2820,
+   "latency_ms": 309,
+   "input_tokens": 4074,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.85
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.06
+    },
+    {
+     "op": "SELECT",
+     "p": 0.06
+    },
+    {
+     "op": "TYPE_TEXT",
+     "p": 0.02
+    },
+    {
+     "op": "PRESS_ENTER",
+     "p": 0.01
+    }
+   ],
+   "targets": {
+    "CLICK": [
+     {
+      "option": "10",
+      "label": "[10] In stock only",
+      "p": 0.51
+     },
+     {
+      "option": "6",
+      "label": "[6] red shoes",
+      "p": 0.26
+     },
+     {
+      "option": "11",
+      "label": "[11] Search",
+      "p": 0.2
+     },
+     {
+      "option": "5",
+      "label": "[5] Open Search products",
+      "p": 0.03
+     },
+     {
+      "option": "7",
+      "label": "[7] red jacket",
+      "p": 0.0
+     }
+    ],
+    "TYPE_TEXT": [
+     {
+      "option": "5",
+      "label": "[5] Search products",
+      "p": 1.0
+     }
+    ],
+    "SELECT": [
+     {
+      "option": "9:1",
+      "label": "[9:1] Category → Shoes",
+      "p": 1.0
+     },
+     {
+      "option": "9:2",
+      "label": "[9:2] Category → Jackets",
+      "p": 0.0
+     },
+     {
+      "option": "9:3",
+      "label": "[9:3] Category → Hats",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.08,
+   "value": "query",
+   "candidates": 14
+  },
+  {
+   "type": "act",
+   "t": 2821,
+   "frame": "f003.jpg",
+   "action": {
+    "id": "e13",
+    "kind": "click",
+    "label": "In stock only",
+    "role": "checkbox"
+   },
+   "rect": {
+    "x": 651,
+    "y": 155,
+    "w": 13,
+    "h": 13
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 2890,
+   "frame": "f004.jpg",
+   "url": "http://127.0.0.1:60474/index.html",
+   "title": "Fixture Shop",
+   "controls": 14
+  },
+  {
+   "type": "decide",
+   "t": 3210,
+   "latency_ms": 320,
+   "input_tokens": 4102,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.85
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.06
+    },
+    {
+     "op": "TYPE_TEXT",
+     "p": 0.04
+    },
+    {
+     "op": "SELECT",
+     "p": 0.03
+    },
+    {
+     "op": "PRESS_ENTER",
+     "p": 0.01
+    }
+   ],
+   "targets": {
+    "CLICK": [
+     {
+      "option": "11",
+      "label": "[11] Search",
+      "p": 0.6
+     },
+     {
+      "option": "6",
+      "label": "[6] red shoes",
+      "p": 0.37
+     },
+     {
+      "option": "5",
+      "label": "[5] Open Search products",
+      "p": 0.03
+     },
+     {
+      "option": "2",
+      "label": "[2] Cart",
+      "p": 0.0
+     },
+     {
+      "option": "8",
+      "label": "[8] red cap",
+      "p": 0.0
+     }
+    ],
+    "TYPE_TEXT": [
+     {
+      "option": "5",
+      "label": "[5] Search products",
+      "p": 1.0
+     }
+    ],
+    "SELECT": [
+     {
+      "option": "9:1",
+      "label": "[9:1] Category → Shoes",
+      "p": 1.0
+     },
+     {
+      "option": "9:3",
+      "label": "[9:3] Category → Hats",
+      "p": 0.0
+     },
+     {
+      "option": "9:2",
+      "label": "[9:2] Category → Jackets",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.08,
+   "value": "query",
+   "candidates": 14
+  },
+  {
+   "type": "act",
+   "t": 3211,
+   "frame": "f004.jpg",
+   "action": {
+    "id": "e14",
+    "kind": "click",
+    "label": "Search",
+    "role": "button"
+   },
+   "rect": {
+    "x": 774,
+    "y": 153,
+    "w": 58,
+    "h": 21
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 3398,
+   "frame": "f005.jpg",
+   "url": "http://127.0.0.1:60474/results.html?q=red+shoes&cat=&stock=1",
+   "title": "Results",
+   "controls": 5
+  },
+  {
+   "type": "decide",
+   "t": 3729,
+   "latency_ms": 331,
+   "input_tokens": 2716,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.72
+    },
+    {
+     "op": "SELECT",
+     "p": 0.16
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.12
+    },
+    {
+     "op": "DONE",
+     "p": 0.0
+    },
+    {
+     "op": "WAIT",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "SELECT": [
+     {
+      "option": "1:1",
+      "label": "[1:1] Sort by → Price: low to high",
+      "p": 1.0
+     },
+     {
+      "option": "1:2",
+      "label": "[1:2] Sort by → Rating: high to low",
+      "p": 0.0
+     }
+    ],
+    "CLICK": [
+     {
+      "option": "2",
+      "label": "[2] Red Runner",
+      "p": 0.98
+     },
+     {
+      "option": "4",
+      "label": "[4] New search",
+      "p": 0.02
+     },
+     {
+      "option": "3",
+      "label": "[3] Scarlet Sprint",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.06,
+   "value": null,
+   "candidates": 5
+  },
+  {
+   "type": "act",
+   "t": 3730,
+   "frame": "f005.jpg",
+   "action": {
+    "id": "e3",
+    "kind": "click",
+    "label": "Red Runner",
+    "role": "link"
+   },
+   "rect": {
+    "x": 36,
+    "y": 213,
+    "w": 89,
+    "h": 20
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 3845,
+   "frame": "f006.jpg",
+   "url": "http://127.0.0.1:60474/product.html?id=1",
+   "title": "Red Runner",
+   "controls": 7
+  },
+  {
+   "type": "decide",
+   "t": 4167,
+   "latency_ms": 322,
+   "input_tokens": 2654,
+   "operation": "SELECT",
+   "operations": [
+    {
+     "op": "SELECT",
+     "p": 0.97
+    },
+    {
+     "op": "CLICK",
+     "p": 0.01
+    },
+    {
+     "op": "DONE",
+     "p": 0.01
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.01
+    },
+    {
+     "op": "WAIT",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "SELECT": [
+     {
+      "option": "1:3",
+      "label": "[1:3] Size → 42",
+      "p": 1.0
+     },
+     {
+      "option": "1:1",
+      "label": "[1:1] Size → 40",
+      "p": 0.0
+     },
+     {
+      "option": "1:4",
+      "label": "[1:4] Size → 43",
+      "p": 0.0
+     },
+     {
+      "option": "1:2",
+      "label": "[1:2] Size → 41",
+      "p": 0.0
+     }
+    ],
+    "CLICK": [
+     {
+      "option": "2",
+      "label": "[2] Add to cart",
+      "p": 0.87
+     },
+     {
+      "option": "3",
+      "label": "[3] View cart",
+      "p": 0.09
+     },
+     {
+      "option": "4",
+      "label": "[4] Home",
+      "p": 0.04
+     }
+    ]
+   },
+   "irreversible": 0.17,
+   "value": null,
+   "candidates": 7
+  },
+  {
+   "type": "act",
+   "t": 4167,
+   "frame": "f006.jpg",
+   "action": {
+    "id": "e3",
+    "kind": "select",
+    "label": "Size → 42",
+    "role": "combobox"
+   },
+   "rect": {
+    "x": 54,
+    "y": 138,
+    "w": 107,
+    "h": 19
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 4230,
+   "frame": "f007.jpg",
+   "url": "http://127.0.0.1:60474/product.html?id=1",
+   "title": "Red Runner",
+   "controls": 7
+  },
+  {
+   "type": "decide",
+   "t": 4587,
+   "latency_ms": 357,
+   "input_tokens": 2679,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.87
+    },
+    {
+     "op": "DONE",
+     "p": 0.11
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.02
+    },
+    {
+     "op": "SELECT",
+     "p": 0.0
+    },
+    {
+     "op": "BACK",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "SELECT": [
+     {
+      "option": "1:1",
+      "label": "[1:1] Size → Choose a size",
+      "p": 0.73
+     },
+     {
+      "option": "1:2",
+      "label": "[1:2] Size → 40",
+      "p": 0.19
+     },
+     {
+      "option": "1:4",
+      "label": "[1:4] Size → 43",
+      "p": 0.06
+     },
+     {
+      "option": "1:3",
+      "label": "[1:3] Size → 41",
+      "p": 0.02
+     }
+    ],
+    "CLICK": [
+     {
+      "option": "2",
+      "label": "[2] Add to cart",
+      "p": 0.97
+     },
+     {
+      "option": "3",
+      "label": "[3] View cart",
+      "p": 0.03
+     },
+     {
+      "option": "4",
+      "label": "[4] Home",
+      "p": 0.0
+     }
+    ]
+   },
+   "irreversible": 0.19,
+   "value": null,
+   "candidates": 7
+  },
+  {
+   "type": "act",
+   "t": 4588,
+   "frame": "f007.jpg",
+   "action": {
+    "id": "e5",
+    "kind": "click",
+    "label": "Add to cart",
+    "role": "button"
+   },
+   "rect": {
+    "x": 166,
+    "y": 137,
+    "w": 80,
+    "h": 21
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 4651,
+   "frame": "f008.jpg",
+   "url": "http://127.0.0.1:60474/product.html?id=1",
+   "title": "Red Runner",
+   "controls": 7
+  },
+  {
+   "type": "decide",
+   "t": 4951,
+   "latency_ms": 300,
+   "input_tokens": 2718,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.55
+    },
+    {
+     "op": "DONE",
+     "p": 0.37
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.05
+    },
+    {
+     "op": "BACK",
+     "p": 0.02
+    },
+    {
+     "op": "WAIT",
+     "p": 0.01
+    }
+   ],
+   "targets": {
+    "SELECT": [
+     {
+      "option": "1:1",
+      "label": "[1:1] Size → Choose a size",
+      "p": 0.66
+     },
+     {
+      "option": "1:2",
+      "label": "[1:2] Size → 40",
+      "p": 0.27
+     },
+     {
+      "option": "1:4",
+      "label": "[1:4] Size → 43",
+      "p": 0.05
+     },
+     {
+      "option": "1:3",
+      "label": "[1:3] Size → 41",
+      "p": 0.02
+     }
+    ],
+    "CLICK": [
+     {
+      "option": "3",
+      "label": "[3] View cart",
+      "p": 0.78
+     },
+     {
+      "option": "2",
+      "label": "[2] Add to cart",
+      "p": 0.21
+     },
+     {
+      "option": "4",
+      "label": "[4] Home",
+      "p": 0.01
+     }
+    ]
+   },
+   "irreversible": 0.15,
+   "value": null,
+   "candidates": 7
+  },
+  {
+   "type": "act",
+   "t": 4952,
+   "frame": "f008.jpg",
+   "action": {
+    "id": "e6",
+    "kind": "click",
+    "label": "View cart",
+    "role": "link"
+   },
+   "rect": {
+    "x": 24,
+    "y": 210,
+    "w": 71,
+    "h": 20
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 5040,
+   "frame": "f009.jpg",
+   "url": "http://127.0.0.1:60474/cart.html",
+   "title": "Cart",
+   "controls": 3
+  },
+  {
+   "type": "decide",
+   "t": 5352,
+   "latency_ms": 312,
+   "input_tokens": 1958,
+   "operation": "CLICK",
+   "operations": [
+    {
+     "op": "CLICK",
+     "p": 0.79
+    },
+    {
+     "op": "DONE",
+     "p": 0.17
+    },
+    {
+     "op": "BLOCKED",
+     "p": 0.03
+    },
+    {
+     "op": "BACK",
+     "p": 0.01
+    },
+    {
+     "op": "WAIT",
+     "p": 0.0
+    }
+   ],
+   "targets": {
+    "CLICK": [
+     {
+      "option": "2",
+      "label": "[2] Place order",
+      "p": 0.8
+     },
+     {
+      "option": "3",
+      "label": "[3] Continue shopping",
+      "p": 0.17
+     },
+     {
+      "option": "1",
+      "label": "[1] Remove Red Runner",
+      "p": 0.03
+     }
+    ]
+   },
+   "irreversible": 0.65,
+   "value": null,
+   "candidates": 3
+  },
+  {
+   "type": "finish",
+   "t": 5353,
+   "frame": "f009.jpg",
+   "status": "needs_confirmation",
+   "reason": "label_rule",
+   "pending": {
+    "label": "Place order",
+    "role": "button",
+    "kind": "click"
+   },
+   "pending_rect": {
+    "x": 24,
+    "y": 175,
+    "w": 84,
+    "h": 21
+   },
+   "irreversible_probability": 0.65,
+   "confirm_token": "…6ac:e2",
+   "verification": null,
+   "steps": 8,
+   "requests": 9,
+   "input_tokens": 26251
+  },
+  {
+   "type": "approve",
+   "t": 5353,
+   "label": "Place order"
+  },
+  {
+   "type": "observe",
+   "t": 5385,
+   "frame": "f010.jpg",
+   "url": "http://127.0.0.1:60474/cart.html",
+   "title": "Cart",
+   "controls": 3
+  },
+  {
+   "type": "act",
+   "t": 5386,
+   "frame": "f010.jpg",
+   "action": {
+    "id": "e2",
+    "kind": "click",
+    "label": "Place order",
+    "role": "button"
+   },
+   "rect": {
+    "x": 24,
+    "y": 175,
+    "w": 84,
+    "h": 21
+   },
+   "text": null
+  },
+  {
+   "type": "observe",
+   "t": 5470,
+   "frame": "f011.jpg",
+   "url": "http://127.0.0.1:60474/thanks.html",
+   "title": "Order placed",
+   "controls": 0
+  },
+  {
+   "type": "observe",
+   "t": 5509,
+   "frame": "f012.jpg",
+   "url": "http://127.0.0.1:60474/thanks.html",
+   "title": "Order placed",
+   "controls": 0
+  },
+  {
+   "type": "finish",
+   "t": 5509,
+   "frame": "f012.jpg",
+   "status": "done",
+   "reason": null,
+   "pending": {},
+   "pending_rect": null,
+   "irreversible_probability": null,
+   "confirm_token": null,
+   "verification": {
+    "passed": true,
+    "text": true
+   },
+   "steps": 1,
+   "requests": 0,
+   "input_tokens": 0
+  }
+ ]
+}

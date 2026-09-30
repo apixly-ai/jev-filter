@@ -1,0 +1,1524 @@
+{
+ "date": "2026-09-30",
+ "scope": "Read-only audit. Coverage: 40 public pages, one observation each, headless Chrome 1280x900, zh-CN browser language, one network in mainland China. Live: 24 read-only goals x 2 runs with jev-1.13.0, about 11-13 runs in parallel. Desktop: 8 Windows 11 applications, 5 live goals, one run each. 'reached' is a reviewer judgment from final URL/title and archives, not the verifier.",
+ "coverage_pages": [
+  {
+   "key": "airbnb",
+   "category": "travel-forms",
+   "url": "https://www.airbnb.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 11,
+   "covered": 11,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 11,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 17,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "amazon",
+   "category": "shop",
+   "url": "https://www.amazon.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 32,
+   "covered": 31,
+   "recall": 0.969,
+   "misses": {
+    "transparent_native": 1
+   },
+   "occluded": 6,
+   "controls": 31,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 14,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "antd",
+   "category": "ui-kit-react",
+   "url": "https://ant.design/components/select",
+   "loaded": true,
+   "wall": null,
+   "candidates": 111,
+   "covered": 107,
+   "recall": 0.964,
+   "misses": {
+    "transparent_native": 1,
+    "pointer_no_role": 3
+   },
+   "occluded": 2,
+   "controls": 107,
+   "unlabeled": 7,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 99,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "baidu",
+   "category": "search-cn",
+   "url": "https://www.baidu.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 39,
+   "covered": 32,
+   "recall": 0.821,
+   "misses": {
+    "pointer_no_role": 6,
+    "native_other": 1
+   },
+   "occluded": 0,
+   "controls": 32,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 40,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "bbc",
+   "category": "news",
+   "url": "https://www.bbc.com/news",
+   "loaded": true,
+   "wall": null,
+   "candidates": 33,
+   "covered": 33,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 33,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 13,
+   "detector_flagged_challenge": true
+  },
+  {
+   "key": "bilibili",
+   "category": "media-cn",
+   "url": "https://www.bilibili.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 69,
+   "covered": 49,
+   "recall": 0.71,
+   "misses": {
+    "pointer_no_role": 20
+   },
+   "occluded": 9,
+   "controls": 49,
+   "unlabeled": 2,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 10,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "bing",
+   "category": "search",
+   "url": "https://www.bing.com/",
+   "loaded": false,
+   "note": "browser launch failed (DevToolsActivePort PermissionError)"
+  },
+  {
+   "key": "booking",
+   "category": "travel-forms",
+   "url": "https://www.booking.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 14,
+   "covered": 13,
+   "recall": 0.929,
+   "misses": {
+    "label_custom_control": 1
+   },
+   "occluded": 0,
+   "controls": 13,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 8,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "bootstrap",
+   "category": "ui-kit",
+   "url": "https://getbootstrap.com/docs/5.3/forms/checks-radios/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 61,
+   "covered": 59,
+   "recall": 0.967,
+   "misses": {
+    "transparent_native": 2
+   },
+   "occluded": 5,
+   "controls": 59,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 21,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "chakra",
+   "category": "ui-kit-react",
+   "url": "https://www.chakra-ui.com/docs/components/slider",
+   "loaded": true,
+   "wall": null,
+   "candidates": 74,
+   "covered": 72,
+   "recall": 0.973,
+   "misses": {
+    "role_slider": 1,
+    "tabindex_no_role": 1
+   },
+   "occluded": 6,
+   "controls": 72,
+   "unlabeled": 3,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 36,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "codepen",
+   "category": "editor",
+   "url": "https://codepen.io/pen/",
+   "loaded": true,
+   "wall": "Cloudflare check (zh-CN title)",
+   "candidates": 2,
+   "covered": 2,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 2,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 4,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "ctrip",
+   "category": "travel-cn",
+   "url": "https://www.ctrip.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 55,
+   "covered": 45,
+   "recall": 0.818,
+   "misses": {
+    "tabindex_no_role": 1,
+    "pointer_no_role": 9
+   },
+   "occluded": 6,
+   "controls": 45,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 19,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "duckduckgo",
+   "category": "search",
+   "url": "https://duckduckgo.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 10,
+   "covered": 9,
+   "recall": 0.9,
+   "misses": {
+    "label_custom_control": 1
+   },
+   "occluded": 0,
+   "controls": 9,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 7,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "ebay",
+   "category": "shop",
+   "url": "https://www.ebay.com/",
+   "loaded": true,
+   "wall": "error page",
+   "candidates": 1,
+   "covered": 1,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 1,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 6,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "elementplus",
+   "category": "ui-kit-vue",
+   "url": "https://element-plus.org/en-US/component/select.html",
+   "loaded": true,
+   "wall": null,
+   "candidates": 37,
+   "covered": 33,
+   "recall": 0.892,
+   "misses": {
+    "transparent_native": 3,
+    "pointer_no_role": 1
+   },
+   "occluded": 4,
+   "controls": 33,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 32,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "excalidraw",
+   "category": "canvas-app",
+   "url": "https://excalidraw.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 27,
+   "covered": 27,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 26,
+   "unlabeled": 1,
+   "canvas_pct": 100,
+   "cross_frame_pct": 0,
+   "observe_ms": 8,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "figma",
+   "category": "marketing-spa",
+   "url": "https://www.figma.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 14,
+   "covered": 14,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 1,
+   "controls": 14,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 35,
+   "observe_ms": 5,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "github",
+   "category": "dev-spa",
+   "url": "https://github.com/apixly-ai/jev-filter",
+   "loaded": true,
+   "wall": null,
+   "candidates": 88,
+   "covered": 88,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 14,
+   "controls": 88,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 37,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "gmaps",
+   "category": "canvas-app",
+   "url": "https://www.google.com/maps",
+   "loaded": true,
+   "wall": null,
+   "candidates": 6,
+   "covered": 6,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 6,
+   "unlabeled": 0,
+   "canvas_pct": 100,
+   "cross_frame_pct": 0,
+   "observe_ms": 5,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "govcn",
+   "category": "gov-cn",
+   "url": "https://www.gov.cn/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 30,
+   "covered": 30,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 4,
+   "controls": 29,
+   "unlabeled": 4,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 11,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "hackernews",
+   "category": "dev",
+   "url": "https://news.ycombinator.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 180,
+   "covered": 180,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 180,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 17,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "ikea",
+   "category": "shop",
+   "url": "https://www.ikea.com/us/en/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 30,
+   "covered": 30,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 2,
+   "controls": 30,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 31,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "jd",
+   "category": "shop-cn",
+   "url": "https://www.jd.com/",
+   "loaded": true,
+   "wall": "risk overlay covering the page",
+   "candidates": 5,
+   "covered": 0,
+   "recall": 0.0,
+   "misses": {
+    "pointer_no_role": 5
+   },
+   "occluded": 109,
+   "controls": 0,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 37,
+   "observe_ms": 95,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "mdn",
+   "category": "docs",
+   "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map",
+   "loaded": true,
+   "wall": null,
+   "candidates": 48,
+   "covered": 48,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 9,
+   "controls": 48,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 14,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "mui",
+   "category": "ui-kit-react",
+   "url": "https://mui.com/material-ui/react-checkbox/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 71,
+   "covered": 69,
+   "recall": 0.972,
+   "misses": {
+    "transparent_native": 2
+   },
+   "occluded": 4,
+   "controls": 69,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 15,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "netease",
+   "category": "news-cn",
+   "url": "https://www.163.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 85,
+   "covered": 81,
+   "recall": 0.953,
+   "misses": {
+    "pointer_no_role": 4
+   },
+   "occluded": 55,
+   "controls": 81,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 28,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "notion",
+   "category": "marketing-spa",
+   "url": "https://www.notion.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 16,
+   "covered": 16,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 16,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 7,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "npm",
+   "category": "dev-spa",
+   "url": "https://www.npmjs.com/package/react",
+   "loaded": true,
+   "wall": "Cloudflare check (zh-CN title)",
+   "candidates": 2,
+   "covered": 2,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 2,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 5,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "pydocs",
+   "category": "docs",
+   "url": "https://docs.python.org/3/tutorial/datastructures.html",
+   "loaded": true,
+   "wall": null,
+   "candidates": 35,
+   "covered": 34,
+   "recall": 0.971,
+   "misses": {
+    "pointer_no_role": 1
+   },
+   "occluded": 1,
+   "controls": 34,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 24,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "pypi",
+   "category": "dev",
+   "url": "https://pypi.org/project/requests/",
+   "loaded": true,
+   "wall": "Fastly image CAPTCHA",
+   "candidates": 4,
+   "covered": 3,
+   "recall": 0.75,
+   "misses": {
+    "native_other": 1
+   },
+   "occluded": 0,
+   "controls": 3,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 6,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "reddit",
+   "category": "social",
+   "url": "https://www.reddit.com/",
+   "loaded": true,
+   "wall": "human check",
+   "candidates": 6,
+   "covered": 6,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 6,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 2,
+   "observe_ms": 6,
+   "detector_flagged_challenge": true
+  },
+  {
+   "key": "runoob",
+   "category": "docs-cn",
+   "url": "https://www.runoob.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 39,
+   "covered": 27,
+   "recall": 0.692,
+   "misses": {
+    "pointer_no_role": 12
+   },
+   "occluded": 0,
+   "controls": 27,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 10,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "shadcn",
+   "category": "ui-kit-react",
+   "url": "https://ui.shadcn.com/docs/components/select",
+   "loaded": true,
+   "wall": null,
+   "candidates": 64,
+   "covered": 64,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 7,
+   "controls": 63,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 18,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "stackoverflow",
+   "category": "dev",
+   "url": "https://stackoverflow.com/questions",
+   "loaded": true,
+   "wall": "Cloudflare check (zh-CN title)",
+   "candidates": 2,
+   "covered": 2,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 2,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 4,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "usagov",
+   "category": "gov",
+   "url": "https://www.usa.gov/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 20,
+   "covered": 20,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 20,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 7,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "vuetify",
+   "category": "ui-kit-vue",
+   "url": "https://vuetifyjs.com/en/components/date-pickers/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 81,
+   "covered": 77,
+   "recall": 0.951,
+   "misses": {
+    "transparent_native": 3,
+    "label_custom_control": 1
+   },
+   "occluded": 5,
+   "controls": 72,
+   "unlabeled": 9,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 42,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "w3forms",
+   "category": "forms",
+   "url": "https://www.w3schools.com/html/html_forms.asp",
+   "loaded": true,
+   "wall": null,
+   "candidates": 70,
+   "covered": 68,
+   "recall": 0.971,
+   "misses": {
+    "pointer_no_role": 2
+   },
+   "occluded": 5,
+   "controls": 67,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 26,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "wikipedia",
+   "category": "reference",
+   "url": "https://en.wikipedia.org/wiki/Alan_Turing",
+   "loaded": true,
+   "wall": null,
+   "candidates": 84,
+   "covered": 73,
+   "recall": 0.869,
+   "misses": {
+    "transparent_native": 11
+   },
+   "occluded": 4,
+   "controls": 73,
+   "unlabeled": 1,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 47,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "youtube",
+   "category": "media-spa",
+   "url": "https://www.youtube.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 11,
+   "covered": 11,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 0,
+   "controls": 11,
+   "unlabeled": 0,
+   "canvas_pct": 0,
+   "cross_frame_pct": 0,
+   "observe_ms": 8,
+   "detector_flagged_challenge": false
+  },
+  {
+   "key": "zhihu",
+   "category": "social-cn",
+   "url": "https://www.zhihu.com/",
+   "loaded": true,
+   "wall": null,
+   "candidates": 37,
+   "covered": 37,
+   "recall": 1.0,
+   "misses": {},
+   "occluded": 3,
+   "controls": 37,
+   "unlabeled": 3,
+   "canvas_pct": 2,
+   "cross_frame_pct": 0,
+   "observe_ms": 7,
+   "detector_flagged_challenge": false
+  }
+ ],
+ "live_goals": [
+  {
+   "key": "wikipedia-search",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 6,
+     "input_tokens": 59068,
+     "elapsed_ms": 4216,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 5,
+     "input_tokens": 52745,
+     "elapsed_ms": 4065,
+     "verified": true,
+     "reached": true
+    }
+   ],
+   "done": 2,
+   "reached": 2,
+   "root_cause": null,
+   "skeptic_refuted": null,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "hn-newest",
+   "runs": [
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 8379,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 1280,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "other",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "The diagnosis stands; only details are corrected here. On the Hacker News front page the kernel builds its first decision request with 180 click candidates. The row, section and role fields are duplicated in both the elements table and the click_target criteria, which puts the request at about 74 KB"
+  },
+  {
+   "key": "github-issues",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 1,
+     "requests": 6,
+     "input_tokens": 62766,
+     "elapsed_ms": 4558,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "done",
+     "steps": 1,
+     "requests": 5,
+     "input_tokens": 47202,
+     "elapsed_ms": 4225,
+     "verified": true,
+     "reached": true
+    }
+   ],
+   "done": 2,
+   "reached": 2,
+   "root_cause": null,
+   "skeptic_refuted": null,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "github-releases",
+   "runs": [
+    {
+     "status": "unverified",
+     "steps": 2,
+     "requests": 3,
+     "input_tokens": 42115,
+     "elapsed_ms": 7799,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "unverified",
+     "steps": 1,
+     "requests": 5,
+     "input_tokens": 59030,
+     "elapsed_ms": 8257,
+     "verified": false,
+     "reached": true
+    }
+   ],
+   "done": 0,
+   "reached": 1,
+   "root_cause": "timing_or_settle",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "Confirmed as stated: the root cause is timing_or_settle. The settle op returns within about 50 ms, before GitHub's same-document (soft) navigation commits. That navigation takes about 0.1 s warm, and 0.9-1.1 s when the click comes soon after page load. So the model gets a stale snapshot of the repo "
+  },
+  {
+   "key": "mdn-filter",
+   "runs": [
+    {
+     "status": "needs_value",
+     "steps": 6,
+     "requests": 6,
+     "input_tokens": 18246,
+     "elapsed_ms": 7996,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "needs_value",
+     "steps": 6,
+     "requests": 6,
+     "input_tokens": 22724,
+     "elapsed_ms": 3308,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "observation_gap",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "observation_gap (confirmed): page.js drops the sidebar filter() link because the sidebar's own scroll box is scrolled so that the link sits above the window (scrollTop≈1098, y≈-105). No offered action can scroll that container. Once the link is observable, Jev clicks it with P≈0.8-0.98. Secondary: w"
+  },
+  {
+   "key": "pydocs-modules",
+   "runs": [
+    {
+     "status": "needs_value",
+     "steps": 7,
+     "requests": 7,
+     "input_tokens": 108029,
+     "elapsed_ms": 13508,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 26601,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "observation_gap",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "pypi-search",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 4,
+     "requests": 5,
+     "input_tokens": 11243,
+     "elapsed_ms": 10151,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 3,
+     "requests": 4,
+     "input_tokens": 7688,
+     "elapsed_ms": 28278,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "site_blocked",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "npm-search",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 1719,
+     "elapsed_ms": 5264,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 20458,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "site_blocked",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "bing-search",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 6,
+     "requests": 20,
+     "input_tokens": 114565,
+     "elapsed_ms": 11045,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 25986,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 1,
+   "reached": 1,
+   "root_cause": "network_or_load",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "ddg-search",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 2,
+     "requests": 5,
+     "input_tokens": 12861,
+     "elapsed_ms": 10495,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 3,
+     "input_tokens": 9327,
+     "elapsed_ms": 7105,
+     "verified": true,
+     "reached": false
+    }
+   ],
+   "done": 1,
+   "reached": 0,
+   "root_cause": "site_blocked",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null,
+   "note": "Both runs hit DuckDuckGo's bot puzzle; the rep 2 `done` is likely a false positive because the URL check also matches the challenge page."
+  },
+  {
+   "key": "baidu-search",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 5,
+     "requests": 5,
+     "input_tokens": 20033,
+     "elapsed_ms": 10491,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "blocked",
+     "steps": 5,
+     "requests": 5,
+     "input_tokens": 20033,
+     "elapsed_ms": 6660,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "decision_error",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "Primary cause confirmed: a decision_error. Jev keeps re-choosing TYPE_TEXT on a textbox that already holds 图灵测试, instead of CLICK 百度一下. The misleading field label from page.js (Baidu's placeholder is a hot-search headline) pushes it there, and kernel.py has no guard against a no-op fill. This reprod"
+  },
+  {
+   "key": "so-tags",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 1682,
+     "elapsed_ms": 6588,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "blocked",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 1683,
+     "elapsed_ms": 4572,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "site_blocked",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "jd-search",
+   "runs": [
+    {
+     "status": "origin_blocked",
+     "steps": 2,
+     "requests": 2,
+     "input_tokens": 23041,
+     "elapsed_ms": 5850,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 26357,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "site_blocked",
+   "skeptic_refuted": true,
+   "corrected_root_cause": "The root cause is login_required, not anti-bot site_blocked. Since September 2023, JD's PC web has forced sign-in for every anonymous product search. The search button sends the browser to the cfe.m.jd.com risk_handler page titled 京东验证 (验证一下，购物无忧 with a 快速验证 button), which leads to passport.jd.com l"
+  },
+  {
+   "key": "bilibili-search",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 10,
+     "requests": 10,
+     "input_tokens": 96759,
+     "elapsed_ms": 13175,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 22312,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "new_tab_or_popup",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "youtube-search",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 4,
+     "input_tokens": 13181,
+     "elapsed_ms": 5808,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "error",
+     "steps": 0,
+     "requests": 1,
+     "input_tokens": 0,
+     "elapsed_ms": 28565,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 1,
+   "reached": 1,
+   "root_cause": "network_or_load",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "amazon-search",
+   "runs": [
+    {
+     "status": "error",
+     "steps": null,
+     "requests": null,
+     "input_tokens": null,
+     "elapsed_ms": 5262,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "error",
+     "steps": null,
+     "requests": null,
+     "input_tokens": null,
+     "elapsed_ms": 8454,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "timing_or_settle",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "ikea-search",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 3,
+     "requests": 6,
+     "input_tokens": 35537,
+     "elapsed_ms": 5789,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "done",
+     "steps": 3,
+     "requests": 6,
+     "input_tokens": 34269,
+     "elapsed_ms": 6214,
+     "verified": true,
+     "reached": true
+    }
+   ],
+   "done": 2,
+   "reached": 2,
+   "root_cause": null,
+   "skeptic_refuted": null,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "booking-search",
+   "runs": [
+    {
+     "status": "budget_exhausted",
+     "steps": 25,
+     "requests": 37,
+     "input_tokens": 333772,
+     "elapsed_ms": 37814,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "unverified",
+     "steps": 20,
+     "requests": 32,
+     "input_tokens": 307589,
+     "elapsed_ms": 31902,
+     "verified": false,
+     "reached": true
+    }
+   ],
+   "done": 0,
+   "reached": 1,
+   "root_cause": "timing_or_settle",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "usagov-passport",
+   "runs": [
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 4,
+     "input_tokens": 22118,
+     "elapsed_ms": 4320,
+     "verified": true,
+     "reached": true
+    },
+    {
+     "status": "done",
+     "steps": 2,
+     "requests": 3,
+     "input_tokens": 16267,
+     "elapsed_ms": 3769,
+     "verified": true,
+     "reached": true
+    }
+   ],
+   "done": 2,
+   "reached": 2,
+   "root_cause": null,
+   "skeptic_refuted": null,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "elementplus-select",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 4,
+     "requests": 4,
+     "input_tokens": 23227,
+     "elapsed_ms": 9158,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "blocked",
+     "steps": 4,
+     "requests": 4,
+     "input_tokens": 23227,
+     "elapsed_ms": 13367,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "observation_gap",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "antd-select",
+   "runs": [
+    {
+     "status": "needs_value",
+     "steps": 9,
+     "requests": 15,
+     "input_tokens": 239614,
+     "elapsed_ms": 12517,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "needs_value",
+     "steps": 19,
+     "requests": 23,
+     "input_tokens": 386706,
+     "elapsed_ms": 17288,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "observation_gap",
+   "skeptic_refuted": false,
+   "corrected_root_cause": null
+  },
+  {
+   "key": "bootstrap-checkbox",
+   "runs": [
+    {
+     "status": "unverified",
+     "steps": 1,
+     "requests": 3,
+     "input_tokens": 17343,
+     "elapsed_ms": 4146,
+     "verified": false,
+     "reached": true
+    },
+    {
+     "status": "unverified",
+     "steps": 1,
+     "requests": 3,
+     "input_tokens": 17343,
+     "elapsed_ms": 2089,
+     "verified": false,
+     "reached": true
+    }
+   ],
+   "done": 0,
+   "reached": 2,
+   "root_cause": "verifier_mismatch",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "Diagnosis confirmed (verifier_mismatch). One refinement to the fix: adding element state makes the verifier discriminate. Post-click scored 0.67-0.86 and pre-click 0.27-0.37 over 3 reps and 2 phrasings, but the rephrased question lands right at the 0.7 threshold. Pair the elements change with an exp"
+  },
+  {
+   "key": "mui-checkbox",
+   "runs": [
+    {
+     "status": "blocked",
+     "steps": 5,
+     "requests": 5,
+     "input_tokens": 48089,
+     "elapsed_ms": 7754,
+     "verified": false,
+     "reached": false
+    },
+    {
+     "status": "blocked",
+     "steps": 5,
+     "requests": 5,
+     "input_tokens": 47915,
+     "elapsed_ms": 3874,
+     "verified": false,
+     "reached": false
+    }
+   ],
+   "done": 0,
+   "reached": 0,
+   "root_cause": "observation_gap",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "The root cause is confirmed with one addition. There are two stages.\n\n1. Main cause (unchanged): the observation gap. page.js visible() uses checkVisibility({checkOpacity: true}), which drops MUI's opacity-0 native <input type=checkbox> before the hit test. The target was therefore never offered, an"
+  },
+  {
+   "key": "excalidraw-rect",
+   "runs": [
+    {
+     "status": "unverified",
+     "steps": 1,
+     "requests": 3,
+     "input_tokens": 9801,
+     "elapsed_ms": 4512,
+     "verified": false,
+     "reached": true
+    },
+    {
+     "status": "unverified",
+     "steps": 1,
+     "requests": 3,
+     "input_tokens": 9801,
+     "elapsed_ms": 4622,
+     "verified": false,
+     "reached": true
+    }
+   ],
+   "done": 0,
+   "reached": 2,
+   "root_cause": "verifier_mismatch",
+   "skeptic_refuted": false,
+   "corrected_root_cause": "Root cause verifier_mismatch stands. kernel.py verify() gives the question verifier only url, title and text. Excalidraw marks the active tool only through aria-pressed, which reaches the decision loop through state.elements but never reaches the verifier. One detail needs correcting: the visible te"
+  }
+ ],
+ "desktop_apps": [
+  {
+   "app": "Calculator (calc.exe -> CalculatorApp.exe)",
+   "toolkit": "WinUI/UWP, hosted in ApplicationFrameHost (ApplicationFrameWindow)",
+   "controls": 34,
+   "unlabeled": 0,
+   "observe_ms": 385,
+   "ocr_used": false,
+   "goal": "Calculate 12 times 34 (--verify-text 408)",
+   "status": "done",
+   "passed": true
+  },
+  {
+   "app": "Character Map (charmap.exe)",
+   "toolkit": "Classic Win32 dialog (#32770, ComboBox/ComboLBox, custom CharGridWClass)",
+   "controls": 9,
+   "unlabeled": 0,
+   "observe_ms": 97,
+   "ocr_used": false,
+   "goal": "Choose the Courier New font (--verify-text 'Courier New')",
+   "status": "needs_value (reason repeating)",
+   "passed": false
+  },
+  {
+   "app": "File Explorer window (explorer.exe C:\\Windows\\Web)",
+   "toolkit": "Shell + WinUI/XAML (CabinetWClass; ran in a separate explorer.exe process, pid 43780)",
+   "controls": 78,
+   "unlabeled": 0,
+   "observe_ms": 1191,
+   "ocr_used": false,
+   "goal": "Open the Screen folder (verified by window title)",
+   "status": "done",
+   "passed": true
+  },
+  {
+   "app": "Paint (mspaint.exe, Store version)",
+   "toolkit": "WinUI 3 / XAML (MSPaintApp)",
+   "controls": 113,
+   "unlabeled": 1,
+   "observe_ms": 938,
+   "ocr_used": false,
+   "goal": null,
+   "status": null,
+   "passed": null
+  },
+  {
+   "app": "cmake-gui 3.30.3",
+   "toolkit": "Qt 5.15.10 (Qt51510QWindowIcon), no widget accessibility exposed",
+   "controls": 0,
+   "unlabeled": 0,
+   "observe_ms": 15,
+   "ocr_used": true,
+   "goal": "Open the Help menu (--verify-question 'Is the Help menu of the application open, showing its menu entries?')",
+   "status": "blocked (reason no_progress)",
+   "passed": false
+  },
+  {
+   "app": "DB Browser for SQLite",
+   "toolkit": "Qt 5 (dynamic build, accessibility bridge active; class MainWindow)",
+   "controls": 63,
+   "unlabeled": 0,
+   "observe_ms": 283,
+   "ocr_used": false,
+   "goal": "Open the Help menu (--verify-question as for cmake-gui)",
+   "status": "unverified",
+   "passed": false
+  },
+  {
+   "app": "Beyond Compare 4 (4.4.3, D:\\Beyond Compare 4\\BCompare.exe)",
+   "toolkit": "Delphi VCL (TNagDialog / TViewForm, TUi* controls)",
+   "controls": 67,
+   "unlabeled": 0,
+   "observe_ms": 288,
+   "ocr_used": false,
+   "goal": null,
+   "status": null,
+   "passed": null
+  },
+  {
+   "app": "Google Chrome, throwaway profile (--user-data-dir under the probe dir), local probe page",
+   "toolkit": "Chromium (Chrome_WidgetWin_1)",
+   "controls": 22,
+   "unlabeled": 0,
+   "observe_ms": 481,
+   "ocr_used": false,
+   "goal": null,
+   "status": null,
+   "passed": null
+  }
+ ]
+}

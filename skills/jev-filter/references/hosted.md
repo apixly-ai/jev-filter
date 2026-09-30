@@ -4,7 +4,10 @@ Covers `browse`, `desktop`, `extract` and `survey`. Each prints one JSON documen
 (`survey --format md` prints Markdown). The full history, per-step decision distributions and
 per-record answers go to a private archive file (mode 0600, in the system temporary
 directory) whose path is in `archive`. Exit code 0 means
-complete and ok; 2 means read stdout and act on `status`. Never paste an archive into a public
+complete and ok. Exit 2 with a packet on stdout means read it: `status` for browse and desktop,
+`ok` and `complete` for extract and survey. Exit 2 with empty stdout is a usage error printed on
+stderr. Exit 1 means the command failed before producing a packet; stderr holds
+`{"ok": false, "error_type": …}` (for example `DesktopRefused` or `ValueError`). Never paste an archive into a public
 report.
 
 ## browse and desktop
@@ -15,11 +18,11 @@ report.
 |---|---|---|
 | Goal | `--goal` | One short outcome that is observable on the surface, with every constraint ("in stock only", "size 42"). No secrets: the goal is sent for inference. |
 | Values | `--value KEY=VALUE` (repeatable), `--values FILE` (`-` reads stdin) | Jev cannot write text. It only picks which named value fits a field. |
-| Verifier | `--verify-text`, `--verify-url`, `--verify-question` | Pass at least one. Without a verifier, `done` is only the model's opinion. |
-| Browser surface | `--url`; or `--cdp-port N [--target-id T]`; or `--transport camofox --session S [--tab T]` | Navigation stays on the start origin unless `--allow-origin URL` or `--any-origin`. |
+| Verifier | `--verify-text`, `--verify-question`; `--verify-url` (browse only) | Pass at least one. Without a verifier, `done` is only the model's opinion. |
+| Browser surface | `--url URL` (a private browser; add `--cdp-port N` to open it in your running browser); or `--cdp-port N --target-id T` to attach to an existing tab; or `--transport camofox --session S` with `--url URL` or `--tab T` | Navigation stays on the start origin unless `--allow-origin URL` or `--any-origin`. |
 | Desktop surface | `--window REGEX`, `--process NAME`, `--launch CMD` | Run `desktop --list` first and anchor an exact title: `--window '^Invoice Tool$'`. |
 | Budgets | `--max-steps` (60), `--max-decisions` (120) | Short goals; split long tasks and call once per sub-goal. |
-| Probe | `--dry-run` | Observe, decide one step, execute nothing; the decision is in `pending`. |
+| Probe | `--dry-run` | Observe, decide one step, execute nothing; the chosen control is in `pending`. |
 
 Values file (`--values values.json`):
 
@@ -47,9 +50,9 @@ Values file (`--values values.json`):
 Verifiers run on a fresh observation after the loop stops, and every verifier given must pass:
 
 - `--verify-text`: case-insensitive substring of the final visible text.
-- `--verify-url`: a Python regular expression searched in the final URL.
-- `--verify-question`: a Jev yes/no question on the final page (passes at probability 0.5 or
-  more). It is billable and weaker than text or URL checks.
+- `--verify-url` (browse only): a Python regular expression searched in the final URL.
+- `--verify-question`: a Jev yes/no question on the final page (passes at probability 0.7 or
+  more). It sees page text, not checked, pressed or selected state. It is billable and weaker than text or URL checks.
 
 ### What comes back
 
@@ -58,10 +61,10 @@ Verifiers run on a fresh observation after the loop stops, and every verifier gi
   "status": "needs_confirmation",
   "ok": false,
   "goal": "Buy the cheapest red shoes in size 42",
-  "steps": 5,
-  "decisions": 6,
-  "requests": 6,
-  "usage": {"input_tokens": 21480, "output_tokens": 0},
+  "steps": 8,
+  "decisions": 9,
+  "requests": 9,
+  "usage": {"input_tokens": 26220, "output_tokens": 1678},
   "final": {"url": "http://127.0.0.1:8000/cart.html", "title": "Cart"},
   "pending": {"id": "e2", "kind": "click", "label": "Place order", "role": "button"},
   "reason": "label_rule",
@@ -76,8 +79,10 @@ Verifiers run on a fresh observation after the loop stops, and every verifier gi
 ```
 
 Keys appear only when they apply. `trace` lists operations and control labels, never typed
-text. `verification` holds `{"passed", "text", "url", "question", "question_probability"}` when a
-verifier ran. `dialogs` lists JavaScript dialogs that were dismissed.
+text. `verification` holds `{"passed", "text", "url", "question", "question_probability"}` (plus
+`question_error` if the verifier call failed) when a verifier ran. `dialogs` lists JavaScript
+dialogs the page raised; they were dismissed unless `--accept-dialogs` accepted alerts and
+beforeunload prompts.
 
 | `status` | What to do |
 |---|---|
@@ -89,7 +94,7 @@ verifier ran. `dialogs` lists JavaScript dialogs that were dismissed.
 | `dry_run` | The decided step is in `pending`; nothing was executed. |
 | `origin_blocked` | Navigation left the allowed origins (`origin`). Add `--allow-origin` only if the user expects that site. |
 | `budget_exhausted` | Step or decision budget reached (`budget`). Split the goal. |
-| `error` | Transport, provider or safety-gate failure (`error`), for example a refused sensitive window or a STOP file. Nothing was retried. |
+| `error` | Transport, provider or safety-gate failure during the run (`error`), for example a STOP file, the pointer parked in the top-left corner or a locked desktop. Nothing was retried. A sensitive or elevated target window is refused before the run starts: exit 1, no stdout packet, `{"ok": false, "error_type": "DesktopRefused"}` on stderr. |
 
 Resuming a paused browser run (the first run needs `--keep-open` so `session` is returned):
 
@@ -206,7 +211,7 @@ every record into them.
   },
   "crosstabs": {"topic": {"billing": {"n": 2410, "sentiment_mean": 0.41, "churn_yes_share": 0.31}}},
   "representatives": {"topic": {"billing": [{"id": "T-1042", "confidence": 0.99, "excerpt": "…"}]}},
-  "usage": {"input_tokens": 5190000, "output_tokens": 0}, "requests": 375,
+  "usage": {"input_tokens": 5192517, "output_tokens": 1068773}, "requests": 375,
   "estimated_input_usd": 0.218, "preflight": {"requests": 390, "input_tokens_estimate": 5500000, "input_usd_estimate": 0.231},
   "calibrated": false, "calibration_note": "…", "input": {"rows": 10000, "truncated": false},
   "archive": "/tmp/jev-context-p3v9xa.json"
