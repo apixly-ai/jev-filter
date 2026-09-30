@@ -12,6 +12,10 @@
 | `code-search PATTERN --root PATH --task TEXT` | 将命中扩展到完整函数或方法 |
 | `locate --session S --tab T --origin URL --task TEXT` | 只读选择 Camofox 控件并检查时效 |
 | `triage --input FILE --task TEXT` | 关联 JSON/JSONL 事件后判断 |
+| `browse --url URL --goal TEXT [--value k=v]` | 托管浏览器执行，朝目标推进（[说明](hosted-execution.zh-CN.md#浏览器browse)） |
+| `extract --url URL --task TEXT` | 把页面结构化成记录，再按 `query` 的方式判断 |
+| `desktop --window REGEX --goal TEXT` | 在一个 Windows/macOS 应用里托管执行；`--list` 列出窗口 |
+| `survey --input PATH --spec FILE` | 对大量记录做类型化判断并汇总成报告 |
 | `batch --input FILE` | 自动合并兼容的原生类型化请求 |
 | `read ARCHIVE --id ID` / `list ARCHIVE` | 不调用模型，回读保留的原始记录 |
 | `doctor [--live]` | 检查安装；可选真实 API 测试 |

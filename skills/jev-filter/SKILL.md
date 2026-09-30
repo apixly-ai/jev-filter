@@ -1,6 +1,6 @@
 ---
 name: jev-filter
-description: Use Jev Filter for program-owned semantic filtering, candidate selection, code search and grouped log triage when many records need clear typed judgments. Prefer native tools for exact or short tasks; not a replacement for open-ended reasoning or action authorization.
+description: Use Jev Filter for program-owned semantic filtering, candidate selection, code search and grouped log triage when many records need clear typed judgments, and for hosted execution of short, verifiable browser or desktop goals and surveys over many records. Prefer native tools for exact or short tasks; not a replacement for open-ended reasoning or action authorization.
 ---
 
 # Jev Filter
@@ -24,6 +24,14 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
   only unresolved originals. Do not retry an uncertain external command.
 - Preserve scope, source freshness, identity and authorization checks. A selected
   target is not proof of an executed action. The locator does not click.
+- `browse` / `desktop` execute a short goal themselves: supply named values
+  (`--value key=value`), a verifier (`--verify-text` / `--verify-url`) and stay the
+  planner. Treat `needs_confirmation`, `needs_value`, `blocked` (challenge,
+  login_required) and `unverified` as your turn: ask the user before passing a
+  `--confirm` token or `--allow-irreversible`. Never supply passwords.
+- `survey` answers typed questions over many records and aggregates in code; write the
+  narrative yourself from its report and cite record IDs. Check `calibrated` before
+  trusting confidence floors.
 - New semantic integrations need an A/B with fixed inputs, quality, failures, complete
   operation time and actual usage. Keep negative results; do not promise universal
   cost or latency improvement.

@@ -3,6 +3,42 @@
 The format follows Keep a Changelog; versions follow SemVer within the limitations
 of a 0.x API (minor releases may make documented breaking changes).
 
+## [0.3.0] - 2026-09-30
+
+### Added
+- Hosted execution: Jev Filter now executes, not only filters. Jev chooses among actions the
+  program enumerated; the program acts, re-checks every target first and verifies results.
+- `browse`: web goals over a standard-library DevTools client (private headless Chrome/Edge/
+  Chromium, or `--cdp-port` to attach) or a local Camofox server. One request per step asks the
+  operation and a target per operation (design adapted from browser-use/jev-ultrafast, MIT).
+  Named values (`--value`), optional text model (`--text-model`), origin limits, dialog handling,
+  `--verify-text/--verify-url/--verify-question`, `--dry-run`, and pause/resume for irreversible
+  actions with a one-time `confirm_token` (`--keep-open`, `--cdp-port`/`--target-id`, `--confirm`).
+- `extract`: structures a page into header-labelled table rows, blocks and links, then applies the
+  `query` contract.
+- `desktop`: the same loop in one Windows (UI Automation) or macOS (Accessibility) application,
+  with an OCR fallback (Windows.Media.Ocr, Vision) for drawn UI and `--list` for windows.
+  Deterministic safety gates refuse terminals, credential managers and system settings, locked
+  sessions and elevated targets, and stop on a STOP file or pointer in the top-left corner.
+- `survey`: typed questions over JSONL/CSV/JSON/text inputs with optional screening, packed
+  concurrent evaluation, code-side aggregation (distributions, crosstabs, examples, uncertain and
+  failed IDs), pre-flight budgets (`--max-usd`, `--max-requests`), `--labels` calibration and
+  optional category proposal from a fixed-seed sample.
+- `doctor` reports hosted-execution readiness. `pip install 'jev-filter[desktop]'` adds the
+  desktop backends.
+- Benchmarks: `python -m benchmarks.hosted --live` with synthetic browser, desktop and survey
+  fixtures and program-checked outcomes; results in `benchmarks/results/2026-09-30-hosted.json`.
+
+### Fixed
+- Camofox is reached on `127.0.0.1` instead of `localhost`, removing a ~2 s IPv6 fallback per
+  request on Windows (`locate` tutorial 5059 ms -> 1192 ms). Benchmark tab cleanup sends `userId`
+  in the DELETE body as Camofox 2.4.8 requires.
+
+### Scope
+- Hosted execution is a short-step executor with an observable outcome; open-web long tasks
+  belong to a planning agent. macOS was exercised with a fake accessibility tree and on CI runners
+  when Accessibility can be granted, not on a physical Mac.
+
 ## [0.2.4] - 2026-09-24
 
 ### Fixed

@@ -49,6 +49,7 @@ class DesktopSurface:
         self.nodes = {}
         self.dialogs = []
         self.guard_input = guard_input
+        self.corner = desktop_policy.CornerSwitch() if guard_input else None
         identity = getattr(backend, "identity", lambda: {})()
         try:
             desktop_policy.check_target(
@@ -209,7 +210,7 @@ class DesktopSurface:
         kind = action["kind"]
         if self.guard_input and kind != "wait":
             try:
-                desktop_policy.check_before_input()
+                desktop_policy.check_before_input(self.corner)
             except desktop_policy.DesktopRefused as error:
                 raise ActionFailed(str(error)) from None
         if kind == "wait":

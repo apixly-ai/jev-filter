@@ -31,7 +31,8 @@ flowchart LR
 - **每步一次请求。** 操作题（`CLICK`、`TYPE_TEXT`、`SELECT`、`SCROLL_*`、`PRESS_ENTER`、`BACK`、`WAIT`、`DONE`、`BLOCKED`）和每种操作的目标题一起问，只有和选中操作对应的那道目标题会被执行。这个设计来自 [browser-use/jev-ultrafast](https://github.com/browser-use/jev-ultrafast)（MIT）。
 - **每个决策只消费一次。** 过期的决策在任何改动之前就被丢弃，重试不会重复点击。执行记录写在下一次观察之前。
 - **DONE 不是证据。** `--verify-text`、`--verify-url`、`--verify-question` 在循环结束后的新观察上运行，不通过则为 `unverified`。
-- **预算与卡死。** 默认最多 60 步、120 次决策；连续三次观察没有变化（`WAIT` 除外）就以 `blocked` 结束。
+- **预算、卡死与打转。** 默认最多 60 步、120 次决策；连续三次观察没有变化（`WAIT` 除外），或同一页面状态第三次出现，都以 `blocked` 结束。
+- **交还是正常结果。** 验证码（reCAPTCHA、hCaptcha、Cloudflare）按确定性规则检测，从不尝试求解，运行以 `blocked` 结束，原因为 `challenge`。页面上有密码框时选了 `BLOCKED`，原因为 `login_required`。`--dry-run` 只观察并决策一步，不执行。
 
 ## 浏览器：`browse`
 
@@ -90,6 +91,16 @@ jev-filter desktop --window '^Invoice Tool$' \
 - **macOS** 通过 pyobjc 使用 Accessibility API（`AXPress`、`AXPick`、`AXValue`）。需要在"系统设置 → 隐私与安全性 → 辅助功能"里授权运行 jev-filter 的终端或应用，否则以 `accessibility_permission_required` 停止。
 - **OCR 兜底。** 无障碍接口暴露的控件少于两个时（画布、游戏、自绘界面），用 `Windows.Media.Ocr` 或 macOS Vision 识别出的文本行作为点击目标，点击时该行区域的像素哈希必须未变。`--ocr on|off` 可强制开关。
 - **启动应用。** `--launch '命令'` 启动目标应用，运行结束后关闭，除非加 `--keep-open`。
+- **模态对话框。** 如果按钮的处理函数会弹出模态框，对它做 UI Automation 的 Invoke 会一直不返回，之后对该应用的所有 UIA 调用也会卡住（在 WinForms 的 MessageBox 上实测到）。所以主窗口里的按钮通过 `SendMessageTimeout` 发送 `BM_CLICK`，1 秒内返回，对话框仍可被观察；对话框里的按钮用独立线程做 Invoke。
+
+### 桌面安全门禁
+
+以下确定性检查都在任何 Jev 信号之前执行：
+
+- **拒绝敏感目标**：终端和控制台窗口（在里面输入就是执行命令）、密码管理器、凭据与提权弹窗、系统设置、注册表和进程管理器。`--allow-sensitive-app` 可对单次运行放行。
+- **随时中止**：创建 `JEV_STOP_FILE` 指定的文件（默认 `~/.jev-filter/STOP`），或把鼠标停在屏幕左上角，下一次输入会被拒绝，运行以 `error` 结束。
+- **环境检查**：会话已锁定、处于安全桌面，或（Windows）目标以管理员运行而 jev-filter 没有，都会直接拒绝，而不是让输入被静默丢弃。
+- `jev-filter doctor` 报告浏览器、桌面后端、OCR、锁屏与提权状态；在 macOS 上还报告辅助功能与屏幕录制是否已授权。
 
 ## 大量记录：`survey`
 
@@ -118,6 +129,8 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 - `screen` 先对每条记录问一道是非题，只有通过的记录才问完整题目。
 - 题目按多条记录打包成一个请求，最多 30 个请求并发，复用 `query` 背后的规划器。
 - 报告全部由代码计算：各选项计数与占比、分数均值与分档、是非题的"是"占比、按题目或保留字段的交叉表、每组最有把握的样本（受 `--budget-chars` 限制）、不确定和失败的记录 ID、token 用量与估算输入成本。逐条答案写入私有归档。
+- **预算。** 运行前先规划并估算请求数和输入 token（UTF-8 字节数除以 3，偏上限）。超过 `--max-usd`（默认 5）或 `--max-requests`（默认 1 万）会拒绝执行；`--dry-run` 只打印估算，不推理。
+- **校准。** `--labels labels.jsonl`（`{"id": …, "topic": "billing", "churn": true}`）会给出每题准确率、按置信度分段的准确率，以及样本不少于 20 条时能达到 95% 准确率的最低置信度门槛。没有标注时报告写明 `"calibrated": false`：阈值取决于你的数据和模型版本。
 - `--propose-categories QUESTION` 让文字模型在固定种子的样本上起类别名，然后由 Jev 把所有记录分到这些类别和 `other` 里。Jev 本身从不写总结，叙述交给你的 agent 的大模型基于报告完成。
 
 ## 状态与退出码
@@ -128,7 +141,8 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 | `unverified` | 报告完成但校验未通过 | 2 |
 | `needs_confirmation` | 下一步不可逆，附 `pending` 和 `confirm_token` | 2 |
 | `needs_value` | 某字段需要调用方未提供的值 | 2 |
-| `blocked` | 没有可推进的操作，或连续三步没有进展 | 2 |
+| `blocked` | 没有可推进的操作；`reason` 为 `challenge`、`login_required`、`model_blocked`、`no_progress` 或 `repeating` | 2 |
+| `dry_run` | `--dry-run`：决定的动作在 `pending` 里，没有执行 | 2 |
 | `origin_blocked` | 导航离开了允许的来源 | 2 |
 | `budget_exhausted` | 步数或决策预算用尽 | 2 |
 | `error` | 传输或服务端失败，没有盲目重试 | 2 |
@@ -137,7 +151,8 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 
 ## 限制
 
-- 合法的选择也可能是错的。重要结果请独立核对。
+- 合法的选择也可能是错的。重要结果请独立核对。托管执行适合作为步骤短、结果可观测的执行器；开放网络上的长任务应由你的规划 agent 拆解，再逐步调用 `browse`。
+- 控件超过 250 个的页面在单步里会被截断（`omitted_actions`），请滚动或缩小目标。
 - 不支持画布、封闭式 shadow root、跨域 iframe、拖放、文件上传、验证码和登录表单。密码框永不填写：请使用已登录的配置（`--cdp-port`、Camofox）。
 - Camofox 在顶层文档里按 CSS 选择器点击，所以 iframe 内的控件在该传输下不提供；每次点击在 Camofox 内部还要等约 1.7 秒。
 - 桌面覆盖面取决于应用向无障碍接口暴露了什么。Electron 和 Chromium 窗口很大（数百个控件，Windows 上每次观察约 1.5 秒）。

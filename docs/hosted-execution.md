@@ -39,8 +39,13 @@ flowchart LR
   cannot double-click. Executions are logged before the next observation.
 - **DONE is not proof.** `--verify-text`, `--verify-url` and `--verify-question` run on a fresh
   observation after the loop stops; failure yields `unverified`.
-- **Budgets and stalls.** 60 steps and 120 decisions by default; three consecutive unchanged
-  observations (other than `WAIT`) end the run as `blocked`.
+- **Budgets, stalls and cycles.** 60 steps and 120 decisions by default; three consecutive
+  unchanged observations (other than `WAIT`) or a page state revisited three times end the run
+  as `blocked`.
+- **Hand-back is a normal outcome.** Verification challenges (reCAPTCHA, hCaptcha, Cloudflare)
+  are detected deterministically and never solved: the run ends as `blocked` with reason
+  `challenge`. `BLOCKED` on a page with a password field reports `login_required`.
+  `--dry-run` observes, decides one step and executes nothing.
 
 ## Browser: `browse`
 
@@ -138,6 +143,26 @@ jev-filter desktop --window '^Invoice Tool$' \
   pixel hash of the line's rectangle must be unchanged at click time. `--ocr on|off` forces it.
 - **Launching.** `--launch 'command'` starts the application and closes it after the run unless
   `--keep-open`.
+- **Modal dialogs.** A UI Automation Invoke on a button whose handler opens a modal dialog does
+  not return while the dialog is open, and every later UIA call to that application hangs (seen
+  on a WinForms MessageBox). Main-window buttons are therefore clicked with `BM_CLICK` through
+  `SendMessageTimeout`, which returns within 1 s and keeps the dialog observable; buttons inside
+  dialogs use an Invoke on a separate thread.
+
+### Desktop safety gates
+
+These deterministic checks run before any Jev signal:
+
+- **Sensitive targets are refused**: terminal and console windows (typing there runs commands),
+  password managers, credential and elevation prompts, system settings, registry and process
+  managers. `--allow-sensitive-app` overrides this for one run.
+- **Abort at any time**: create the file named by `JEV_STOP_FILE` (default
+  `~/.jev-filter/STOP`) or park the pointer in the top-left screen corner; the next input
+  is refused and the run ends as `error`.
+- **Environment**: a locked session or secure desktop, and (Windows) an elevated target while
+  jev-filter is not elevated, are refused instead of silently dropping input.
+- `jev-filter doctor` reports browser, desktop backend, OCR, lock and elevation readiness; on
+  macOS it reports whether Accessibility and screen capture are granted.
 
 ## Many records: `survey`
 
@@ -172,6 +197,13 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
   shares, crosstabs by question or kept field, the most confident examples per group (bounded by
   `--budget-chars`), uncertain and failed record IDs, token usage and estimated input cost. Per-record
   answers go to the private archive.
+- **Budgets.** A pre-flight plan estimates requests and input tokens (UTF-8 bytes / 3, an upper
+  bound). Runs above `--max-usd` (default 5) or `--max-requests` (default 10,000) are refused;
+  `--dry-run` prints the estimate without inference.
+- **Calibration.** `--labels labels.jsonl` (`{"id": …, "topic": "billing", "churn": true}`)
+  adds accuracy per question, accuracy by confidence band and the lowest confidence floor that
+  reaches 95% accuracy with at least 20 samples. Without labels the report says
+  `"calibrated": false`: thresholds depend on your data and the model version.
 - `--propose-categories QUESTION` lets the text model name categories from a fixed-seed sample;
   Jev then classifies every record into them plus `other`. Jev itself never writes summaries: use
   your agent's LLM to narrate the report.
@@ -184,7 +216,8 @@ jev-filter survey --input tickets.jsonl --spec survey.json --format md
 | `unverified` | DONE, but a verifier failed | 2 |
 | `needs_confirmation` | Next action is irreversible; `pending` and `confirm_token` included | 2 |
 | `needs_value` | A field needs a value that was not supplied | 2 |
-| `blocked` | No available operation can progress, or no progress for three steps | 2 |
+| `blocked` | No operation can progress; `reason` is `challenge`, `login_required`, `model_blocked`, `no_progress` or `repeating` | 2 |
+| `dry_run` | `--dry-run`: the decided action is in `pending`; nothing executed | 2 |
 | `origin_blocked` | Navigation left the allowed origins | 2 |
 | `budget_exhausted` | Step or decision budget reached | 2 |
 | `error` | Transport or provider failure; nothing was retried blindly | 2 |
@@ -196,6 +229,10 @@ latencies.
 ## Limits
 
 - A valid choice can still be wrong. Verify outcomes independently for anything that matters.
+  Treat hosted execution as a short-step executor with a single observable outcome; long
+  open-web tasks belong to your planning agent, which can call `browse` per step.
+- Pages with more than 250 controls are truncated for one step (`omitted_actions`); scroll or
+  narrow the goal.
 - Canvas, closed shadow roots, cross-origin frames, drag and drop, file uploads, CAPTCHAs and
   sign-in forms are not handled. Password fields are never filled: use a pre-authenticated
   profile (`--cdp-port`, Camofox) instead.

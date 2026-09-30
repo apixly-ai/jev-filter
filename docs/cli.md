@@ -12,6 +12,10 @@ Use `jev-filter --help` and `<command> --help` for exact flags.
 | `code-search PATTERN --root PATH --task TEXT` | Expand candidate hits to complete code symbols |
 | `locate --session S --tab T --origin URL --task TEXT` | Read-only Camofox control selection and freshness guard |
 | `triage --input FILE --task TEXT` | Group JSON/JSONL events by request ID, then judge |
+| `browse --url URL --goal TEXT [--value k=v]` | Hosted browser execution toward a goal ([guide](hosted-execution.md#browser-browse)) |
+| `extract --url URL --task TEXT` | Structure a page into records, then judge like `query` |
+| `desktop --window REGEX --goal TEXT` | Hosted execution in one Windows/macOS application; `--list` shows windows |
+| `survey --input PATH --spec FILE` | Typed questions over many records, aggregated into a report |
 | `batch --input FILE` | Native typed request contracts, packed when compatible |
 | `read ARCHIVE --id ID` / `list ARCHIVE` | Recover retained input without inference |
 | `doctor [--live]` | Local setup checks; optional billable live check |

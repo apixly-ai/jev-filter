@@ -2,6 +2,74 @@
 
 [简体中文](benchmarks.zh-CN.md)
 
+## Hosted execution: 2026-09-30
+
+Scope: synthetic local fixtures only, live Jev (`jev-1.13.x`), three repetitions per task. A run
+passes only when its final status is the expected one **and** a program check on the final state
+holds: URL and storage for the browser, window text for the desktop, generated ground truth for
+the survey. The model's DONE is never counted as success. Irreversible fixture actions are
+expected to pause (`needs_confirmation`) and are verified not to have happened.
+
+| Line | Transport | Task | Expected | Passed | Median steps | Median requests | Median time | Median input tokens | Jev p50 |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| browser | camofox | buy-pauses-before-order | `needs_confirmation` | 3/3 | 8 | 9 | 13.7 s | 26,251 | 358 ms |
+| browser | camofox | contact-form-scroll | `done` | 3/3 | 9 | 10 | 7.9 s | 27,401 | 350 ms |
+| browser | camofox | delete-is-gated | `needs_confirmation` | 3/3 | 0 | 1 | 0.7 s | 1,709 | 703 ms |
+| browser | camofox | search-filter | `done` | 3/3 | 6 | 7 | 9.3 s | 23,594 | 336 ms |
+| browser | camofox | shadow-dom | `done` | 3/3 | 1 | 2 | 2.0 s | 3,130 | 504 ms |
+| browser | cdp | buy-pauses-before-order | `needs_confirmation` | 3/3 | 8 | 9 | 3.9 s | 26,251 | 349 ms |
+| browser | cdp | contact-form-scroll | `done` | 3/3 | 6 | 7 | 3.0 s | 21,188 | 345 ms |
+| browser | cdp | delete-is-gated | `needs_confirmation` | 3/3 | 0 | 1 | 0.7 s | 1,709 | 726 ms |
+| browser | cdp | same-origin-frame | `done` | 3/3 | 1 | 2 | 1.1 s | 3,294 | 527 ms |
+| browser | cdp | search-filter | `done` | 3/3 | 5 | 6 | 2.8 s | 20,405 | 356 ms |
+| browser | cdp | shadow-dom | `done` | 3/3 | 1 | 2 | 1.2 s | 3,268 | 568 ms |
+| browser | cdp | buy-pauses-before-order (no gated note) | `needs_confirmation` | 3/3 | 8 | 9 | 4.0 s | 25,211 | 359 ms |
+| desktop | windows-uia | advanced-tab | `done` | 3/3 | 3 | 4 | 3.4 s | 8,627 | 442 ms |
+| desktop | windows-uia | delete-is-gated | `needs_confirmation` | 3/3 | 0 | 1 | 0.8 s | 2,862 | 706 ms |
+| desktop | windows-uia | form-save | `done` | 3/3 | 5 | 6 | 5.6 s | 21,215 | 362 ms |
+| desktop | windows-uia | ocr-canvas | `done` | 3/3 | 1 | 2 | 2.1 s | 3,569 | 510 ms |
+
+| Variant | Records | Requests | Input tokens | Input USD | Time | Topic | Sentiment | Churn | Screen |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| default | 500 | 19 | 257,075 | $0.0108 | 3.5 s | 100.0% | 94.8% | 100.0% | 98.6% |
+| no-screen | 500 | 17 | 234,422 | $0.0098 | 2.1 s | 100.0% | 94.7% | 100.0% | – |
+| unpacked | 500 | 940 | 590,522 | $0.0248 | 14.0 s | 100.0% | 95.2% | 100.0% | 98.0% |
+| default | 10,000 | 375 | 5,192,517 | $0.2181 | 19.6 s | 100.0% | 95.7% | 100.0% | 98.8% |
+
+[Per-run JSON](../benchmarks/results/2026-09-30-hosted.json)
+
+How to read it:
+
+- **Browser.** The fixture shop has a modal cookie banner, an autocomplete combobox, a native
+  select, a results table, a cart with *Place order* and *Remove* buttons, a long form that needs
+  scrolling, an open shadow root and a same-origin iframe. Camofox clicks by CSS selector in the
+  top document, so the iframe task is not offered there, and every Camofox click spends about
+  1.7 s inside Camofox.
+- **Ablation.** `no gated note` removes the program's fixed sentence ("irreversible steps are
+  gated by the program; keep advancing"). In isolated probes on the results page, goals ending in
+  *buy* made Jev choose BLOCKED with probability 0.46–0.60 without it and 0.09–0.13 with it. In
+  whole runs the low-confidence-terminal fallback and row-context text also rescue the task, so
+  the end-to-end difference is small; the note is kept because it removes the failure at its
+  source.
+- **Desktop.** A WinForms application (text field, drop-down list, checkbox, tabs, list, a
+  *Delete all records* button and a button that opens a modal MessageBox) and a Tk canvas whose
+  buttons are drawn pixels, driven through the OCR fallback. Window start-up time is excluded.
+- **Survey.** Seeded synthetic support tickets (five topics, three tones, churn mentions, 10%
+  spam), English and Chinese. The records are template-generated and easy, so 100% topic accuracy
+  here says nothing about your data; measure with `--labels` on a labelled sample. `unpacked`
+  sends one record per request (the same questions); `no-screen` skips the relevance pre-pass.
+  With only 10% irrelevant records, screening costs more than it saves: it pays off when most
+  records are irrelevant.
+
+Reproduce (billable, needs a Chromium; Camofox and the desktop line are optional):
+
+```sh
+pip install -e '.[dev,browser-test,desktop]'
+python -m benchmarks.hosted --live --lines browser,desktop,survey --repeats 3 \
+  --camofox --output /tmp/hosted.json
+python -m benchmarks.hosted_report /tmp/hosted.json
+```
+
 ## Whole-operation benchmark: 48 agent runs
 
 ![Whole-operation context, cost and latency results](assets/operations.png)

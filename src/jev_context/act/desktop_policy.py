@@ -164,10 +164,26 @@ def check_elevation(pid):
         )
 
 
-def check_before_input():
+class CornerSwitch:
+    """Abort when the pointer is MOVED into the top-left corner during a run. A pointer that
+    already rests there at start (headless runners often report 0,0) arms the switch only
+    after it has left the corner once."""
+
+    def __init__(self):
+        self.armed = not pointer_in_corner()
+
+    def tripped(self):
+        inside = pointer_in_corner()
+        if not self.armed:
+            self.armed = not inside
+            return False
+        return inside
+
+
+def check_before_input(corner=None):
     if stop_file().exists():
         raise DesktopRefused(f"aborted: stop file present ({stop_file()})")
-    if pointer_in_corner():
+    if corner is not None and corner.tripped():
         raise DesktopRefused("aborted: pointer parked in the top-left corner")
     if desktop_locked():
         raise DesktopRefused("desktop_locked: the session is locked or a secure desktop is active")

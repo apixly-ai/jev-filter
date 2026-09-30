@@ -493,10 +493,35 @@ def test_stop_file_aborts_before_the_next_input(tmp_path, monkeypatch):
     monkeypatch.setattr(policy, "pointer_in_corner", lambda: True)
     with pytest.raises(ActionFailed, match="corner"):
         surface.act(save, state)
+    # A pointer already resting in the corner when the run starts does not trip the switch.
+    resting = DesktopSurface(FakeBackend(controls()), settle_s=0)
+    state = resting.observe()
+    monkeypatch.setattr(policy, "desktop_locked", lambda: False)
+    assert resting.act(next(a for a in state["actions"] if a["label"] == "Save profile"), state)
     monkeypatch.setattr(policy, "pointer_in_corner", lambda: False)
     monkeypatch.setattr(policy, "desktop_locked", lambda: True)
     with pytest.raises(ActionFailed, match="locked"):
         surface.act(save, state)
+
+
+@pytest.mark.skipif(sys.platform != "darwin", reason="macOS Accessibility")
+@pytest.mark.desktop
+def test_macos_ax_fixture_round_trip():
+    AS = pytest.importorskip("ApplicationServices")
+    if not AS.AXIsProcessTrusted():
+        pytest.skip("Accessibility is not granted to this Python")
+    title = f"JevMac{time.monotonic_ns() % 10**8}"
+    process = launch(title, sys.executable, str(FIXTURE / "fixture_mac.py"))
+    try:
+        s = DesktopSurface(MacBackend(window=f"^{title}$", timeout=20))
+        state = s.observe()
+        s.act(by(state, "Customer name", "fill"), state, text="Ada Lovelace")
+        state = s.observe()
+        s.act(by(state, "Save profile"), state)
+        time.sleep(0.5)
+        assert "saved Ada Lovelace" in s.observe()["text"]
+    finally:
+        process.kill()
 
 
 @windows

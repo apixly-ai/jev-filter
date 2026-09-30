@@ -315,6 +315,12 @@ class LaunchedBrowser:
         ]
         if headless:
             args.insert(1, "--headless=new")
+        # Linux CI images may forbid the unprivileged user namespaces Chrome's sandbox needs.
+        root = hasattr(os, "geteuid") and os.geteuid() == 0
+        if os.environ.get("JEV_BROWSER_NO_SANDBOX") == "1" or (
+            sys.platform.startswith("linux") and root
+        ):
+            args.insert(1, "--no-sandbox")
         args[1:1] = list(extra_args or [])
         flags = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
         self.process = subprocess.Popen(

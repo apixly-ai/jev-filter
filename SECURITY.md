@@ -9,7 +9,7 @@ there is no contractual response-time guarantee.
 
 ## Supported versions
 
-Security fixes target the latest 0.1.x release. Older prereleases should be upgraded.
+Security fixes target the latest 0.x release. Older prereleases should be upgraded.
 See CHANGELOG.md and GitHub Releases for fixes.
 
 ## Trust boundaries
@@ -27,3 +27,23 @@ See CHANGELOG.md and GitHub Releases for fixes.
 - A model decision is fallible. Required-context checks validate presence, not truth.
   Validate identities, source freshness, permissions and outcomes in the executor.
 - Public PR CI has no model keys. Live benchmarks are explicit local operations.
+
+## Hosted execution (`browse`, `desktop`)
+
+- Jev only chooses among actions the program enumerated from its own observation. Model
+  output never becomes a selector, coordinate, command, script or free text; typed text comes
+  from caller-supplied values or an explicitly enabled text model.
+- Every target is re-checked immediately before input (identity, state, visibility,
+  occlusion). Stale decisions are discarded, not retried; a mutation is never retried blindly.
+- Pay/send/delete-like actions pause with a one-time confirmation token bound to the page or
+  window fingerprint unless `--allow-irreversible` is given for that run.
+- Browser navigation is limited to the start origin plus `--allow-origin`. The DevTools client
+  accepts loopback `ws://` endpoints only. `--cdp-port` attaches to a browser profile you
+  control, including its signed-in sessions: only attach to a profile you intend to use.
+- Password, hidden and file inputs are never observed or filled. Verification challenges are
+  handed back, never solved.
+- Desktop execution refuses terminals, credential managers, elevation prompts and system
+  settings unless `--allow-sensitive-app`, refuses locked sessions and elevated targets, and
+  stops on a STOP file or when the pointer is parked in the top-left corner.
+- Page text, control labels and record text are untrusted input and are sent to TypeSafe.
+  Rules against prompt injection reduce risk; they are not a security boundary.

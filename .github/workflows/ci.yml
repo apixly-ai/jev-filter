@@ -57,7 +57,37 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: python -m pip install ".[dev,browser-test]"
       - run: python -m playwright install --with-deps chromium
-      - run: python -m pytest tests/test_browser.py tests/test_dashboard_browser.py
+      - run: python -m pytest tests/test_browser.py tests/test_dashboard_browser.py tests/test_act_browser.py tests/test_act_transports.py tests/test_cdp.py
+        env:
+          JEV_BROWSER_NO_SANDBOX: "1"
+  desktop-windows:
+    # Live UI Automation and OCR on a Windows runner; informational until proven stable there.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install ".[dev,desktop]"
+      - run: python -m pytest tests/test_act_desktop.py -rs
+  desktop-macos:
+    # Needs Accessibility for the runner's Python; tests skip with a reason when it is absent.
+    runs-on: macos-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install ".[dev,desktop]"
+      - name: Try to grant Accessibility to the runner's Python (best effort)
+        run: |
+          PY="$(python -c 'import os,sys; print(os.path.realpath(sys.executable))')"
+          sudo sqlite3 "/Library/Application Support/com.apple.TCC/TCC.db" \
+            "INSERT OR REPLACE INTO access (service, client, client_type, auth_value, auth_reason, auth_version, indirect_object_identifier, flags) VALUES ('kTCCServiceAccessibility', '$PY', 1, 2, 4, 1, 'UNUSED', 0);" || true
+      - run: python -m pytest tests/test_act_desktop.py -rs
   npm:
     runs-on: ubuntu-latest
     steps:

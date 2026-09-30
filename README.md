@@ -11,7 +11,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-7958d6" alt="MIT license"></a>
 </p>
 
-**A semantic filter between your tools and your AI agent.** Capture command output, search results, browser controls or logs inside the CLI. Let Jev judge them using the agent's task and context. Return relevant evidence and unresolved IDs instead of an entire raw dump.
+**A semantic filter and hosted executor between your tools and your AI agent.** Capture command output, search results, browser controls or logs inside the CLI. Let Jev judge them using the agent's task and context. Return relevant evidence and unresolved IDs instead of an entire raw dump. **New in 0.3:** let the CLI act on a web page or a desktop app, or survey thousands of records, with the same typed and inspectable decisions. [Hosted execution →](#hosted-execution-browser-desktop-and-data)
 
 ## Local savings dashboard
 
@@ -24,6 +24,34 @@ Configure a numeric-only local ledger, then run `jev-filter stats dashboard` (au
 - **Keep decisions inspectable.** The agent controls the context, questions and output; missing facts remain `REVIEW`. **8/8 exact fixture runs**, plus three installed workflow acceptance checks. [Public data](benchmarks/results/2026-09-22-live.json) · [Integration evidence](benchmarks/results/2026-09-22-migration.json)
 
 Use it for **many records + repeated semantic judgment + clear criteria**. Use native tools for exact paths, IDs, selectors, calculations and short results. Keep open-ended reasoning and writing in your primary model.
+
+## Hosted execution: browser, desktop and data
+
+Jev chooses; the program acts. Each step observes the page or window, asks Jev one request for the next operation and its target among program-enumerated controls, re-checks the target and executes it. Jev never produces selectors, coordinates, commands or text.
+
+```sh
+# Browser: a private headless Chrome/Edge, or --cdp-port / Camofox
+jev-filter browse --url https://shop.example/ --goal 'Buy the cheapest in-stock red shoes in size 42' \
+  --value query='red shoes'            # pauses before "Place order" with a confirm_token
+
+# Desktop: Windows UI Automation or macOS Accessibility, OCR fallback
+jev-filter desktop --window '^Invoice Tool$' --goal 'Choose the Pro plan and save' --verify-text 'saved'
+
+# Data: typed questions over many records, aggregated in code
+jev-filter survey --input tickets.jsonl --spec survey.json --format md
+```
+
+- **Safe by construction.** Pay/send/delete-like actions pause for confirmation; navigation stays on the start origin; passwords and CAPTCHAs are handed back, never handled; desktop runs refuse terminals and credential managers and stop on a STOP file.
+- **Measured on synthetic local fixtures with live Jev** (three repetitions each, success checked by the program, not by the model):
+
+| Line | Tasks | Passed runs | Median time per task |
+|---|---:|---:|---|
+| Browser (Camofox) | 5 | 15/15 | 0.7–13.7 s |
+| Browser (Chromium via CDP) | 6 | 18/18 | 0.7–3.9 s |
+| Desktop (Windows UIA + OCR) | 4 | 12/12 | 0.8–5.6 s |
+| Survey (10,000 records) | 1 | topic 100.0%, sentiment 95.7% | 19.6 s, 375 requests, ~$0.22 input |
+
+These are small synthetic tests with easy, template-generated records; they show the mechanics and costs, not open-web success rates. [Guide and limits →](docs/hosted-execution.md) · [Benchmark method →](docs/benchmarks.md#hosted-execution-2026-09-30)
 
 ## Benchmarks
 
@@ -124,6 +152,10 @@ existing Jev workflow again. Use native tools for exact or short work.
 | Source code matching a broad lexical query | `code-search` | [Code recipe](docs/recipes.md#3-search-whole-code-symbols) |
 | A local Camofox page with many controls | `locate` | [Browser recipe](docs/recipes.md#4-find-a-browser-control) |
 | JSON/JSONL events across many requests | `triage` | [Log recipe](docs/recipes.md#5-triage-correlated-events) |
+| A web goal the CLI should carry out | `browse` | [Hosted execution](docs/hosted-execution.md#browser-browse) |
+| Structured data from a web page | `extract` | [Page data](docs/hosted-execution.md#page-data-extract) |
+| A goal inside a Windows/macOS application | `desktop` | [Desktop](docs/hosted-execution.md#desktop-desktop) |
+| Thousands of records to classify and summarize | `survey` | [Survey](docs/hosted-execution.md#many-records-survey) |
 | An existing typed Jev workflow | Python `batch.run` or CLI `batch` | [Library integration](docs/agents.md#python-workflows) |
 
 [All flags and limits](docs/cli.md) · [Original evidence by ID](docs/getting-started.md#read-the-result) · [Architecture](docs/architecture.md)
@@ -135,7 +167,7 @@ We use Jev Filter in our own environment. Source annotation, Telegram maintenanc
 - **No result cache.** Explicit context, bounded collection, retained failures and reported usage.
 - **Protected releases.** Required CI/security checks, immutable release tags, checksums and build provenance.
 - **Portable core.** Python library plus npm CLI distribution; automatic batching, maximum 30 requests in flight.
-- **Transparent boundaries.** Inputs used for inference are sent to TypeSafe. `exec` runs your command and is not a sandbox. Selection does not authorize actions. [Security →](SECURITY.md)
+- **Transparent boundaries.** Inputs used for inference are sent to TypeSafe. `exec` runs your command and is not a sandbox. Hosted execution runs only program-enumerated actions and pauses before irreversible ones. [Security →](SECURITY.md)
 
 After one-time npm package trust setup, successful GitHub Releases automatically publish all five packages through OIDC and verify a fresh registry install. No long-lived npm token is stored. See [publication and recovery](docs/distribution.md#one-time-npm-trust-setup).
 
