@@ -197,10 +197,15 @@ def test_click_cannot_consume_a_text_target():
         ("Next page", "click", 0.9, (True, "jev_probability")),
         ("Next page", "click", 0.1, (False, None)),
         ("Send message", "fill", 0.99, (False, None)),
+        ("Send weekly report|checkbox", "click", 0.1, (False, None)),
+        ("Delete after 30 days|radio", "click", 0.1, (False, None)),
+        ("Delete all records|button", "click", 0.0, (True, "label_rule")),
     ],
 )
 def test_irreversible_floor_and_probability(label, kind, p, expected):
-    decision = {"action": {"kind": kind, "label": label}, "irreversible_probability": p}
+    label, _, role = label.partition("|")
+    action = {"kind": kind, "label": label, **({"role": role} if role else {})}
+    decision = {"action": action, "irreversible_probability": p}
     assert space.irreversible(decision, 0.5) == expected
 
 

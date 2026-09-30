@@ -133,10 +133,11 @@ def _act_main():
     return act_main
 
 
-HOSTED = {"browse": _act_main, "extract": _act_main}
+HOSTED = {"browse": _act_main, "extract": _act_main, "desktop": _act_main}
 HOSTED_HELP = {
     "browse": "Hosted browser execution toward a goal",
     "extract": "Structure a web page into records and select relevant ones",
+    "desktop": "Hosted desktop execution in one Windows/macOS application",
 }
 
 

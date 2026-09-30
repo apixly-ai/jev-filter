@@ -94,8 +94,6 @@ def add_browser_args(cmd):
     cmd.add_argument(
         "--target-id", help="Existing DevTools target (tab) to attach to; needs --cdp-port"
     )
-    cmd.add_argument("--model", default=space.DEFAULT_MODEL)
-    cmd.add_argument("--limit", type=int, default=250, help="Maximum observed controls per step")
 
 
 def compact(result):
@@ -141,24 +139,16 @@ def compact(result):
     return packet
 
 
-def run_browse(args):
+def run_goal(surface, args, tool, allowed):
+    """Shared loop wrapper for browser and desktop surfaces."""
     from ..cli import save_archive
     from ..stats import record
-    from .browser import origin_of
     from .kernel import Run
     from .text import from_environment
 
     values = load_values(args.values, args.value)
-    attached = (args.transport == "camofox" and args.tab) or getattr(args, "target_id", None)
-    if not args.url and not attached:
-        raise ValueError("--url is required")
     if not 1 <= args.max_steps <= 500 or not 1 <= args.max_decisions <= 1000:
         raise ValueError("budgets out of range")
-    allowed = list(args.allow_origin or [])
-    if args.url and not args.any_origin:
-        allowed.append(origin_of(args.url))
-    elif not args.any_origin and not allowed:
-        allowed = ["initial"]
     helper = from_environment() if args.text_model else None
     if args.text_model and helper is None:
         raise ValueError(
@@ -166,10 +156,10 @@ def run_browse(args):
         )
     decide = jev_decider()
     started = time.perf_counter()
-    page = open_page(args)
+    session = None
     try:
         run = Run(
-            page,
+            surface,
             args.goal,
             decide=decide,
             values=values,
@@ -177,41 +167,91 @@ def run_browse(args):
             max_decisions=args.max_decisions,
             allow_irreversible=args.allow_irreversible,
             irreversible_threshold=args.irreversible_threshold,
-            allowed_origins=None if args.any_origin else allowed,
+            allowed_origins=allowed,
             text_helper=helper,
             model=args.model,
             observe_limit=args.limit,
             confirm=args.confirm,
             verify_text=args.verify_text,
-            verify_url=args.verify_url,
+            verify_url=getattr(args, "verify_url", None),
             verify_question=args.verify_question,
             continue_after_confirm=args.continue_after_confirm,
         )
         result = run.run()
-        result["transport"] = page.name
-        if getattr(page, "dialogs", None):
-            result["dialogs"] = page.dialogs
+        result["transport"] = surface.name
+        if getattr(surface, "dialogs", None):
+            result["dialogs"] = surface.dialogs
         result["decision_log"] = run.decisions
     finally:
-        if args.keep_open and hasattr(page, "detach"):
-            result_session = page.detach()
+        if args.keep_open and hasattr(surface, "detach"):
+            session = surface.detach()
+        elif args.keep_open:
+            session = {"camofox_tab": surface.tab} if hasattr(surface, "tab") else {"kept": True}
+        elif getattr(args, "close_browser", False) and surface.name == "cdp":
+            surface.close(close_browser=True)
         else:
-            result_session = {"camofox_tab": page.tab} if args.keep_open else None
-            if not args.keep_open:
-                if getattr(args, "close_browser", False) and page.name == "cdp":
-                    page.close(close_browser=True)
-                else:
-                    page.close()
+            surface.close()
         decide.client.close()
-    if result_session:
-        result["session"] = result_session
+    if session:
+        result["session"] = session
     result["elapsed_ms"] = round((time.perf_counter() - started) * 1000)
-    result["archive"] = save_archive({"tool": "browse", "result": result})
+    result["archive"] = save_archive({"tool": tool, "result": result})
     packet = compact(result)
     rendered = json.dumps(packet, ensure_ascii=False, indent=2)
-    record("browse", None, rendered + "\n", {**result, "complete": result["ok"]}, comparable=False)
+    record(tool, None, rendered + "\n", {**result, "complete": result["ok"]}, comparable=False)
     print(rendered)
     return 0 if result["ok"] else 2
+
+
+def run_browse(args):
+    from .browser import origin_of
+
+    attached = (args.transport == "camofox" and args.tab) or getattr(args, "target_id", None)
+    if not args.url and not attached:
+        raise ValueError("--url is required")
+    allowed = list(args.allow_origin or [])
+    if args.url and not args.any_origin:
+        allowed.append(origin_of(args.url))
+    elif not args.any_origin and not allowed:
+        allowed = ["initial"]
+    page = open_page(args)
+    return run_goal(page, args, "browse", None if args.any_origin else allowed)
+
+
+def open_desktop(args):
+    import shlex
+
+    from .desktop import DesktopSurface, open_backend
+    from .ocr import open_ocr
+
+    if not (args.window or args.process or args.launch):
+        raise ValueError("desktop needs --window, --process or --launch")
+    launch = shlex.split(args.launch, posix=sys.platform != "win32") if args.launch else None
+    backend = open_backend(
+        window=args.window, process=args.process, launch=launch, timeout=args.timeout
+    )
+    try:
+        ocr = open_ocr(args.ocr)
+    except Exception:
+        backend.close()
+        raise
+    surface = DesktopSurface(backend, ocr=ocr, ocr_min_actions=2 if args.ocr == "auto" else 10**6)
+    if args.ocr == "on":
+        surface.ocr_min_actions = 10**6
+    surface.name = "desktop-" + sys.platform
+    return surface
+
+
+def run_desktop(args):
+    if args.list:
+        from .desktop import list_windows
+
+        print(json.dumps({"windows": list_windows()}, ensure_ascii=False, indent=2))
+        return 0
+    if not args.goal:
+        raise ValueError("--goal is required")
+    surface = open_desktop(args)
+    return run_goal(surface, args, "desktop", None)
 
 
 def run_extract(args):
@@ -266,6 +306,34 @@ def run_extract(args):
     return 0 if result["ok"] and result["complete"] else 2
 
 
+def add_goal_args(cmd, goal_required=True):
+    cmd.add_argument("--goal", required=goal_required)
+    cmd.add_argument("--values", help="JSON object of named values to type (path or -)")
+    cmd.add_argument("--value", action="append", help="Named value KEY=VALUE (repeatable)")
+    cmd.add_argument(
+        "--allow-irreversible", action="store_true", help="Execute pay/send/delete-like actions"
+    )
+    cmd.add_argument("--irreversible-threshold", type=float, default=0.5)
+    cmd.add_argument("--confirm", help="Confirm token from a previous needs_confirmation result")
+    cmd.add_argument(
+        "--continue-after-confirm",
+        action="store_true",
+        help="Keep working toward the goal after executing a confirmed action",
+    )
+    cmd.add_argument("--max-steps", type=int, default=60)
+    cmd.add_argument("--max-decisions", type=int, default=120)
+    cmd.add_argument("--verify-text", help="Text that must appear in the final state")
+    cmd.add_argument("--verify-question", help="Yes/no question Jev must affirm on the final state")
+    cmd.add_argument(
+        "--text-model", action="store_true", help="Use JEV_TEXT_* model for unsupplied field text"
+    )
+    cmd.add_argument("--model", default=space.DEFAULT_MODEL)
+    cmd.add_argument("--limit", type=int, default=250, help="Maximum observed controls per step")
+    cmd.add_argument(
+        "--keep-open", action="store_true", help="Leave the tab, browser or launched app running"
+    )
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="jev-filter", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -273,9 +341,7 @@ def main(argv=None):
         "browse", help="Let Jev drive a browser toward a goal; the program executes"
     )
     add_browser_args(browse)
-    browse.add_argument("--goal", required=True)
-    browse.add_argument("--values", help="JSON object of named values to type (path or -)")
-    browse.add_argument("--value", action="append", help="Named value KEY=VALUE (repeatable)")
+    add_goal_args(browse)
     browse.add_argument(
         "--allow-origin", action="append", help="Additional origin the run may visit"
     )
@@ -283,38 +349,33 @@ def main(argv=None):
         "--any-origin", action="store_true", help="Do not restrict navigation origins"
     )
     browse.add_argument(
-        "--allow-irreversible", action="store_true", help="Execute pay/send/delete-like actions"
-    )
-    browse.add_argument("--irreversible-threshold", type=float, default=0.5)
-    browse.add_argument("--confirm", help="Confirm token from a previous needs_confirmation result")
-    browse.add_argument(
         "--accept-dialogs", action="store_true", help="Accept alert/beforeunload dialogs"
     )
-    browse.add_argument("--max-steps", type=int, default=60)
-    browse.add_argument("--max-decisions", type=int, default=120)
-    browse.add_argument("--verify-text", help="Text that must appear on the final page")
     browse.add_argument("--verify-url", help="Regex the final URL must match")
-    browse.add_argument(
-        "--verify-question", help="Yes/no question Jev must affirm on the final page"
-    )
-    browse.add_argument(
-        "--text-model", action="store_true", help="Use JEV_TEXT_* model for unsupplied field text"
-    )
-    browse.add_argument(
-        "--continue-after-confirm",
-        action="store_true",
-        help="Keep working toward the goal after executing a confirmed action",
-    )
     browse.add_argument(
         "--close-browser", action="store_true", help="Close an attached browser after the run"
     )
-    browse.add_argument(
-        "--keep-open", action="store_true", help="Leave an attached tab/browser open"
+    desktop = sub.add_parser(
+        "desktop", help="Let Jev drive one desktop application toward a goal (Windows/macOS)"
     )
+    add_goal_args(desktop, goal_required=False)
+    desktop.add_argument("--window", help="Regex matching the target window title")
+    desktop.add_argument("--process", help="Target process/application name")
+    desktop.add_argument("--launch", help="Command that starts the target application")
+    desktop.add_argument("--timeout", type=float, default=15, help="Seconds to wait for the window")
+    desktop.add_argument(
+        "--ocr",
+        choices=["auto", "on", "off"],
+        default="auto",
+        help="OCR fallback when accessibility exposes too few controls",
+    )
+    desktop.add_argument("--list", action="store_true", help="List candidate windows and exit")
     extract = sub.add_parser(
         "extract", help="Structure a page into records and let Jev select relevant ones"
     )
     add_browser_args(extract)
+    extract.add_argument("--model", default=space.DEFAULT_MODEL)
+    extract.add_argument("--limit", type=int, default=250)
     extract.add_argument("--task", required=True)
     extract.add_argument("--analysis", help="Decision spec (same contract as query)")
     extract.add_argument("--scope", help="CSS scope for extraction")
@@ -325,4 +386,6 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.command == "browse":
         return run_browse(args)
+    if args.command == "desktop":
+        return run_desktop(args)
     return run_extract(args)

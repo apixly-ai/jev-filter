@@ -43,8 +43,8 @@ to the value names and descriptions. Choose NONE if no supplied value belongs in
 IRREVERSIBLE = """Would executing the best next operation on this state commit an effect that cannot be
 undone by the user: completing a payment or purchase, placing an order, sending or posting a message,
 publishing, deleting or overwriting data, submitting an application, or changing account, security,
-permission or system settings? Navigation, searching, filtering, opening items, typing into fields
-and toggling view options are reversible."""
+permission or operating-system settings? Navigation, searching, filtering, opening items, typing into
+fields, toggling checkboxes or tabs, and applying ordinary in-app preferences are reversible."""
 
 # Appended to the goal by the program (never by a model). Without it, goals that end in an
 # irreversible step ("buy", "place the order") make Jev choose BLOCKED early; measured on the
@@ -68,6 +68,9 @@ IRREVERSIBLE_WORDS = re.compile(
     r"confirm payment|donate|subscribe|install|uninstall|format|reset|revoke|grant|authorize|approve)\b"
     r"|支付|付款|购买|下单|提交订单|确认订单|发送|发布|删除|移除|清空|转账|提现|注册|注销|授权|安装|卸载|格式化|重置"
 )
+
+
+COMMIT_ROLES = {"button", "link", "menuitem", "text", ""}
 
 
 def action_space(actions):
@@ -253,11 +256,21 @@ def irreversible(decision, threshold=0.5):
     action = decision.get("action") or {}
     if action.get("kind") not in ("click", "key", "select"):
         return False, None
-    label = " ".join(str(action.get(k, "")) for k in ("label", "section"))
-    if action.get("kind") == "click" and IRREVERSIBLE_WORDS.search(label):
+    # The keyword floor applies to commit-style controls only: toggles, tabs and options are
+    # reversible even when labelled "Send weekly report" or "Delete after 30 days".
+    commit = action.get("role", "button") in COMMIT_ROLES
+    if (
+        action.get("kind") == "click"
+        and commit
+        and IRREVERSIBLE_WORDS.search(action.get("label", ""))
+    ):
         return True, "label_rule"
     p = decision.get("irreversible_probability")
-    if p is not None and p >= threshold and action.get("kind") in ("click", "key"):
+    if (
+        p is not None
+        and p >= threshold
+        and (action.get("kind") == "key" or (action.get("kind") == "click" and commit))
+    ):
         return True, "jev_probability"
     return False, None
 
