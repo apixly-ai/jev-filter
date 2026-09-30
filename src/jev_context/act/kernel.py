@@ -66,6 +66,7 @@ class Run:
         stall_steps=3,
         continue_after_confirm=False,
         goal_note=True,
+        dry_run=False,
         context=None,
         terminal_threshold=0.5,
         fallback_floor=0.15,
@@ -95,6 +96,7 @@ class Run:
         self.stall_steps = stall_steps
         self.continue_after_confirm = continue_after_confirm
         self.goal_note = goal_note  # False only for the documented ablation benchmark
+        self.dry_run = dry_run
         self.terminal_threshold = terminal_threshold
         self.fallback_floor = fallback_floor
         self.overrides = 0
@@ -218,6 +220,8 @@ class Run:
         self.started = self.clock()
         page = self.observe()
         self.visits[page.get("fingerprint")] = 1
+        if page.get("challenge"):
+            return self.finish("blocked", page, reason="challenge")
         if page.get("scope_missing"):
             return self.finish("error", page, error="scope_missing")
         if self.allowed == {"initial"}:
@@ -232,6 +236,8 @@ class Run:
                 return self.finish("done", page, confirmed=True)
         unchanged = 0
         while True:
+            if page.get("challenge"):
+                return self.finish("blocked", page, reason="challenge")
             if not self.origin_ok(page):
                 return self.finish("origin_blocked", page, origin=origin_of(page.get("url", "")))
             if len(self.decisions) >= self.max_decisions:
@@ -282,12 +288,21 @@ class Run:
                     self.stale += 1
                     page = self.observe()
                     continue
-                return self.finish(
-                    "done" if operation == "DONE" else "blocked",
-                    page,
-                    last_confidence=decision["confidence"],
-                )
+                extra = {"last_confidence": decision["confidence"]}
+                if operation == "BLOCKED":
+                    extra["reason"] = self.blocked_reason(page)
+                return self.finish("done" if operation == "DONE" else "blocked", page, **extra)
             action = decision["action"]
+            if self.dry_run:
+                return self.finish(
+                    "dry_run",
+                    page,
+                    pending=describe(action),
+                    operation=operation,
+                    confidence=decision["confidence"],
+                    target_probability=decision.get("target_probability"),
+                    irreversible_probability=decision.get("irreversible_probability"),
+                )
             risky, reason = space.irreversible(decision, self.threshold)
             if risky and not self.allow_irreversible:
                 return self.finish(
@@ -352,6 +367,14 @@ class Run:
                 return self.finish("blocked", page, reason="no_progress")
             if self.repeating():
                 return self.finish("blocked", page, reason="repeating")
+
+    @staticmethod
+    def blocked_reason(page):
+        if page.get("challenge"):
+            return "challenge"  # CAPTCHA / bot check: hand back, never solve
+        if page.get("password_fields"):
+            return "login_required"  # passwords are never filled; use a signed-in profile
+        return "model_blocked"
 
     def repeating(self, limit=3):
         """A page state revisited `limit` times means the run is cycling (open/close,

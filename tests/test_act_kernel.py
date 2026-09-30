@@ -429,3 +429,24 @@ def test_pagination_through_new_states_is_not_repetition():
         surface, "x", decide=Policy([("CLICK", "Next page")] * 5 + [("DONE",)])
     ).run()
     assert result["status"] == "done" and result["steps"] == 5
+
+
+def test_challenges_hand_back_before_any_decision():
+    wall = page(url="https://shop.test/", actions=SEARCH, challenge=True)
+    surface = Surface([wall], {})
+    policy = Policy([])
+    result = kernel.Run(surface, "x", decide=policy).run()
+    assert result["status"] == "blocked" and result["reason"] == "challenge" and not policy.bodies
+
+
+def test_blocked_on_a_password_form_says_login_required():
+    login = page(url="https://shop.test/login", actions=SEARCH, password_fields=1)
+    result = kernel.Run(Surface([login], {}), "x", decide=Policy([("BLOCKED",)])).run()
+    assert result["status"] == "blocked" and result["reason"] == "login_required"
+
+
+def test_dry_run_decides_one_step_and_executes_nothing():
+    surface = search_flow()
+    result = kernel.Run(surface, "x", decide=Policy([("CLICK", "Search")]), dry_run=True).run()
+    assert result["status"] == "dry_run" and result["pending"]["label"] == "Search"
+    assert surface.executed == []

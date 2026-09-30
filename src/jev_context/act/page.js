@@ -331,7 +331,14 @@
   actions.push({id: 'wait', kind: 'wait', label: 'Wait for the page to update'});
   const dialogs = all('dialog[open],[role="dialog"],[role="alertdialog"],[aria-modal="true"]').filter(visible)
     .map(d => name(d) || (d.querySelector('h1,h2,h3') || {}).innerText || 'dialog').slice(0, 5);
+  // Deterministic hand-back signals: verification challenges are never solved, and password
+  // fields are never observed or filled, so a visible one means a sign-in the user must do.
+  const challenge = Boolean(document.querySelector(
+      'iframe[src*="recaptcha"],iframe[src*="hcaptcha"],iframe[src*="challenges.cloudflare.com"],' +
+      '#cf-challenge-running,.g-recaptcha,.h-captcha,[data-sitekey]')) ||
+    /^(just a moment|attention required|verify you are human)/i.test(document.title);
+  const passwords = all('input[type="password"]').filter(visible).length;
   return {url: location.href, origin: location.origin, title: document.title, w: innerWidth, h: innerHeight,
     text, scroll: {y: scrollY, height}, actions, marker, page_key: pageKey, guards, omitted_actions: omitted,
-    covered_actions: covered, below_fold: below, dialogs, frames};
+    covered_actions: covered, below_fold: below, dialogs, frames, challenge, password_fields: passwords};
 })

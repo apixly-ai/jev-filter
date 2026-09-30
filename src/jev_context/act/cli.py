@@ -176,6 +176,7 @@ def run_goal(surface, args, tool, allowed):
             verify_url=getattr(args, "verify_url", None),
             verify_question=args.verify_question,
             continue_after_confirm=args.continue_after_confirm,
+            dry_run=getattr(args, "dry_run", False),
         )
         result = run.run()
         result["transport"] = surface.name
@@ -336,6 +337,9 @@ def add_goal_args(cmd, goal_required=True):
     cmd.add_argument("--limit", type=int, default=250, help="Maximum observed controls per step")
     cmd.add_argument(
         "--keep-open", action="store_true", help="Leave the tab, browser or launched app running"
+    )
+    cmd.add_argument(
+        "--dry-run", action="store_true", help="Observe and decide one step; execute nothing"
     )
 
 

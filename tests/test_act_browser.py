@@ -90,6 +90,7 @@ def test_sensitive_fields_never_leave_the_page(browser, origin):
     state = browser.observe()
     labels = [a["label"] for a in state["actions"]]
     assert "Password" not in labels
+    assert state["password_fields"] == 1 and state["challenge"] is False
     otp = by_label(state, "One-time code", "fill")
     assert otp["sensitive"] is True
     browser.act(otp, state, text="123456")

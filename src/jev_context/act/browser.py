@@ -187,6 +187,14 @@ class CDPPage(Page):
             )
             # Keep animation frames running in a background tab without stealing focus.
             self.cmd("Emulation.setFocusEmulationEnabled", {"enabled": True})
+            if self.launched is not None:
+                # Our own private browser: foreground the tab. Background tabs get throttled
+                # timers/rAF (reported 0/5 -> 5/5 on Windows once foregrounded). Attached user
+                # browsers are left alone.
+                try:
+                    self.cmd("Page.bringToFront")
+                except cdp.CDPError:
+                    pass
             if url:
                 self.navigate(url)
         except Exception:
