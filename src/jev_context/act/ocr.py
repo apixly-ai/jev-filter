@@ -35,23 +35,163 @@ def _grab(rect):
         return shot.rgb, shot.size
 
 
+def _grab_window(hwnd):
+    """Windows: PrintWindow(PW_RENDERFULLCONTENT) captures the window itself even when another
+    window covers it (a screen grab would OCR whatever is on top). Returns rgb, size, origin."""
+    import ctypes
+    from ctypes import wintypes
+
+    # Private DLL instances with full prototypes: 64-bit handles must not be truncated, and
+    # the shared ctypes.windll function objects used by uiautomation must not be mutated.
+    user32, gdi32 = ctypes.WinDLL("user32"), ctypes.WinDLL("gdi32")
+    handle = ctypes.c_void_p
+    user32.GetWindowRect.argtypes = [handle, ctypes.POINTER(wintypes.RECT)]
+    user32.GetWindowDC.argtypes, user32.GetWindowDC.restype = [handle], handle
+    user32.ReleaseDC.argtypes = [handle, handle]
+    user32.PrintWindow.argtypes = [handle, handle, wintypes.UINT]
+    gdi32.CreateCompatibleDC.argtypes, gdi32.CreateCompatibleDC.restype = [handle], handle
+    gdi32.CreateCompatibleBitmap.argtypes = [handle, ctypes.c_int, ctypes.c_int]
+    gdi32.CreateCompatibleBitmap.restype = handle
+    gdi32.SelectObject.argtypes, gdi32.SelectObject.restype = [handle, handle], handle
+    gdi32.GetDIBits.argtypes = [
+        handle,
+        handle,
+        wintypes.UINT,
+        wintypes.UINT,
+        ctypes.c_void_p,
+        ctypes.c_void_p,
+        wintypes.UINT,
+    ]
+    gdi32.DeleteObject.argtypes = [handle]
+    gdi32.DeleteDC.argtypes = [handle]
+    rect = wintypes.RECT()
+    if not user32.GetWindowRect(hwnd, ctypes.byref(rect)):
+        return None
+    width, height = rect.right - rect.left, rect.bottom - rect.top
+    if width <= 0 or height <= 0:
+        return None
+
+    class BITMAPINFOHEADER(ctypes.Structure):
+        _fields_ = [
+            ("biSize", wintypes.DWORD),
+            ("biWidth", wintypes.LONG),
+            ("biHeight", wintypes.LONG),
+            ("biPlanes", wintypes.WORD),
+            ("biBitCount", wintypes.WORD),
+            ("biCompression", wintypes.DWORD),
+            ("biSizeImage", wintypes.DWORD),
+            ("biXPelsPerMeter", wintypes.LONG),
+            ("biYPelsPerMeter", wintypes.LONG),
+            ("biClrUsed", wintypes.DWORD),
+            ("biClrImportant", wintypes.DWORD),
+        ]
+
+    window_dc = user32.GetWindowDC(hwnd)
+    memory_dc = gdi32.CreateCompatibleDC(window_dc)
+    bitmap = gdi32.CreateCompatibleBitmap(window_dc, width, height)
+    previous = gdi32.SelectObject(memory_dc, bitmap)
+    try:
+        if not user32.PrintWindow(hwnd, memory_dc, 2):
+            return None
+        header = BITMAPINFOHEADER(40, width, -height, 1, 32, 0, 0, 0, 0, 0, 0)
+        buffer = ctypes.create_string_buffer(width * height * 4)
+        if not gdi32.GetDIBits(memory_dc, bitmap, 0, height, buffer, ctypes.byref(header), 0):
+            return None
+        bgra = buffer.raw
+    finally:
+        gdi32.SelectObject(memory_dc, previous)
+        gdi32.DeleteObject(bitmap)
+        gdi32.DeleteDC(memory_dc)
+        user32.ReleaseDC(hwnd, window_dc)
+    if not any(bgra[i] for i in range(0, len(bgra), 4 * 97)):
+        return None  # some GPU-composited windows render black through PrintWindow
+    rgb = bytearray(width * height * 3)
+    rgb[0::3], rgb[1::3], rgb[2::3] = bgra[2::4], bgra[1::4], bgra[0::4]
+    rgb = bytes(rgb)
+    scale = _dpi_scale(hwnd)
+    if scale > 1.01:
+        # A DPI-virtualized window is drawn at its logical size in the top-left of the bitmap
+        # (measured: 520x360 logical content inside a 938x698 physical rect at 175%).
+        logical = (max(1, int(width / scale)), max(1, int(height / scale)))
+        rgb = _crop(rgb, (width, height), (0, 0, logical[0], logical[1]))
+        width, height = logical
+    return rgb, (width, height), (rect.left, rect.top), scale
+
+
+def _dpi_scale(hwnd):
+    """Physical pixels per window pixel: monitor DPI / the window's own DPI (1 when aware)."""
+    try:
+        import ctypes
+
+        user32, shcore = ctypes.WinDLL("user32"), ctypes.WinDLL("shcore")
+        user32.GetDpiForWindow.argtypes = [ctypes.c_void_p]
+        user32.MonitorFromWindow.argtypes, user32.MonitorFromWindow.restype = (
+            [ctypes.c_void_p, ctypes.c_uint],
+            ctypes.c_void_p,
+        )
+        window_dpi = user32.GetDpiForWindow(hwnd) or 96
+        monitor = user32.MonitorFromWindow(hwnd, 2)
+        dpi_x, dpi_y = ctypes.c_uint(), ctypes.c_uint()
+        if (
+            shcore.GetDpiForMonitor(
+                ctypes.c_void_p(monitor), 0, ctypes.byref(dpi_x), ctypes.byref(dpi_y)
+            )
+            != 0
+        ):
+            return 1.0
+        return dpi_x.value / window_dpi
+    except Exception:
+        return 1.0
+
+
+def _crop(rgb, size, box):
+    width, _ = size
+    left, top, right, bottom = box
+    rows = [rgb[(y * width + left) * 3 : (y * width + right) * 3] for y in range(top, bottom)]
+    return b"".join(rows)
+
+
 class BaseOCR:
-    def lines(self, window):
+    def capture(self, window):
+        hwnd = window.get("hwnd")
+        if sys.platform == "win32" and hwnd:
+            grabbed = _grab_window(hwnd)
+            if grabbed is not None:
+                self.hwnd = hwnd
+                return grabbed
+        self.hwnd = None
         rect = window.get("rect")
-        if not rect:
-            return []
         rgb, size = _grab(rect)
+        return rgb, size, (rect[0], rect[1]), 1.0
+
+    def lines(self, window):
+        if not window.get("rect"):
+            return []
+        grabbed = self.capture(window)
+        rgb, size, (ox, oy), scale = grabbed
+        self.window = window
         found = self.recognize(rgb, size)
         result = []
         for text, (x, y, w, h) in found:
-            screen = [rect[0] + x, rect[1] + y, rect[0] + x + w, rect[1] + y + h]
+            screen = [ox + x * scale, oy + y * scale, ox + (x + w) * scale, oy + (y + h) * scale]
             result.append({"text": text[:200], "rect": [round(v) for v in screen]})
-        self.hashes = {tuple(r["rect"]): self.region_hash(r["rect"]) for r in result}
+        self.hashes = {tuple(r["rect"]): self.region_hash(r["rect"], grabbed) for r in result}
         return result
 
-    def region_hash(self, rect):
-        rgb, _ = _grab(rect)
-        return hashlib.sha1(rgb).hexdigest()
+    def region_hash(self, rect, grabbed=None):
+        if grabbed is None and getattr(self, "window", None) is not None:
+            grabbed = self.capture(self.window)
+        if grabbed is None:
+            rgb, _ = _grab(rect)
+            return hashlib.sha1(rgb).hexdigest()
+        rgb, size, (ox, oy), scale = grabbed
+        box = (
+            max(0, int((rect[0] - ox) / scale)),
+            max(0, int((rect[1] - oy) / scale)),
+            min(size[0], int((rect[2] - ox) / scale)),
+            min(size[1], int((rect[3] - oy) / scale)),
+        )
+        return hashlib.sha1(_crop(rgb, size, box)).hexdigest()
 
     def unchanged(self, rect):
         before = getattr(self, "hashes", {}).get(tuple(rect))

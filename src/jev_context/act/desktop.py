@@ -30,13 +30,35 @@ class DesktopSurface:
 
     name = "desktop"
 
-    def __init__(self, backend, *, ocr=None, ocr_min_actions=2, settle_s=0.15):
+    def __init__(
+        self,
+        backend,
+        *,
+        ocr=None,
+        ocr_min_actions=2,
+        settle_s=0.15,
+        allow_sensitive=False,
+        guard_input=True,
+    ):
+        from . import desktop_policy
+
         self.backend = backend
         self.ocr = ocr
         self.ocr_min_actions = ocr_min_actions
         self.settle_s = settle_s
         self.nodes = {}
         self.dialogs = []
+        self.guard_input = guard_input
+        identity = getattr(backend, "identity", lambda: {})()
+        try:
+            desktop_policy.check_target(
+                identity.get("process"), identity.get("window_class"), allow_sensitive
+            )
+            if identity.get("pid"):
+                desktop_policy.check_elevation(identity["pid"])
+        except desktop_policy.DesktopRefused:
+            backend.close()
+            raise
 
     # -- observation --------------------------------------------------------------------------
     def _collect(self, limit, text_limit):
@@ -119,6 +141,7 @@ class DesktopSurface:
             "page_key": [window.get("title"), window.get("pid")],
             "guards": guards,
             "omitted_actions": omitted,
+            "truncated": bool(getattr(self.backend, "truncated", False)),
             "dialogs": window.get("dialogs", []),
             "window": {k: window.get(k) for k in ("title", "process", "pid", "rect")},
         }
@@ -181,7 +204,14 @@ class DesktopSurface:
 
     # -- execution ----------------------------------------------------------------------------
     def act(self, action, state, text=None):
+        from . import desktop_policy
+
         kind = action["kind"]
+        if self.guard_input and kind != "wait":
+            try:
+                desktop_policy.check_before_input()
+            except desktop_policy.DesktopRefused as error:
+                raise ActionFailed(str(error)) from None
         if kind == "wait":
             time.sleep(0.2)
             return {"executed": action["id"]}

@@ -186,3 +186,47 @@ def test_category_proposal_uses_a_fixed_sample_and_adds_other():
         sample_size=10,
     )
     assert again["r"] == seen["records"]  # deterministic sample
+
+
+def test_preflight_refuses_over_budget_and_dry_run_estimates(tmp_path, capsys):
+    write_dataset(tmp_path, 60)
+    args = ["--input", str(tmp_path / "records.jsonl"), "--spec", str(tmp_path / "spec.json")]
+    assert survey.main(args + ["--dry-run"]) == 0
+    plan = json.loads(capsys.readouterr().out)
+    assert plan["requests"] >= 2 and plan["input_tokens_estimate"] > 0
+    assert plan["input_usd_estimate"] > 0
+    assert survey.main(args + ["--max-usd", "0.000001"]) == 2
+    refused = json.loads(capsys.readouterr().out)
+    assert refused["refused"] == "budget" and not refused["ok"]
+    assert survey.main(args + ["--max-usd", "0", "--max-requests", "1"]) == 2
+
+
+def test_labels_produce_accuracy_reliability_and_a_floor(tmp_path, monkeypatch, capsys):
+    records = write_dataset(tmp_path, 200)
+    truth = {r["id"]: r["truth"] for r in records}
+    monkeypatch.setattr(survey, "evaluate", fake_evaluate(truth))
+    labels = tmp_path / "labels.jsonl"
+    rows = [
+        json.dumps({"id": rid, "topic": t["topic"], "churn": t["churn"]})
+        for rid, t in truth.items()
+        if not t["spam"]
+    ]
+    labels.write_text("\n".join(rows), encoding="utf-8")
+    spec = str(tmp_path / "spec.json")
+    survey.main(
+        ["--input", str(tmp_path / "records.jsonl"), "--spec", spec, "--labels", str(labels)]
+    )
+    report = json.loads(capsys.readouterr().out)
+    assert report["calibrated"] is True
+    topic = report["calibration"]["topic"]
+    assert topic["accuracy"] == 1.0 and topic["suggested_confidence_floor"] == 0.5
+    assert "0.9-1.0" in topic["by_confidence"]
+    assert report["calibration"]["churn"]["accuracy"] == 1.0
+
+
+def test_unlabelled_reports_say_uncalibrated(tmp_path, monkeypatch, capsys):
+    records = write_dataset(tmp_path, 30)
+    monkeypatch.setattr(survey, "evaluate", fake_evaluate({r["id"]: r["truth"] for r in records}))
+    survey.main(["--input", str(tmp_path / "records.jsonl"), "--spec", str(tmp_path / "spec.json")])
+    report = json.loads(capsys.readouterr().out)
+    assert report["calibrated"] is False and "uncalibrated" in report["calibration_note"]

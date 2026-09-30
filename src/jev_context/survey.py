@@ -274,6 +274,84 @@ def aggregate(records, answers, spec, budget_chars=4000):
     }
 
 
+def estimate(records, task, spec, model):
+    """Pre-flight: planned requests and a conservative input-token estimate (UTF-8 bytes / 3;
+    CJK text is about 3 bytes per character and often one token each). Not a provider count."""
+    from .cli import chunks, normalize
+
+    parts = list(chunks(normalize([dict(r) for r in records])))
+    planned = analysis.plan(
+        parts, task, {"mode": "analyze", "questions": spec["questions"], "model": model}
+    )
+    size = sum(analysis.encoded_bytes(item["request"]) for item in planned["items"])
+    requests = len(planned["items"])
+    if spec.get("screen"):
+        screen = {"screen": {"type": "noul", "instructions": spec["screen"]["instructions"]}}
+        screened = analysis.plan(
+            parts, task, {"mode": "analyze", "questions": screen, "model": model}
+        )
+        size += sum(analysis.encoded_bytes(item["request"]) for item in screened["items"])
+        requests += len(screened["items"])
+    tokens = size // 3
+    rate = spec.get("usd_per_million_input", 0.042)
+    return {
+        "requests": requests,
+        "deferred": len(planned["deferred"]),
+        "input_tokens_estimate": tokens,
+        "input_usd_estimate": round(tokens * rate / 1e6, 6),
+        "basis": "utf8_bytes/3, upper bound",
+    }
+
+
+def evaluate_labels(answers, labels, questions, target=0.95, min_support=20):
+    """Accuracy against caller labels, a reliability table per confidence band, and the lowest
+    confidence floor whose confident answers reach `target` accuracy with enough support."""
+    out = {}
+    for name, q in questions.items():
+        pairs = []
+        for rid, truth in labels.items():
+            if name not in truth or rid not in answers or name not in answers[rid]:
+                continue
+            a = answers[rid][name]
+            if q["type"] == "choice":
+                pairs.append((a["confidence"], a["choice"] == truth[name]))
+            elif q["type"] == "score":
+                pairs.append((a["confidence"], round(a["score"]) == int(truth[name])))
+            else:
+                pairs.append((abs(a["noul"] - 0.5) * 2, (a["noul"] >= 0.5) == bool(truth[name])))
+        if not pairs:
+            continue
+        bands = {}
+        for low, high in ((0.0, 0.5), (0.5, 0.7), (0.7, 0.9), (0.9, 1.01)):
+            hits = [ok for c, ok in pairs if low <= c < high]
+            if hits:
+                label = f"{low:.1f}-{min(high, 1.0):.1f}"
+                bands[label] = {"n": len(hits), "accuracy": round(sum(hits) / len(hits), 4)}
+        floor = None
+        for candidate in (0.5, 0.6, 0.7, 0.8, 0.9, 0.95):
+            kept = [ok for c, ok in pairs if c >= candidate]
+            if len(kept) >= min_support and sum(kept) / len(kept) >= target:
+                floor = candidate
+                break
+        out[name] = {
+            "n": len(pairs),
+            "accuracy": round(sum(ok for _, ok in pairs) / len(pairs), 4),
+            "by_confidence": bands,
+            "suggested_confidence_floor": floor,
+            "confidence_basis": "noul: |p-0.5|*2" if q["type"] == "noul" else "reported confidence",
+        }
+    return out
+
+
+def load_labels(path):
+    labels = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            row = json.loads(line)
+            labels[str(row["id"])] = {k: v for k, v in row.items() if k != "id"}
+    return labels
+
+
 def render_markdown(report):
     lines = [
         f"# Survey: {report['task']}",
@@ -368,6 +446,18 @@ def main(argv=None):
     parser.add_argument("--budget-chars", type=int, default=4000)
     parser.add_argument("--format", choices=["json", "md"], default="json")
     parser.add_argument(
+        "--max-usd",
+        type=float,
+        default=5.0,
+        help="Refuse runs whose pre-flight input estimate exceeds this (0 disables)",
+    )
+    parser.add_argument(
+        "--max-requests", type=int, default=10000, help="Refuse larger plans (0 disables)"
+    )
+    parser.add_argument(
+        "--labels", help="JSONL {id, <question>: expected} for accuracy and calibration"
+    )
+    parser.add_argument(
         "--propose-categories",
         metavar="QUESTION",
         help="Fill this choice question's categories from a text-model sample",
@@ -409,28 +499,24 @@ def main(argv=None):
     usage = {"input_tokens": 0, "output_tokens": 0}
     usage_complete = True
     requests = 0
+    plan = estimate(records, task, spec, model)
     if args.dry_run:
-        from .cli import chunks, normalize
-
-        parts = list(chunks(normalize(records)))
-        planned = analysis.plan(
-            parts, task, {"mode": "analyze", "questions": spec["questions"], "model": model}
-        )
-        print(
-            json.dumps(
-                {
-                    "ok": True,
-                    "dry_run": True,
-                    "records": len(records),
-                    "requests": len(planned["items"]),
-                    "deferred": len(planned["deferred"]),
-                    "input": meta,
-                },
-                ensure_ascii=False,
-                indent=2,
-            )
-        )
+        payload = {"ok": True, "dry_run": True, "records": len(records), **plan, "input": meta}
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
+    over_usd = bool(args.max_usd) and plan["input_usd_estimate"] > args.max_usd
+    over_requests = bool(args.max_requests) and plan["requests"] > args.max_requests
+    if over_usd or over_requests:
+        refused = {
+            "ok": False,
+            "complete": False,
+            "refused": "budget",
+            "estimate": plan,
+            "max_usd": args.max_usd,
+            "max_requests": args.max_requests,
+        }
+        print(json.dumps(refused, indent=2))
+        return 2
     target = records
     if spec.get("screen"):
         screen_q = {"screen": {"type": "noul", "instructions": spec["screen"]["instructions"]}}
@@ -477,6 +563,17 @@ def main(argv=None):
     )
     rate = spec.get("usd_per_million_input", 0.042)
     report["estimated_input_usd"] = round(usage["input_tokens"] * rate / 1e6, 6)
+    report["preflight"] = plan
+    if args.labels:
+        flat = {rid: e.get("answers", {}) for rid, e in answers.items() if e.get("status") == "OK"}
+        report["calibration"] = evaluate_labels(flat, load_labels(args.labels), spec["questions"])
+        report["calibrated"] = True
+    else:
+        report["calibrated"] = False
+        report["calibration_note"] = (
+            "Thresholds are uncalibrated; pass --labels with a labelled sample from your own "
+            "data before relying on confidence floors."
+        )
     report["complete"] = report["failed"] == 0 and not meta["truncated"]
     report["ok"] = report["failed"] < max(1, len(target))
     report["archive"] = save_archive(

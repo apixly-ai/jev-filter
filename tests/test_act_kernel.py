@@ -303,11 +303,22 @@ def test_no_progress_blocks_after_three_unchanged_steps():
     )
 
 
-def test_type_text_without_a_value_stops_for_the_caller():
+def test_type_text_without_a_value_skips_the_field_once_then_stops():
     surface = search_flow()
-    result = kernel.Run(surface, "Search", decide=Policy([("TYPE_TEXT", "Search products")])).run()
-    assert result["status"] == "needs_value" and result["field"]["label"] == "Search products"
-    assert surface.executed == []
+    policy = Policy([("TYPE_TEXT", "Search products"), ("BLOCKED",)])
+    result = kernel.Run(surface, "Search", decide=policy).run()
+    assert result["status"] == "needs_value" and result["fields"] == [{"label": "Search products"}]
+    assert surface.executed == [] and result["history"][0]["skipped"] is True
+    # The skipped field is no longer offered to the model.
+    offered = policy.bodies[1]["questions"]
+    assert "type_text_target" not in offered
+
+
+def test_optional_field_without_a_value_does_not_block_the_goal():
+    surface = search_flow()
+    policy = Policy([("TYPE_TEXT", "Search products"), ("CLICK", "Search"), ("DONE",)])
+    result = kernel.Run(surface, "Search", decide=policy).run()
+    assert result["status"] == "done" and surface.executed == [("e3", None)]
 
 
 def test_text_helper_fills_when_no_value_matches():
@@ -381,3 +392,40 @@ def test_confident_blocked_still_stops():
     surface = search_flow()
     result = kernel.Run(surface, "Search", decide=Policy([("BLOCKED",)])).run()
     assert result["status"] == "blocked" and result["terminal_overrides"] == 0
+
+
+def test_oscillating_actions_are_detected_even_when_the_page_changes():
+    a = page(
+        url="https://shop.test/a",
+        actions=[
+            {"id": "e1", "kind": "click", "label": "Toggle menu", "role": "button", "node": 1}
+        ],
+    )
+    b = page(
+        url="https://shop.test/b",
+        actions=[
+            {"id": "e1", "kind": "click", "label": "Toggle menu", "role": "button", "node": 1}
+        ],
+    )
+    surface = Surface([a, b], {("https://shop.test/a", "e1"): b, ("https://shop.test/b", "e1"): a})
+    result = kernel.Run(surface, "x", decide=Policy([("CLICK", "Toggle menu")] * 6)).run()
+    assert (
+        result["status"] == "blocked" and result["reason"] == "repeating" and result["steps"] == 4
+    )
+
+
+def test_pagination_through_new_states_is_not_repetition():
+    pages = [
+        page(
+            url=f"https://shop.test/p{i}",
+            actions=[
+                {"id": "e1", "kind": "click", "label": "Next page", "role": "link", "node": 1}
+            ],
+        )
+        for i in range(6)
+    ]
+    surface = Surface(pages, {(f"https://shop.test/p{i}", "e1"): pages[i + 1] for i in range(5)})
+    result = kernel.Run(
+        surface, "x", decide=Policy([("CLICK", "Next page")] * 5 + [("DONE",)])
+    ).run()
+    assert result["status"] == "done" and result["steps"] == 5

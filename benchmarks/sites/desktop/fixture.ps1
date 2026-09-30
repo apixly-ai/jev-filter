@@ -68,6 +68,10 @@ $beta = New-Object System.Windows.Forms.CheckBox
 $beta.Text = 'Enable beta features'; $beta.AutoSize = $true
 $beta.Location = New-Object System.Drawing.Point(20, 20)
 $advanced.Controls.Add($beta)
+$help = New-Object System.Windows.Forms.Button
+$help.Text = 'Show help'; $help.Location = New-Object System.Drawing.Point(250, 60); $help.Width = 120
+$advanced.Controls.Add($help)
+$help.Add_Click({ [void][System.Windows.Forms.MessageBox]::Show('Beta features may change without notice.', 'Help') })
 $apply = New-Object System.Windows.Forms.Button
 $apply.Text = 'Apply advanced settings'; $apply.Location = New-Object System.Drawing.Point(20, 60); $apply.Width = 200
 $advanced.Controls.Add($apply)

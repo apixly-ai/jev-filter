@@ -448,3 +448,79 @@ def test_windows_ocr_fallback_clicks_drawn_text():
         assert "opened Settings" in s.observe()["text"]
     finally:
         process.kill()
+
+
+# ---------------------------------------------------------------------------------------------
+# Deterministic desktop safety gates
+# ---------------------------------------------------------------------------------------------
+def test_sensitive_targets_are_refused_unless_allowed():
+    from jev_context.act import desktop_policy as policy
+
+    with pytest.raises(policy.DesktopRefused, match="refused_sensitive_target"):
+        policy.check_target("WindowsTerminal.exe")
+    with pytest.raises(policy.DesktopRefused):
+        policy.check_target("powershell.exe", "ConsoleWindowClass")
+    policy.check_target(
+        "powershell.exe", "WindowsForms10.Window.8.app"
+    )  # a GUI app hosted by PowerShell
+    policy.check_target("KeePassXC.exe", allow_sensitive=True)
+
+    class Identified(FakeBackend):
+        def identity(self):
+            return {"pid": None, "process": "1Password.exe", "window_class": "x"}
+
+    backend = Identified(controls())
+    with pytest.raises(policy.DesktopRefused):
+        DesktopSurface(backend)
+    assert backend.closed
+
+
+def test_stop_file_aborts_before_the_next_input(tmp_path, monkeypatch):
+    from jev_context.act import desktop_policy as policy
+    from jev_context.act.browser import ActionFailed
+
+    stop = tmp_path / "STOP"
+    monkeypatch.setenv("JEV_STOP_FILE", str(stop))
+    monkeypatch.setattr(policy, "pointer_in_corner", lambda: False)
+    monkeypatch.setattr(policy, "desktop_locked", lambda: False)
+    surface = DesktopSurface(FakeBackend(controls()), settle_s=0)
+    state = surface.observe()
+    save = next(a for a in state["actions"] if a["label"] == "Save profile")
+    stop.write_text("stop", encoding="utf-8")
+    with pytest.raises(ActionFailed, match="stop file"):
+        surface.act(save, state)
+    stop.unlink()
+    monkeypatch.setattr(policy, "pointer_in_corner", lambda: True)
+    with pytest.raises(ActionFailed, match="corner"):
+        surface.act(save, state)
+    monkeypatch.setattr(policy, "pointer_in_corner", lambda: False)
+    monkeypatch.setattr(policy, "desktop_locked", lambda: True)
+    with pytest.raises(ActionFailed, match="locked"):
+        surface.act(save, state)
+
+
+@windows
+def test_environment_probes_run_on_windows():
+    from jev_context.act import desktop_policy as policy
+
+    assert policy.desktop_locked() in (False, True)
+    policy.check_elevation(__import__("os").getpid())  # same elevation as ourselves: never refused
+
+
+@windows
+@pytest.mark.desktop
+def test_windows_modal_dialog_does_not_freeze_the_uia_channel(winforms):
+    s = winforms
+    state = s.observe()
+    s.act(by(state, "Advanced"), state)
+    s.settle({})
+    state = s.observe()
+    record = s.act(by(state, "Show help"), state)
+    assert record["via"] == "bm_click"
+    time.sleep(0.5)
+    state = s.observe()  # must not hang while the MessageBox is open
+    assert "Help" in state["dialogs"]
+    ok = next(a for a in state["actions"] if a["label"] in ("OK", "确定"))
+    s.act(ok, state)
+    time.sleep(0.5)
+    assert s.observe()["dialogs"] == []

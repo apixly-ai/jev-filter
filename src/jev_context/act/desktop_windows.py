@@ -94,6 +94,13 @@ class WindowsBackend:
         self.pid = self.window.ProcessId
         self.last_focus = None
 
+    def identity(self):
+        return {
+            "pid": self.pid,
+            "process": self._process_name(self.pid),
+            "window_class": self.window.ClassName,
+        }
+
     def _find(self):
         for w in auto.GetRootControl().GetChildren():
             try:
@@ -193,6 +200,7 @@ class WindowsBackend:
             "pid": self.pid,
             "process": self._process_name(self.pid) or "app",
             "rect": _rect(self.window),
+            "hwnd": self.window.NativeWindowHandle,
             "focus": focus,
             "dialogs": dialogs,
         }
@@ -252,10 +260,16 @@ class WindowsBackend:
 
     def snapshot(self, limit=400):
         elements, texts = [], []
+        self.truncated = False
+        deadline = time.monotonic() + 3.0
         seen = set()
 
         def walk(control, section, owner, depth, parent_key):
             if len(elements) >= limit or depth > 40:
+                self.truncated = True
+                return
+            if time.monotonic() > deadline:
+                self.truncated = True  # large trees (Electron/Chromium) are cut, never silently
                 return
             try:
                 children = control.GetChildren()
@@ -391,6 +405,99 @@ class WindowsBackend:
             raise StalePage("point is covered by another window")
         auto.Click(int(x), int(y), waitTime=0)
 
+    @staticmethod
+    def _post_click(control, hwnd):
+        """Standard Win32/WinForms buttons: send BM_CLICK with a 1 s timeout.
+
+        Measured on a WinForms fixture: a UIA Invoke on a button whose handler shows a modal
+        MessageBox never returned while the box was open, and every later UIA call to that
+        application hung as well. SendMessageTimeout(BM_CLICK) returns after at most 1 s in that
+        case and leaves the UIA channel usable (the dialog is then observed and closed normally);
+        for ordinary buttons it returns in a few ms. A posted BM_CLICK was ignored by a
+        background dialog, so the synchronous-with-timeout form is used.
+        """
+        try:
+            if (
+                control.ControlTypeName != "ButtonControl"
+                or "button" not in (control.ClassName or "").lower()
+            ):
+                return False
+            import ctypes
+            from ctypes import wintypes
+
+            result = wintypes.DWORD()
+            sent = ctypes.windll.user32.SendMessageTimeoutW(
+                hwnd,
+                0x00F5,
+                0,
+                0,
+                0x0002,
+                1000,
+                ctypes.byref(result),  # BM_CLICK, SMTO_ABORTIFHUNG
+            )
+            # 0 with ERROR_TIMEOUT means the handler is still running (modal): it was delivered.
+            return bool(sent) or ctypes.windll.kernel32.GetLastError() == 1460
+        except Exception:
+            return False
+
+    def _invoke_isolated(self, control, pattern, timeout=2.0):
+        """Invoke without letting a modal dialog freeze this process.
+
+        A provider may run the click handler synchronously; if that handler shows a modal
+        dialog, Invoke only returns when the dialog closes (measured: still blocked after 6 s on
+        a WinForms MessageBox, and later UIA calls on the same thread hung too). HWND-backed
+        controls are therefore re-acquired and invoked from a worker thread with its own UIA
+        client; after `timeout` the step counts as executed and the next observation sees the
+        dialog among the process's windows.
+        """
+        import threading
+
+        try:
+            hwnd = control.NativeWindowHandle
+        except Exception:
+            hwnd = 0
+        if not hwnd:
+            pattern.Invoke(waitTime=0)
+            return {"via": "invoke"}
+        # Buttons of the main window may open a modal dialog: BM_CLICK keeps UIA usable. Buttons
+        # inside a dialog or popup usually close it; BM_CLICK can be ignored by an inactive dialog
+        # (documented for BM_CLICK, and observed intermittently), so those use Invoke.
+        try:
+            top = control.GetTopLevelControl()
+            in_main_window = (
+                top is not None and top.NativeWindowHandle == self.window.NativeWindowHandle
+            )
+        except Exception:
+            in_main_window = False
+        if in_main_window and self._post_click(control, hwnd):
+            return {"via": "bm_click"}
+        outcome = {}
+
+        def work():
+            with auto.UIAutomationInitializerInThread():
+                try:
+                    target = auto.ControlFromHandle(hwnd)
+                    invoke = target.GetPattern(auto.PatternId.InvokePattern) if target else None
+                    if invoke is None:
+                        outcome["missing"] = True
+                        return
+                    invoke.Invoke(waitTime=0)
+                    outcome["ok"] = True
+                except Exception as error:  # reported to the archive, never retried blindly
+                    outcome["error"] = type(error).__name__
+
+        worker = threading.Thread(target=work, daemon=True, name="jev-uia-invoke")
+        worker.start()
+        worker.join(timeout)
+        if worker.is_alive():
+            return {"via": "invoke", "blocked_by_modal": True}
+        if outcome.get("missing"):
+            pattern.Invoke(waitTime=0)
+            return {"via": "invoke"}
+        if outcome.get("error"):
+            raise ActionFailed(f"invoke failed: {outcome['error']}")
+        return {"via": "invoke"}
+
     def perform(self, control, kind, text=None):
         try:
             if not control.Exists(0, 0):
@@ -433,6 +540,8 @@ class WindowsBackend:
         ):
             pattern = _pattern(control, name)
             if pattern is not None:
+                if name == "InvokePattern":
+                    return self._invoke_isolated(control, pattern)
                 call(pattern)
                 return {"via": name.replace("Pattern", "").lower()}
         # A collapsed combo box without ExpandCollapse opens through its drop-down button.

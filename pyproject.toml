@@ -62,6 +62,8 @@ markers = [
 
 [tool.coverage.run]
 source = ["jev_context"]
+# Windows-only live backends; measured by the Windows desktop CI job (UI Automation + OCR).
+omit = ["*/jev_context/act/desktop_windows.py", "*/jev_context/act/ocr.py"]
 [tool.coverage.report]
 show_missing = true
 fail_under = 80

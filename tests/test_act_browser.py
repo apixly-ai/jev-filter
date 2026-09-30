@@ -7,7 +7,6 @@ from pathlib import Path
 
 import pytest
 
-from jev_context.act import cdp
 from jev_context.act.browser import CDPPage, StalePage
 
 SITE = Path(__file__).resolve().parents[1] / "benchmarks" / "sites" / "shop"
@@ -31,18 +30,13 @@ def origin():
 
 @pytest.fixture(scope="module")
 def executable():
-    try:
-        sync = pytest.importorskip("playwright.sync_api")
-        with sync.sync_playwright() as p:
-            path = p.chromium.executable_path
-        if Path(path).is_file():
-            return path
-    except Exception:
-        pass
-    try:
-        return cdp.find_chromium()
-    except cdp.CDPError:
-        pytest.skip("no Chromium available")
+    """The Playwright-managed Chromium (CI browser job); skipped elsewhere like test_browser.py."""
+    sync = pytest.importorskip("playwright.sync_api")
+    with sync.sync_playwright() as p:
+        path = p.chromium.executable_path
+    if not Path(path).is_file():
+        pytest.skip("Playwright Chromium is not installed")
+    return path
 
 
 @pytest.fixture

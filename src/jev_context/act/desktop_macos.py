@@ -35,7 +35,7 @@ class Gone(RuntimeError):
     """The target application or window no longer exists."""
 
 
-class AXApi:
+class AXApi:  # pragma: no cover - pyobjc adapter; exercised only on macOS runners
     """Thin adapter over pyobjc's ApplicationServices/Quartz/AppKit."""
 
     def __init__(self):
@@ -58,10 +58,17 @@ class AXApi:
             yield {"pid": int(app.processIdentifier()), "name": str(app.localizedName() or "")}
 
     def app(self, pid):
-        return self.AS.AXUIElementCreateApplication(pid)
+        element = self.AS.AXUIElementCreateApplication(pid)
+        # A busy or hung application must not stall every attribute read for seconds.
+        self.AS.AXUIElementSetMessagingTimeout(element, 0.5)
+        return element
 
     def get(self, element, attribute):
         error, value = self.AS.AXUIElementCopyAttributeValue(element, attribute, None)
+        if error == -25211:  # kAXErrorAPIDisabled: permission revoked mid-run; never "empty"
+            raise RuntimeError(
+                "accessibility_permission_required: Accessibility access was revoked"
+            )
         return value if error == 0 else None
 
     def point(self, value):
@@ -116,7 +123,7 @@ class AXApi:
 KEYCODES = {"Enter": 36, "Escape": 53}
 
 
-def list_windows(api=None):
+def list_windows(api=None):  # pragma: no cover - needs a real AX session
     api = api or AXApi()
     rows = []
     for app in api.applications():
@@ -153,6 +160,9 @@ class MacBackend:
             self.close()
             raise RuntimeError("target window not found")
         self.name = self._app_name()
+
+    def identity(self):
+        return {"pid": self.pid, "process": self.name, "window_class": None}
 
     def _app_name(self):
         for app in self.api.applications():
@@ -270,9 +280,15 @@ class MacBackend:
 
     def snapshot(self, limit=400):
         elements, texts = [], []
+        self.truncated = False
+        deadline = time.monotonic() + 3.0
 
         def walk(element, section, owner, depth, key):
             if len(elements) >= limit or depth > 40:
+                self.truncated = True
+                return
+            if time.monotonic() > deadline:
+                self.truncated = True  # large trees (Electron/Chromium) are cut, never silently
                 return
             for index, child in enumerate(self.api.get(element, "AXChildren") or []):
                 role_name = str(self.api.get(child, "AXRole") or "")

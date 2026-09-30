@@ -65,6 +65,7 @@ class Run:
         verify_threshold=0.7,
         stall_steps=3,
         continue_after_confirm=False,
+        goal_note=True,
         context=None,
         terminal_threshold=0.5,
         fallback_floor=0.15,
@@ -93,9 +94,12 @@ class Run:
         self.verify_threshold = verify_threshold
         self.stall_steps = stall_steps
         self.continue_after_confirm = continue_after_confirm
+        self.goal_note = goal_note  # False only for the documented ablation benchmark
         self.terminal_threshold = terminal_threshold
         self.fallback_floor = fallback_floor
         self.overrides = 0
+        self.unfillable = {}  # node -> label of fields the run has no value for
+        self.visits = {}  # page fingerprint -> times observed after an action
         self.context = context
         self.clock = clock
         self.history = []
@@ -140,6 +144,11 @@ class Run:
             page = final
             if not verification["passed"]:
                 status = "unverified"
+        if self.unfillable and status in ("blocked", "unverified"):
+            # The run could not finish and it skipped fields it had no value for: say so.
+            status = "needs_value"
+            extra.setdefault("fields", [{"label": v} for v in self.unfillable.values()])
+            extra.setdefault("supplied", sorted(self.values))
         return {
             "status": status,
             "ok": status == "done",
@@ -208,6 +217,7 @@ class Run:
     def run(self):
         self.started = self.clock()
         page = self.observe()
+        self.visits[page.get("fingerprint")] = 1
         if page.get("scope_missing"):
             return self.finish("error", page, error="scope_missing")
         if self.allowed == {"initial"}:
@@ -229,14 +239,26 @@ class Run:
             if len(self.history) >= self.max_steps:
                 return self.finish("budget_exhausted", page, budget="steps")
             try:
+                offered = page
+                if self.unfillable:
+                    offered = dict(
+                        page,
+                        actions=[
+                            a
+                            for a in page["actions"]
+                            if not (a.get("kind") == "fill" and a.get("node") in self.unfillable)
+                        ],
+                    )
                 body, targets, controls = space.build_request(
-                    page,
+                    offered,
                     self.goal,
                     self.history,
                     values=self.values,
                     model=self.model,
                     context=self.context,
-                    note=space.AUTHORIZED_NOTE if self.allow_irreversible else space.GATED_NOTE,
+                    note=(space.AUTHORIZED_NOTE if self.allow_irreversible else space.GATED_NOTE)
+                    if self.goal_note
+                    else None,
                 )
             except ValueError as error:
                 return self.finish("error", page, error=str(error))
@@ -284,9 +306,30 @@ class Run:
                     continue
                 text, text_meta = self.text_for(decision, page)
                 if text is None:
-                    return self.finish(
-                        "needs_value", page, field=describe(action), supplied=sorted(self.values)
+                    if action["node"] in self.unfillable or len(self.unfillable) >= 8:
+                        return self.finish(
+                            "needs_value",
+                            page,
+                            field=describe(action),
+                            supplied=sorted(self.values),
+                        )
+                    # No supplied value fits: skip this field once and let the next decision
+                    # choose among the remaining operations (it may be optional).
+                    self.unfillable[action["node"]] = action.get("label")
+                    self.history.append(
+                        {
+                            "step": len(self.history) + 1,
+                            "action": action.get("label"),
+                            "kind": "fill",
+                            "operation": "TYPE_TEXT",
+                            "result": "skipped: no supplied value",
+                            "skipped": True,
+                            "page_changed": False,
+                            "url": page.get("url"),
+                            "elapsed_ms": self.elapsed(),
+                        }
                     )
+                    continue
             step = self.execute(page, action, decision, text, text_meta)
             if step is None:
                 page = self.observe()
@@ -301,10 +344,19 @@ class Run:
                 time.sleep(0.2)
                 page = self.observe()
             changed = page["fingerprint"] != before
+            if changed:  # unchanged pages are the stall detector's business
+                self.visits[page["fingerprint"]] = self.visits.get(page["fingerprint"], 0) + 1
             self.history[-1]["page_changed"] = changed
             unchanged = 0 if changed or action["kind"] == "wait" else unchanged + 1
             if unchanged >= self.stall_steps:
                 return self.finish("blocked", page, reason="no_progress")
+            if self.repeating():
+                return self.finish("blocked", page, reason="repeating")
+
+    def repeating(self, limit=3):
+        """A page state revisited `limit` times means the run is cycling (open/close,
+        toggle/untoggle). Pagination and scrolling reach new states and are unaffected."""
+        return any(count >= limit for count in self.visits.values())
 
     def gate_terminal(self, decision, answers, targets, controls):
         """A weak DONE/BLOCKED does not end the run when a concrete operation is plausible."""

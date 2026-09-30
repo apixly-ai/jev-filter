@@ -131,7 +131,7 @@ def compact(result):
     packet["trace"] = [
         {
             k: h.get(k)
-            for k in ("step", "operation", "action", "page_changed", "value_key")
+            for k in ("step", "operation", "action", "page_changed", "value_key", "skipped")
             if h.get(k) is not None
         }
         for h in result.get("history", [])
@@ -235,7 +235,12 @@ def open_desktop(args):
     except Exception:
         backend.close()
         raise
-    surface = DesktopSurface(backend, ocr=ocr, ocr_min_actions=2 if args.ocr == "auto" else 10**6)
+    surface = DesktopSurface(
+        backend,
+        ocr=ocr,
+        ocr_min_actions=2 if args.ocr == "auto" else 10**6,
+        allow_sensitive=getattr(args, "allow_sensitive_app", False),
+    )
     if args.ocr == "on":
         surface.ocr_min_actions = 10**6
     surface.name = "desktop-" + sys.platform
@@ -370,6 +375,11 @@ def main(argv=None):
         help="OCR fallback when accessibility exposes too few controls",
     )
     desktop.add_argument("--list", action="store_true", help="List candidate windows and exit")
+    desktop.add_argument(
+        "--allow-sensitive-app",
+        action="store_true",
+        help="Allow terminals, credential managers and system settings as targets",
+    )
     extract = sub.add_parser(
         "extract", help="Structure a page into records and let Jev select relevant ones"
     )
