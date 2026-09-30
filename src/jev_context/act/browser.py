@@ -253,11 +253,21 @@ class CDPPage(Page):
     def _execute(self, action, text):
         kind = action["kind"]
         if kind == "scroll":
+            before = self.evaluate("scrollY")
             self.cmd(
                 "Input.dispatchMouseEvent",
                 {"type": "mouseWheel", "x": 400, "y": 400, "deltaX": 0, "deltaY": action["delta"]},
             )
-            return {}
+            # Wheel scrolling can animate; wait until the offset settles before observing.
+            deadline = time.monotonic() + 0.6
+            last = before
+            while time.monotonic() < deadline:
+                time.sleep(0.03)
+                current = self.evaluate("scrollY")
+                if current != before and current == last:
+                    break
+                last = current
+            return {"scrolled": last != before}
         if kind == "key":
             for kind_ in ("keyDown", "keyUp"):
                 params = {
