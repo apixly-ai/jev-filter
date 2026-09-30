@@ -1,0 +1,19 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Results</title><script src="common.js"></script>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}td,th{padding:4px 10px;text-align:left}</style></head><body>
+<h1>Search results</h1><p id="summary"></p>
+<label for="sort">Sort by</label><select id="sort"><option value="relevance">Relevance</option><option value="price">Price: low to high</option><option value="rating">Rating: high to low</option></select>
+<table id="t"><caption>Matching products</caption><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Rating</th><th>Availability</th></tr></thead><tbody></tbody></table>
+<p><a href="index.html">New search</a></p>
+<script>
+const p = params(), q = (p.get('q') || '').toLowerCase().trim(), cat = p.get('cat') || '', stock = p.get('stock') === '1';
+const words = q.split(/\s+/).filter(Boolean).map(w => w.replace(/s$/, ''));
+let rows = PRODUCTS.filter(x => words.every(w => (x.name + ' ' + x.category + ' ' + x.color).toLowerCase().includes(w)))
+  .filter(x => !cat || x.category === cat).filter(x => !stock || x.stock);
+function render() {
+  const s = document.getElementById('sort').value;
+  const sorted = [...rows].sort((a, b) => s === 'price' ? a.price - b.price : s === 'rating' ? b.rating - a.rating : a.id - b.id);
+  document.querySelector('#t tbody').innerHTML = sorted.map(x => `<tr><td><a href="product.html?id=${x.id}">${x.name}</a></td><td>${x.category}</td><td>$${x.price}</td><td>${x.rating}</td><td>${x.stock ? 'In stock' : 'Out of stock'}</td></tr>`).join('');
+  document.getElementById('summary').textContent = `${rows.length} results for "${q}"` + (cat ? ` in ${cat}` : '') + (stock ? ' (in stock only)' : '') + `, sorted by ${s}`;
+}
+document.getElementById('sort').onchange = render; render();
+</script></body></html>

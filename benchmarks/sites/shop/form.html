@@ -1,0 +1,14 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Contact us</title>
+<style>body{font:16px system-ui;margin:0;padding:16px 24px}label{display:block;margin-top:14px}.spacer{height:900px}</style></head><body>
+<h1>Contact us</h1><p>Fill in the form below. Required fields are marked *.</p>
+<form id="f"><label>Full name * <input id="name" name="name"></label>
+<label>Email * <input id="email" name="email" type="email"></label>
+<div class="spacer" aria-hidden="true"></div>
+<label>Topic <select id="topic" name="topic"><option value="">Choose a topic</option><option value="order">Order question</option><option value="returns">Returns</option><option value="other">Something else</option></select></label>
+<label>Message <textarea id="msg" name="msg" rows="4"></textarea></label>
+<label><input type="checkbox" id="agree"> I agree to be contacted *</label>
+<button type="submit">Save draft</button></form><p id="out" role="status"></p>
+<script>document.getElementById('f').onsubmit = e => { e.preventDefault(); const v = id => document.getElementById(id);
+  const ok = v('name').value && v('email').value && v('agree').checked;
+  v('out').textContent = ok ? `Draft saved for ${v('name').value} about ${v('topic').value || 'nothing'}` : 'Please complete the required fields.'; };</script>
+</body></html>
