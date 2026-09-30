@@ -10,8 +10,9 @@
 - `desktop`：在一个 Windows（UI Automation）或 macOS（辅助功能）应用里运行同样的循环，自绘界面用 OCR（Windows.Media.Ocr、Vision）兜底，`--list` 列出窗口。确定性安全门禁会拒绝终端、凭据管理器和系统设置，拒绝已锁定的会话和已提权的目标，并在出现 STOP 文件或鼠标停在左上角时停止。
 - `survey`：对 JSONL/CSV/JSON/文本输入做类型化判断，可选先筛选，打包并发推理，由代码汇总（分布、交叉表、代表样本、不确定与失败 ID），运行前预算检查（`--max-usd`、`--max-requests`），`--labels` 校准，可选用固定种子样本提出类别。
 - `doctor` 报告托管执行是否就绪；`pip install 'jev-filter[desktop]'` 安装桌面后端。
+- agent skill：新增 `skills/jev-filter/references/hosted.md`，说明 `browse`、`desktop`、`extract`、`survey` 的输入怎么构造（值文件、survey 规格、标注文件），以及每种输出状态该怎么处理。
 - 基准：`python -m benchmarks.hosted --live` 用合成的浏览器、桌面、survey 夹具，结果由程序校验，数据在 `benchmarks/results/2026-09-30-hosted.json`。
-- 修复：Camofox 改用 `127.0.0.1` 访问，去掉 Windows 上每次请求约 2 秒的 IPv6 回退（`locate` 教程 5059 ms → 1192 ms）；基准清理标签页时按 Camofox 2.4.8 的要求把 `userId` 放进 DELETE 请求体。
+- 修复：Camofox 改用 `127.0.0.1` 访问，去掉 Windows 上每次请求约 2 秒的 IPv6 回退（`locate` 教程 5059 ms → 1192 ms）；基准清理标签页时按 Camofox 2.4.8 的要求把 `userId` 放进 DELETE 请求体；Windows 提权检测改用指针宽度的句柄，读不到自身令牌时不再拒绝所有已提权目标；未安装 `winrt` 时 `doctor` 不再报错；`needs_value` 的输出保留全部被跳过的 `fields`；macOS 查找窗口时能看到首次查询之后才启动的应用。
 - 范围说明：托管执行适合步骤短、结果可观测的目标；开放网络的长任务应由规划 agent 拆解。macOS 在离线测试中用模拟的无障碍树验证，并在可授权辅助功能的 CI runner 上运行，没有在实体 Mac 上跑过。
 
 ## 0.2.4 — 2026-09-24

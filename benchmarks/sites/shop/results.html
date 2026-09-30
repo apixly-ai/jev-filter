@@ -12,7 +12,13 @@ let rows = PRODUCTS.filter(x => words.every(w => (x.name + ' ' + x.category + ' 
 function render() {
   const s = document.getElementById('sort').value;
   const sorted = [...rows].sort((a, b) => s === 'price' ? a.price - b.price : s === 'rating' ? b.rating - a.rating : a.id - b.id);
-  document.querySelector('#t tbody').innerHTML = sorted.map(x => `<tr><td><a href="product.html?id=${x.id}">${x.name}</a></td><td>${x.category}</td><td>$${x.price}</td><td>${x.rating}</td><td>${x.stock ? 'In stock' : 'Out of stock'}</td></tr>`).join('');
+  const body = document.querySelector('#t tbody');
+  body.replaceChildren(...sorted.map(x => {
+    const tr = document.createElement('tr'), a = document.createElement('a'), cell = () => tr.appendChild(document.createElement('td'));
+    a.href = 'product.html?id=' + encodeURIComponent(x.id); a.textContent = x.name; cell().append(a);
+    for (const v of [x.category, '$' + x.price, String(x.rating), x.stock ? 'In stock' : 'Out of stock']) cell().textContent = v;
+    return tr;
+  }));
   document.getElementById('summary').textContent = `${rows.length} results for "${q}"` + (cat ? ` in ${cat}` : '') + (stock ? ' (in stock only)' : '') + `, sorted by ${s}`;
 }
 document.getElementById('sort').onchange = render; render();

@@ -116,6 +116,7 @@ def compact(result):
         "confirm_token",
         "irreversible_probability",
         "field",
+        "fields",
         "supplied",
         "origin",
         "error",

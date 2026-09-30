@@ -214,6 +214,20 @@ def test_compact_hides_history_details():
     ]
 
 
+def test_compact_keeps_every_field_a_needs_value_run_skipped():
+    packet = cli.compact(
+        {
+            "status": "needs_value",
+            "ok": False,
+            "fields": [{"label": "Coupon"}, {"label": "Phone"}],
+            "supplied": ["name"],
+            "history": [],
+        }
+    )
+    assert packet["fields"] == [{"label": "Coupon"}, {"label": "Phone"}]
+    assert packet["supplied"] == ["name"]
+
+
 # ---------------------------------------------------------------------------------------------
 def helper_with(responder):
     return text.TextHelper(

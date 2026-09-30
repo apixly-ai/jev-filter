@@ -8,6 +8,14 @@ from . import __version__
 from .provider import Client, ProviderError, credential
 
 
+def _has_module(name):
+    """find_spec for a dotted name imports its parents; a missing parent means "absent"."""
+    try:
+        return importlib.util.find_spec(name) is not None
+    except (ImportError, ValueError):
+        return False
+
+
 def hosted():
     """Readiness of browser/desktop execution. Offline; reads nothing but local capabilities."""
     from .act import desktop_policy
@@ -21,7 +29,7 @@ def hosted():
         report["browser_executable"] = False
     if sys.platform == "win32":
         report["desktop_backend"] = importlib.util.find_spec("uiautomation") is not None
-        report["ocr"] = importlib.util.find_spec("winrt.windows.media.ocr") is not None
+        report["ocr"] = _has_module("winrt.windows.media.ocr")
         report["session_locked"] = desktop_policy.desktop_locked()
         try:
             report["elevated"] = bool(desktop_policy._elevated())

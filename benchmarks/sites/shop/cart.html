@@ -4,11 +4,17 @@
 <button id="order">Place order</button> <a href="index.html">Continue shopping</a>
 <script>
 function render() {
-  const items = cart();
-  document.getElementById('items').innerHTML = items.map((it, i) => { const x = PRODUCTS.find(p => p.id === it.id);
-    return `<li>${x.name} size ${it.size} — $${x.price} <button data-i="${i}" class="rm">Remove ${x.name}</button></li>`; }).join('') || '<li>Your cart is empty.</li>';
+  const items = cart(), list = document.getElementById('items');
+  list.replaceChildren();
+  items.forEach((it, i) => {
+    const x = PRODUCTS.find(p => p.id === it.id), li = document.createElement('li'), b = document.createElement('button');
+    li.append(`${x.name} size ${it.size} — $${x.price} `);
+    b.className = 'rm'; b.textContent = `Remove ${x.name}`;
+    b.onclick = () => { const c = cart(); c.splice(i, 1); saveCart(c); render(); };
+    li.append(b); list.append(li);
+  });
+  if (!items.length) { const li = document.createElement('li'); li.textContent = 'Your cart is empty.'; list.append(li); }
   document.getElementById('total').textContent = 'Total: $' + items.reduce((s, it) => s + PRODUCTS.find(p => p.id === it.id).price, 0);
-  document.querySelectorAll('.rm').forEach(b => b.onclick = () => { const c = cart(); c.splice(+b.dataset.i, 1); saveCart(c); render(); });
 }
 document.getElementById('order').onclick = () => { if (!cart().length) return; saveCart([]); location.href = 'thanks.html'; };
 render();

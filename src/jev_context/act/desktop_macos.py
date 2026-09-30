@@ -54,6 +54,11 @@ class AXApi:  # pragma: no cover - pyobjc adapter; exercised only on macOS runne
         return bool(self.AS.AXIsProcessTrustedWithOptions(options))
 
     def applications(self):
+        # runningApplications is a KVO snapshot refreshed on the run loop; turn it briefly so an
+        # application launched after the first query (for example by --launch) shows up.
+        self.AppKit.NSRunLoop.currentRunLoop().runUntilDate_(
+            self.AppKit.NSDate.dateWithTimeIntervalSinceNow_(0.02)
+        )
         for app in self.AppKit.NSWorkspace.sharedWorkspace().runningApplications():
             yield {"pid": int(app.processIdentifier()), "name": str(app.localizedName() or "")}
 

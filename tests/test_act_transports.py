@@ -2,7 +2,6 @@
 
 import http.server
 import json
-import re
 import threading
 
 import pytest
@@ -38,8 +37,11 @@ OBSERVED = {
 
 
 def op_of(expression):
-    match = re.search(r"\)\((\{.*\})\)\s*$", expression, re.S)
-    return json.loads(match.group(1)) if match else {"raw": expression}
+    body = expression.rstrip()
+    start = body.rfind(")({")
+    if start < 0 or not body.endswith("})"):
+        return {"raw": expression}
+    return json.loads(body[start + 2 : -1])
 
 
 def page_reply(request, state):

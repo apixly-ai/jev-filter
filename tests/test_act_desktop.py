@@ -404,6 +404,16 @@ def by(state, label, kind=None):
     )
 
 
+def observe_until(surface, label, timeout=3.0):
+    """A drop-down list appears a moment after its button is invoked; observe until it does."""
+    deadline = time.monotonic() + timeout
+    while True:
+        state = surface.observe()
+        if any(a["label"] == label for a in state["actions"]) or time.monotonic() > deadline:
+            return state
+        time.sleep(0.2)
+
+
 @windows
 @pytest.mark.desktop
 def test_windows_uia_fixture_round_trip(winforms):
@@ -415,8 +425,7 @@ def test_windows_uia_fixture_round_trip(winforms):
     s.act(by(state, "Customer name", "fill"), state, text="Ada Lovelace")
     state = s.observe()
     s.act(by(state, "Open Plan"), state)
-    s.settle({})
-    state = s.observe()
+    state = observe_until(s, "Plan → Pro")
     s.act(by(state, "Plan → Pro"), state)
     s.settle({})
     state = s.observe()
@@ -513,7 +522,13 @@ def test_macos_ax_fixture_round_trip():
     title = f"JevMac{time.monotonic_ns() % 10**8}"
     process = launch(title, sys.executable, str(FIXTURE / "fixture_mac.py"))
     try:
-        s = DesktopSurface(MacBackend(window=f"^{title}$", timeout=20))
+        try:
+            backend = MacBackend(window=f"^{title}$", timeout=20)
+        except RuntimeError as error:
+            from jev_context.act.desktop_macos import list_windows
+
+            pytest.fail(f"{error}; fixture exit={process.poll()}; windows={list_windows()[:20]}")
+        s = DesktopSurface(backend)
         state = s.observe()
         s.act(by(state, "Customer name", "fill"), state, text="Ada Lovelace")
         state = s.observe()
@@ -529,7 +544,31 @@ def test_environment_probes_run_on_windows():
     from jev_context.act import desktop_policy as policy
 
     assert policy.desktop_locked() in (False, True)
+    # Both readings must succeed: an unreadable own token once refused every elevated target.
+    assert policy._elevated() in (False, True)
+    assert policy._elevated(__import__("os").getpid()) == policy._elevated()
     policy.check_elevation(__import__("os").getpid())  # same elevation as ourselves: never refused
+
+
+def test_elevation_refuses_only_on_a_positive_mismatch(monkeypatch):
+    from jev_context.act import desktop_policy as policy
+
+    monkeypatch.setattr(policy.sys, "platform", "win32")
+    readings = {}
+    monkeypatch.setattr(policy, "_elevated", lambda pid=None: readings["target" if pid else "own"])
+    for target, own in [(True, None), (None, False), (True, True), (False, False)]:
+        readings.update(target=target, own=own)
+        policy.check_elevation(123)
+    readings.update(target=True, own=False)
+    with pytest.raises(policy.DesktopRefused, match="target_elevated"):
+        policy.check_elevation(123)
+
+
+def test_doctor_treats_a_missing_parent_module_as_absent():
+    from jev_context.doctor import _has_module
+
+    assert _has_module("json")
+    assert not _has_module("jev_no_such_package.sub")
 
 
 @windows

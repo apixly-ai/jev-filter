@@ -26,6 +26,9 @@ of a 0.x API (minor releases may make documented breaking changes).
   optional category proposal from a fixed-seed sample.
 - `doctor` reports hosted-execution readiness. `pip install 'jev-filter[desktop]'` adds the
   desktop backends.
+- Agent skill: `skills/jev-filter/references/hosted.md` explains how to build `browse`,
+  `desktop`, `extract` and `survey` inputs (values files, survey specs, labels) and how to act on
+  each output status.
 - Benchmarks: `python -m benchmarks.hosted --live` with synthetic browser, desktop and survey
   fixtures and program-checked outcomes; results in `benchmarks/results/2026-09-30-hosted.json`.
 
@@ -33,6 +36,10 @@ of a 0.x API (minor releases may make documented breaking changes).
 - Camofox is reached on `127.0.0.1` instead of `localhost`, removing a ~2 s IPv6 fallback per
   request on Windows (`locate` tutorial 5059 ms -> 1192 ms). Benchmark tab cleanup sends `userId`
   in the DELETE body as Camofox 2.4.8 requires.
+- The Windows elevation probe passes pointer-sized handles; an unreadable own token no longer
+  refuses every elevated target. `doctor` no longer fails when `winrt` is not installed.
+- `needs_value` output keeps the full list of skipped `fields`. macOS window lookup sees
+  applications launched after the first query.
 
 ### Scope
 - Hosted execution is a short-step executor with an observable outcome; open-web long tasks

@@ -20,3 +20,5 @@ Read stdout even on exit 2: it can contain successful IDs alongside unresolved I
 Use `selected_ids`, `review_ids`, `complete`, and receipt references. Default output
 is compact; exact originals and full answer distributions remain local. Never upload
 private receipts or keys as part of a public bug report.
+
+`browse`, `desktop`, `extract` and `survey` inputs and outputs are in [hosted.md](hosted.md).

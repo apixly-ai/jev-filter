@@ -24,16 +24,27 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
   only unresolved originals. Do not retry an uncertain external command.
 - Preserve scope, source freshness, identity and authorization checks. A selected
   target is not proof of an executed action. The locator does not click.
-- `browse` / `desktop` execute a short goal themselves: supply named values
-  (`--value key=value`), a verifier (`--verify-text` / `--verify-url`) and stay the
-  planner. Treat `needs_confirmation`, `needs_value`, `blocked` (challenge,
-  login_required) and `unverified` as your turn: ask the user before passing a
-  `--confirm` token or `--allow-irreversible`. Never supply passwords.
-- `survey` answers typed questions over many records and aggregates in code; write the
-  narrative yourself from its report and cite record IDs. Check `calibrated` before
-  trusting confidence floors.
+- `browse` / `desktop` execute a short goal themselves. Build each call from one
+  observable goal with its constraints, named values (`--value key=value`, or a
+  `--values` JSON object whose entries may be `{"value", "description", "sensitive"}`)
+  and at least one verifier (`--verify-text`, `--verify-url`). Stay the planner for
+  anything longer and call once per sub-goal. `--dry-run` shows the next step only.
+- Only `status: done` (exit 0) is success. `needs_confirmation` (`pending`,
+  `confirm_token`), `needs_value` (`field`/`fields`), `blocked` (`challenge`,
+  `login_required`) and `unverified` are your turn: ask the user before passing
+  `--confirm` or `--allow-irreversible`. Never supply passwords.
+- `extract` turns a page into `row`/`heading`/`block`/`link` records, then follows the
+  `query` contract.
+- `survey` takes records (JSONL/JSON/CSV/directory) and a spec: `task`, 1..16 typed
+  `questions`, optional `screen`, `group_by`, `keep`, `confidence_floor`. Run
+  `--dry-run` for the cost estimate first. It aggregates in code; write the narrative
+  yourself from the report and cite record IDs. Check `calibrated` (pass `--labels`)
+  before trusting confidence floors.
 - New semantic integrations need an A/B with fixed inputs, quality, failures, complete
   operation time and actual usage. Keep negative results; do not promise universal
   cost or latency improvement.
 
-See [contract and examples](references/contract.md) for input/output details.
+- [references/contract.md](references/contract.md): records, analysis specs and the
+  `query`/`exec`/`extract` output.
+- [references/hosted.md](references/hosted.md): `browse`/`desktop`/`extract`/`survey`
+  flags, values files, survey specs, labels, output packets and what to do per status.

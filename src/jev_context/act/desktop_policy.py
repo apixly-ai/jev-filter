@@ -128,7 +128,30 @@ def _elevated(pid=None):
     import ctypes
     from ctypes import wintypes
 
-    kernel32, advapi32 = ctypes.windll.kernel32, ctypes.windll.advapi32
+    # Private DLL objects with full prototypes: handles are pointer-sized, and the pseudo handle
+    # of GetCurrentProcess (-1) is truncated to 32 bits by an untyped call on 64-bit Python.
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    advapi32 = ctypes.WinDLL("advapi32", use_last_error=True)
+    kernel32.GetCurrentProcess.restype = wintypes.HANDLE
+    kernel32.GetCurrentProcess.argtypes = []
+    kernel32.OpenProcess.restype = wintypes.HANDLE
+    kernel32.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
+    kernel32.CloseHandle.restype = wintypes.BOOL
+    kernel32.CloseHandle.argtypes = [wintypes.HANDLE]
+    advapi32.OpenProcessToken.restype = wintypes.BOOL
+    advapi32.OpenProcessToken.argtypes = [
+        wintypes.HANDLE,
+        wintypes.DWORD,
+        ctypes.POINTER(wintypes.HANDLE),
+    ]
+    advapi32.GetTokenInformation.restype = wintypes.BOOL
+    advapi32.GetTokenInformation.argtypes = [
+        wintypes.HANDLE,
+        ctypes.c_int,
+        ctypes.c_void_p,
+        wintypes.DWORD,
+        ctypes.POINTER(wintypes.DWORD),
+    ]
     process = (
         kernel32.GetCurrentProcess() if pid is None else kernel32.OpenProcess(0x1000, False, pid)
     )
@@ -157,7 +180,8 @@ def check_elevation(pid):
         target, own = _elevated(pid), _elevated()
     except Exception:
         return
-    if target and not own:
+    # Refuse only on a positive reading; an unreadable token (None) is not evidence of a mismatch.
+    if target is True and own is False:
         raise DesktopRefused(
             "target_elevated: the application runs as administrator and this process does not; Windows "
             "would silently drop input (UIPI). Run jev-filter elevated or the target unelevated."
