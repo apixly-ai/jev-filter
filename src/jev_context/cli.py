@@ -133,11 +133,18 @@ def _act_main():
     return act_main
 
 
-HOSTED = {"browse": _act_main, "extract": _act_main, "desktop": _act_main}
+def _survey_main():
+    from .survey import main as survey_main
+
+    return lambda argv: survey_main(argv[1:])
+
+
+HOSTED = {"browse": _act_main, "extract": _act_main, "desktop": _act_main, "survey": _survey_main}
 HOSTED_HELP = {
     "browse": "Hosted browser execution toward a goal",
     "extract": "Structure a web page into records and select relevant ones",
     "desktop": "Hosted desktop execution in one Windows/macOS application",
+    "survey": "Typed judgments over many records, aggregated into an evidence report",
 }
 
 
