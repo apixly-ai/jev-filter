@@ -361,7 +361,7 @@ class CamofoxPage(Page):
 
         if not re.fullmatch(r"[A-Za-z0-9._-]+", session):
             raise ValueError("Invalid named browser session")
-        self.base = (base or os.environ.get("JEV_CAMOFOX_URL") or "http://localhost:9377").rstrip(
+        self.base = (base or os.environ.get("JEV_CAMOFOX_URL") or "http://127.0.0.1:9377").rstrip(
             "/"
         )
         if (urllib.parse.urlsplit(self.base).hostname or "") not in LOOPBACK_HOSTS:

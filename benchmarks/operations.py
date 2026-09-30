@@ -33,7 +33,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
 def api(method, path, body=None):
     request = urllib.request.Request(
-        "http://localhost:9377" + path,
+        "http://127.0.0.1:9377" + path,
         data=json.dumps(body).encode() if body is not None else None,
         method=method,
         headers={"Content-Type": "application/json"},
@@ -284,7 +284,7 @@ def main():
         finally:
             if tab:
                 try:
-                    api("DELETE", f"/tabs/{tab}?userId={user}")
+                    api("DELETE", f"/tabs/{tab}", {"userId": user})
                 except Exception:
                     pass
         with lock:

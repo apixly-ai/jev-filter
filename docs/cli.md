@@ -55,7 +55,7 @@ source. Unsupported/invalid code stays reviewable. Contained spans are deduplica
 changed file revisions are rejected before returning a match. It is a lexical
 shortlist, not exhaustive semantic indexing.
 
-The locator uses an existing local Camofox-compatible server on localhost:9377 and
+The locator uses an existing local Camofox-compatible server on 127.0.0.1:9377 and
 an explicitly named session/tab/origin. It observes reachable controls, omits input
 values, strips URL credentials/query/fragment, and verifies the selected Node before
 returning a selector. Duplicate indistinguishable controls, stale nodes and ambiguous
