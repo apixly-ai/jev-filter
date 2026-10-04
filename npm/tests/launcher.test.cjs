@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const path = require('node:path');
 const { platformPackage, launch } = require('../bin/jev-filter.cjs');
 
 test('selects only supported native platforms', () => {
@@ -19,7 +20,7 @@ test('passes arguments and inherited stdio without a shell', () => {
     process: { on() {}, removeListener() {}, exitCode: undefined },
   });
   assert.equal(result, child);
-  assert.deepEqual(observed, ['/fixture/native/bin/jev-filter', ['exec', '--', 'printf', 'a b'], { stdio: 'inherit', shell: false }]);
+  assert.deepEqual(observed, [path.join('/fixture/native', 'bin', 'jev-filter'), ['exec', '--', 'printf', 'a b'], { stdio: 'inherit', shell: false }]);
 });
 
 test('missing optional binary gives an actionable error', () => {
