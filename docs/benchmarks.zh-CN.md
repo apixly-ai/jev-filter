@@ -4,11 +4,60 @@
 
 ## 最新付费真实调用 · 2026-10-04
 
+**96 条记录，中位 1.313 秒筛完，选中 ID 完全一致。** 新增同输出实验对比可用的
+Jev API 与已登录 Codex CLI 筛选路径，全部 **9/9** 次结果精确且完整。这个阶段结果
+与下面的整轮 agent 上下文 A/B 分开。
+
 **返回工具上下文减少 91.6–97.2%，完整证据仍可回查。** 最新整段结果覆盖
 **24 次真实主模型运行**：三个固定合成场景（`code-search`、`triage`、`exec`），
 两个主模型（`gpt-5.6-luna`、`gpt-6-astra`），原文/过滤两个实验臂，每个单元重复两次。
 过滤臂完整完成 **12/12**，原文臂 **11/12**；全部 **24/24** 都选对预期 ID 集。
 原文 Astra triage 有一次 ID 正确，但完整响应契约失败，仍计入分母。
+
+### 同输出筛选：实测执行路径的速度
+
+[同输出数据](../benchmarks/results/2026-10-04-live-selection-speed.json) 使用相同的 96 条
+合成记录、两个原子语义条件，预期输出为 48 个匹配 ID。Jev 通过自动合批 API 筛选；
+已登录 Codex CLI 按 **medium 推理、不使用工具**直接筛选传入的记录。
+三个重复轮次轮换实验臂顺序，每次重新运行，不缓存推理结果。
+夹具把**八个简单中英模板各重复十二次**，只有服务 ID 不同，覆盖清楚的当前/历史与
+响应前/后区分，不是 96 个独立困难用例。
+
+| 实测路径 | 筛选耗时中位 | 实测范围 | 精确完整结果 |
+|---|---:|---:|---:|
+| **Jev `jev-1.13.0` · 自动合批 API** | **1.313 秒** | 1.238–1.375 秒 | **3/3** |
+| Luna `gpt-5.6-luna` · 已登录 Codex CLI | 13.421 秒 | 13.210–13.932 秒 | 3/3 |
+| Astra `gpt-6-astra` · 已登录 Codex CLI | 14.543 秒 | 14.333–15.593 秒 | 3/3 |
+
+**这是执行路径筛选延迟，不是模型原生/API 延迟或整轮 agent 提速。** Jev 计时包含
+规划、传输、类型化解析与程序精简；Codex 包含 prompt 序列化、进程启动、提供方/agent
+回合及最终响应。夹具目录准备单独计时并排除。原生推理与 CLI 启动开销无法分别观察，
+逐请求延迟未采集；Jev 后面没有主模型续跑。**没有测试主模型的直接 API 路径。**
+每臂三次是 smoke 样本，不是置信区间或
+跨工作量保证，重复的简单模板也限制推广。没有推理结果缓存，不代表提供方没有内部缓存。
+
+![同输出筛选路径，每条 3/3 精确：Jev API 1.313 秒，Codex CLI Luna 13.421 秒、Astra 14.543 秒](assets/selection-speed-live.zh-CN.png)
+
+九次运行都返回相同的 **375 bytes** 规范化判断，误报、漏选、复核、超时、失败请求及
+未知用量尝试均为零。这是相同输出与原始证据，**不是相同的序列化 prompt**：
+记录本身 **12,351 bytes**；每次 Jev 类型化请求合计 **93,226 bytes**，主模型 prompt
+各为 **13,224 bytes**，另有 **196 bytes** 输出 schema 与 CLI 自带 harness。
+Jev 每次两个实际请求；主模型每次返回一个回合，底层实际请求数未提供。
+
+| 路径 | 三次实际输入 / 其中缓存 / 输出 tokens |
+|---|---:|
+| Jev | **91,086 / 未提供 / 27,546** |
+| Luna | 59,052 / 0 / 788 |
+| Astra | 66,216 / 0 / 492 |
+
+这组同输出实验中，**Jev 输入 tokens 比两个主模型路径都多**；输出用量也包含逐记录的
+类型化判断，而非只有最终 ID 列表。用量完整，实际费用仍为 `null`。主模型使用订阅认证，
+这些耗时与 tokens 没有建立账单节省。Jev 实际响应模型为 `jev-1.13.0`；CLI 记录请求的
+主模型名称，没有独立暴露提供方返回的实际模型 ID。
+
+[报告与限制](https://github.com/apixly-ai/jev-filter/blob/main/benchmarks/results/2026-10-04-live-selection-speed-summary.md) ·
+[独立用量收据](../benchmarks/results/2026-10-04-live-selection-speed-usage.json) ·
+[可复现脚本](../benchmarks/selection_speed.py)
 
 ### 整段任务：上下文明显缩减，耗时各有得失
 
@@ -62,7 +111,8 @@
 | 单条并发，上限 12 | 3.22 s | 209,244 | 3/3 |
 | 自动合批 + 并发 | 1.25 s | 91,086 | 3/3 |
 
-合批输入**减少 56.5%**，合批并发在这个样本中比单条并发**快 61.2%**。
+合批输入**减少 56.5%**，合批并发在这个样本中筛选速度为单条并发的 **2.58 倍**，
+耗时**减少 61.2%**（**3.215 → 1.246 秒**）。
 计时包含规划、原生推理与精简，**没有主模型后续处理**，不能称为整轮 agent 提速。
 重复的简单记录模板与网络波动限制推广。全部实验臂提供方返回 **600,660 输入 / 110,964 输出
  tokens**，用量完整，没有未知尝试。这个历史实现的 driver 只暴露请求模型 `jev-1.13.0`，
@@ -137,13 +187,16 @@ CLI survey **64/64** 主题标注正确，聚合计数完全一致。
 另有实际 `jev-1.13.0` **180,522 输入 / 11,378 输出 tokens**。用量完整，订阅实际账单未知；结果还单独
 保留首组矩阵的用量。可靠接管会增加工作，没有证明普遍便宜或普遍快速的浏览器 agent。
 
-### 包含失败试验的完整审计用量
+### 包含失败试验的早期累计审计用量
 
 [累计用量台账](../benchmarks/results/2026-10-04-live-total-usage.json) 包含 pilot、重复验证与失败实验，
 不仅统计公开成功表格。已知 Jev **2,928,677 输入 / 324,772 输出 tokens**，另有**一次提供方尝试用量未知**。
 按所列每百万输入 $0.042，已知输入对应 **$0.123004434 的估算下界**；累计总费用与实际账单仍未知。
 主模型账号使用 **1,463,583 输入 / 其中缓存 563,200 / 7,315 输出 tokens**，属于订阅访问，不是已核验的
 API 账单。未知不会悄悄记零，不同账务口径也不直接相加。
+
+这份早期系列保持原样。新的同输出速度实验另外增加 **91,086 Jev 输入 / 27,546 输出**
+及 **125,268 主模型输入 / 其中缓存 0 / 1,280 输出 tokens**，记录在[独立增量收据](../benchmarks/results/2026-10-04-live-selection-speed-usage.json)。
 
 ### 复现新的付费运行
 
@@ -156,6 +209,9 @@ python -m pip install -e '.[code,dev,docs,browser-test]'
 python -m pip install mcp
 python -m benchmarks.run --live --records 96 --repeats 3 --parallel-workers 12 \
   --output local-results/batching-new.json
+python -m benchmarks.selection_speed --live --records 96 --repeats 3 --workers 12 \
+  --models gpt-5.6-luna gpt-6-astra --output local-results/selection-speed-new.json \
+  --private-dir ../jev-selection-private-new
 python -m benchmarks.live_records --live --repeats 2 --output local-results/records-new.json
 python -m benchmarks.live_interfaces --live --output local-results/interfaces-new.json
 python -m benchmarks.operations --live --models gpt-5.6-luna gpt-6-astra \
@@ -164,7 +220,8 @@ python -m benchmarks.operations --live --models gpt-5.6-luna gpt-6-astra \
   --report local-results/operations-new.json --private-dir local-results/operations-traces
 ```
 
-三组实验分别回答整段主模型上下文、记录判断质量、接口正确性的问题；不要合并分母，
+这些实验分别回答筛选路径速度、整段主模型上下文、记录判断质量、接口正确性的问题。
+同输出速度实验还需要已登录的 Codex CLI，私有目录必须是仓库外的新路径；不要合并分母，
 也不要把局部阶段收益当成整轮 agent 节省。
 
 ## 0.4 发版证据 2026-10-04

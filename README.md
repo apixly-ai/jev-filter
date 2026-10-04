@@ -14,7 +14,9 @@
 
 **Give your agent the signal. Keep the evidence.** Jev Filter turns large tool outputs into compact, typed decisions before they enter your agent's context. Commands, code, logs and page records stay inside the program; your agent receives relevant evidence and the IDs that need its attention.
 
-**91.6–97.2% less returned tool context. 24/24 exact ID sets.** Measured on 24 real agent runs over three synthetic scenarios, two primary models and two repetitions per arm on **2026-10-04**. Every original remains recoverable by ID. [Live evidence and trade-offs →](#measured-advantages)
+**96 records screened in 1.31 seconds. The same exact result.** Paid same-output A/B: Jev's batched API path took a median **1.313 s**, versus **13.421 s** for Luna and **14.543 s** for Astra through signed-in Codex CLI. All **9/9** runs selected the same correct 48 IDs. Three repetitions per path on synthetic inputs; CLI startup is included, and no primary-agent continuation follows Jev. [Compare the measured paths →](#measured-advantages)
+
+**91.6–97.2% less returned tool context. 24/24 exact ID sets.** A separate whole-agent A/B on **2026-10-04** measured three synthetic scenarios, two primary models and two repetitions per arm. Every original remains recoverable by ID. [Live evidence and trade-offs →](#measured-advantages)
 
 ## More signal. Less work for your agent.
 
@@ -25,6 +27,8 @@
 The result is a useful division of labor: **programs collect and verify; Jev makes repeated semantic judgments; your agent plans, reasons and writes.** Automatic batching reduces repeated input, up to 30 requests run concurrently, and no result cache hides a new observation.
 
 ## Proven where your agent actually works
+
+**Do the repeated judgments together.** The program shares task context across each bounded batch: a separate batching A/B used **2 requests instead of 96**, with **56.5% fewer Jev input tokens** and **2.58× filtering speed** compared with single-record parallel Jev calls. You get the same labeled result in less waiting time, without a result cache.
 
 **Put the signal in the conversation, keep the full trace within reach.** In the fresh whole-operation A/B, the filtered agent completed **12/12** runs; raw context completed **11/12**. All 24 runs returned the expected ID sets. This measures collection, real primary-agent tool use and continuation together.
 
@@ -78,14 +82,28 @@ Start with the [copyable analysis contract](docs/recipes.md#1-custom-command-out
 
 Fresh **paid live evidence · 2026-10-04**. Inputs, source hashes, per-run tokens, complete timing and failures are public. Each result belongs to its stated scope.
 
+**Fast semantic selection, checked against the same expected answer.** All paths screened 96 records against two semantic conditions and returned exactly the same 48 matching IDs.
+
+| Measured path | Median screening time | Exact complete runs |
+|---|---:|---:|
+| **Jev `jev-1.13.0` · auto-batched API** | **1.313 s** | **3/3** |
+| Luna `gpt-5.6-luna` · signed-in Codex CLI | 13.421 s | 3/3 |
+| Astra `gpt-6-astra` · signed-in Codex CLI | 14.543 s | 3/3 |
+
+This compares available **execution paths**, including CLI startup and the primary-agent turn; native model latency is not isolated. Primary paths use medium reasoning and no tools. Three repetitions are a smoke sample, not a whole-agent speedup or workload guarantee. [Per-run evidence](benchmarks/results/2026-10-04-live-selection-speed.json) · [Method and reproduction](docs/benchmarks.md#same-output-screening-fast-selection-through-the-measured-paths)
+
+![Same-output screening paths: Jev API median 1.313 s, signed-in Codex CLI Luna 13.421 s and Astra 14.543 s; every path 3/3 exact](docs/assets/selection-speed-live.png)
+
 | Advantage | Observed result | Scope and trade-off |
 |---|---|---|
+| **Get repeated judgments sooner** | **2.58× filtering speed**: **3.215 → 1.246 s**, **61.2% less elapsed time**; **56.5% fewer Jev input tokens**. | Single-record parallel vs automatic batch-parallel Jev, 96 synthetic records × two predicates, three repetitions per arm; all **12/12** runs exact. Jev stage only, parallel worker cap 12; not a primary-model speed comparison. [Data](benchmarks/results/2026-10-04-live-batching.json) |
 | **Keep the agent's context focused** | **91.6–97.2% less returned tool context**; filtered completion **12/12**, raw **11/12**; all **24/24 ID sets correct**. | 24 real agent runs, three synthetic scenarios, two primary models, two repetitions per arm. Five/six cells slower by **0.1–18.4%**; cold API-equivalent cost ranged from **23.2% lower to 1.1% higher**. Subscription billing remains unknown. [Data](benchmarks/results/2026-10-04-live-operations-summary.json) |
 | **Recover more relevant code** | Correct matches **4/12 → 10/12**, **zero false positives**. | Exact vs opt-in recall, both with native semantic filtering. Returned context grew **5,284 → 9,706 bytes**; absent lexical overlap still misses. [Data](benchmarks/results/2026-10-04-live-records.json) |
 | **Inspect the change that matters** | All **4/4** target changes selected in each repetition; returned context **23.9% lower** than retaining every file. | Eight synthetic files, two repetitions. Semantic triage adds model usage and increases median whole-operation time **503 → 1,465 ms**. [Data](benchmarks/results/2026-10-04-live-records.json) |
-| **Batch repeated judgments efficiently** | **56.5% fewer Jev input tokens** and **61.2% faster** batch-parallel operation than single-record parallel. | 96 synthetic records × two predicates, three repetitions; all **12/12** runs exact. Jev stage only, not whole-agent speed; parallel worker cap 12. [Data](benchmarks/results/2026-10-04-live-batching.json) |
 | **Connect real interfaces** | **13/13 paid E2E checks pass**, including exact MCP evidence recovery and **64/64** survey topic labels. | Python CLI, fresh npm **0.4.0** JS/native package, official MCP, local Chromium extraction and survey. Small synthetic fixtures; resolved model identity is unavailable from these public adapters. [Data](benchmarks/results/2026-10-04-live-interfaces.json) |
 | **Reach inside a scroll container** | Verified nested-scroll completion **0/3 → 3/3** under the same strict **0.55 / 0.10** policy. | Pinned browser source A/B; program adds observed container evidence. Six ordinary goal runs still need review. More successful work consumes more calls, context and time. [Data](benchmarks/results/2026-10-04-live-browser-final-ab.json) |
+
+![96-record Jev filtering: 3.22 seconds to 1.25 seconds with automatic batching, 12/12 exact runs](docs/assets/speed-live.png)
 
 <details>
 <summary><strong>See the new whole-operation chart and reproduce the results</strong></summary>

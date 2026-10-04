@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
 <title id="title">Jev Filter — 把关键信号交给 AI</title>
-<desc id="desc">采集一次，结合上下文判断，返回可回查的证据。程序采集记录，Jev 进行类型化语义判断，主模型接收选中证据和待复核 ID，原文保留在本地。2026-10-04 付费测试：三个合成场景、两个主模型、每臂两次，共 24 次真实 agent 运行，返回工具上下文减少 91.6–97.2%。全部 ID 集正确；耗时与费用各有得失。</desc>
+<desc id="desc">采集一次，结合上下文判断，返回可回查的证据。程序采集记录，Jev 进行类型化语义判断，主模型接收选中证据和待复核 ID，原文保留在本地。2026-10-04 付费测试：三个合成场景、两个主模型、每臂两次，共 24 次真实 agent 运行，返回工具上下文减少 91.6–97.2%。全部 ID 集正确；耗时与费用各有得失。另测 Jev 自动合批相对单条并发筛选速度为 2.58 倍，96 条合成记录从 3.22 秒缩短至 1.25 秒；此为 Jev 阶段实测。同结果对照中，Jev API 筛选 96 条记录的三次中位耗时为 1.31 秒；主模型 Codex CLI 路径包含进程开销。</desc>
 <defs>
   <linearGradient id="background" x2="1" y2="1"><stop stop-color="#080e1c"/><stop offset="1" stop-color="#14213b"/></linearGradient>
   <linearGradient id="signal" x2="1" y2="1"><stop stop-color="#77efc5"/><stop offset="1" stop-color="#95a2ff"/></linearGradient>
@@ -51,10 +51,10 @@
   <text x="54" y="479" fill="#91edc9" font-size="36" font-weight="750" letter-spacing="-1">91.6–97.2%</text>
   <text x="54" y="506" fill="#d5e6f0" font-size="16" font-weight="600">返回工具上下文减少</text>
   <text x="54" y="530" fill="#a3b5cf" font-size="14">24 次真实 agent 运行 · 2026-10-04</text>
-  <text x="443" y="480" fill="#e3e7ff" font-size="25" font-weight="650">24/24 组 ID 全对</text>
-  <text x="443" y="506" fill="#c2cce2" font-size="14">过滤臂 12/12 次完整完成</text>
-  <text x="443" y="530" fill="#a3b5cf" font-size="14">完整原文仍可按 ID 回查</text>
-  <text x="840" y="480" fill="#e8eef8" font-size="25" font-weight="650">13/13 项真实接入</text>
-  <text x="840" y="506" fill="#c2cce2" font-size="15">CLI · Python · JS / TS · MCP</text>
-  <text x="840" y="530" fill="#a3b5cf" font-size="14">付费合成 E2E · 独立验证</text>
+  <text x="443" y="480" fill="#e3e7ff" font-size="36" font-weight="750">1.31 秒</text>
+  <text x="443" y="506" fill="#c2cce2" font-size="15">96 条记录的语义筛选</text>
+  <text x="443" y="530" fill="#a3b5cf" font-size="14">Jev API 工具路径 · 三次中位耗时</text>
+  <text x="840" y="480" fill="#e8eef8" font-size="25" font-weight="650">24/24 组 ID 全对</text>
+  <text x="840" y="506" fill="#c2cce2" font-size="15">13/13 项付费接入验证</text>
+  <text x="840" y="530" fill="#a3b5cf" font-size="14">合成数据实测 · 证据可核对</text>
 </g></svg>

@@ -16,7 +16,12 @@ The command catalogue is collapsible so it supports the narrative rather than ow
 
 The hero combines a runnable example with a prominent proof strip: the fresh
 91.6–97.2% returned-context reduction is directly labelled “24 real agent runs ·
-2026-10-04”. It also shows traceable evidence and the four core integration routes.
+2026-10-04”. Beside it, **1.31 seconds** is labelled as a 96-record Jev API
+selection workflow and the median of three runs. The adjacent exact-ID and interface
+checks keep quality in view. A visible bilingual chart shows the same-output Jev API
+and signed-in Codex CLI paths with process overhead and small-sample limits beside
+the numbers. The separate **2.58× batch speed** chart compares two Jev parallel arms.
+Neither chart implies isolated native inference or whole-agent speedup.
 English and Chinese claims, dates, scope and limitations must be kept synchronized.
 The README does not promise universal
 speed, cost savings, automatic correctness or open-web completion rates.
