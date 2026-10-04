@@ -1,0 +1,25 @@
+{
+  "mode": "filter",
+  "context": {
+    "goal": "Find retrieved passages that explicitly support retrying HTTP 429 without creating duplicate charges.",
+    "scope": "API v4 documentation; all source_uri values are synthetic fixture references, not live documentation.",
+    "success": "Both retry permission and duplicate-charge prevention must be supported by the supplied passage.",
+    "exclusions": "Other failure phases, an explicit instruction not to retry, or missing version/protection evidence.",
+    "version": "v4"
+  },
+  "required_context": ["goal", "scope", "success", "exclusions", "version"],
+  "required_record_fields": ["source.api_version", "source.source_uri", "source.revision"],
+  "requirements": [
+    {
+      "id": "retry_429",
+      "statement": "The supplied passage explicitly permits the client to retry an HTTP 429 response for the API version in context.version.",
+      "expected": true
+    },
+    {
+      "id": "duplicate_protection",
+      "statement": "The HTTP 429 retry described in the supplied passage is protected against creating a duplicate charge.",
+      "expected": true
+    }
+  ],
+  "fields": ["source_id", "text", "answers", "source"]
+}

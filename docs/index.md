@@ -1,6 +1,10 @@
 <p><img src="assets/hero.svg" alt="Jev Filter: give your agent the signal. Collect once, decide with context, return the proof."></p>
 
-# Give your agent the signal.
+# Jev Filter: semantic filtering for AI agent tools
+
+Jev Filter is an independent, MIT-licensed tool maintained by Apixly. It screens retrieved search results, code candidates, logs and command output against your task and supplied context, returning compact, typed evidence packets with source IDs and review cases. Every retained original remains recoverable by ID. Install the official npm package **`@apixly/jev-filter`**, or use its Python, JavaScript / TypeScript and read-only MCP interfaces.
+
+Use it when many records need the same clear semantic judgment: which retrieved passages meet your evidence criteria, which code implements a behavior, or which correlated log events show a current failure. Your program collects and verifies; Jev makes the repeated judgments; your primary agent plans, reasons and writes. [Installation](getting-started.md) · [Common questions](faq.md).
 
 **91.6–97.2% less returned tool context.** Paid A/B on 2026-10-04: 24 real agent runs, three synthetic scenarios, two primary models and two repetitions per arm. Give your agent the relevant evidence; keep every original recoverable by ID.
 
@@ -43,6 +47,16 @@ The same core fits **CLI, Python, JavaScript / TypeScript and read-only MCP**, p
 **Verified browser progress:** observed scroll-container evidence changed the nested-scroll fixture from **0/3 to 3/3** completed runs under the same strict **0.55 / 0.10** policy. Six ordinary goal runs still require review. A model's `DONE` is usable only when an independent final check agrees. [Current browser evidence, failed variants and recovery research](benchmarks.md).
 
 [All measurements](benchmarks.md) · [Install and run](getting-started.md) · [Recorded synthetic workflows](showcase.md)
+
+## Practical tutorials
+
+| Task | Runnable tutorial |
+|---|---|
+| Filter retrieved search results before an agent reads them | [Search-result filtering for RAG and AI agents](search-result-filtering.md) |
+| Find code by behavior inside a bounded lexical candidate set | [Semantic code search for coding agents](semantic-code-search.md) |
+| Separate a current incident from a recovered historical failure | [Correlated log triage with semantic filtering](log-triage.md) |
+
+Each tutorial includes synthetic inputs, a caller-controlled contract, expected results and an offline preparation step. Inference requires a TypeSafe Jev API key and consumes provider usage; these examples are not new benchmark measurements.
 
 ## Start with your task
 

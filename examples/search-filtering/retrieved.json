@@ -1,0 +1,36 @@
+[
+  {
+    "id": "v4-429-idempotency",
+    "text": "For API v4, a client may retry an HTTP 429 response after the Retry-After interval. A retried POST must reuse the original idempotency key so the server returns the existing charge instead of creating a duplicate charge.",
+    "api_version": "v4",
+    "source_uri": "synthetic://api-v4/retries#rate-limit",
+    "revision": "fixture-1"
+  },
+  {
+    "id": "v4-timeout",
+    "text": "For API v4, a client may retry a connection timeout before receiving an HTTP response. This passage does not describe handling an HTTP 429 response.",
+    "api_version": "v4",
+    "source_uri": "synthetic://api-v4/retries#connection",
+    "revision": "fixture-1"
+  },
+  {
+    "id": "v4-429-no-retry",
+    "text": "For this API v4 bulk endpoint, clients must not retry an HTTP 429 response. Stop the operation and ask the operator to reduce the batch size.",
+    "api_version": "v4",
+    "source_uri": "synthetic://api-v4/bulk#rate-limit",
+    "revision": "fixture-1"
+  },
+  {
+    "id": "v4-429-incomplete",
+    "text": "For API v4, retry an HTTP 429 response after the Retry-After interval. The excerpt contains no information about duplicate charges or idempotency keys.",
+    "api_version": "v4",
+    "source_uri": "synthetic://api-v4/quickstart#retry",
+    "revision": "fixture-1"
+  },
+  {
+    "id": "version-missing",
+    "text": "Retry HTTP 429 after Retry-After and reuse the original idempotency key to prevent duplicate charges. The retrieved source metadata does not establish which API version this passage applies to.",
+    "source_uri": "synthetic://unversioned/retries",
+    "revision": "fixture-1"
+  }
+]
