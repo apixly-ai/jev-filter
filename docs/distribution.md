@@ -84,7 +84,7 @@ Do not select stage-only permission if unattended direct publication is intended
 To publish/resume the existing release after setup:
 
 ```sh
-gh workflow run publish-npm.yml --ref main -f tag=v0.4.0
+gh workflow run publish-npm.yml --ref main -f tag=v0.4.1
 ```
 
 A green GitHub Release is not proof of npm publication; check the separate Publish npm

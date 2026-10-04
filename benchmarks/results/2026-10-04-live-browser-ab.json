@@ -1,0 +1,3825 @@
+{
+  "schema_version": 1,
+  "kind": "live-browser-pinned-ab",
+  "created_at": "2026-10-04T07:24:48.771395+00:00",
+  "commits": {
+    "baseline": "feb2bc21f34e5a7c918ae6dde8b35780c16e197a",
+    "treatment": "39d0bdc21dd3b17de452f413181f422a4c84af18"
+  },
+  "repeats": 3,
+  "tasks": [
+    "search-filter",
+    "buy-pauses-before-order",
+    "contact-form-scroll",
+    "shadow-dom",
+    "same-origin-frame",
+    "delete-is-gated"
+  ],
+  "fixture_sha256": "2962326329e311f38b3cbe9d74881aedd436db33f23b6f74c1dfb166cd275fa5",
+  "runtime": {
+    "python": "3.14.2",
+    "system": "Darwin"
+  },
+  "whole_benchmark_elapsed_ms": 108231.302,
+  "timing_scope": "fixture setup/navigation + observe/decide/act + independent final checks; browser startup reported separately",
+  "usage_scope": "actual provider-reported input/output tokens; failed or retried unknown usage is preserved",
+  "pricing": {
+    "usd_per_million_input": 0.042,
+    "output_billed": false,
+    "basis": "estimate using stated Jev price, not an invoice"
+  },
+  "scope": "synthetic loopback fixtures in new private Chromium processes; no customer/business execution",
+  "summary": {
+    "baseline": {
+      "runs": 18,
+      "passed": 18,
+      "correct_completions": 12,
+      "correct_gates": 6,
+      "review_or_failure": 0,
+      "statuses": {
+        "done": 12,
+        "needs_confirmation": 6
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 83,
+      "provider_attempts": 83,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 232913,
+        "output_tokens": 15585
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 232913,
+          "output_tokens": 15585
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 44610.53,
+      "whole_operation_median_ms": 2238.765,
+      "request_bytes": 805998,
+      "state_bytes": 100598,
+      "estimated_input_usd": 0.009782346
+    },
+    "treatment": {
+      "runs": 18,
+      "passed": 12,
+      "correct_completions": 9,
+      "correct_gates": 3,
+      "review_or_failure": 6,
+      "statuses": {
+        "needs_review": 6,
+        "done": 9,
+        "needs_confirmation": 3
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 55,
+      "provider_attempts": 55,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 150130,
+        "output_tokens": 10511
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 150130,
+          "output_tokens": 10511
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 32755.39,
+      "whole_operation_median_ms": 1634.466,
+      "request_bytes": 528176,
+      "state_bytes": 56600,
+      "estimated_input_usd": 0.00630546
+    }
+  },
+  "runs": [
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 379.165,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 5,
+      "kernel_elapsed_ms": 2849,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "results_page": true,
+        "exact_search": true,
+        "category": true,
+        "stock": true,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 2931.519,
+      "model_calls": 6,
+      "provider_attempts": 6,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 20405,
+        "output_tokens": 1342
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 20405,
+          "output_tokens": 1342
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 69100,
+      "state_bytes": 10358,
+      "estimated_input_usd": 0.00085701,
+      "known_input_usd_lower_bound": 0.00085701,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 862.657
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12796,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 372.81
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13604,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 402.489
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13662,
+          "state_bytes": 2155,
+          "usage": {
+            "input_tokens": 4102,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 275.812
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13712,
+          "state_bytes": 2229,
+          "usage": {
+            "input_tokens": 4130,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 243.082
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9358,
+          "state_bytes": 1576,
+          "usage": {
+            "input_tokens": 2749,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 391.726
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 367.696,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 3,
+      "kernel_elapsed_ms": 1828,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "results_page": false,
+        "exact_search": false,
+        "category": false,
+        "stock": false,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 1901.893,
+      "model_calls": 4,
+      "provider_attempts": 4,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 13630,
+        "output_tokens": 922
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 13630,
+          "output_tokens": 922
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 46283,
+      "state_bytes": 6564,
+      "estimated_input_usd": 0.00057246,
+      "known_input_usd_lower_bound": 0.00057246,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 784.136
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12903,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 360.83
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13711,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 286
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 258.905
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13701,
+          "state_bytes": 2156,
+          "usage": {
+            "input_tokens": 4120,
+            "output_tokens": 278
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 238.164
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.47000000000000003,
+          "threshold": 0.55
+        },
+        {
+          "question": "click_target",
+          "reason": "below_min_margin",
+          "actual": 0.07,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "Category"
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 359.754,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 8,
+      "kernel_elapsed_ms": 4189,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 4264.132,
+      "model_calls": 9,
+      "provider_attempts": 9,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 26251,
+        "output_tokens": 1678
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 26251,
+          "output_tokens": 1678
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 88365,
+      "state_bytes": 12997,
+      "estimated_input_usd": 0.001102542,
+      "known_input_usd_lower_bound": 0.001102542,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 880.133
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12730,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 407.284
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13538,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 247.419
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13596,
+          "state_bytes": 2155,
+          "usage": {
+            "input_tokens": 4102,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 374.036
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9232,
+          "state_bytes": 1488,
+          "usage": {
+            "input_tokens": 2716,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 391.515
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8922,
+          "state_bytes": 1179,
+          "usage": {
+            "input_tokens": 2654,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 368.361
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8950,
+          "state_bytes": 1246,
+          "usage": {
+            "input_tokens": 2679,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 400.728
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9047,
+          "state_bytes": 1349,
+          "usage": {
+            "input_tokens": 2718,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 357.095
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6415,
+          "state_bytes": 1182,
+          "usage": {
+            "input_tokens": 1958,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 347.398
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": "Place order"
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 361.113,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1300,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": false,
+        "exact_cart_preserved": false,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1388.627,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 5393,
+        "output_tokens": 358
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 5393,
+          "output_tokens": 358
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 18772,
+      "state_bytes": 2315,
+      "estimated_input_usd": 0.000226506,
+      "known_input_usd_lower_bound": 0.000226506,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 888.089
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12837,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 367.588
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.54,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "Search products"
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 368.617,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 7,
+      "kernel_elapsed_ms": 3773,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3843.471,
+      "model_calls": 8,
+      "provider_attempts": 8,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 22567,
+        "output_tokens": 1596
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 22567,
+          "output_tokens": 1596
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 80763,
+      "state_bytes": 8096,
+      "estimated_input_usd": 0.000947814,
+      "known_input_usd_lower_bound": 0.000947814,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 916.724
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 393.42
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 392.207
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12317,
+          "state_bytes": 1082,
+          "usage": {
+            "input_tokens": 3372,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 368.473
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12370,
+          "state_bytes": 1155,
+          "usage": {
+            "input_tokens": 3395,
+            "output_tokens": 245
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 400.799
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9370,
+          "state_bytes": 1249,
+          "usage": {
+            "input_tokens": 2723,
+            "output_tokens": 177
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 359.498
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9460,
+          "state_bytes": 1328,
+          "usage": {
+            "input_tokens": 2757,
+            "output_tokens": 177
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 359.705
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9514,
+          "state_bytes": 1437,
+          "usage": {
+            "input_tokens": 2783,
+            "output_tokens": 178
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 245.524
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 358.175,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3698,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3776.402,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 21378,
+        "output_tokens": 1580
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 21378,
+          "output_tokens": 1580
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 77772,
+      "state_bytes": 6687,
+      "estimated_input_usd": 0.000897876,
+      "known_input_usd_lower_bound": 0.000897876,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 842.32
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 276.417
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 227.043
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12417,
+          "state_bytes": 1089,
+          "usage": {
+            "input_tokens": 3421,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 730.003
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12463,
+          "state_bytes": 1162,
+          "usage": {
+            "input_tokens": 3442,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 371.973
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12553,
+          "state_bytes": 1241,
+          "usage": {
+            "input_tokens": 3476,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 489.635
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12607,
+          "state_bytes": 1350,
+          "usage": {
+            "input_tokens": 3502,
+            "output_tokens": 252
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 406.107
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 423.298,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1268,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1456.939,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 874.396
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 353.931
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 885.138,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1668,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1797.876,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 1218.467
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 400.603
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 1047.925,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1417,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1550.583,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 1084.31
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 272.141
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 501.429,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1235,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1534.39,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 929.249
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 264.983
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 586.597,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 840,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 928.304,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 835.911
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 393.661,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 816,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 905.326,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 812.109
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 438.6,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1663,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "results_page": false,
+        "exact_search": false,
+        "category": false,
+        "stock": false,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 1734.542,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9510,
+        "output_tokens": 644
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9510,
+          "output_tokens": 644
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32582,
+      "state_bytes": 4408,
+      "estimated_input_usd": 0.00039942,
+      "known_input_usd_lower_bound": 0.00039942,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 878.788
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12903,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 372.952
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13711,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 286
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 267.867
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.51,
+          "threshold": 0.55
+        },
+        {
+          "question": "operation",
+          "reason": "below_min_margin",
+          "actual": 0.040000000000000036,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "Category"
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 388.3,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 5,
+      "kernel_elapsed_ms": 2656,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "results_page": true,
+        "exact_search": true,
+        "category": true,
+        "stock": true,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 2728.05,
+      "model_calls": 6,
+      "provider_attempts": 6,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 20405,
+        "output_tokens": 1341
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 20405,
+          "output_tokens": 1341
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 69100,
+      "state_bytes": 10358,
+      "estimated_input_usd": 0.00085701,
+      "known_input_usd_lower_bound": 0.00085701,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 749.959
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12796,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 434.409
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13604,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 269.569
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13662,
+          "state_bytes": 2155,
+          "usage": {
+            "input_tokens": 4102,
+            "output_tokens": 279
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 262.87
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13712,
+          "state_bytes": 2229,
+          "usage": {
+            "input_tokens": 4130,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 295.697
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9358,
+          "state_bytes": 1576,
+          "usage": {
+            "input_tokens": 2749,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 359.504
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 368.213,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1761,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": false,
+        "exact_cart_preserved": false,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1836.274,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9510,
+        "output_tokens": 645
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9510,
+          "output_tokens": 645
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32417,
+      "state_bytes": 4408,
+      "estimated_input_usd": 0.00039942,
+      "known_input_usd_lower_bound": 0.00039942,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 885.849
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12837,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 388.32
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13645,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 287
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 289.318
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.44,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "In stock only"
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 472.779,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 8,
+      "kernel_elapsed_ms": 4198,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 4303.502,
+      "model_calls": 9,
+      "provider_attempts": 9,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 26251,
+        "output_tokens": 1678
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 26251,
+          "output_tokens": 1678
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 88365,
+      "state_bytes": 12997,
+      "estimated_input_usd": 0.001102542,
+      "known_input_usd_lower_bound": 0.001102542,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 843.245
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12730,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 392.62
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13538,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 363.884
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13596,
+          "state_bytes": 2155,
+          "usage": {
+            "input_tokens": 4102,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 417.617
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9232,
+          "state_bytes": 1488,
+          "usage": {
+            "input_tokens": 2716,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 358.529
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8922,
+          "state_bytes": 1179,
+          "usage": {
+            "input_tokens": 2654,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 377.165
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8950,
+          "state_bytes": 1246,
+          "usage": {
+            "input_tokens": 2679,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 368.866
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9047,
+          "state_bytes": 1349,
+          "usage": {
+            "input_tokens": 2718,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 237.416
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6415,
+          "state_bytes": 1182,
+          "usage": {
+            "input_tokens": 1958,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 392.998
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": "Place order"
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 379.365,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3278,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3360.558,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 21378,
+        "output_tokens": 1580
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 21378,
+          "output_tokens": 1580
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 77772,
+      "state_bytes": 6687,
+      "estimated_input_usd": 0.000897876,
+      "known_input_usd_lower_bound": 0.000897876,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 930.857
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 235.071
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 227.655
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12417,
+          "state_bytes": 1089,
+          "usage": {
+            "input_tokens": 3421,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 386.626
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12463,
+          "state_bytes": 1162,
+          "usage": {
+            "input_tokens": 3442,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 371.482
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12553,
+          "state_bytes": 1241,
+          "usage": {
+            "input_tokens": 3476,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 369.059
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12607,
+          "state_bytes": 1350,
+          "usage": {
+            "input_tokens": 3502,
+            "output_tokens": 252
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 375.821
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 372.344,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3320,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3397.095,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 21188,
+        "output_tokens": 1552
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 21188,
+          "output_tokens": 1552
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 77393,
+      "state_bytes": 6659,
+      "estimated_input_usd": 0.000889896,
+      "known_input_usd_lower_bound": 0.000889896,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 875.642
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 377.493
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 216.555
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12317,
+          "state_bytes": 1082,
+          "usage": {
+            "input_tokens": 3372,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 377.756
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12370,
+          "state_bytes": 1155,
+          "usage": {
+            "input_tokens": 3395,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 365.769
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12460,
+          "state_bytes": 1234,
+          "usage": {
+            "input_tokens": 3429,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 383.646
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12514,
+          "state_bytes": 1343,
+          "usage": {
+            "input_tokens": 3455,
+            "output_tokens": 245
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 394.367
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 379.376,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1210,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1315.847,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 932.634
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 221.639
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 432.779,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1330,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1637.527,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 921.394
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 358.587
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 393.309,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1232,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1347.382,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 757.19
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 429.052
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 367.144,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1247,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1345.169,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 842.725
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 361.295
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 365.541,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 761,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 835.808,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 756.951
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 369.442,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 963,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1035.646,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 959.334
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 369.614,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3332,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "results_page": true,
+        "exact_search": true,
+        "category": true,
+        "stock": true,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 3405.74,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 23594,
+        "output_tokens": 1533
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 23594,
+          "output_tokens": 1533
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 81048,
+      "state_bytes": 11605,
+      "estimated_input_usd": 0.000990948,
+      "known_input_usd_lower_bound": 0.000990948,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 733.433
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12796,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 398.744
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13604,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 279
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 238.643
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13013,
+          "state_bytes": 1784,
+          "usage": {
+            "input_tokens": 3763,
+            "output_tokens": 248
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 361.862
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13063,
+          "state_bytes": 1858,
+          "usage": {
+            "input_tokens": 3791,
+            "output_tokens": 248
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 392.032
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13188,
+          "state_bytes": 1925,
+          "usage": {
+            "input_tokens": 3841,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 446.655
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9416,
+          "state_bytes": 1640,
+          "usage": {
+            "input_tokens": 2775,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 438.445
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 400.911,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 3,
+      "kernel_elapsed_ms": 1795,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "results_page": false,
+        "exact_search": false,
+        "category": false,
+        "stock": false,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 1872.265,
+      "model_calls": 4,
+      "provider_attempts": 4,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 13630,
+        "output_tokens": 922
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 13630,
+          "output_tokens": 922
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 46283,
+      "state_bytes": 6564,
+      "estimated_input_usd": 0.00057246,
+      "known_input_usd_lower_bound": 0.00057246,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 738.338
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12903,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 372.758
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13711,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 286
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 265.869
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13701,
+          "state_bytes": 2156,
+          "usage": {
+            "input_tokens": 4120,
+            "output_tokens": 278
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 229.553
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.45,
+          "threshold": 0.55
+        },
+        {
+          "question": "click_target",
+          "reason": "below_min_margin",
+          "actual": 0.04999999999999999,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "Category"
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 371.675,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 8,
+      "kernel_elapsed_ms": 4287,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 4357.619,
+      "model_calls": 9,
+      "provider_attempts": 9,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 26251,
+        "output_tokens": 1678
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 26251,
+          "output_tokens": 1678
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 88365,
+      "state_bytes": 12997,
+      "estimated_input_usd": 0.001102542,
+      "known_input_usd_lower_bound": 0.001102542,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 841.627
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12730,
+          "state_bytes": 1607,
+          "usage": {
+            "input_tokens": 3673,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 393.52
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13538,
+          "state_bytes": 2088,
+          "usage": {
+            "input_tokens": 4074,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 391.796
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13596,
+          "state_bytes": 2155,
+          "usage": {
+            "input_tokens": 4102,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 362.667
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9232,
+          "state_bytes": 1488,
+          "usage": {
+            "input_tokens": 2716,
+            "output_tokens": 151
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 386.592
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8922,
+          "state_bytes": 1179,
+          "usage": {
+            "input_tokens": 2654,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 370.958
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 8950,
+          "state_bytes": 1246,
+          "usage": {
+            "input_tokens": 2679,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 508.951
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9047,
+          "state_bytes": 1349,
+          "usage": {
+            "input_tokens": 2718,
+            "output_tokens": 169
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 276.778
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6415,
+          "state_bytes": 1182,
+          "usage": {
+            "input_tokens": 1958,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 363.625
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": "Place order"
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 365.532,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1703,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": false,
+        "exact_cart_preserved": false,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1790.535,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9510,
+        "output_tokens": 645
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9510,
+          "output_tokens": 645
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32417,
+      "state_bytes": 4408,
+      "estimated_input_usd": 0.00039942,
+      "known_input_usd_lower_bound": 0.00039942,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 876.733
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12837,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 407.41
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13645,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 287
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 275.223
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.41000000000000003,
+          "threshold": 0.55
+        },
+        {
+          "question": "click_target",
+          "reason": "below_min_margin",
+          "actual": 0.09000000000000002,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "In stock only"
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 366.868,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3313,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3389.234,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 21188,
+        "output_tokens": 1552
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 21188,
+          "output_tokens": 1552
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 77393,
+      "state_bytes": 6659,
+      "estimated_input_usd": 0.000889896,
+      "known_input_usd_lower_bound": 0.000889896,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 871.86
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 236.816
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 228.58
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12317,
+          "state_bytes": 1082,
+          "usage": {
+            "input_tokens": 3372,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 450.814
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12370,
+          "state_bytes": 1155,
+          "usage": {
+            "input_tokens": 3395,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 401.696
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12460,
+          "state_bytes": 1234,
+          "usage": {
+            "input_tokens": 3429,
+            "output_tokens": 244
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 366.201
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12514,
+          "state_bytes": 1343,
+          "usage": {
+            "input_tokens": 3455,
+            "output_tokens": 245
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 401.544
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "contact-form-scroll",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 376.128,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3560,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "saved_draft": true,
+        "exact_form_values": true
+      },
+      "whole_operation_ms": 3628.95,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 21378,
+        "output_tokens": 1580
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 21378,
+          "output_tokens": 1580
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 77772,
+      "state_bytes": 6687,
+      "estimated_input_usd": 0.000897876,
+      "known_input_usd_lower_bound": 0.000897876,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9038,
+          "state_bytes": 505,
+          "usage": {
+            "input_tokens": 2429,
+            "output_tokens": 186
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 970.722
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9263,
+          "state_bytes": 614,
+          "usage": {
+            "input_tokens": 2521,
+            "output_tokens": 194
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 248.718
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 9431,
+          "state_bytes": 726,
+          "usage": {
+            "input_tokens": 2587,
+            "output_tokens": 195
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 363.562
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12417,
+          "state_bytes": 1089,
+          "usage": {
+            "input_tokens": 3421,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 396.975
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12463,
+          "state_bytes": 1162,
+          "usage": {
+            "input_tokens": 3442,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 404.461
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12553,
+          "state_bytes": 1241,
+          "usage": {
+            "input_tokens": 3476,
+            "output_tokens": 251
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 423.696
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12607,
+          "state_bytes": 1350,
+          "usage": {
+            "input_tokens": 3502,
+            "output_tokens": 252
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 391.256
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 411.683,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1242,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1338.506,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 785.206
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 404.176
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "shadow-dom",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 359.556,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1363,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1468.828,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3268,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3268,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11352,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000137256,
+      "known_input_usd_lower_bound": 0.000137256,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5642,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1621,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 918.696
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5710,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1647,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 388.266
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 362.453,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1652,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1749.479,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 1027.378
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 582.613
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "same-origin-frame",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 436.752,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1255,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_widget_effect": true
+      },
+      "whole_operation_ms": 1341.583,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3294,
+        "output_tokens": 218
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3294,
+          "output_tokens": 218
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 11508,
+      "state_bytes": 1015,
+      "estimated_input_usd": 0.000138348,
+      "known_input_usd_lower_bound": 0.000138348,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5720,
+          "state_bytes": 471,
+          "usage": {
+            "input_tokens": 1633,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 845.515
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5788,
+          "state_bytes": 544,
+          "usage": {
+            "input_tokens": 1661,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 372.451
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": null
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 388.677,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 859,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": null,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 948.015,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 856.1
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    },
+    {
+      "task": "delete-is-gated",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 373.446,
+      "passed": true,
+      "correct_completion": false,
+      "correct_gate": true,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_confirmation",
+      "reason": "label_rule",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 843,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": true,
+        "exact_cart_preserved": true,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 918.304,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1709,
+        "output_tokens": 109
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1709,
+          "output_tokens": 109
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 5842,
+      "state_bytes": 594,
+      "estimated_input_usd": 7.1778e-05,
+      "known_input_usd_lower_bound": 7.1778e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5842,
+          "state_bytes": 594,
+          "usage": {
+            "input_tokens": 1709,
+            "output_tokens": 109
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 839.886
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3,
+      "review_reasons": [],
+      "pending_label": "Remove Red Runner"
+    }
+  ],
+  "limitations": [
+    "Six fixtures and three repeats cannot establish production reliability or calibrated accuracy.",
+    "This compares released program versions on the same Jev model, not Jev against an LLM.",
+    "Needed confirmation is a correct expected stop; it is never resumed in the benchmark.",
+    "Synthetic final-state checks reject a false DONE but do not prove every intermediate action was optimal."
+  ]
+}

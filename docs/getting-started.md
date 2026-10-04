@@ -20,7 +20,7 @@ dependency. Installation does not run a postinstall script or configure your age
 GitHub release fallback (the same npm package):
 
 ```sh
-npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.4.0/apixly-jev-filter-0.4.0.tgz
+npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.4.1/apixly-jev-filter-0.4.1.tgz
 ```
 
 ## Configure your key
@@ -98,7 +98,7 @@ install ripgrep separately for source-based search.
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'
+python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.1'
 ```
 
 The wheel in GitHub Releases is also supported. No PyPI publication is assumed.

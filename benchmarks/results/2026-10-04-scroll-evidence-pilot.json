@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "kind": "live-browser-pinned-ab",
+  "created_at": "2026-10-04T07:42:26.552744+00:00",
+  "commits": {
+    "baseline": "working-tree-snapshot",
+    "treatment": "working-tree-snapshot"
+  },
+  "source_sha256": {
+    "baseline": "4a73f6d212df8f71a41348902558015627935bfd2f972e240ff2f69be8d449d0",
+    "treatment": "6c95c1640536085028953f8a71721ca83e1cb1a6576e408f78b617ce14f0b3dd"
+  },
+  "repeats": 1,
+  "tasks": [
+    "nested-scroll-target"
+  ],
+  "fixture_sha256": "4334e3857ca40deb61ad758f3792c8dcb2eb19889b58dfde99bd4ea10cd01670",
+  "runtime": {
+    "python": "3.14.2",
+    "system": "Darwin"
+  },
+  "whole_benchmark_elapsed_ms": 7178.015,
+  "timing_scope": "fixture setup/navigation + observe/decide/act + independent final checks; browser startup reported separately",
+  "usage_scope": "actual provider-reported input/output tokens; failed or retried unknown usage is preserved",
+  "pricing": {
+    "usd_per_million_input": 0.042,
+    "output_billed": false,
+    "basis": "estimate using stated Jev price, not an invoice"
+  },
+  "scope": "synthetic loopback fixtures in new private Chromium processes; no customer/business execution",
+  "summary": {
+    "baseline": {
+      "runs": 1,
+      "passed": 0,
+      "correct_completions": 0,
+      "correct_gates": 0,
+      "review_or_failure": 1,
+      "statuses": {
+        "blocked": 1
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1959,
+        "output_tokens": 159
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1959,
+          "output_tokens": 159
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 1427.374,
+      "whole_operation_median_ms": 1427.374,
+      "request_bytes": 6173,
+      "state_bytes": 494,
+      "estimated_input_usd": 8.2278e-05
+    },
+    "treatment": {
+      "runs": 1,
+      "passed": 1,
+      "correct_completions": 1,
+      "correct_gates": 0,
+      "review_or_failure": 0,
+      "statuses": {
+        "done": 1
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 10781,
+        "output_tokens": 613
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 10781,
+          "output_tokens": 613
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 3292.802,
+      "whole_operation_median_ms": 3292.802,
+      "request_bytes": 35364,
+      "state_bytes": 5194,
+      "estimated_input_usd": 0.000452802
+    }
+  },
+  "runs": [
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 945.774,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "blocked",
+      "reason": "model_blocked",
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1339,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 1427.374,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1959,
+        "output_tokens": 159
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1959,
+          "output_tokens": 159
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 6173,
+      "state_bytes": 494,
+      "estimated_input_usd": 8.2278e-05,
+      "known_input_usd_lower_bound": 8.2278e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 920.316
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3142,
+          "state_bytes": 288,
+          "usage": {
+            "input_tokens": 1002,
+            "output_tokens": 84
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 352.525
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 359.976,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 6,
+      "kernel_elapsed_ms": 3213,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": true
+      },
+      "whole_operation_ms": 3292.802,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 10781,
+        "output_tokens": 613
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 10781,
+          "output_tokens": 613
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 35364,
+      "state_bytes": 5194,
+      "estimated_input_usd": 0.000452802,
+      "known_input_usd_lower_bound": 0.000452802,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3909,
+          "state_bytes": 507,
+          "usage": {
+            "input_tokens": 1226,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 846.845
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 4197,
+          "state_bytes": 574,
+          "usage": {
+            "input_tokens": 1354,
+            "output_tokens": 83
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 392.819
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 4281,
+          "state_bytes": 660,
+          "usage": {
+            "input_tokens": 1389,
+            "output_tokens": 83
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 375.67
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 4356,
+          "state_bytes": 743,
+          "usage": {
+            "input_tokens": 1415,
+            "output_tokens": 83
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 373.546
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 4447,
+          "state_bytes": 840,
+          "usage": {
+            "input_tokens": 1447,
+            "output_tokens": 83
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 359.463
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 7049,
+          "state_bytes": 894,
+          "usage": {
+            "input_tokens": 1960,
+            "output_tokens": 103
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 358.957
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 7125,
+          "state_bytes": 976,
+          "usage": {
+            "input_tokens": 1990,
+            "output_tokens": 103
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 232.904
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1
+    }
+  ],
+  "limitations": [
+    "Small fixture sets and repeated runs cannot establish production reliability or calibrated accuracy.",
+    "This compares released program versions on the same Jev model, not Jev against an LLM.",
+    "Needed confirmation is a correct expected stop; it is never resumed in the benchmark.",
+    "Synthetic final-state checks reject a false DONE but do not prove every intermediate action was optimal."
+  ]
+}

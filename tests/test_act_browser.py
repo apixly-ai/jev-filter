@@ -191,6 +191,54 @@ def test_native_and_aria_control_state_remains_verifiable(browser):
     assert option["control_label"] == "Sort"
 
 
+def test_native_select_click_can_load_choices_through_observed_handler(browser):
+    synthetic(
+        browser,
+        '<label>Lazy choices<select onclick="if(this.options.length===1){'
+        "this.add(new Option('Loaded choice','loaded'));"
+        "document.getElementById('out').textContent='Choices loaded';}"
+        '">'
+        '<option value="">Open picker</option></select></label><p id="out"></p>',
+    )
+    state = browser.observe()
+    assert not any(a["kind"] == "select" for a in state["actions"])
+    browser.act(by_label(state, "Lazy choices", "click"), state)
+    assert browser.evaluate("document.getElementById('out').textContent") == "Choices loaded"
+    assert by_label(browser.observe(), "Lazy choices → Loaded choice", "select")
+
+
+def test_nested_scroll_exposes_remaining_travel_and_marks_clipped_controls(browser):
+    from jev_context.act import space
+
+    synthetic(
+        browser,
+        '<section aria-label="Results panel" style="overflow-y:auto;height:120px;width:400px">'
+        '<div style="height:450px">Earlier results</div>'
+        "<button>Load target</button></section>",
+    )
+    state = browser.observe()
+    down = next(a for a in state["actions"] if a["kind"] == "scroll" and a.get("node"))
+    assert down["scroll_top"] == 0
+    assert down["client_height"] == 120
+    assert down["scroll_height"] > 450
+    assert down["scroll_max"] == down["scroll_height"] - down["client_height"]
+    assert down["remaining_down"] == down["scroll_max"]
+    assert down["container"] == "Results panel"
+    assert state["clipped_actions"] == 1 and state["covered_actions"] == 0
+    assert "Load target" not in state["text"]
+    clipped = state["clipped_controls"][0]
+    assert clipped["label"] == "Load target" and clipped["direction"] == "down"
+    assert clipped["container_node"] == down["node"]
+    body, _, _ = space.build_request(state, "Load the needed item", [])
+    operation = body["questions"]["operation"]["criteria"][down["id"].upper()]
+    assert operation["scroll_top"] == 0 and operation["remaining_down"] == down["scroll_max"]
+    assert body["state"]["notes"]["clipped_controls"] == state["clipped_controls"]
+    browser.act(down, state)
+    later = browser.observe()
+    current = next(a for a in later["actions"] if a["kind"] == "scroll" and a.get("delta", 0) > 0)
+    assert current["scroll_top"] > 0 and current["remaining_down"] < down["remaining_down"]
+
+
 def test_roleless_clickable_and_transparent_native_toggle(browser):
     synthetic(
         browser,

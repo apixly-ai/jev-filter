@@ -14,16 +14,16 @@ The command catalogue is collapsible so it supports the narrative rather than ow
 - Responsive documentation landing: the same visual language, clear primary action, task-oriented routes, horizontal navigation on narrow screens and keyboard-visible focus states.
 - Actual data stays in text and tables, with source links. Historical charts remain available inside a details panel; no decorative chart invents a performance result.
 
-The hero combines a runnable example with a prominent proof strip: the historical
-88–97% returned-context reduction is directly labelled “48 synthetic agent runs ·
-2026-09-23”. It also shows traceable evidence and the four core integration routes.
+The hero combines a runnable example with a prominent proof strip: the fresh
+91.6–97.2% returned-context reduction is directly labelled “24 real agent runs ·
+2026-10-04”. It also shows traceable evidence and the four core integration routes.
 English and Chinese claims, dates, scope and limitations must be kept synchronized.
 The README does not promise universal
 speed, cost savings, automatic correctness or open-web completion rates.
 
 ## Evidence and honesty
 
-The strongest measured hook is the 2026-09-23 whole-operation benchmark's 88–97%
+The strongest measured hook is the 2026-10-04 whole-operation benchmark's 91.6–97.2%
 reduction in returned tool context. The same table exposes the cost range, latency
 regressions and synthetic scope. Hosted fixture passes sit beside the weaker real-web
 audit. New release experiments must keep baseline, treatment, failures, review rates,
@@ -39,8 +39,9 @@ fit a calibrated production probability model.
 
 Edit `docs/assets/hero.svg` and `hero.zh-CN.svg` directly. Styling for the documentation
 site is in `docs/assets/docs.css`; `scripts/build_docs.py` copies it into the build.
-Data-derived charts remain reproducible with `python scripts/render_assets.py` after
-installing `.[docs]`.
+Fresh charts and social images are reproducible with `python scripts/render_live_assets.py`
+after installing `.[docs,browser-test]`. `scripts/render_assets.py` rebuilds only historical
+charts and preserves the maintained hero.
 
 ```sh
 python scripts/build_docs.py

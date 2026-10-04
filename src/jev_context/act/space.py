@@ -25,6 +25,10 @@ Submit populated search fields before opening a result; a populated field is not
 WAIT only when the needed control is absent or disabled, or submitted results are still loading.
 Recent WAIT actions are not evidence of loading. Prefer a useful visible control over WAIT.
 If the needed control may be below the visible area, SCROLL_DOWN.
+For nested containers, clipped_controls are evidence of unavailable controls, not actionable targets.
+Use the offered scroll direction for their container. Its scroll_top and remaining travel show progress;
+continue scrolling until the needed control becomes actionable. A successful scroll may reveal only
+part of a long container. Do not choose BLOCKED while a relevant observed scroll can still reveal it.
 For cookie or consent banners, choose the option that rejects optional tracking unless the goal says otherwise.
 Irreversible steps (payment, placing an order, sending, deleting) are gated by the program, which
 pauses for the user's confirmation before executing them: keep advancing toward them normally and
@@ -154,7 +158,28 @@ def build_request(
     elements, targets, controls = action_space(state["actions"])
     goal = f"{goal}\n{note}" if note else goal
     operations = {k: OPERATIONS[k] for k in OPERATIONS if k in targets}
-    operations.update({k: v["label"] for k, v in controls.items()})
+    scroll_fields = (
+        "container",
+        "container_node",
+        "scroll_top",
+        "client_height",
+        "scroll_height",
+        "scroll_max",
+        "remaining_down",
+        "remaining_up",
+    )
+    operations.update(
+        {
+            key: {
+                "operation": action["label"],
+                "direction": "down" if action["delta"] > 0 else "up",
+                **{field: action[field] for field in scroll_fields if field in action},
+            }
+            if action["kind"] == "scroll" and "scroll_max" in action
+            else action["label"]
+            for key, action in controls.items()
+        }
+    )
     operations["DONE"] = "Every requirement of the goal is visibly satisfied."
     operations["BLOCKED"] = "No available operation can make progress."
     questions = {
@@ -201,6 +226,15 @@ def build_request(
             notes[key] = state[key]
     if state.get("dialogs"):
         notes["open_dialogs"] = state["dialogs"]
+    if state.get("clipped_controls"):
+        notes["clipped_controls"] = state["clipped_controls"]
+    containers = {
+        action["node"]: {field: action[field] for field in scroll_fields if field in action}
+        for action in state["actions"]
+        if action["kind"] == "scroll" and "scroll_max" in action
+    }
+    if containers:
+        notes["scroll_containers"] = list(containers.values())
     body = {
         "model": model,
         "state": {

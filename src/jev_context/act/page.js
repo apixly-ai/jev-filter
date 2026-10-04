@@ -45,6 +45,27 @@
     const r = e.getBoundingClientRect(), [dx, dy] = frameOffset(e);
     return {x: r.x + dx, y: r.y + dy, w: r.width, h: r.height};
   };
+  const parentOf = e => e.parentElement || (e.getRootNode && e.getRootNode().host) ||
+    (e.ownerDocument && e.ownerDocument.defaultView.frameElement) || null;
+  // A painted node can still be outside a scroll container's client viewport.
+  // Distinguish that condition from an overlay so the planner sees real scroll
+  // progress and never mistakes clipped text for an available action target.
+  const clipInfo = (e, r, center = false) => {
+    const left = center ? r.x + r.w / 2 : r.x, right = center ? left : r.x + r.w;
+    const top = center ? r.y + r.h / 2 : r.y, bottom = center ? top : r.y + r.h;
+    for (let p = parentOf(e); p; p = parentOf(p)) {
+      if (p === document.body || p === document.documentElement) continue;
+      const s = p.ownerDocument.defaultView.getComputedStyle(p), box = rectOf(p);
+      const x = box.x + p.clientLeft, y = box.y + p.clientTop;
+      const clipsY = ['auto', 'scroll', 'overlay', 'hidden', 'clip'].includes(s.overflowY);
+      const clipsX = ['auto', 'scroll', 'overlay', 'hidden', 'clip'].includes(s.overflowX);
+      if (clipsY && bottom <= y) return {container: p, direction: 'up'};
+      if (clipsY && top >= y + p.clientHeight) return {container: p, direction: 'down'};
+      if (clipsX && (right <= x || left >= x + p.clientWidth))
+        return {container: p, direction: 'horizontal'};
+    }
+    return null;
+  };
   // Hit-test through open shadow roots and same-origin frames, then walk the composed tree up.
   const deepHit = (x, y) => {
     let doc = document, ox = 0, oy = 0, el = null;
@@ -279,7 +300,8 @@
   const scopeRoot = request.scope ? document.querySelector(request.scope) : null;
   if (request.scope && !scopeRoot) return {scope_missing: true, url: location.href};
   const actions = [];
-  let covered = 0, below = 0;
+  const clippedControls = [];
+  let covered = 0, below = 0, clipped = 0;
   for (const e of all(SELECTOR)) {
     if (scopeRoot && !composedContains(scopeRoot, e)) continue;
     if (skipped(e) || !visible(e) || e.matches(':disabled') || e.closest('[aria-disabled="true"]')) continue;
@@ -293,6 +315,16 @@
     if (r.w <= 0 || r.h <= 0) continue;
     if (x < 0 || y < 0 || x >= innerWidth || y >= innerHeight) { if (y >= innerHeight) below++; continue; }
     if (rname === 'gridcell' && e.querySelector('button,[role="button"]')) continue;
+    const clip = clipInfo(target, r, true);
+    if (clip) {
+      clipped++;
+      if (clippedControls.length < 50 && scrollable(clip.container) &&
+          (!scopeRoot || composedContains(scopeRoot, clip.container)))
+        clippedControls.push({label: name(e) || rname, role: rname, direction: clip.direction,
+          container: name(clip.container) || section(clip.container) || 'scrollable panel',
+          container_node: identity(clip.container)});
+      continue;
+    }
     const hit = deepHit(x, y);
     if (!hit || !composedContains(target, hit)) { covered++; continue; }
     const base = {node: identity(e), role: rname, label: name(e) || rname,
@@ -335,10 +367,14 @@
     const node = identity(e), label = name(e) || section(e) || 'scrollable panel';
     const delta = Math.max(1, Math.round(e.clientHeight * 0.7));
     const frame = e.ownerDocument !== document || undefined;
+    const max = Math.max(0, e.scrollHeight - e.clientHeight);
+    const facts = {container: label.slice(0, 120), container_node: node,
+      scroll_top: e.scrollTop, client_height: e.clientHeight, scroll_height: e.scrollHeight,
+      scroll_max: max, remaining_down: Math.max(0, max - e.scrollTop), remaining_up: Math.max(0, e.scrollTop)};
     if (e.scrollTop + e.clientHeight < e.scrollHeight - 2)
-      actions.push({node, kind: 'scroll', label: 'Scroll down in ' + label.slice(0, 120), delta, frame});
+      actions.push({...facts, node, kind: 'scroll', label: 'Scroll down in ' + label.slice(0, 120), delta, frame});
     if (e.scrollTop > 0)
-      actions.push({node, kind: 'scroll', label: 'Scroll up in ' + label.slice(0, 120), delta: -delta, frame});
+      actions.push({...facts, node, kind: 'scroll', label: 'Scroll up in ' + label.slice(0, 120), delta: -delta, frame});
   }
   const words = [];
   let lastRow = null;
@@ -355,6 +391,7 @@
       if (!value || !parent || parent.closest('script,style,noscript,template') || !visible(parent)) continue;
       range.selectNodeContents(node);
       const r = range.getBoundingClientRect(), [dx, dy] = frameOffset(parent);
+      if (clipInfo(parent, {x: r.x + dx, y: r.y + dy, w: r.width, h: r.height})) continue;
       if (r.width > 0 && r.height > 0 && r.bottom + dy > 0 && r.top + dy < innerHeight && r.right + dx > 0 && r.left + dx < innerWidth) {
         const rowEl = parent.closest('tr,[role="row"]');
         if (rowEl && rowEl === lastRow && words.length) { words[words.length - 1] += ' | ' + value; }
@@ -370,7 +407,7 @@
   // Copies: ids assigned below must not leak into the freshness marker.
   const semantics = actions.map(a => ({...a}));
   const marker = [performance.timeOrigin, location.href, scrollX, scrollY, innerWidth, innerHeight,
-    document.title, text, semantics, pageKey[6], pageKey[7]];
+    document.title, text, semantics, pageKey[6], pageKey[7], clippedControls];
   if (op === 'marker') return marker;
   const limit = Math.max(1, Math.min(request.limit || 250, 1000));
   const omitted = Math.max(0, actions.length - limit);
@@ -394,5 +431,6 @@
   const passwords = all('input[type="password"]').filter(visible).length;
   return {url: location.href, origin: location.origin, title: document.title, w: innerWidth, h: innerHeight,
     text, scroll: {y: scrollY, height}, actions, marker, page_key: pageKey, guards, omitted_actions: omitted,
-    covered_actions: covered, below_fold: below, dialogs, frames, challenge, password_fields: passwords};
+    covered_actions: covered, clipped_actions: clipped, clipped_controls: clippedControls,
+    below_fold: below, dialogs, frames, challenge, password_fields: passwords};
 })

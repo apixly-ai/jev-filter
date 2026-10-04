@@ -14,7 +14,7 @@
 
 **Give your agent the signal. Keep the evidence.** Jev Filter turns large tool outputs into compact, typed decisions before they enter your agent's context. Commands, code, logs and page records stay inside the program; your agent receives relevant evidence and the IDs that need its attention.
 
-**88–97% less returned tool context** in our 48-run whole-operation benchmark. Every original remains recoverable by ID. [Dated evidence and trade-offs →](#measured-advantages)
+**91.6–97.2% less returned tool context. 24/24 exact ID sets.** Measured on 24 real agent runs over three synthetic scenarios, two primary models and two repetitions per arm on **2026-10-04**. Every original remains recoverable by ID. [Live evidence and trade-offs →](#measured-advantages)
 
 ## More signal. Less work for your agent.
 
@@ -24,12 +24,15 @@
 
 The result is a useful division of labor: **programs collect and verify; Jev makes repeated semantic judgments; your agent plans, reasons and writes.** Automatic batching reduces repeated input, up to 30 requests run concurrently, and no result cache hides a new observation.
 
-## New in 0.4: a stronger decision layer
+## Proven where your agent actually works
 
-- **Review ambiguity explicitly.** Configurable per-question probability, margin and confidence policies route uncertain decisions to review; unknown provider usage stays incomplete.
-- **Search the behavior, inspect the change.** Opt-in hybrid code retrieval combines lexical candidates, symbols and one-hop caller clues. `diff-review` collects a bounded Git diff for semantic inspection with source receipts.
-- **Connect the same core everywhere.** A typed JavaScript client and a read-only MCP server reuse the existing CLI and evidence core; partial results stay usable.
-- **Evaluate before automating.** Offline `eval` reports error, review and probability diagnostics with grouped holdout checks. Benchmark adapters compare providers without adding a production fallback.
+**Put the signal in the conversation, keep the full trace within reach.** In the fresh whole-operation A/B, the filtered agent completed **12/12** runs; raw context completed **11/12**. All 24 runs returned the expected ID sets. This measures collection, real primary-agent tool use and continuation together.
+
+**Find more of the behavior you meant.** Opt-in code recall plus native Jev filtering recovered **10/12** labeled matches, versus **4/12** for exact candidates, with zero false positives. Bounded diff triage selected all four target changes in both repetitions. Originals and source freshness remain independently checkable.
+
+**Use the route you already have.** **13/13 paid interface checks** passed across the Python CLI, a fresh published npm install, JavaScript, official MCP, local page extraction and survey. You get the same evidence contract without rebuilding your agent.
+
+The context gain is the strongest result. **Five of six whole-operation cells were slower; a cheap-model `exec` cell cost 1.1% more in the cold API-equivalent estimate.** Smaller context does not guarantee lower latency or billing. [Numbers, methods and negative results →](docs/benchmarks.md)
 
 [Agent integration examples →](docs/agent-quickstart.md#javascript-and-mcp) · [Command reference →](docs/cli.md)
 
@@ -73,24 +76,38 @@ Start with the [copyable analysis contract](docs/recipes.md#1-custom-command-out
 
 ## Measured advantages
 
-We publish inputs, methods, per-run data and regressions. Each number belongs to the experiment shown; measure your own task before assuming a speed or cost benefit.
+Fresh **paid live evidence · 2026-10-04**. Inputs, source hashes, per-run tokens, complete timing and failures are public. Each result belongs to its stated scope.
 
-| Experiment | Observed result | What was tested |
+| Advantage | Observed result | Scope and trade-off |
 |---|---|---|
-| **0.4 decision contracts** · 2026-10-04 | Expected behavior **3/13 → 13/13**; false fixture actions **3 → 0**. | Offline scripted distributions and failure envelopes, **no model requests**. Reviews increased **0 → 6** and returned context **4,104 → 7,087 bytes**. [Data](benchmarks/results/2026-10-04-decisions.json) |
-| **0.4 browser observation** · 2026-10-04 | Local fixture checks **3/15 → 15/15**; typed-state recall **20% → 100%**. | Program-owned actions, **no Jev inference**. Operation time and planned context grew; this does not measure model-driven completion. [Data](benchmarks/results/2026-10-04-browser-observation.json) |
-| **0.4 hybrid code candidates** · 2026-10-04 | Mean collector recall **27.8% → 66.7%**; precision **66.7% → 47.2%**. | Fixed synthetic cases, **no semantic inference**. Candidate context and collection time grew; retrieval is opt-in and cannot solve absent lexical overlap. [Data](benchmarks/results/2026-10-04-retrieval.json) |
-| **Whole agent operation** · 2026-09-23 | **88–97% less returned tool context**; all runs selected the expected IDs. | 48 runs, 2 primary models, 4 synthetic scenarios. Cold API-equivalent cost ranged from **20.8% lower to 0.6% higher**; latency improved in some cells and regressed in others. |
-| **Jev batching** · 2026-09-22 | **56.5% fewer input tokens**; batch + parallel was **32.4% faster** than single-record parallel. | 96 synthetic records × 2 predicates, 2 repetitions per arm. Measures the Jev stage, not whole-agent speed. |
-| **Hosted browser & desktop fixtures** · 2026-09-30 | Browser: **15/15 Camofox**, **18/18 CDP**. Desktop: **12/12**. | Small local synthetic fixtures, 3 repetitions per task, final state checked by the program. |
-| **Real public websites** · 2026-09-30 | **16/48** read-only runs reached the goal; **16/34** after excluding bot checks, sign-in walls and provider failures. | 24 goals in one environment. Custom widgets and verification were weak; this is not an open-web success-rate guarantee. |
+| **Keep the agent's context focused** | **91.6–97.2% less returned tool context**; filtered completion **12/12**, raw **11/12**; all **24/24 ID sets correct**. | 24 real agent runs, three synthetic scenarios, two primary models, two repetitions per arm. Five/six cells slower by **0.1–18.4%**; cold API-equivalent cost ranged from **23.2% lower to 1.1% higher**. Subscription billing remains unknown. [Data](benchmarks/results/2026-10-04-live-operations-summary.json) |
+| **Recover more relevant code** | Correct matches **4/12 → 10/12**, **zero false positives**. | Exact vs opt-in recall, both with native semantic filtering. Returned context grew **5,284 → 9,706 bytes**; absent lexical overlap still misses. [Data](benchmarks/results/2026-10-04-live-records.json) |
+| **Inspect the change that matters** | All **4/4** target changes selected in each repetition; returned context **23.9% lower** than retaining every file. | Eight synthetic files, two repetitions. Semantic triage adds model usage and increases median whole-operation time **503 → 1,465 ms**. [Data](benchmarks/results/2026-10-04-live-records.json) |
+| **Batch repeated judgments efficiently** | **56.5% fewer Jev input tokens** and **61.2% faster** batch-parallel operation than single-record parallel. | 96 synthetic records × two predicates, three repetitions; all **12/12** runs exact. Jev stage only, not whole-agent speed; parallel worker cap 12. [Data](benchmarks/results/2026-10-04-live-batching.json) |
+| **Connect real interfaces** | **13/13 paid E2E checks pass**, including exact MCP evidence recovery and **64/64** survey topic labels. | Python CLI, fresh npm **0.4.0** JS/native package, official MCP, local Chromium extraction and survey. Small synthetic fixtures; resolved model identity is unavailable from these public adapters. [Data](benchmarks/results/2026-10-04-live-interfaces.json) |
+| **Reach inside a scroll container** | Verified nested-scroll completion **0/3 → 3/3** under the same strict **0.55 / 0.10** policy. | Pinned browser source A/B; program adds observed container evidence. Six ordinary goal runs still need review. More successful work consumes more calls, context and time. [Data](benchmarks/results/2026-10-04-live-browser-final-ab.json) |
 
 <details>
-<summary><strong>See the whole-operation chart and reproducible data</strong></summary>
+<summary><strong>See the new whole-operation chart and reproduce the results</strong></summary>
 
-![Whole-operation gains and regressions across two primary models and four scenarios](docs/assets/operations.png)
+![Fresh whole-operation context reduction, API-equivalent cost and latency changes](docs/assets/operations-live.png)
 
-[Method and all results](docs/benchmarks.md) · [Per-run JSON](benchmarks/results/2026-09-23-operations.json) · [CSV](benchmarks/results/2026-09-23-operations.csv) · [Jev-stage data](benchmarks/results/2026-09-22-live.json)
+[Method and all live results](docs/benchmarks.md) · [Per-run JSON](benchmarks/results/2026-10-04-live-operations.json) · [CSV](benchmarks/results/2026-10-04-live-operations.csv) · [Reproducible driver](benchmarks/operations.py)
+
+</details>
+
+<details>
+<summary><strong>Earlier evidence: offline contracts, batching and open-web limitations</strong></summary>
+
+| Experiment | Dated result | Scope |
+|---|---|---|
+| Offline release contracts · 2026-10-04 | **3/13 → 13/13** expected behaviors; **3 → 0** false fixture actions. | Scripted responses, no model calls; reviews and diagnostic context increase. [Data](benchmarks/results/2026-10-04-decisions.json) |
+| Jev batching · 2026-09-22 | **56.5% fewer input tokens**; batch + parallel **32.4% faster** than single-record parallel. | 96 synthetic records × two predicates, two repetitions; Jev stage only. [Data](benchmarks/results/2026-09-22-live.json) |
+| Historical whole operation · 2026-09-23 | **88–97% less returned tool context**. | 48 runs over four synthetic scenarios; cost and latency vary. [Data](benchmarks/results/2026-09-23-operations.json) |
+| Historical hosted fixtures · 2026-09-30 | Browser **15/15 Camofox**, **18/18 CDP**; desktop **12/12**. | Local fixtures under the then-current planner policy; not a current strict-policy or open-web completion guarantee. [Data](benchmarks/results/2026-09-30-hosted.json) |
+| Public websites · 2026-09-30 | **16/48** read-only goals reached; **16/34** after excluding access walls and provider failures. | 24 goals in one environment. Custom widgets and verification were weak. [Data](benchmarks/results/2026-09-30-real-world.json) |
+
+[Full methods and historical data](docs/benchmarks.md). The latest browser experiments retain failed pruning variants and unknown provider attempts; they do not turn a safe stop into a completed goal.
 
 </details>
 
@@ -108,7 +125,7 @@ jev-filter browse --url https://shop.example/ \
   --value query='red shoes' --verify-text 'Search results'
 ```
 
-Replace the example URL with your permitted test page and meaningful verifier. `browse` and `desktop` succeed only with `status: done`; `extract` and `survey` require `ok` and `complete`. A selected action is not proof of completion.
+Replace the example URL with your permitted test page and meaningful verifier. For `browse` and `desktop`, require **`status: done` and an independent final-state check**; `extract` and `survey` require `ok` and `complete`. A selected action or model-reported `DONE` alone is not proof of completion. A separate [verified primary-planner reference](docs/benchmarks.md) reached **6/6** expected outcomes after strict review; it adds substantial model time and is not an automatic fallback shipped in the product.
 
 [Interactive replay: browser, desktop, survey](https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html) · [Recording method](docs/showcase.md) · [Safety gates and limitations](docs/hosted-execution.md)
 

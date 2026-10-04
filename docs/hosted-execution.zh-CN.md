@@ -82,7 +82,7 @@ jev-filter extract --url 'https://shop.example/results?q=red' \
 ## 桌面：`desktop`
 
 ```sh
-pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'   # Windows：UI Automation + OCR；macOS：pyobjc
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.1'   # Windows：UI Automation + OCR；macOS：pyobjc
 jev-filter desktop --list                  # 列出候选窗口
 jev-filter desktop --window '^Invoice Tool$' \
   --goal 'Set the customer name to Ada Lovelace, choose the Pro plan and save' \

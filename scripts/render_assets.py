@@ -139,33 +139,7 @@ fig.text(
 fig.savefig(OUT / "workflow-tradeoffs.png", dpi=180)
 fig.savefig(OUT / "workflow-tradeoffs.svg")
 plt.close(fig)
-hero = """<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-<title id="title">jev-filter</title><desc id="desc">Capture tool output, apply task-aware Jev judgments, deliver evidence to the agent. Originals stay available locally.</desc>
-<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101b2b"/><stop offset="1" stop-color="#192442"/></linearGradient><linearGradient id="accent"><stop stop-color="#83e3c4"/><stop offset="1" stop-color="#a6a0ff"/></linearGradient></defs>
-<rect width="1200" height="420" rx="22" fill="url(#bg)"/>
-<circle cx="1100" cy="0" r="240" fill="#8074df" opacity=".065"/>
-<g font-family="Arial,Helvetica,sans-serif">
-<text x="55" y="52" fill="#8eacc8" font-size="14" letter-spacing="3">TASK-AWARE TOOLS FOR AI AGENTS</text>
-<text x="52" y="128" fill="#f4f8ff" font-size="68" font-weight="700">jev<tspan fill="#8ce1c6">-filter</tspan></text>
-<text x="55" y="173" fill="#c5d2e5" font-size="23">Filter tool output before it reaches your agent.</text>
-<rect x="55" y="222" width="270" height="113" rx="13" fill="#23314a" stroke="#3a4a66"/>
-<text x="77" y="254" fill="#9aacbf" font-size="13" letter-spacing="1.5">01 / CAPTURE</text>
-<text x="77" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Tools &amp; records</text>
-<text x="77" y="311" fill="#9aacbf" font-size="16">Commands · code · DOM · logs</text>
-<path d="M337 277 H419 m-9 -8 9 8 -9 8" stroke="#83e3c4" stroke-width="2" fill="none"/>
-<rect x="433" y="222" width="295" height="113" rx="13" fill="#173b3c" stroke="#518f81"/>
-<text x="455" y="254" fill="#8fe4c8" font-size="13" letter-spacing="1.5">02 / JUDGE</text>
-<text x="455" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Jev + your context</text>
-<text x="455" y="311" fill="#a4c8c2" font-size="16">Typed decisions · batch · parallel</text>
-<path d="M740 277 H822 m-9 -8 9 8 -9 8" stroke="#aba6f3" stroke-width="2" fill="none"/>
-<rect x="838" y="222" width="307" height="113" rx="13" fill="#2c2d4e" stroke="#66628b"/>
-<text x="860" y="254" fill="#b9b2fa" font-size="13" letter-spacing="1.5">03 / REASON</text>
-<text x="860" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Evidence for the agent</text>
-<text x="860" y="311" fill="#b7b7d0" font-size="16">Relevant records + unresolved IDs</text>
-<text x="55" y="383" fill="#91a5bd" font-size="16">Originals retained locally</text><text x="433" y="383" fill="#91a5bd" font-size="16">Up to 30 concurrent requests</text><text x="838" y="383" fill="#91a5bd" font-size="16">No result cache</text>
-</g></svg>"""
-(OUT / "hero.svg").write_text(hero, encoding="utf-8")
-print("Rendered hero and benchmark charts from checked-in data.")
+print("Rendered historical benchmark charts from checked-in data; maintained hero is unchanged.")
 
 # Localized artwork uses the same data; no English paragraphs are mixed into Chinese pages.
 
@@ -274,24 +248,3 @@ else:
     raise RuntimeError(
         "Install a Chinese font (Noto Sans CJK SC recommended) to render localized charts"
     )
-
-hero_cn = hero
-for english, chinese in {
-    "TASK-AWARE TOOLS FOR AI AGENTS": "为 AI 提供与任务相关的工具结果",
-    "Filter tool output before it reaches your agent.": "先筛选工具结果，再让主模型推理。",
-    "01 / CAPTURE": "01 / 程序采集",
-    "02 / JUDGE": "02 / 语义判断",
-    "03 / REASON": "03 / 主模型推理",
-    "Tools &amp; records": "工具与原始记录",
-    "Commands · code · DOM · logs": "命令 · 代码 · 网页 · 日志",
-    "Jev + your context": "Jev + 任务上下文",
-    "Typed decisions · batch · parallel": "类型化判断 · 合批 · 并发",
-    "Evidence for the agent": "交给主模型的证据",
-    "Relevant records + unresolved IDs": "相关结果 + 待复核 ID",
-    "Originals retained locally": "原文保存在本地",
-    "Up to 30 concurrent requests": "最多 30 个并发请求",
-    "No result cache": "不使用结果缓存",
-}.items():
-    hero_cn = hero_cn.replace(english, chinese)
-hero_cn = hero_cn.replace("Arial,Helvetica,sans-serif", "PingFang SC,Microsoft YaHei,sans-serif")
-(OUT / "hero.zh-CN.svg").write_text(hero_cn, encoding="utf-8")

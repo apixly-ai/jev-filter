@@ -1,6 +1,6 @@
 {
   "name": "@apixly/jev-filter",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Give AI agents the signal: typed decisions, traceable evidence and bounded execution. Native runtime included.",
   "license": "MIT",
   "author": "JIA-ss",
@@ -42,10 +42,10 @@
     "test": "node --test npm/tests/*.test.cjs"
   },
   "optionalDependencies": {
-    "@apixly/jev-filter-darwin-arm64": "0.4.0",
-    "@apixly/jev-filter-darwin-x64": "0.4.0",
-    "@apixly/jev-filter-linux-arm64": "0.4.0",
-    "@apixly/jev-filter-linux-x64": "0.4.0"
+    "@apixly/jev-filter-darwin-arm64": "0.4.1",
+    "@apixly/jev-filter-darwin-x64": "0.4.1",
+    "@apixly/jev-filter-linux-arm64": "0.4.1",
+    "@apixly/jev-filter-linux-x64": "0.4.1"
   },
   "publishConfig": {
     "access": "public"
