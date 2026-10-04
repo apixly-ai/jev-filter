@@ -1,0 +1,628 @@
+{
+  "schema_version": 2,
+  "kind": "whole-operation-summary",
+  "timestamp_utc": "2026-10-04T07:28:45.150302+00:00",
+  "scope": "Fixed synthetic collectors plus real primary-agent shell invocation and continuation. Optional browser freshness guard only when locate is selected. Setup excluded and recorded separately. At most two model lanes; each lane serial. Not unrestricted agent tool selection.",
+  "models": [
+    "gpt-5.6-luna",
+    "gpt-6-astra"
+  ],
+  "cases": [
+    "code-search",
+    "triage",
+    "exec"
+  ],
+  "repeats": 2,
+  "result_cache": false,
+  "main_access": "Codex CLI configured authentication; token usage is measured, subscription billing is unknown.",
+  "pricing": {
+    "date_verified": "2026-10-04",
+    "unit": "USD per million tokens, Standard short context",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "https://docs.typesafe.ai/models"
+    ],
+    "main": {
+      "gpt-5.6-luna": {
+        "input": 0.2,
+        "cached_input": 0.02,
+        "cache_write": 0.25,
+        "output": 1.2
+      },
+      "gpt-6-astra": {
+        "input": 10,
+        "cached_input": 1,
+        "cache_write": 12.5,
+        "output": 50
+      }
+    },
+    "jev": {
+      "model": "jev-1.13.0",
+      "input": 0.042,
+      "output": 0
+    },
+    "caveat": "Caller-supplied rate snapshot verified from official sources on this date. API-equivalent modeling assumes Standard pricing and <=272K tokens per request; Codex events report aggregate token usage but do not establish every request's context length, cache-write charges, service tier or actual subscription billing. Cache-write rates are recorded but not modeled because usage is unavailable. Missing usage yields null cost. These estimates are not an invoice."
+  },
+  "cost_caveat": "Optional caller-supplied API-equivalent estimates are not a subscription invoice. Provider prompt caching is measured separately from inference-result caching. Missing usage or absent rates yield null cost, never zero.",
+  "latency_denominator": "All timed runs, including failures; untimed failures remain counted.",
+  "quality_denominator": "All attempted runs, including failures and review outcomes.",
+  "rows": [
+    {
+      "model": "gpt-5.6-luna",
+      "case": "code-search",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 14869,
+        "median_ms": 14869.0,
+        "min_ms": 13464,
+        "max_ms": 16274,
+        "timed_runs": 2,
+        "mean_context_bytes": 34839,
+        "mean_context_chars": 34839,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 86575,
+          "cached_input_tokens": 32256,
+          "output_tokens": 785
+        },
+        "main_known_tokens": {
+          "input_tokens": 86575,
+          "cached_input_tokens": 32256,
+          "output_tokens": 785
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.009128500000000001,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.00622546,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 16124,
+        "median_ms": 16124.0,
+        "min_ms": 15328,
+        "max_ms": 16920,
+        "timed_runs": 2,
+        "mean_context_bytes": 1353,
+        "mean_context_chars": 1353,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 66609,
+          "cached_input_tokens": 32256,
+          "output_tokens": 489
+        },
+        "main_known_tokens": {
+          "input_tokens": 66609,
+          "cached_input_tokens": 32256,
+          "output_tokens": 489
+        },
+        "jev_tokens": {
+          "input_tokens": 41818,
+          "output_tokens": 5850
+        },
+        "jev_known_tokens": {
+          "input_tokens": 41818,
+          "output_tokens": 5850
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.007832478,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.0049294379999999995,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 96.11642125204513,
+      "context_chars_reduction_pct": 96.11642125204513,
+      "main_input_tokens_reduction_pct": 23.062084897487722,
+      "cold_cost_reduction_pct": 14.19753519198117,
+      "adjusted_cost_reduction_pct": 20.81809215704543,
+      "latency_change_pct": 8.440379312663925
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "triage",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 15214,
+        "median_ms": 15214.0,
+        "min_ms": 14628,
+        "max_ms": 15800,
+        "timed_runs": 2,
+        "mean_context_bytes": 34938,
+        "mean_context_chars": 34938,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 85751,
+          "cached_input_tokens": 32256,
+          "output_tokens": 514
+        },
+        "main_known_tokens": {
+          "input_tokens": 85751,
+          "cached_input_tokens": 32256,
+          "output_tokens": 514
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.008883499999999999,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.005980460000000001,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 17085,
+        "median_ms": 17085.0,
+        "min_ms": 16729,
+        "max_ms": 17441,
+        "timed_runs": 2,
+        "mean_context_bytes": 984,
+        "mean_context_chars": 984,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 66442,
+          "cached_input_tokens": 32256,
+          "output_tokens": 534
+        },
+        "main_known_tokens": {
+          "input_tokens": 66442,
+          "cached_input_tokens": 32256,
+          "output_tokens": 534
+        },
+        "jev_tokens": {
+          "input_tokens": 78172,
+          "output_tokens": 11418
+        },
+        "jev_known_tokens": {
+          "input_tokens": 78172,
+          "output_tokens": 11418
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.008606212000000002,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.005703172,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 97.18358234586982,
+      "context_chars_reduction_pct": 97.18358234586982,
+      "main_input_tokens_reduction_pct": 22.517521661554962,
+      "cold_cost_reduction_pct": 3.121382338042411,
+      "adjusted_cost_reduction_pct": 4.636566417967858,
+      "latency_change_pct": 12.297883528329168
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "exec",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 15815.5,
+        "median_ms": 15815.5,
+        "min_ms": 14713,
+        "max_ms": 16918,
+        "timed_runs": 2,
+        "mean_context_bytes": 11081,
+        "mean_context_chars": 11081,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 70312,
+          "cached_input_tokens": 48384,
+          "output_tokens": 505
+        },
+        "main_known_tokens": {
+          "input_tokens": 70312,
+          "cached_input_tokens": 48384,
+          "output_tokens": 505
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.007334200000000001,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.0029796400000000004,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 15839,
+        "median_ms": 15839.0,
+        "min_ms": 15419,
+        "max_ms": 16259,
+        "timed_runs": 2,
+        "mean_context_bytes": 931,
+        "mean_context_chars": 931,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 66169,
+          "cached_input_tokens": 45312,
+          "output_tokens": 455
+        },
+        "main_known_tokens": {
+          "input_tokens": 66169,
+          "cached_input_tokens": 45312,
+          "output_tokens": 455
+        },
+        "jev_tokens": {
+          "input_tokens": 25024,
+          "output_tokens": 7818
+        },
+        "jev_known_tokens": {
+          "input_tokens": 25024,
+          "output_tokens": 7818
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.0074154040000000004,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.003337324,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 91.5982312065698,
+      "context_chars_reduction_pct": 91.5982312065698,
+      "main_input_tokens_reduction_pct": 5.892308567527593,
+      "cold_cost_reduction_pct": -1.107196422240997,
+      "adjusted_cost_reduction_pct": -12.004268972090571,
+      "latency_change_pct": 0.14858841010401136
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "code-search",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 18514,
+        "median_ms": 18514.0,
+        "min_ms": 18352,
+        "max_ms": 18676,
+        "timed_runs": 2,
+        "mean_context_bytes": 34839,
+        "mean_context_chars": 34839,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 98275,
+          "cached_input_tokens": 37120,
+          "output_tokens": 296
+        },
+        "main_known_tokens": {
+          "input_tokens": 98275,
+          "cached_input_tokens": 37120,
+          "output_tokens": 296
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.49877499999999997,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.331735,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 19443,
+        "median_ms": 19443.0,
+        "min_ms": 19370,
+        "max_ms": 19516,
+        "timed_runs": 2,
+        "mean_context_bytes": 1353,
+        "mean_context_chars": 1353,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 76149,
+          "cached_input_tokens": 37120,
+          "output_tokens": 292
+        },
+        "main_known_tokens": {
+          "input_tokens": 76149,
+          "cached_input_tokens": 37120,
+          "output_tokens": 292
+        },
+        "jev_tokens": {
+          "input_tokens": 41818,
+          "output_tokens": 5850
+        },
+        "jev_known_tokens": {
+          "input_tokens": 41818,
+          "output_tokens": 5850
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.388923178,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.22188317800000001,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 96.11642125204513,
+      "context_chars_reduction_pct": 96.11642125204513,
+      "main_input_tokens_reduction_pct": 22.514372933095906,
+      "cold_cost_reduction_pct": 22.024323993784765,
+      "adjusted_cost_reduction_pct": 33.11432981144588,
+      "latency_change_pct": 5.017824349141198
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "triage",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 1,
+        "review_runs": 1,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 23117,
+        "median_ms": 23117.0,
+        "min_ms": 21833,
+        "max_ms": 24401,
+        "timed_runs": 2,
+        "mean_context_bytes": 34938,
+        "mean_context_chars": 34938,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 99612,
+          "cached_input_tokens": 37120,
+          "output_tokens": 343
+        },
+        "main_known_tokens": {
+          "input_tokens": 99612,
+          "cached_input_tokens": 37120,
+          "output_tokens": 343
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.506635,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.339595,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 19583,
+        "median_ms": 19583.0,
+        "min_ms": 19383,
+        "max_ms": 19783,
+        "timed_runs": 2,
+        "mean_context_bytes": 984,
+        "mean_context_chars": 984,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 75926,
+          "cached_input_tokens": 37120,
+          "output_tokens": 308
+        },
+        "main_known_tokens": {
+          "input_tokens": 75926,
+          "cached_input_tokens": 37120,
+          "output_tokens": 308
+        },
+        "jev_tokens": {
+          "input_tokens": 78172,
+          "output_tokens": 11418
+        },
+        "jev_known_tokens": {
+          "input_tokens": 78172,
+          "output_tokens": 11418
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.388971612,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.221931612,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 97.18358234586982,
+      "context_chars_reduction_pct": 97.18358234586982,
+      "main_input_tokens_reduction_pct": 23.77825964743203,
+      "cold_cost_reduction_pct": 23.224488635802885,
+      "adjusted_cost_reduction_pct": 34.64815088561374,
+      "latency_change_pct": -15.287450793788127
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "exec",
+      "raw": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 18734.5,
+        "median_ms": 18734.5,
+        "min_ms": 16895,
+        "max_ms": 20574,
+        "timed_runs": 2,
+        "mean_context_bytes": 11081,
+        "mean_context_chars": 11081,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 79988,
+          "cached_input_tokens": 37120,
+          "output_tokens": 286
+        },
+        "main_known_tokens": {
+          "input_tokens": 79988,
+          "cached_input_tokens": 37120,
+          "output_tokens": 286
+        },
+        "jev_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "jev_known_tokens": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.40709,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.24004999999999999,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "filtered": {
+        "runs": 2,
+        "valid_runs": 2,
+        "invalid_runs": 0,
+        "selection_correct": 2,
+        "complete_correct": 2,
+        "review_runs": 0,
+        "review_ids_count": 0,
+        "false_positive_count": 0,
+        "false_negative_count": 0,
+        "mean_ms": 22189.5,
+        "median_ms": 22189.5,
+        "min_ms": 19785,
+        "max_ms": 24594,
+        "timed_runs": 2,
+        "mean_context_bytes": 931,
+        "mean_context_chars": 931,
+        "context_measurements": 2,
+        "main_tokens": {
+          "input_tokens": 75915,
+          "cached_input_tokens": 70400,
+          "output_tokens": 291
+        },
+        "main_known_tokens": {
+          "input_tokens": 75915,
+          "cached_input_tokens": 70400,
+          "output_tokens": 291
+        },
+        "jev_tokens": {
+          "input_tokens": 25024,
+          "output_tokens": 7818
+        },
+        "jev_known_tokens": {
+          "input_tokens": 25024,
+          "output_tokens": 7818
+        },
+        "usage_complete": true,
+        "actual_billed_usd": null,
+        "mean_cold_usd": 0.387375504,
+        "mean_cold_usd_measurements": 2,
+        "mean_adjusted_usd": 0.070575504,
+        "mean_adjusted_usd_measurements": 2
+      },
+      "context_bytes_reduction_pct": 91.5982312065698,
+      "context_chars_reduction_pct": 91.5982312065698,
+      "main_input_tokens_reduction_pct": 5.092013802070305,
+      "cold_cost_reduction_pct": 4.842785624800417,
+      "adjusted_cost_reduction_pct": 70.59966506977713,
+      "latency_change_pct": 18.441911980570612
+    }
+  ]
+}

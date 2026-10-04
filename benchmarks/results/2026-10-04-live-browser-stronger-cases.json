@@ -1,0 +1,1018 @@
+{
+  "schema_version": 1,
+  "kind": "live-browser-pinned-ab",
+  "created_at": "2026-10-04T07:34:20.085751+00:00",
+  "commits": {
+    "baseline": "39d0bdc21dd3b17de452f413181f422a4c84af18",
+    "treatment": "working-tree-snapshot"
+  },
+  "source_sha256": {
+    "baseline": "329682d8b5e60d9ea81fe6a552ddc11af952c65f4b322db6f9bf42db77a3e18f",
+    "treatment": "4a73f6d212df8f71a41348902558015627935bfd2f972e240ff2f69be8d449d0"
+  },
+  "repeats": 3,
+  "tasks": [
+    "already-satisfied-controls",
+    "nested-scroll-target"
+  ],
+  "fixture_sha256": "3ad5004db9b7876bfc1dec5885207cdcc3611a33a8b38809804cfc16a7d3049a",
+  "runtime": {
+    "python": "3.14.2",
+    "system": "Darwin"
+  },
+  "whole_benchmark_elapsed_ms": 27692.208,
+  "timing_scope": "fixture setup/navigation + observe/decide/act + independent final checks; browser startup reported separately",
+  "usage_scope": "actual provider-reported input/output tokens; failed or retried unknown usage is preserved",
+  "pricing": {
+    "usd_per_million_input": 0.042,
+    "output_billed": false,
+    "basis": "estimate using stated Jev price, not an invoice"
+  },
+  "scope": "synthetic loopback fixtures in new private Chromium processes; no customer/business execution",
+  "summary": {
+    "baseline": {
+      "runs": 6,
+      "passed": 3,
+      "correct_completions": 3,
+      "correct_gates": 0,
+      "review_or_failure": 3,
+      "statuses": {
+        "done": 3,
+        "blocked": 2,
+        "needs_review": 1
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 11,
+      "provider_attempts": 11,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 16071,
+        "output_tokens": 1131
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 16071,
+          "output_tokens": 1131
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 8023.541,
+      "whole_operation_median_ms": 1377.058,
+      "request_bytes": 53177,
+      "state_bytes": 5571,
+      "estimated_input_usd": 0.000674982
+    },
+    "treatment": {
+      "runs": 6,
+      "passed": 3,
+      "correct_completions": 3,
+      "correct_gates": 0,
+      "review_or_failure": 3,
+      "statuses": {
+        "done": 3,
+        "blocked": 1,
+        "needs_review": 2
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 10,
+      "provider_attempts": 10,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 14859,
+        "output_tokens": 1005
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 14859,
+          "output_tokens": 1005
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 7710.9,
+      "whole_operation_median_ms": 1331.182,
+      "request_bytes": 49651,
+      "state_bytes": 5331,
+      "estimated_input_usd": 0.000624078
+    }
+  },
+  "runs": [
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 548.632,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1287,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1377.682,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3732,
+        "output_tokens": 246
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3732,
+          "output_tokens": 246
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12600,
+      "state_bytes": 1459,
+      "estimated_input_usd": 0.000156744,
+      "known_input_usd_lower_bound": 0.000156744,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6260,
+          "state_bytes": 687,
+          "usage": {
+            "input_tokens": 1852,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 885.545
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6340,
+          "state_bytes": 772,
+          "usage": {
+            "input_tokens": 1880,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 354.496
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1
+    },
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 665.093,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1320,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1383.535,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3662,
+        "output_tokens": 232
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3662,
+          "output_tokens": 232
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12472,
+      "state_bytes": 1475,
+      "estimated_input_usd": 0.000153804,
+      "known_input_usd_lower_bound": 0.000153804,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6196,
+          "state_bytes": 695,
+          "usage": {
+            "input_tokens": 1817,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 923.895
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6276,
+          "state_bytes": 780,
+          "usage": {
+            "input_tokens": 1845,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 357.647
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 458.455,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "blocked",
+      "reason": "model_blocked",
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1548,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 1630.579,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1959,
+        "output_tokens": 159
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1959,
+          "output_tokens": 159
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 6173,
+      "state_bytes": 494,
+      "estimated_input_usd": 8.2278e-05,
+      "known_input_usd_lower_bound": 8.2278e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 1082.643
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3142,
+          "state_bytes": 288,
+          "usage": {
+            "input_tokens": 1002,
+            "output_tokens": 84
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 409.4
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 541.958,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "blocked",
+      "reason": "model_blocked",
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1199,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 1278.829,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1959,
+        "output_tokens": 159
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1959,
+          "output_tokens": 159
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 6173,
+      "state_bytes": 494,
+      "estimated_input_usd": 8.2278e-05,
+      "known_input_usd_lower_bound": 8.2278e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 771.628
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3142,
+          "state_bytes": 288,
+          "usage": {
+            "input_tokens": 1002,
+            "output_tokens": 84
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 380.613
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1
+    },
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 773.987,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1469,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1559.315,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3662,
+        "output_tokens": 232
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3662,
+          "output_tokens": 232
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12472,
+      "state_bytes": 1475,
+      "estimated_input_usd": 0.000153804,
+      "known_input_usd_lower_bound": 0.000153804,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6196,
+          "state_bytes": 695,
+          "usage": {
+            "input_tokens": 1817,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 1002.174
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6276,
+          "state_bytes": 780,
+          "usage": {
+            "input_tokens": 1845,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 399.385
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2
+    },
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 442.747,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1273,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1353.295,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3732,
+        "output_tokens": 246
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3732,
+          "output_tokens": 246
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12600,
+      "state_bytes": 1459,
+      "estimated_input_usd": 0.000156744,
+      "known_input_usd_lower_bound": 0.000156744,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6260,
+          "state_bytes": 687,
+          "usage": {
+            "input_tokens": 1852,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 858.267
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6340,
+          "state_bytes": 772,
+          "usage": {
+            "input_tokens": 1880,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 356.411
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 404.866,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.53,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "Scroll down in Results panel",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 850,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 927.132,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 957,
+        "output_tokens": 75
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 957,
+          "output_tokens": 75
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 3031,
+      "state_bytes": 206,
+      "estimated_input_usd": 4.0194e-05,
+      "known_input_usd_lower_bound": 4.0194e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 845.886
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 2
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 379.737,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.51,
+          "threshold": 0.55
+        },
+        {
+          "question": "operation",
+          "reason": "below_min_margin",
+          "actual": 0.09000000000000002,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "Scroll down in Results panel",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 809,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 889.779,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 957,
+        "output_tokens": 75
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 957,
+          "output_tokens": 75
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 3031,
+      "state_bytes": 206,
+      "estimated_input_usd": 4.0194e-05,
+      "known_input_usd_lower_bound": 4.0194e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 805.907
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 2
+    },
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 376.957,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1308,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1395.772,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3732,
+        "output_tokens": 246
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3732,
+          "output_tokens": 246
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12600,
+      "state_bytes": 1459,
+      "estimated_input_usd": 0.000156744,
+      "known_input_usd_lower_bound": 0.000156744,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6260,
+          "state_bytes": 687,
+          "usage": {
+            "input_tokens": 1852,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 894.551
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6340,
+          "state_bytes": 772,
+          "usage": {
+            "input_tokens": 1880,
+            "output_tokens": 123
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 362.056
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3
+    },
+    {
+      "task": "already-satisfied-controls",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 463.084,
+      "passed": true,
+      "correct_completion": true,
+      "correct_gate": false,
+      "review_or_failure": false,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "done",
+      "reason": null,
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1412,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "confirmed": true,
+        "exact_controls": true
+      },
+      "whole_operation_ms": 1493.263,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 3662,
+        "output_tokens": 232
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 3662,
+          "output_tokens": 232
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 12472,
+      "state_bytes": 1475,
+      "estimated_input_usd": 0.000153804,
+      "known_input_usd_lower_bound": 0.000153804,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6196,
+          "state_bytes": 695,
+          "usage": {
+            "input_tokens": 1817,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 992.767
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 6276,
+          "state_bytes": 780,
+          "usage": {
+            "input_tokens": 1845,
+            "output_tokens": 116
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 368.269
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 454.145,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "blocked",
+      "reason": "model_blocked",
+      "review_reasons": [],
+      "pending_label": null,
+      "error_type": null,
+      "error": null,
+      "steps": 1,
+      "kernel_elapsed_ms": 1288,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 1376.434,
+      "model_calls": 2,
+      "provider_attempts": 2,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 1959,
+        "output_tokens": 159
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 1959,
+          "output_tokens": 159
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 6173,
+      "state_bytes": 494,
+      "estimated_input_usd": 8.2278e-05,
+      "known_input_usd_lower_bound": 8.2278e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 873.085
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3142,
+          "state_bytes": 288,
+          "usage": {
+            "input_tokens": 1002,
+            "output_tokens": 84
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 365.571
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 3
+    },
+    {
+      "task": "nested-scroll-target",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 400.625,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.52,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "Scroll down in Results panel",
+      "error_type": null,
+      "error": null,
+      "steps": 0,
+      "kernel_elapsed_ms": 990,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "target_effect": false
+      },
+      "whole_operation_ms": 1068.826,
+      "model_calls": 1,
+      "provider_attempts": 1,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 957,
+        "output_tokens": 75
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 957,
+          "output_tokens": 75
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 3031,
+      "state_bytes": 206,
+      "estimated_input_usd": 4.0194e-05,
+      "known_input_usd_lower_bound": 4.0194e-05,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 3031,
+          "state_bytes": 206,
+          "usage": {
+            "input_tokens": 957,
+            "output_tokens": 75
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 986.503
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 3
+    }
+  ],
+  "limitations": [
+    "Small fixture sets and repeated runs cannot establish production reliability or calibrated accuracy.",
+    "This compares released program versions on the same Jev model, not Jev against an LLM.",
+    "Needed confirmation is a correct expected stop; it is never resumed in the benchmark.",
+    "Synthetic final-state checks reject a false DONE but do not prove every intermediate action was optimal."
+  ]
+}

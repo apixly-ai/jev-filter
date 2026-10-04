@@ -1,0 +1,2959 @@
+{
+  "schema_version": 1,
+  "kind": "live_synthetic_interface_e2e",
+  "timestamp_utc": "2026-10-04T07:46:23.227286+00:00",
+  "python_source_version": "0.4.0",
+  "npm_package": "@apixly/jev-filter@0.4.0",
+  "result_cache": false,
+  "max_independent_workers": 4,
+  "scope": "Real Python CLI and freshly installed published JS/native/MCP interfaces, local Chromium extraction and synthetic CLI survey. Whole process startup and verification included. No external business actions or primary-agent continuation.",
+  "runner_sha256": "1757b8a0b4a61b165f74c8c3fb555b4460a619e6d8e266739c5ff47eadee862b",
+  "fixture_sha256": "f2ec71f692e8c12b24e4a667854a54abe39b85dccde0697bf455712308d0b89f",
+  "limitations": [
+    "Small synthetic interface checks are not a production reliability or open-web success study.",
+    "Resolved model identity is unavailable from these public interfaces; requested model and returned token envelopes are kept separate.",
+    "Survey repetitions cover eight simple templates, not a held-out topic-generalization evaluation.",
+    "USD estimates in interface packets are application estimates, not verified supplier invoices."
+  ],
+  "checks": [
+    {
+      "name": "python_cli_query_32",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "expected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 993.802,
+      "returned_context_bytes": 6016,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 10247,
+          "output_tokens": 3055
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": null,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 16,
+        "mode": "filter",
+        "receipt": "receipt:d086db33c817a0d7",
+        "scope_incomplete": false,
+        "ok": true,
+        "archive": "receipt:32b751822ca5e370",
+        "cache_enabled": false,
+        "collection": {},
+        "source_count": 32,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 10247,
+            "output_tokens": 3055
+          },
+          "usage_complete": true,
+          "network_questions": 64,
+          "workers": 1,
+          "requests": 1
+        },
+        "elapsed_ms": 925,
+        "excerpts": [
+          {
+            "source_id": "r000",
+            "text": "Service 0. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "6897fd9ac0f5548b9fd23ee92f0983b2413c2f47c0981f8a6d545fc739587f06"
+            },
+            "start": 0,
+            "end": 81,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r001",
+            "text": "Service 1. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "600813649e39e3c3542b0c261b6e65acb73b4163efe29adf2369d03e1817051b"
+            },
+            "start": 0,
+            "end": 75,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r002",
+            "text": "Service 2. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "347055c730c4e75a4c5939ab174e95428924690c7ab6f8382501604041d2f497"
+            },
+            "start": 0,
+            "end": 64,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r006",
+            "text": "Service 6. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "e6967d46da3240a9c50420e8e53cfee8a670cce256df10557f50dd0eaf551609"
+            },
+            "start": 0,
+            "end": 40,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r008",
+            "text": "Service 8. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "267a2adf13d858e8a1c3175d4b9a9296ccd835564d5c8a89429a86051b989bbc"
+            },
+            "start": 0,
+            "end": 81,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r009",
+            "text": "Service 9. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "c3d399f83acdf982f906636893e1e83e6393ed6590ea504dfb17ae58eb4e1f6b"
+            },
+            "start": 0,
+            "end": 75,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r010",
+            "text": "Service 10. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "5a7b137da20e957136674dba0c07499e7517f856d0da7a961f00edaaba2b89fd"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r014",
+            "text": "Service 14. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "107a412e992344b4497ebf2a200aca1cf5be497e34d7271a441a89a7e18be75f"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r016",
+            "text": "Service 16. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "24fab0488584edd4596b37b8932bf42a38618c6fa62e2f3f04134017799ba6cf"
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r017",
+            "text": "Service 17. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "b395716c7bd8048d89fbfce4302b90e0a5aba4d3427091dcff0634eb855e7e1f"
+            },
+            "start": 0,
+            "end": 76,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r018",
+            "text": "Service 18. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "3ad9950076c6621bcd4f2fc696413ae3f33d04bcfe3e96cf556c1d8f01d3d58c"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r022",
+            "text": "Service 22. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "03e883ae5327ecff2544db5779f318f819eb3215021cd3408cd56de302bf13e0"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r024",
+            "text": "Service 24. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "933cd95ec4b48ce0313e829186f9ddba85584255d00d6b262df85f666288da85"
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r025",
+            "text": "Service 25. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "d0237eab2ca9eb57eb29b6ae9551e9e1f0f08a7b4933c12c75d7ab1dd4016039"
+            },
+            "start": 0,
+            "end": 76,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r026",
+            "text": "Service 26. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "04e7bb5d74d7c7ec56806531dc08ee8dff12b8845138283c08f9399558540285"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r030",
+            "text": "Service 30. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "6e655de29486f7a0d0a7aa3f657f63826162cdadfd44fe05d8c7a63311b121e2"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "python_cli_code_recall",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "expected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1032.115,
+      "returned_context_bytes": 2438,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 1799,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "auth.py:persist_token:1",
+          "auth.py:refresh_credentials:7",
+          "auth.py:renew_session:4"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 1,
+        "ok": true,
+        "archive": "receipt:71ebbead4ec7af2e",
+        "receipt": "receipt:0803a75274f699be",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 1799,
+            "output_tokens": 189
+          },
+          "usage_complete": true,
+          "network_questions": 4,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 903,
+        "tool": "code-search",
+        "elapsed_ms": 927,
+        "analysis_receipt": "receipt:52743e5db70660e9",
+        "excerpts": [
+          {
+            "source_id": "auth.py:persist_token:1",
+            "text": "def persist_token(token):\n    return write_disk(token) # token_anchor\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "persist_token",
+              "line": 1,
+              "end_line": 2,
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "exact"
+                ]
+              }
+            },
+            "start": 0,
+            "end": 70,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "auth.py:refresh_credentials:7",
+            "text": "def refresh_credentials(secret):\n    return save_credentials(secret)\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "refresh_credentials",
+              "line": 7,
+              "end_line": 8,
+              "calls": [
+                "save_credentials"
+              ],
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "lexical"
+                ],
+                "score": 9.830533
+              }
+            },
+            "start": 0,
+            "end": 69,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "auth.py:renew_session:4",
+            "text": "def renew_session(token):\n    return persist_token(token)\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "renew_session",
+              "line": 4,
+              "end_line": 5,
+              "calls": [
+                "persist_token"
+              ],
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "caller"
+                ],
+                "call_clues": [
+                  "persist_token"
+                ]
+              }
+            },
+            "start": 0,
+            "end": 58,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "python_cli_triage_8",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "expected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1037.356,
+      "returned_context_bytes": 1310,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 3329,
+          "output_tokens": 755
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 4,
+        "ok": true,
+        "archive": "receipt:ff92ec789a46539b",
+        "receipt": "receipt:1c515886acd8ccf7",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 3329,
+            "output_tokens": 755
+          },
+          "usage_complete": true,
+          "network_questions": 16,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 947,
+        "tool": "triage",
+        "elapsed_ms": 947,
+        "analysis_receipt": "receipt:32f5782dad321cc8",
+        "excerpts": [
+          {
+            "source_id": "correlated:request-0",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-1",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-2",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-6",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "python_cli_diff_6",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "expected": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1296.144,
+      "returned_context_bytes": 4131,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 3405,
+          "output_tokens": 283
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 2,
+        "ok": true,
+        "archive": "receipt:a62617616cf8c49e",
+        "receipt": "receipt:203eb6b807d9ee25",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 3405,
+            "output_tokens": 283
+          },
+          "usage_complete": true,
+          "network_questions": 6,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 879,
+        "tool": "diff-review",
+        "elapsed_ms": 1193,
+        "analysis_receipt": "receipt:4f547dc1f8feb692",
+        "excerpts": [
+          {
+            "source_id": "diff:auth.py",
+            "text": "{\"path\":\"auth.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def can_manage(user):\\n    return user.is_admin\\n\",\"after\":\"def can_manage(user):\\n    return True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "auth.py",
+              "path": "auth.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "77a5b67bf10595dac0de71c93d52e59ee9a120ca",
+              "after_blob": null,
+              "before_sha256": "7587216d8456fb152b9288735a55047a59d9a0247dd97d0a563451889c390bbe",
+              "after_sha256": "f3cbf41d54ae88bbd84d9e8d4211128eec152af99b090a3b0aac967c4caa9243",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 188,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:input.py",
+            "text": "{\"path\":\"input.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def run(value):\\n    return execute(sanitize(value))\\n\",\"after\":\"def run(value):\\n    return execute(value)\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "input.py",
+              "path": "input.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "ae10ef1b810aef9f64c4651fb06733df4446e484",
+              "after_blob": null,
+              "before_sha256": "791034319cedd7ecd9916f3bac241cdc52eac51a8288fb74faeb866a11ec093a",
+              "after_sha256": "eecc129fc98baab483b2e441a4fbdec2ea64f934dffa2496c7236f74cbb95fa0",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 198,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:quota.py",
+            "text": "{\"path\":\"quota.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def allowed(balance, amount):\\n    return balance >= amount\\n\",\"after\":\"def allowed(balance, amount):\\n    return True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "quota.py",
+              "path": "quota.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "5aade67c320eba18c88103db1ab624c22aa7ec19",
+              "after_blob": null,
+              "before_sha256": "5c4a912600fabce2dbec874c699023ee73aff224c8fdaa74392f3aa172e265ac",
+              "after_sha256": "f95581444977bdd750cf24ce4468e4b832a0a065c8dde19caf039f25a5e62e65",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 209,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:test_auth.py",
+            "text": "{\"path\":\"test_auth.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def test_member_cannot_manage():\\n    assert can_manage(member) is False\\n\",\"after\":\"def test_member_cannot_manage():\\n    assert True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "test_auth.py",
+              "path": "test_auth.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "6ae009fe648613f01d6cad932d515fa412f5e5e3",
+              "after_blob": null,
+              "before_sha256": "4b7af6b9a696fe3c7216012ac78f83921088ba5f0ed818698088a1e08918bbf3",
+              "after_sha256": "a49909333497aa46f9a98793ceb42c73f044eb33b1dc746b2902a9bfffe3bc9b",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 229,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published_js_query_32",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "expected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 3014.226,
+      "returned_context_bytes": 6041,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 10247,
+          "output_tokens": 3055
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": null,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 16,
+        "mode": "filter",
+        "receipt": "receipt:ec23c52d79094007",
+        "scope_incomplete": false,
+        "ok": true,
+        "archive": "receipt:0657d64301b47600",
+        "cache_enabled": false,
+        "collection": {},
+        "source_count": 32,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 10247,
+            "output_tokens": 3055
+          },
+          "usage_complete": true,
+          "network_questions": 64,
+          "workers": 1,
+          "requests": 1
+        },
+        "elapsed_ms": 2310,
+        "excerpts": [
+          {
+            "source_id": "r000",
+            "text": "Service 0. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "6897fd9ac0f5548b9fd23ee92f0983b2413c2f47c0981f8a6d545fc739587f06"
+            },
+            "start": 0,
+            "end": 81,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r001",
+            "text": "Service 1. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "600813649e39e3c3542b0c261b6e65acb73b4163efe29adf2369d03e1817051b"
+            },
+            "start": 0,
+            "end": 75,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r002",
+            "text": "Service 2. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "347055c730c4e75a4c5939ab174e95428924690c7ab6f8382501604041d2f497"
+            },
+            "start": 0,
+            "end": 64,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r006",
+            "text": "Service 6. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "e6967d46da3240a9c50420e8e53cfee8a670cce256df10557f50dd0eaf551609"
+            },
+            "start": 0,
+            "end": 40,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r008",
+            "text": "Service 8. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "267a2adf13d858e8a1c3175d4b9a9296ccd835564d5c8a89429a86051b989bbc"
+            },
+            "start": 0,
+            "end": 81,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r009",
+            "text": "Service 9. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "c3d399f83acdf982f906636893e1e83e6393ed6590ea504dfb17ae58eb4e1f6b"
+            },
+            "start": 0,
+            "end": 75,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r010",
+            "text": "Service 10. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "5a7b137da20e957136674dba0c07499e7517f856d0da7a961f00edaaba2b89fd"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r014",
+            "text": "Service 14. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "107a412e992344b4497ebf2a200aca1cf5be497e34d7271a441a89a7e18be75f"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r016",
+            "text": "Service 16. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "24fab0488584edd4596b37b8932bf42a38618c6fa62e2f3f04134017799ba6cf"
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r017",
+            "text": "Service 17. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "b395716c7bd8048d89fbfce4302b90e0a5aba4d3427091dcff0634eb855e7e1f"
+            },
+            "start": 0,
+            "end": 76,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r018",
+            "text": "Service 18. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "3ad9950076c6621bcd4f2fc696413ae3f33d04bcfe3e96cf556c1d8f01d3d58c"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r022",
+            "text": "Service 22. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "03e883ae5327ecff2544db5779f318f819eb3215021cd3408cd56de302bf13e0"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r024",
+            "text": "Service 24. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "933cd95ec4b48ce0313e829186f9ddba85584255d00d6b262df85f666288da85"
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r025",
+            "text": "Service 25. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "d0237eab2ca9eb57eb29b6ae9551e9e1f0f08a7b4933c12c75d7ab1dd4016039"
+            },
+            "start": 0,
+            "end": 76,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r026",
+            "text": "Service 26. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "04e7bb5d74d7c7ec56806531dc08ee8dff12b8845138283c08f9399558540285"
+            },
+            "start": 0,
+            "end": 65,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r030",
+            "text": "Service 30. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "sha256": "6e655de29486f7a0d0a7aa3f657f63826162cdadfd44fe05d8c7a63311b121e2"
+            },
+            "start": 0,
+            "end": 41,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published_js_code_recall",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "expected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1596.818,
+      "returned_context_bytes": 2464,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 1799,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "auth.py:persist_token:1",
+          "auth.py:refresh_credentials:7",
+          "auth.py:renew_session:4"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 1,
+        "ok": true,
+        "archive": "receipt:b2ff11da7497474a",
+        "receipt": "receipt:6e905a4446b6455e",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 1799,
+            "output_tokens": 189
+          },
+          "usage_complete": true,
+          "network_questions": 4,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 1068,
+        "tool": "code-search",
+        "elapsed_ms": 1389,
+        "analysis_receipt": "receipt:cfeeb8e10af518f0",
+        "excerpts": [
+          {
+            "source_id": "auth.py:persist_token:1",
+            "text": "def persist_token(token):\n    return write_disk(token) # token_anchor\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "persist_token",
+              "line": 1,
+              "end_line": 2,
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "exact"
+                ]
+              }
+            },
+            "start": 0,
+            "end": 70,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "auth.py:refresh_credentials:7",
+            "text": "def refresh_credentials(secret):\n    return save_credentials(secret)\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "refresh_credentials",
+              "line": 7,
+              "end_line": 8,
+              "calls": [
+                "save_credentials"
+              ],
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "lexical"
+                ],
+                "score": 9.830533
+              }
+            },
+            "start": 0,
+            "end": 69,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "auth.py:renew_session:4",
+            "text": "def renew_session(token):\n    return persist_token(token)\n",
+            "status": "OK",
+            "answers": {
+              "implements": "SUPPORTED"
+            },
+            "source": {
+              "path": "auth.py",
+              "symbol": "renew_session",
+              "line": 4,
+              "end_line": 5,
+              "calls": [
+                "persist_token"
+              ],
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7",
+              "retrieval": {
+                "channels": [
+                  "caller"
+                ],
+                "call_clues": [
+                  "persist_token"
+                ]
+              }
+            },
+            "start": 0,
+            "end": 58,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published_js_triage_8",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "expected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1129.669,
+      "returned_context_bytes": 1334,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 3329,
+          "output_tokens": 755
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 4,
+        "ok": true,
+        "archive": "receipt:1d1b684252726af5",
+        "receipt": "receipt:69b22a98d24edf33",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 3329,
+            "output_tokens": 755
+          },
+          "usage_complete": true,
+          "network_questions": 16,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 913,
+        "tool": "triage",
+        "elapsed_ms": 913,
+        "analysis_receipt": "receipt:e44f87cdd49a34a5",
+        "excerpts": [
+          {
+            "source_id": "correlated:request-0",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-1",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-2",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "correlated:request-6",
+            "answers": {
+              "establishment": "SUPPORTED",
+              "response": "CONTRADICTED"
+            },
+            "source": {
+              "event_count": 1
+            },
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published_js_diff_6",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "expected": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 1341.422,
+      "returned_context_bytes": 4155,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 3405,
+          "output_tokens": 283
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "diff:auth.py",
+          "diff:input.py",
+          "diff:quota.py",
+          "diff:test_auth.py"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 2,
+        "ok": true,
+        "archive": "receipt:f264a51fdc230e7b",
+        "receipt": "receipt:844a3f4d5e9459ac",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 3405,
+            "output_tokens": 283
+          },
+          "usage_complete": true,
+          "network_questions": 6,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 950,
+        "tool": "diff-review",
+        "elapsed_ms": 1135,
+        "analysis_receipt": "receipt:6c9ba8f4fb59bafe",
+        "excerpts": [
+          {
+            "source_id": "diff:auth.py",
+            "text": "{\"path\":\"auth.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def can_manage(user):\\n    return user.is_admin\\n\",\"after\":\"def can_manage(user):\\n    return True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "auth.py",
+              "path": "auth.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "77a5b67bf10595dac0de71c93d52e59ee9a120ca",
+              "after_blob": null,
+              "before_sha256": "7587216d8456fb152b9288735a55047a59d9a0247dd97d0a563451889c390bbe",
+              "after_sha256": "f3cbf41d54ae88bbd84d9e8d4211128eec152af99b090a3b0aac967c4caa9243",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 188,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:input.py",
+            "text": "{\"path\":\"input.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def run(value):\\n    return execute(sanitize(value))\\n\",\"after\":\"def run(value):\\n    return execute(value)\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "input.py",
+              "path": "input.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "ae10ef1b810aef9f64c4651fb06733df4446e484",
+              "after_blob": null,
+              "before_sha256": "791034319cedd7ecd9916f3bac241cdc52eac51a8288fb74faeb866a11ec093a",
+              "after_sha256": "eecc129fc98baab483b2e441a4fbdec2ea64f934dffa2496c7236f74cbb95fa0",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 198,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:quota.py",
+            "text": "{\"path\":\"quota.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def allowed(balance, amount):\\n    return balance >= amount\\n\",\"after\":\"def allowed(balance, amount):\\n    return True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "quota.py",
+              "path": "quota.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "5aade67c320eba18c88103db1ab624c22aa7ec19",
+              "after_blob": null,
+              "before_sha256": "5c4a912600fabce2dbec874c699023ee73aff224c8fdaa74392f3aa172e265ac",
+              "after_sha256": "f95581444977bdd750cf24ce4468e4b832a0a065c8dde19caf039f25a5e62e65",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 209,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "diff:test_auth.py",
+            "text": "{\"path\":\"test_auth.py\",\"change\":\"M\",\"before_mode\":\"100644\",\"after_mode\":\"100644\",\"before\":\"def test_member_cannot_manage():\\n    assert can_manage(member) is False\\n\",\"after\":\"def test_member_cannot_manage():\\n    assert True\\n\"}",
+            "status": "OK",
+            "answers": {
+              "weakens": "SUPPORTED"
+            },
+            "source": {
+              "relative_path": "test_auth.py",
+              "path": "test_auth.py",
+              "change": "M",
+              "before_mode": "100644",
+              "after_mode": "100644",
+              "before_blob": "6ae009fe648613f01d6cad932d515fa412f5e5e3",
+              "after_blob": null,
+              "before_sha256": "4b7af6b9a696fe3c7216012ac78f83921088ba5f0ed818698088a1e08918bbf3",
+              "after_sha256": "a49909333497aa46f9a98793ceb42c73f044eb33b1dc746b2902a9bfffe3bc9b",
+              "evidence_complete": true
+            },
+            "start": 0,
+            "end": 229,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "published_native_official_mcp_filter",
+      "exit_code": null,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "expected": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "false_positive": [],
+        "false_negative": [],
+        "evidence_roundtrip": true
+      },
+      "passed": true,
+      "whole_operation_ms": 1129.321,
+      "returned_context_bytes": 9403,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 10247,
+          "output_tokens": 3055
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "r000",
+          "r001",
+          "r002",
+          "r006",
+          "r008",
+          "r009",
+          "r010",
+          "r014",
+          "r016",
+          "r017",
+          "r018",
+          "r022",
+          "r024",
+          "r025",
+          "r026",
+          "r030"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 16,
+        "ok": true,
+        "archive": "receipt:9284c2f11ba037e5",
+        "receipt": "receipt:266138e1f43b8c1a",
+        "excerpts": [
+          {
+            "source_id": "r000",
+            "start": 0,
+            "end": 81,
+            "text": "Service 0. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.95,
+                "probabilities": {
+                  "UNKNOWN": 0.03,
+                  "SUPPORTED": 0.97,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r001",
+            "start": 0,
+            "end": 75,
+            "text": "Service 1. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 1.0,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r002",
+            "start": 0,
+            "end": 64,
+            "text": "Service 2. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.98,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.99,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r006",
+            "start": 0,
+            "end": 40,
+            "text": "Service 6. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.91,
+                "probabilities": {
+                  "UNKNOWN": 0.06,
+                  "SUPPORTED": 0.94,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r008",
+            "start": 0,
+            "end": 81,
+            "text": "Service 8. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.96,
+                "probabilities": {
+                  "UNKNOWN": 0.03,
+                  "SUPPORTED": 0.97,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r009",
+            "start": 0,
+            "end": 75,
+            "text": "Service 9. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 1.0,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r010",
+            "start": 0,
+            "end": 65,
+            "text": "Service 10. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.98,
+                "probabilities": {
+                  "UNKNOWN": 0.02,
+                  "SUPPORTED": 0.98,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r014",
+            "start": 0,
+            "end": 41,
+            "text": "Service 14. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.92,
+                "probabilities": {
+                  "UNKNOWN": 0.05,
+                  "SUPPORTED": 0.95,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r016",
+            "start": 0,
+            "end": 82,
+            "text": "Service 16. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.93,
+                "probabilities": {
+                  "UNKNOWN": 0.04,
+                  "SUPPORTED": 0.96,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r017",
+            "start": 0,
+            "end": 76,
+            "text": "Service 17. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 1.0,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "SUPPORTED": 0.0,
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r018",
+            "start": 0,
+            "end": 65,
+            "text": "Service 18. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.98,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.99,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r022",
+            "start": 0,
+            "end": 41,
+            "text": "Service 22. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.92,
+                "probabilities": {
+                  "UNKNOWN": 0.05,
+                  "SUPPORTED": 0.95,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r024",
+            "start": 0,
+            "end": 82,
+            "text": "Service 24. The current request failed at DNS resolution before any HTTP response.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.95,
+                "probabilities": {
+                  "UNKNOWN": 0.03,
+                  "SUPPORTED": 0.97,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r025",
+            "start": 0,
+            "end": 76,
+            "text": "Service 25. The current TCP connection was refused. No HTTP headers arrived.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 1.0,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r026",
+            "start": 0,
+            "end": 65,
+            "text": "Service 26. The current TLS handshake failed before HTTP started.",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.98,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.99,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.01,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "r030",
+            "start": 0,
+            "end": 41,
+            "text": "Service 30. 当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.92,
+                "probabilities": {
+                  "UNKNOWN": 0.05,
+                  "SUPPORTED": 0.95,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "SUPPORTED": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          }
+        ],
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 10247,
+            "output_tokens": 3055
+          },
+          "usage_complete": true,
+          "network_questions": 64,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 1122
+      },
+      "protocol": "2025-11-25",
+      "listed_tools": 4
+    },
+    {
+      "name": "published_native_official_mcp_search",
+      "exit_code": null,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "expected": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 6057.657,
+      "returned_context_bytes": 2594,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 1799,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "auth.py:persist_token:1",
+          "auth.py:refresh_credentials:7",
+          "auth.py:renew_session:4"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 1,
+        "ok": true,
+        "archive": "receipt:46a7ab5b4bc11425",
+        "receipt": "receipt:ccfec64590db2942",
+        "excerpts": [
+          {
+            "source_id": "auth.py:persist_token:1",
+            "start": 0,
+            "end": 70,
+            "text": "def persist_token(token):\n    return write_disk(token) # token_anchor\n",
+            "status": "OK",
+            "answers": {
+              "implements": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 0.0,
+                  "SUPPORTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {
+              "path": "auth.py",
+              "symbol": "persist_token",
+              "line": 1,
+              "end_line": 2,
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7"
+            }
+          },
+          {
+            "source_id": "auth.py:refresh_credentials:7",
+            "start": 0,
+            "end": 69,
+            "text": "def refresh_credentials(secret):\n    return save_credentials(secret)\n",
+            "status": "OK",
+            "answers": {
+              "implements": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.98,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 0.01,
+                  "SUPPORTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {
+              "path": "auth.py",
+              "symbol": "refresh_credentials",
+              "line": 7,
+              "end_line": 8,
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7"
+            }
+          },
+          {
+            "source_id": "auth.py:renew_session:4",
+            "start": 0,
+            "end": 58,
+            "text": "def renew_session(token):\n    return persist_token(token)\n",
+            "status": "OK",
+            "answers": {
+              "implements": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 0.0,
+                  "SUPPORTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {
+              "path": "auth.py",
+              "symbol": "renew_session",
+              "line": 4,
+              "end_line": 5,
+              "boundary": "symbol",
+              "source_sha256": "5252c3784c63b3fd9813e1535f824269360586e9fe00f6f4a9bc6be2803634f7"
+            }
+          }
+        ],
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 1799,
+            "output_tokens": 189
+          },
+          "usage_complete": true,
+          "network_questions": 4,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 6023
+      },
+      "protocol": "2025-11-25",
+      "listed_tools": 4
+    },
+    {
+      "name": "published_native_official_mcp_triage",
+      "exit_code": null,
+      "verification": {
+        "passed": true,
+        "selected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "expected": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "false_positive": [],
+        "false_negative": []
+      },
+      "passed": true,
+      "whole_operation_ms": 941.425,
+      "returned_context_bytes": 3251,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 3329,
+          "output_tokens": 755
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "correlated:request-0",
+          "correlated:request-1",
+          "correlated:request-2",
+          "correlated:request-6"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 4,
+        "ok": true,
+        "archive": "receipt:3b34305a270cb2b8",
+        "receipt": "receipt:b405adabd6844674",
+        "excerpts": [
+          {
+            "source_id": "correlated:request-0",
+            "start": 0,
+            "end": 160,
+            "text": "{\"events\":[{\"event\":{\"request_id\":\"request-0\",\"message\":\"The current request failed at DNS resolution before any HTTP response.\"},\"occurrences\":1,\"lines\":[1]}]}",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.93,
+                "probabilities": {
+                  "SUPPORTED": 0.96,
+                  "UNKNOWN": 0.04,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "SUPPORTED": 0.0,
+                  "UNKNOWN": 0.01,
+                  "CONTRADICTED": 0.99
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "correlated:request-1",
+            "start": 0,
+            "end": 154,
+            "text": "{\"events\":[{\"event\":{\"request_id\":\"request-1\",\"message\":\"The current TCP connection was refused. No HTTP headers arrived.\"},\"occurrences\":1,\"lines\":[2]}]}",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "SUPPORTED": 1.0,
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "SUPPORTED": 0.0,
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "correlated:request-2",
+            "start": 0,
+            "end": 143,
+            "text": "{\"events\":[{\"event\":{\"request_id\":\"request-2\",\"message\":\"The current TLS handshake failed before HTTP started.\"},\"occurrences\":1,\"lines\":[3]}]}",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "SUPPORTED": 0.99,
+                  "UNKNOWN": 0.01,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 0.99,
+                "probabilities": {
+                  "SUPPORTED": 0.0,
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          },
+          {
+            "source_id": "correlated:request-6",
+            "start": 0,
+            "end": 119,
+            "text": "{\"events\":[{\"event\":{\"request_id\":\"request-6\",\"message\":\"当前请求在 TLS 建连时失败，尚未收到 HTTP 响应。\"},\"occurrences\":1,\"lines\":[7]}]}",
+            "status": "OK",
+            "answers": {
+              "establishment": {
+                "type": "choice",
+                "choice": "SUPPORTED",
+                "confidence": 0.94,
+                "probabilities": {
+                  "SUPPORTED": 0.96,
+                  "UNKNOWN": 0.04,
+                  "CONTRADICTED": 0.0
+                }
+              },
+              "response": {
+                "type": "choice",
+                "choice": "CONTRADICTED",
+                "confidence": 1.0,
+                "probabilities": {
+                  "SUPPORTED": 0.0,
+                  "UNKNOWN": 0.0,
+                  "CONTRADICTED": 1.0
+                }
+              }
+            },
+            "decision": "MATCH",
+            "display_truncated": false,
+            "source": {}
+          }
+        ],
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 3329,
+            "output_tokens": 755
+          },
+          "usage_complete": true,
+          "network_questions": 16,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 937
+      },
+      "protocol": "2025-11-25",
+      "listed_tools": 4
+    },
+    {
+      "name": "python_cli_local_table_extract",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "semantic_selected_skus": [
+          "L1",
+          "L3",
+          "L4",
+          "L7"
+        ],
+        "deterministic_price_under_35_skus": [
+          "L1",
+          "L4",
+          "L7"
+        ],
+        "price_comparison_owner": "program; exact numeric data parsed from collected source rows"
+      },
+      "passed": true,
+      "whole_operation_ms": 1857.504,
+      "returned_context_bytes": 1838,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 4741,
+          "output_tokens": 1115
+        },
+        "usage_complete": true,
+        "requests": 1,
+        "unknown_usage_attempts": 0,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "selected_ids": [
+          "r1",
+          "r3",
+          "r4",
+          "r7"
+        ],
+        "review_ids": [],
+        "complete": true,
+        "excluded_count": 4,
+        "ok": true,
+        "archive": "receipt:3d04bad0e536f46b",
+        "receipt": "receipt:44eaa67acf200ee8",
+        "scope_incomplete": false,
+        "cache_enabled": false,
+        "telemetry": {
+          "usage": {
+            "input_tokens": 4741,
+            "output_tokens": 1115
+          },
+          "usage_complete": true,
+          "network_questions": 24,
+          "workers": 1,
+          "unknown_usage_attempts": 0,
+          "requests": 1
+        },
+        "analysis_ms": 930,
+        "tool": "extract",
+        "url": "http://127.0.0.1:PORT/table.html",
+        "records": 8,
+        "elapsed_ms": 983,
+        "excerpts": [
+          {
+            "source_id": "r1",
+            "text": "SKU: L1 | Category: Lamp | Stock: In stock | Price: $29 | Charging: USB-C charging",
+            "status": "OK",
+            "answers": {
+              "lamp": "SUPPORTED",
+              "stock": "SUPPORTED",
+              "usbc": "SUPPORTED"
+            },
+            "source": {
+              "kind": "row",
+              "section": "",
+              "caption": ""
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r3",
+            "text": "SKU: L3 | Category: Lamp | Stock: In stock | Price: $49 | Charging: USB-C charging",
+            "status": "OK",
+            "answers": {
+              "lamp": "SUPPORTED",
+              "stock": "SUPPORTED",
+              "usbc": "SUPPORTED"
+            },
+            "source": {
+              "kind": "row",
+              "section": "",
+              "caption": ""
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r4",
+            "text": "SKU: L4 | Category: Lamp | Stock: In stock | Price: $31 | Charging: USB-C charging",
+            "status": "OK",
+            "answers": {
+              "lamp": "SUPPORTED",
+              "stock": "SUPPORTED",
+              "usbc": "SUPPORTED"
+            },
+            "source": {
+              "kind": "row",
+              "section": "",
+              "caption": ""
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          },
+          {
+            "source_id": "r7",
+            "text": "SKU: L7 | Category: Lamp | Stock: In stock | Price: $34 | Charging: USB-C charging",
+            "status": "OK",
+            "answers": {
+              "lamp": "SUPPORTED",
+              "stock": "SUPPORTED",
+              "usbc": "SUPPORTED"
+            },
+            "source": {
+              "kind": "row",
+              "section": "",
+              "caption": ""
+            },
+            "start": 0,
+            "end": 82,
+            "display_truncated": false,
+            "decision": "MATCH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "python_cli_survey_64",
+      "exit_code": 0,
+      "verification": {
+        "passed": true,
+        "expected_topic_counts": {
+          "billing": 16,
+          "bug": 16,
+          "feature_request": 8,
+          "account": 8,
+          "shipping": 8,
+          "other": 8
+        },
+        "actual_topic_counts": {
+          "billing": 16,
+          "bug": 16,
+          "feature_request": 8,
+          "account": 8,
+          "shipping": 8,
+          "other": 8
+        },
+        "labels_accuracy": 1.0
+      },
+      "passed": true,
+      "whole_operation_ms": 1184.973,
+      "returned_context_bytes": 4794,
+      "model_usage": {
+        "known_usage": {
+          "input_tokens": 13940,
+          "output_tokens": 3884
+        },
+        "usage_complete": true,
+        "requests": 4,
+        "unknown_usage_attempts": null,
+        "requested_model": "jev-1.13.0",
+        "resolved_model": null,
+        "resolved_model_basis": "This interface does not expose the provider response model; requested identity is not substituted for observed identity."
+      },
+      "packet": {
+        "records": 64,
+        "evaluated": 64,
+        "failed": 0,
+        "failed_ids": [],
+        "uncertain_records": 0,
+        "uncertain_ids": [],
+        "questions": {
+          "topic": {
+            "type": "choice",
+            "answered": 64,
+            "uncertain": 0,
+            "counts": {
+              "billing": 16,
+              "bug": 16,
+              "feature_request": 8,
+              "account": 8,
+              "shipping": 8,
+              "other": 8
+            },
+            "share": {
+              "billing": 0.25,
+              "bug": 0.25,
+              "feature_request": 0.125,
+              "account": 0.125,
+              "shipping": 0.125,
+              "other": 0.125
+            },
+            "mean_confidence": 1.0
+          }
+        },
+        "crosstabs": {
+          "topic": {
+            "billing": {
+              "n": 16
+            },
+            "bug": {
+              "n": 16
+            },
+            "feature_request": {
+              "n": 8
+            },
+            "account": {
+              "n": 8
+            },
+            "shipping": {
+              "n": 8
+            },
+            "other": {
+              "n": 8
+            }
+          }
+        },
+        "representatives": {
+          "topic": {
+            "billing": [
+              {
+                "id": "ticket-057",
+                "confidence": 1.0,
+                "excerpt": "这个月账单重复扣费，请退款。"
+              },
+              {
+                "id": "ticket-056",
+                "confidence": 1.0,
+                "excerpt": "I was charged twice this month. Please refund the duplicate payment."
+              },
+              {
+                "id": "ticket-049",
+                "confidence": 1.0,
+                "excerpt": "这个月账单重复扣费，请退款。"
+              }
+            ],
+            "bug": [
+              {
+                "id": "ticket-059",
+                "confidence": 1.0,
+                "excerpt": "升级后应用一打开设置就闪退。"
+              },
+              {
+                "id": "ticket-058",
+                "confidence": 1.0,
+                "excerpt": "The app crashes every time I open settings."
+              },
+              {
+                "id": "ticket-051",
+                "confidence": 1.0,
+                "excerpt": "升级后应用一打开设置就闪退。"
+              }
+            ],
+            "feature_request": [
+              {
+                "id": "ticket-060",
+                "confidence": 1.0,
+                "excerpt": "Please add a CSV export feature."
+              },
+              {
+                "id": "ticket-052",
+                "confidence": 1.0,
+                "excerpt": "Please add a CSV export feature."
+              },
+              {
+                "id": "ticket-044",
+                "confidence": 1.0,
+                "excerpt": "Please add a CSV export feature."
+              }
+            ],
+            "account": [
+              {
+                "id": "ticket-061",
+                "confidence": 1.0,
+                "excerpt": "I cannot log in; please unlock my account."
+              },
+              {
+                "id": "ticket-053",
+                "confidence": 1.0,
+                "excerpt": "I cannot log in; please unlock my account."
+              },
+              {
+                "id": "ticket-045",
+                "confidence": 1.0,
+                "excerpt": "I cannot log in; please unlock my account."
+              }
+            ],
+            "shipping": [
+              {
+                "id": "ticket-062",
+                "confidence": 1.0,
+                "excerpt": "The courier delivered my order to the wrong address."
+              },
+              {
+                "id": "ticket-054",
+                "confidence": 1.0,
+                "excerpt": "The courier delivered my order to the wrong address."
+              },
+              {
+                "id": "ticket-046",
+                "confidence": 1.0,
+                "excerpt": "The courier delivered my order to the wrong address."
+              }
+            ],
+            "other": [
+              {
+                "id": "ticket-063",
+                "confidence": 1.0,
+                "excerpt": "Hello support team. Have a pleasant day!"
+              },
+              {
+                "id": "ticket-055",
+                "confidence": 1.0,
+                "excerpt": "Hello support team. Have a pleasant day!"
+              },
+              {
+                "id": "ticket-047",
+                "confidence": 1.0,
+                "excerpt": "Hello support team. Have a pleasant day!"
+              }
+            ]
+          }
+        },
+        "task": "Classify the primary topic of each synthetic support ticket.",
+        "input": {
+          "files": 1,
+          "rows": 64,
+          "parse_errors": 0,
+          "truncated_texts": 0,
+          "truncated": false
+        },
+        "screened_out": 0,
+        "usage": {
+          "input_tokens": 13940,
+          "output_tokens": 3884
+        },
+        "usage_complete": true,
+        "requests": 4,
+        "elapsed_ms": 1018,
+        "category_proposal": null,
+        "estimated_input_usd": 0.000585,
+        "preflight": {
+          "requests": 1,
+          "deferred": 0,
+          "input_tokens_estimate": 13073,
+          "input_usd_estimate": 0.000549,
+          "basis": "utf8_bytes/3, upper bound"
+        },
+        "calibration": {
+          "topic": {
+            "n": 64,
+            "accuracy": 1.0,
+            "by_confidence": {
+              "0.9-1.0": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            },
+            "suggested_confidence_floor": 0.5,
+            "confidence_basis": "reported confidence"
+          }
+        },
+        "calibrated": true,
+        "complete": true,
+        "ok": true,
+        "archive": "receipt:10a6513eb16aa09f"
+      }
+    }
+  ],
+  "installed_npm_version": "0.4.0",
+  "installed_native_version": "0.4.0",
+  "fresh_install_verified": true,
+  "passed": true,
+  "actual_known_usage": {
+    "input_tokens": 71616,
+    "output_tokens": 17562
+  },
+  "usage_complete": true,
+  "logical_requests": 16
+}

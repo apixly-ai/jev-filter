@@ -20,9 +20,14 @@ def main():
     p.add_argument("--output", required=True)
     p.add_argument("--records", type=int, default=96)
     p.add_argument("--repeats", type=int, default=2)
+    p.add_argument(
+        "--parallel-workers", type=int, default=30, help="1..30; lower when sharing a test budget"
+    )
     a = p.parse_args()
     if not 1 <= a.records <= 512 or not 1 <= a.repeats <= 10:
         p.error("records 1..512 and repeats 1..10 required")
+    if not 1 <= a.parallel_workers <= 30:
+        p.error("parallel-workers 1..30 required")
     target = Path(a.output)
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists():
@@ -31,8 +36,8 @@ def main():
     configurations = [
         ("single_serial", 1, 1),
         ("batch_serial", "auto", 1),
-        ("single_parallel", 1, 30),
-        ("batch_parallel", "auto", 30),
+        ("single_parallel", 1, a.parallel_workers),
+        ("batch_parallel", "auto", a.parallel_workers),
     ]
     rows = []
     for repeat in range(a.repeats if a.live else 1):
@@ -78,6 +83,7 @@ def main():
         "model": "jev-1.13.0",
         "result_cache": False,
         "concurrency_cap": 30,
+        "parallel_workers": a.parallel_workers,
         "fixture_sha256": hashlib.sha256(
             json.dumps(records, sort_keys=True, ensure_ascii=False).encode()
         ).hexdigest(),

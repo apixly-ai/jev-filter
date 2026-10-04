@@ -1,0 +1,1284 @@
+{
+  "schema_version": 2,
+  "kind": "whole-operation",
+  "timestamp_utc": "2026-10-04T07:28:45.150302+00:00",
+  "scope": "Fixed synthetic collectors plus real primary-agent shell invocation and continuation. Optional browser freshness guard only when locate is selected. Setup excluded and recorded separately. At most two model lanes; each lane serial. Not unrestricted agent tool selection.",
+  "repeats": 2,
+  "reasoning_effort": "medium",
+  "models": [
+    "gpt-5.6-luna",
+    "gpt-6-astra"
+  ],
+  "cases": [
+    "code-search",
+    "triage",
+    "exec"
+  ],
+  "jev_workers_per_lane": 4,
+  "result_cache": false,
+  "main_access": "Codex CLI configured authentication; token usage is measured, subscription billing is unknown.",
+  "pricing": {
+    "date_verified": "2026-10-04",
+    "unit": "USD per million tokens, Standard short context",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-6-astra",
+      "https://docs.typesafe.ai/models"
+    ],
+    "main": {
+      "gpt-5.6-luna": {
+        "input": 0.2,
+        "cached_input": 0.02,
+        "cache_write": 0.25,
+        "output": 1.2
+      },
+      "gpt-6-astra": {
+        "input": 10,
+        "cached_input": 1,
+        "cache_write": 12.5,
+        "output": 50
+      }
+    },
+    "jev": {
+      "model": "jev-1.13.0",
+      "input": 0.042,
+      "output": 0
+    },
+    "caveat": "Caller-supplied rate snapshot verified from official sources on this date. API-equivalent modeling assumes Standard pricing and <=272K tokens per request; Codex events report aggregate token usage but do not establish every request's context length, cache-write charges, service tier or actual subscription billing. Cache-write rates are recorded but not modeled because usage is unavailable. Missing usage yields null cost. These estimates are not an invoice."
+  },
+  "cost_caveat": "Optional caller-supplied API-equivalent estimates are not a subscription invoice. Provider prompt caching is measured separately from inference-result caching. Missing usage or absent rates yield null cost, never zero.",
+  "rows": [
+    {
+      "model": "gpt-5.6-luna",
+      "case": "code-search",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 13464,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 43265,
+        "cached_input_tokens": 16128,
+        "output_tokens": 428
+      },
+      "main_known_usage": {
+        "input_tokens": 43265,
+        "cached_input_tokens": 16128,
+        "output_tokens": 428
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34839,
+      "tool_output_bytes": 34839,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.0091666,
+      "cache_adjusted_api_equivalent_usd": 0.006263560000000001
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "code-search",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 18676,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 49138,
+        "cached_input_tokens": 18560,
+        "output_tokens": 148
+      },
+      "main_known_usage": {
+        "input_tokens": 49138,
+        "cached_input_tokens": 18560,
+        "output_tokens": 148
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34839,
+      "tool_output_bytes": 34839,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.49878,
+      "cache_adjusted_api_equivalent_usd": 0.33174
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "code-search",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 15328,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 33268,
+        "cached_input_tokens": 16128,
+        "output_tokens": 205
+      },
+      "main_known_usage": {
+        "input_tokens": 33268,
+        "cached_input_tokens": 16128,
+        "output_tokens": 205
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 20909,
+        "output_tokens": 2925
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 1353,
+      "tool_output_bytes": 1353,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.007777778,
+      "cache_adjusted_api_equivalent_usd": 0.004874738
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "code-search",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 19516,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 38074,
+        "cached_input_tokens": 18560,
+        "output_tokens": 146
+      },
+      "main_known_usage": {
+        "input_tokens": 38074,
+        "cached_input_tokens": 18560,
+        "output_tokens": 146
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 20909,
+        "output_tokens": 2925
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 1353,
+      "tool_output_bytes": 1353,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.388918178,
+      "cache_adjusted_api_equivalent_usd": 0.221878178
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "triage",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 14628,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 42870,
+        "cached_input_tokens": 16128,
+        "output_tokens": 260
+      },
+      "main_known_usage": {
+        "input_tokens": 42870,
+        "cached_input_tokens": 16128,
+        "output_tokens": 260
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34938,
+      "tool_output_bytes": 34938,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.008886,
+      "cache_adjusted_api_equivalent_usd": 0.005982960000000001
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "triage",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 17441,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 33229,
+        "cached_input_tokens": 16128,
+        "output_tokens": 276
+      },
+      "main_known_usage": {
+        "input_tokens": 33229,
+        "cached_input_tokens": 16128,
+        "output_tokens": 276
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 39086,
+        "output_tokens": 5709
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 984,
+      "tool_output_bytes": 984,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.008618612000000001,
+      "cache_adjusted_api_equivalent_usd": 0.005715572
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "triage",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 24401,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 47591,
+        "cached_input_tokens": 18560,
+        "output_tokens": 154
+      },
+      "main_known_usage": {
+        "input_tokens": 47591,
+        "cached_input_tokens": 18560,
+        "output_tokens": 154
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34938,
+      "tool_output_bytes": 34938,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.48361,
+      "cache_adjusted_api_equivalent_usd": 0.31657
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "exec",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 14713,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 35176,
+        "cached_input_tokens": 32256,
+        "output_tokens": 254
+      },
+      "main_known_usage": {
+        "input_tokens": 35176,
+        "cached_input_tokens": 32256,
+        "output_tokens": 254
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 11081,
+      "tool_output_bytes": 11081,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.007340000000000001,
+      "cache_adjusted_api_equivalent_usd": 0.0015339199999999998
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "triage",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 19783,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 37964,
+        "cached_input_tokens": 18560,
+        "output_tokens": 156
+      },
+      "main_known_usage": {
+        "input_tokens": 37964,
+        "cached_input_tokens": 18560,
+        "output_tokens": 156
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 39086,
+        "output_tokens": 5709
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 984,
+      "tool_output_bytes": 984,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.389081612,
+      "cache_adjusted_api_equivalent_usd": 0.222041612
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "exec",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 15419,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 33184,
+        "cached_input_tokens": 16128,
+        "output_tokens": 220
+      },
+      "main_known_usage": {
+        "input_tokens": 33184,
+        "cached_input_tokens": 16128,
+        "output_tokens": 220
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 12512,
+        "output_tokens": 3909
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 931,
+      "tool_output_bytes": 931,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.007426304,
+      "cache_adjusted_api_equivalent_usd": 0.004523264
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "exec",
+      "arm": "raw",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 16895,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 39993,
+        "cached_input_tokens": 18560,
+        "output_tokens": 142
+      },
+      "main_known_usage": {
+        "input_tokens": 39993,
+        "cached_input_tokens": 18560,
+        "output_tokens": 142
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 11081,
+      "tool_output_bytes": 11081,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.40703,
+      "cache_adjusted_api_equivalent_usd": 0.23999
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "code-search",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 16920,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 33341,
+        "cached_input_tokens": 16128,
+        "output_tokens": 284
+      },
+      "main_known_usage": {
+        "input_tokens": 33341,
+        "cached_input_tokens": 16128,
+        "output_tokens": 284
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 20909,
+        "output_tokens": 2925
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 1353,
+      "tool_output_bytes": 1353,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.007887178000000002,
+      "cache_adjusted_api_equivalent_usd": 0.004984138
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "exec",
+      "arm": "filtered",
+      "repeat": 0,
+      "setup_ms": 0,
+      "elapsed_ms": 19785,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 37956,
+        "cached_input_tokens": 35200,
+        "output_tokens": 145
+      },
+      "main_known_usage": {
+        "input_tokens": 37956,
+        "cached_input_tokens": 35200,
+        "output_tokens": 145
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 12512,
+        "output_tokens": 3909
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 931,
+      "tool_output_bytes": 931,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.387335504,
+      "cache_adjusted_api_equivalent_usd": 0.070535504
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "code-search",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 16274,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 43310,
+        "cached_input_tokens": 16128,
+        "output_tokens": 357
+      },
+      "main_known_usage": {
+        "input_tokens": 43310,
+        "cached_input_tokens": 16128,
+        "output_tokens": 357
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34839,
+      "tool_output_bytes": 34839,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.0090904,
+      "cache_adjusted_api_equivalent_usd": 0.00618736
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "code-search",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 19370,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 38075,
+        "cached_input_tokens": 18560,
+        "output_tokens": 146
+      },
+      "main_known_usage": {
+        "input_tokens": 38075,
+        "cached_input_tokens": 18560,
+        "output_tokens": 146
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 20909,
+        "output_tokens": 2925
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 1353,
+      "tool_output_bytes": 1353,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.388928178,
+      "cache_adjusted_api_equivalent_usd": 0.22188817800000002
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "triage",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 16729,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 33213,
+        "cached_input_tokens": 16128,
+        "output_tokens": 258
+      },
+      "main_known_usage": {
+        "input_tokens": 33213,
+        "cached_input_tokens": 16128,
+        "output_tokens": 258
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 39086,
+        "output_tokens": 5709
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 984,
+      "tool_output_bytes": 984,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.008593812000000001,
+      "cache_adjusted_api_equivalent_usd": 0.005690772
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "triage",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 15800,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 42881,
+        "cached_input_tokens": 16128,
+        "output_tokens": 254
+      },
+      "main_known_usage": {
+        "input_tokens": 42881,
+        "cached_input_tokens": 16128,
+        "output_tokens": 254
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34938,
+      "tool_output_bytes": 34938,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.008881,
+      "cache_adjusted_api_equivalent_usd": 0.005977960000000001
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "code-search",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 18352,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "expected_ids": [
+        "session_store.py:persist_session:119"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 49137,
+        "cached_input_tokens": 18560,
+        "output_tokens": 148
+      },
+      "main_known_usage": {
+        "input_tokens": 49137,
+        "cached_input_tokens": 18560,
+        "output_tokens": 148
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34839,
+      "tool_output_bytes": 34839,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.49877,
+      "cache_adjusted_api_equivalent_usd": 0.33173
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "exec",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 16259,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 32985,
+        "cached_input_tokens": 29184,
+        "output_tokens": 235
+      },
+      "main_known_usage": {
+        "input_tokens": 32985,
+        "cached_input_tokens": 29184,
+        "output_tokens": 235
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 12512,
+        "output_tokens": 3909
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 931,
+      "tool_output_bytes": 931,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.007404504,
+      "cache_adjusted_api_equivalent_usd": 0.002151384
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "triage",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 19383,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 37962,
+        "cached_input_tokens": 18560,
+        "output_tokens": 152
+      },
+      "main_known_usage": {
+        "input_tokens": 37962,
+        "cached_input_tokens": 18560,
+        "output_tokens": 152
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 39086,
+        "output_tokens": 5709
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 984,
+      "tool_output_bytes": 984,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.388861612,
+      "cache_adjusted_api_equivalent_usd": 0.221821612
+    },
+    {
+      "model": "gpt-5.6-luna",
+      "case": "exec",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 16918,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 35136,
+        "cached_input_tokens": 16128,
+        "output_tokens": 251
+      },
+      "main_known_usage": {
+        "input_tokens": 35136,
+        "cached_input_tokens": 16128,
+        "output_tokens": 251
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 11081,
+      "tool_output_bytes": 11081,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.0073284000000000005,
+      "cache_adjusted_api_equivalent_usd": 0.004425360000000001
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "triage",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 21833,
+      "valid": true,
+      "exact": false,
+      "needs_review": true,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "expected_ids": [
+        "correlated:req-013",
+        "correlated:req-047"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 52021,
+        "cached_input_tokens": 18560,
+        "output_tokens": 189
+      },
+      "main_known_usage": {
+        "input_tokens": 52021,
+        "cached_input_tokens": 18560,
+        "output_tokens": 189
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 34938,
+      "tool_output_bytes": 34938,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.52966,
+      "cache_adjusted_api_equivalent_usd": 0.36262
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "exec",
+      "arm": "filtered",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 24594,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 37959,
+        "cached_input_tokens": 35200,
+        "output_tokens": 146
+      },
+      "main_known_usage": {
+        "input_tokens": 37959,
+        "cached_input_tokens": 35200,
+        "output_tokens": 146
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 12512,
+        "output_tokens": 3909
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 931,
+      "tool_output_bytes": 931,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.387415504,
+      "cache_adjusted_api_equivalent_usd": 0.070615504
+    },
+    {
+      "model": "gpt-6-astra",
+      "case": "exec",
+      "arm": "raw",
+      "repeat": 1,
+      "setup_ms": 0,
+      "elapsed_ms": 20574,
+      "valid": true,
+      "exact": true,
+      "needs_review": false,
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "selected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "expected_ids": [
+        "item-011",
+        "item-052"
+      ],
+      "guard_ok": true,
+      "main_usage": {
+        "input_tokens": 39995,
+        "cached_input_tokens": 18560,
+        "output_tokens": 144
+      },
+      "main_known_usage": {
+        "input_tokens": 39995,
+        "cached_input_tokens": 18560,
+        "output_tokens": 144
+      },
+      "main_usage_complete": true,
+      "main_turn_count": 1,
+      "jev_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0
+      },
+      "jev_usage_complete": true,
+      "usage_complete": true,
+      "collector_complete": true,
+      "review_ids": [],
+      "tool_output_chars": 11081,
+      "tool_output_bytes": 11081,
+      "tool_output_measurement_complete": true,
+      "selection_correct": true,
+      "collector_calls": 1,
+      "extra_commands": 0,
+      "timeout": false,
+      "actual_billed_usd": null,
+      "cold_api_equivalent_usd": 0.40715,
+      "cache_adjusted_api_equivalent_usd": 0.24011
+    }
+  ]
+}

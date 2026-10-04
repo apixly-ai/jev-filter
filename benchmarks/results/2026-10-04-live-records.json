@@ -1,0 +1,3688 @@
+{
+  "schema_version": 1,
+  "kind": "live_synthetic_record_workflows",
+  "timestamp_utc": "2026-10-04T07:29:13.308010+00:00",
+  "version": "0.4.0",
+  "requested_model": "jev-1.13.0",
+  "python": "3.14.2",
+  "platform": "Darwin",
+  "fixture_sha256": "0e9a4a01811dc2dcfc3d735a88328cdae99ca9636e5fcf9d90682565e4cda3f6",
+  "runtime_source_sha256": {
+    "jev_context.analysis": "864263de4dff787777dc0f9cdb41071c0dbebd5d41137df7300ed7fdc5fac5b5",
+    "jev_context.decision_policy": "a026907dcf3e733e19b9c1ee97527eb939afc1411de4101563cacd6ab36a42b0",
+    "jev_context.diff": "28cfb51b0ee79dc0185aa59097128313d4f9266e4e11c42f079af182434fb52d",
+    "jev_context.pool": "94f5b622e9f82038113ba695e87ef8c094a47b3f1731f324218bc65e42a007dd",
+    "jev_context.provider": "675ed25d0c644fe0f8081f6310b07aa24766e1f5df16ccb9d77b43d3c4d1881e",
+    "jev_context.tools": "f679103b237ded894b73b6f403f080fc399f424498b886f066cfaf22788d51f7"
+  },
+  "runner_sha256": "252e36eb68aebeb6ad86f32c1ce5f3ea8d0a213356681848e8a4a7a07d87c31c",
+  "result_cache": false,
+  "max_workers": 4,
+  "inference_enabled": true,
+  "scope": "Whole synthetic record operations including collection, admission, native inference, reduction and source freshness. Excludes a primary agent continuation, customer data, browser/desktop actions and invoice reconciliation.",
+  "arms": {
+    "code": "Same 0.4.0 exact rg collector vs opt-in lexical/symbol/caller recall; both use the same native semantic filter.",
+    "diff": "All changed files retained deterministically vs native semantic triage of full before/after evidence; not a human reviewer quality comparison.",
+    "uncertainty": "Default zero thresholds vs threshold chosen using a separate native calibration sample. Each holdout arm obtains fresh inference; no saved judgment serves as a live model result."
+  },
+  "limitations": [
+    "Lexical recall cannot retrieve the deliberately absent-token no-overlap case.",
+    "Recall can add irrelevant candidates, context bytes, model tokens and latency.",
+    "Fixed small synthetic scenarios do not establish production or whole-agent savings.",
+    "Threshold selection is observed sample admission, not a fitted probability calibrator or a population accuracy guarantee.",
+    "Calibration and holdout use distinct source records but cover similar handwritten connection scenarios; this is not an out-of-distribution generalization study.",
+    "Native token envelopes are actual provider usage; USD conversion needs a separate verified price and is not invoice proof."
+  ],
+  "runs": [
+    {
+      "workflow": "code",
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 0,
+      "candidate_ids": [
+        "persist_token"
+      ],
+      "quality": {
+        "records": 3,
+        "selected_ids": [
+          "persist_token"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "correct_decisions": 1,
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "automatic": 1,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.3333333333333333,
+        "exact": false
+      },
+      "decisions": {
+        "persist_token": "MATCH"
+      },
+      "native_answers": {
+        "persist_token": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 885.88,
+      "collection_ms": 5.884,
+      "admission_inference_reduction_ms": 879.863,
+      "input_source_bytes": 70,
+      "inference_context_bytes": 1658,
+      "returned_context_bytes": 1086,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "network_questions": 1,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 715,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 715,
+              "output_tokens": 49
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 0,
+      "candidate_ids": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "quality": {
+        "records": 4,
+        "selected_ids": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 4,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "persist_token": "MATCH",
+        "refresh_credentials": "MATCH",
+        "display_credentials_help": "EXCLUDE",
+        "renew_session": "MATCH"
+      },
+      "native_answers": {
+        "persist_token": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.01
+            }
+          }
+        },
+        "refresh_credentials": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 1.0,
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "display_credentials_help": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "renew_session": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 1.0,
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 865.623,
+      "collection_ms": 14.573,
+      "admission_inference_reduction_ms": 850.866,
+      "input_source_bytes": 269,
+      "inference_context_bytes": 3864,
+      "returned_context_bytes": 2506,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 1620,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "network_questions": 4,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 1620,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 1620,
+              "output_tokens": 189
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 0,
+      "candidate_ids": [
+        "verify_access"
+      ],
+      "quality": {
+        "records": 2,
+        "selected_ids": [
+          "verify_access"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "deny_permission"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "deny_permission"
+        ],
+        "correct_decisions": 1,
+        "precision": 1.0,
+        "recall": 0.5,
+        "automatic": 1,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.5,
+        "exact": false
+      },
+      "decisions": {
+        "verify_access": "MATCH"
+      },
+      "native_answers": {
+        "verify_access": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.53,
+            "probabilities": {
+              "CONTRADICTED": 0.27,
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.69
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 856.893,
+      "collection_ms": 12.332,
+      "admission_inference_reduction_ms": 844.469,
+      "input_source_bytes": 70,
+      "inference_context_bytes": 1710,
+      "returned_context_bytes": 1097,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 721,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "network_questions": 1,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 721,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 721,
+              "output_tokens": 49
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 0,
+      "candidate_ids": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "quality": {
+        "records": 3,
+        "selected_ids": [
+          "deny_permission",
+          "verify_access"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 3,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 3,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "verify_access": "MATCH",
+        "deny_permission": "MATCH",
+        "permission_notice": "EXCLUDE"
+      },
+      "native_answers": {
+        "verify_access": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.64,
+            "probabilities": {
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.76,
+              "CONTRADICTED": 0.2
+            }
+          }
+        },
+        "deny_permission": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "UNKNOWN": 0.03,
+              "SUPPORTED": 0.96,
+              "CONTRADICTED": 0.01
+            }
+          }
+        },
+        "permission_notice": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 845.478,
+      "collection_ms": 15.288,
+      "admission_inference_reduction_ms": 830.001,
+      "input_source_bytes": 193,
+      "inference_context_bytes": 3232,
+      "returned_context_bytes": 1888,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 1363,
+          "output_tokens": 143
+        },
+        "usage_complete": true,
+        "network_questions": 3,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 1363,
+          "output_tokens": 143
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 1363,
+              "output_tokens": 143
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 0,
+      "candidate_ids": [],
+      "quality": {
+        "records": 1,
+        "selected_ids": [],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "verify_access"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "verify_access"
+        ],
+        "correct_decisions": 0,
+        "precision": null,
+        "recall": 0.0,
+        "automatic": 0,
+        "automatic_error_rate": null,
+        "coverage": 0.0,
+        "exact": false
+      },
+      "decisions": {},
+      "native_answers": {},
+      "whole_operation_ms": 17.44,
+      "collection_ms": 14.538,
+      "admission_inference_reduction_ms": 2.884,
+      "input_source_bytes": 0,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 459,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "network_questions": 0,
+        "requests": 0,
+        "workers": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 0,
+      "candidate_ids": [],
+      "quality": {
+        "records": 1,
+        "selected_ids": [],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "verify_access"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "verify_access"
+        ],
+        "correct_decisions": 0,
+        "precision": null,
+        "recall": 0.0,
+        "automatic": 0,
+        "automatic_error_rate": null,
+        "coverage": 0.0,
+        "exact": false
+      },
+      "decisions": {},
+      "native_answers": {},
+      "whole_operation_ms": 16.792,
+      "collection_ms": 15.369,
+      "admission_inference_reduction_ms": 1.414,
+      "input_source_bytes": 0,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 459,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "network_questions": 0,
+        "requests": 0,
+        "workers": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 1,
+      "candidate_ids": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "quality": {
+        "records": 4,
+        "selected_ids": [
+          "persist_token",
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 4,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 4,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "persist_token": "MATCH",
+        "refresh_credentials": "MATCH",
+        "display_credentials_help": "EXCLUDE",
+        "renew_session": "MATCH"
+      },
+      "native_answers": {
+        "persist_token": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        },
+        "refresh_credentials": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "CONTRADICTED": 0.01,
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.99
+            }
+          }
+        },
+        "display_credentials_help": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "renew_session": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 851.567,
+      "collection_ms": 14.099,
+      "admission_inference_reduction_ms": 837.311,
+      "input_source_bytes": 269,
+      "inference_context_bytes": 3864,
+      "returned_context_bytes": 2506,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 1620,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "network_questions": 4,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 1620,
+          "output_tokens": 189
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 1620,
+              "output_tokens": 189
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 1,
+      "candidate_ids": [
+        "persist_token"
+      ],
+      "quality": {
+        "records": 3,
+        "selected_ids": [
+          "persist_token"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "refresh_credentials",
+          "renew_session"
+        ],
+        "correct_decisions": 1,
+        "precision": 1.0,
+        "recall": 0.3333333333333333,
+        "automatic": 1,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.3333333333333333,
+        "exact": false
+      },
+      "decisions": {
+        "persist_token": "MATCH"
+      },
+      "native_answers": {
+        "persist_token": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 852.013,
+      "collection_ms": 11.75,
+      "admission_inference_reduction_ms": 840.123,
+      "input_source_bytes": 70,
+      "inference_context_bytes": 1658,
+      "returned_context_bytes": 1086,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 715,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "network_questions": 1,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 715,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 715,
+              "output_tokens": 49
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 1,
+      "candidate_ids": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "quality": {
+        "records": 3,
+        "selected_ids": [
+          "deny_permission",
+          "verify_access"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 3,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 3,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "verify_access": "MATCH",
+        "deny_permission": "MATCH",
+        "permission_notice": "EXCLUDE"
+      },
+      "native_answers": {
+        "verify_access": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.66,
+            "probabilities": {
+              "CONTRADICTED": 0.2,
+              "SUPPORTED": 0.77,
+              "UNKNOWN": 0.03
+            }
+          }
+        },
+        "deny_permission": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "CONTRADICTED": 0.01,
+              "SUPPORTED": 0.96,
+              "UNKNOWN": 0.03
+            }
+          }
+        },
+        "permission_notice": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 861.079,
+      "collection_ms": 13.648,
+      "admission_inference_reduction_ms": 847.029,
+      "input_source_bytes": 193,
+      "inference_context_bytes": 3232,
+      "returned_context_bytes": 1888,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 1363,
+          "output_tokens": 143
+        },
+        "usage_complete": true,
+        "network_questions": 3,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 1363,
+          "output_tokens": 143
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 1363,
+              "output_tokens": 143
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 1,
+      "candidate_ids": [
+        "verify_access"
+      ],
+      "quality": {
+        "records": 2,
+        "selected_ids": [
+          "verify_access"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "deny_permission"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "deny_permission"
+        ],
+        "correct_decisions": 1,
+        "precision": 1.0,
+        "recall": 0.5,
+        "automatic": 1,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.5,
+        "exact": false
+      },
+      "decisions": {
+        "verify_access": "MATCH"
+      },
+      "native_answers": {
+        "verify_access": {
+          "implements_operation": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.63,
+            "probabilities": {
+              "SUPPORTED": 0.75,
+              "UNKNOWN": 0.04,
+              "CONTRADICTED": 0.21
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 880.761,
+      "collection_ms": 12.922,
+      "admission_inference_reduction_ms": 867.767,
+      "input_source_bytes": 70,
+      "inference_context_bytes": 1710,
+      "returned_context_bytes": 1097,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 721,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "network_questions": 1,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 721,
+          "output_tokens": 49
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 721,
+              "output_tokens": 49
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 1,
+      "candidate_ids": [],
+      "quality": {
+        "records": 1,
+        "selected_ids": [],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "verify_access"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "verify_access"
+        ],
+        "correct_decisions": 0,
+        "precision": null,
+        "recall": 0.0,
+        "automatic": 0,
+        "automatic_error_rate": null,
+        "coverage": 0.0,
+        "exact": false
+      },
+      "decisions": {},
+      "native_answers": {},
+      "whole_operation_ms": 17.068,
+      "collection_ms": 15.609,
+      "admission_inference_reduction_ms": 1.45,
+      "input_source_bytes": 0,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 459,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "network_questions": 0,
+        "requests": 0,
+        "workers": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "code",
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 1,
+      "candidate_ids": [],
+      "quality": {
+        "records": 1,
+        "selected_ids": [],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [
+          "verify_access"
+        ],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [
+          "verify_access"
+        ],
+        "correct_decisions": 0,
+        "precision": null,
+        "recall": 0.0,
+        "automatic": 0,
+        "automatic_error_rate": null,
+        "coverage": 0.0,
+        "exact": false
+      },
+      "decisions": {},
+      "native_answers": {},
+      "whole_operation_ms": 6.956,
+      "collection_ms": 5.487,
+      "admission_inference_reduction_ms": 1.457,
+      "input_source_bytes": 0,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 459,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "network_questions": 0,
+        "requests": 0,
+        "workers": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "diff",
+      "case": "weakened_checks",
+      "arm": "baseline",
+      "repeat": 0,
+      "candidate_ids": [
+        "auth.py",
+        "docs.txt",
+        "input.py",
+        "logging.py",
+        "quota.py",
+        "strict_auth.py",
+        "test_auth.py",
+        "timeout.py"
+      ],
+      "quality": {
+        "records": 8,
+        "selected_ids": [
+          "auth.py",
+          "docs.txt",
+          "input.py",
+          "logging.py",
+          "quota.py",
+          "strict_auth.py",
+          "test_auth.py",
+          "timeout.py"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [
+          "docs.txt",
+          "logging.py",
+          "strict_auth.py",
+          "timeout.py"
+        ],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [
+          "docs.txt",
+          "logging.py",
+          "strict_auth.py",
+          "timeout.py"
+        ],
+        "not_collected_ids": [],
+        "correct_decisions": 4,
+        "precision": 0.5,
+        "recall": 1.0,
+        "automatic": 8,
+        "automatic_error_rate": 0.5,
+        "coverage": 1.0,
+        "exact": false
+      },
+      "decisions": {
+        "auth.py": "MATCH",
+        "docs.txt": "MATCH",
+        "input.py": "MATCH",
+        "logging.py": "MATCH",
+        "quota.py": "MATCH",
+        "strict_auth.py": "MATCH",
+        "test_auth.py": "MATCH",
+        "timeout.py": "MATCH"
+      },
+      "native_answers": {},
+      "whole_operation_ms": 443.702,
+      "collection_ms": 431.156,
+      "admission_inference_reduction_ms": 0.149,
+      "input_source_bytes": 1583,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 5714,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "requests": 0,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "unknown_usage_attempts": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "diff",
+      "case": "weakened_checks",
+      "arm": "treatment",
+      "repeat": 0,
+      "candidate_ids": [
+        "auth.py",
+        "docs.txt",
+        "input.py",
+        "logging.py",
+        "quota.py",
+        "strict_auth.py",
+        "test_auth.py",
+        "timeout.py"
+      ],
+      "quality": {
+        "records": 8,
+        "selected_ids": [
+          "auth.py",
+          "input.py",
+          "quota.py",
+          "test_auth.py"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 8,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "auth.py": "MATCH",
+        "docs.txt": "EXCLUDE",
+        "input.py": "MATCH",
+        "logging.py": "EXCLUDE",
+        "quota.py": "MATCH",
+        "strict_auth.py": "EXCLUDE",
+        "test_auth.py": "MATCH",
+        "timeout.py": "EXCLUDE"
+      },
+      "native_answers": {
+        "auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "docs.txt": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.78,
+            "probabilities": {
+              "UNKNOWN": 0.14,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.86
+            }
+          }
+        },
+        "input.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "logging.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.83,
+            "probabilities": {
+              "UNKNOWN": 0.11,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.89
+            }
+          }
+        },
+        "quota.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "strict_auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "test_auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 1.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "timeout.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.63,
+            "probabilities": {
+              "UNKNOWN": 0.24,
+              "SUPPORTED": 0.01,
+              "CONTRADICTED": 0.75
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 1307.26,
+      "collection_ms": 448.724,
+      "admission_inference_reduction_ms": 816.694,
+      "input_source_bytes": 1583,
+      "inference_context_bytes": 9359,
+      "returned_context_bytes": 4350,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 4277,
+          "output_tokens": 379
+        },
+        "usage_complete": true,
+        "network_questions": 8,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 4277,
+          "output_tokens": 379
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 4277,
+              "output_tokens": 379
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "diff",
+      "case": "weakened_checks",
+      "arm": "treatment",
+      "repeat": 1,
+      "candidate_ids": [
+        "auth.py",
+        "docs.txt",
+        "input.py",
+        "logging.py",
+        "quota.py",
+        "strict_auth.py",
+        "test_auth.py",
+        "timeout.py"
+      ],
+      "quality": {
+        "records": 8,
+        "selected_ids": [
+          "auth.py",
+          "input.py",
+          "quota.py",
+          "test_auth.py"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 8,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 8,
+        "automatic_error_rate": 0.0,
+        "coverage": 1.0,
+        "exact": true
+      },
+      "decisions": {
+        "auth.py": "MATCH",
+        "docs.txt": "EXCLUDE",
+        "input.py": "MATCH",
+        "logging.py": "EXCLUDE",
+        "quota.py": "MATCH",
+        "strict_auth.py": "EXCLUDE",
+        "test_auth.py": "MATCH",
+        "timeout.py": "EXCLUDE"
+      },
+      "native_answers": {
+        "auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        },
+        "docs.txt": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.75,
+            "probabilities": {
+              "UNKNOWN": 0.17,
+              "CONTRADICTED": 0.83,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "input.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        },
+        "logging.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.79,
+            "probabilities": {
+              "UNKNOWN": 0.13,
+              "CONTRADICTED": 0.87,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "quota.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        },
+        "strict_auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 1.0,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "test_auth.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 1.0
+            }
+          }
+        },
+        "timeout.py": {
+          "weakens_check": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.59,
+            "probabilities": {
+              "UNKNOWN": 0.26,
+              "CONTRADICTED": 0.73,
+              "SUPPORTED": 0.01
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 1622.147,
+      "collection_ms": 749.048,
+      "admission_inference_reduction_ms": 853.127,
+      "input_source_bytes": 1583,
+      "inference_context_bytes": 9359,
+      "returned_context_bytes": 4350,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 4277,
+          "output_tokens": 379
+        },
+        "usage_complete": true,
+        "network_questions": 8,
+        "workers": 1,
+        "unknown_usage_attempts": 0,
+        "requests": 1
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 4277,
+          "output_tokens": 379
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 1,
+            "known_usage": {
+              "input_tokens": 4277,
+              "output_tokens": 379
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "diff",
+      "case": "weakened_checks",
+      "arm": "baseline",
+      "repeat": 1,
+      "candidate_ids": [
+        "auth.py",
+        "docs.txt",
+        "input.py",
+        "logging.py",
+        "quota.py",
+        "strict_auth.py",
+        "test_auth.py",
+        "timeout.py"
+      ],
+      "quality": {
+        "records": 8,
+        "selected_ids": [
+          "auth.py",
+          "docs.txt",
+          "input.py",
+          "logging.py",
+          "quota.py",
+          "strict_auth.py",
+          "test_auth.py",
+          "timeout.py"
+        ],
+        "review_ids": [],
+        "false_positive_ids": [
+          "docs.txt",
+          "logging.py",
+          "strict_auth.py",
+          "timeout.py"
+        ],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [
+          "docs.txt",
+          "logging.py",
+          "strict_auth.py",
+          "timeout.py"
+        ],
+        "not_collected_ids": [],
+        "correct_decisions": 4,
+        "precision": 0.5,
+        "recall": 1.0,
+        "automatic": 8,
+        "automatic_error_rate": 0.5,
+        "coverage": 1.0,
+        "exact": false
+      },
+      "decisions": {
+        "auth.py": "MATCH",
+        "docs.txt": "MATCH",
+        "input.py": "MATCH",
+        "logging.py": "MATCH",
+        "quota.py": "MATCH",
+        "strict_auth.py": "MATCH",
+        "test_auth.py": "MATCH",
+        "timeout.py": "MATCH"
+      },
+      "native_answers": {},
+      "whole_operation_ms": 561.917,
+      "collection_ms": 550.91,
+      "admission_inference_reduction_ms": 0.14,
+      "input_source_bytes": 1583,
+      "inference_context_bytes": 0,
+      "returned_context_bytes": 5714,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "requests": 0,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "unknown_usage_attempts": 0
+      },
+      "model_accounting": {
+        "observed_models": [],
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": []
+      }
+    },
+    {
+      "workflow": "uncertainty",
+      "case": "held_out_current_establishment",
+      "arm": "baseline",
+      "repeat": 0,
+      "candidate_ids": [
+        "holdout-00",
+        "holdout-01",
+        "holdout-02",
+        "holdout-03",
+        "holdout-04",
+        "holdout-05",
+        "holdout-06",
+        "holdout-07",
+        "holdout-08",
+        "holdout-09",
+        "holdout-10",
+        "holdout-11",
+        "holdout-12",
+        "holdout-13",
+        "holdout-14",
+        "holdout-15",
+        "holdout-16",
+        "holdout-17"
+      ],
+      "quality": {
+        "records": 18,
+        "selected_ids": [
+          "holdout-00",
+          "holdout-01",
+          "holdout-02",
+          "holdout-03",
+          "holdout-04",
+          "holdout-05"
+        ],
+        "review_ids": [
+          "holdout-14",
+          "holdout-15",
+          "holdout-16",
+          "holdout-17"
+        ],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 14,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.7777777777777778,
+        "exact": true
+      },
+      "decisions": {
+        "holdout-00": "MATCH",
+        "holdout-01": "MATCH",
+        "holdout-02": "MATCH",
+        "holdout-03": "MATCH",
+        "holdout-04": "MATCH",
+        "holdout-05": "MATCH",
+        "holdout-06": "EXCLUDE",
+        "holdout-07": "EXCLUDE",
+        "holdout-08": "EXCLUDE",
+        "holdout-09": "EXCLUDE",
+        "holdout-10": "EXCLUDE",
+        "holdout-11": "EXCLUDE",
+        "holdout-12": "EXCLUDE",
+        "holdout-13": "EXCLUDE",
+        "holdout-14": "REVIEW",
+        "holdout-15": "REVIEW",
+        "holdout-16": "REVIEW",
+        "holdout-17": "REVIEW"
+      },
+      "native_answers": {
+        "holdout-00": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.96,
+            "probabilities": {
+              "SUPPORTED": 0.97,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.03
+            }
+          }
+        },
+        "holdout-01": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.83,
+            "probabilities": {
+              "SUPPORTED": 0.88,
+              "CONTRADICTED": 0.02,
+              "UNKNOWN": 0.1
+            }
+          }
+        },
+        "holdout-02": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-03": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-04": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "UNKNOWN": 0.01,
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-05": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.96
+            }
+          }
+        },
+        "holdout-06": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.39,
+            "probabilities": {
+              "SUPPORTED": 0.06,
+              "CONTRADICTED": 0.6,
+              "UNKNOWN": 0.34
+            }
+          }
+        },
+        "holdout-07": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "holdout-08": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.01,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99
+            }
+          }
+        },
+        "holdout-09": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-10": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-11": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.82,
+            "probabilities": {
+              "SUPPORTED": 0.02,
+              "CONTRADICTED": 0.88,
+              "UNKNOWN": 0.1
+            }
+          }
+        },
+        "holdout-12": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.92,
+            "probabilities": {
+              "UNKNOWN": 0.05,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.95
+            }
+          }
+        },
+        "holdout-13": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-14": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-15": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-16": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-17": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 0.89,
+            "probabilities": {
+              "UNKNOWN": 0.93,
+              "SUPPORTED": 0.05,
+              "CONTRADICTED": 0.02
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 913.474,
+      "collection_ms": 0.014,
+      "admission_inference_reduction_ms": 913.387,
+      "input_source_bytes": 1422,
+      "inference_context_bytes": 10526,
+      "returned_context_bytes": 4682,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "network_questions": 18,
+        "workers": 2,
+        "unknown_usage_attempts": 0,
+        "requests": 2
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 2,
+            "known_usage": {
+              "input_tokens": 3579,
+              "output_tokens": 848
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "uncertainty",
+      "case": "held_out_current_establishment",
+      "arm": "treatment",
+      "repeat": 0,
+      "candidate_ids": [
+        "holdout-00",
+        "holdout-01",
+        "holdout-02",
+        "holdout-03",
+        "holdout-04",
+        "holdout-05",
+        "holdout-06",
+        "holdout-07",
+        "holdout-08",
+        "holdout-09",
+        "holdout-10",
+        "holdout-11",
+        "holdout-12",
+        "holdout-13",
+        "holdout-14",
+        "holdout-15",
+        "holdout-16",
+        "holdout-17"
+      ],
+      "quality": {
+        "records": 18,
+        "selected_ids": [
+          "holdout-00",
+          "holdout-01",
+          "holdout-02",
+          "holdout-03",
+          "holdout-04",
+          "holdout-05"
+        ],
+        "review_ids": [
+          "holdout-14",
+          "holdout-15",
+          "holdout-16",
+          "holdout-17"
+        ],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 14,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.7777777777777778,
+        "exact": true
+      },
+      "decisions": {
+        "holdout-00": "MATCH",
+        "holdout-01": "MATCH",
+        "holdout-02": "MATCH",
+        "holdout-03": "MATCH",
+        "holdout-04": "MATCH",
+        "holdout-05": "MATCH",
+        "holdout-06": "EXCLUDE",
+        "holdout-07": "EXCLUDE",
+        "holdout-08": "EXCLUDE",
+        "holdout-09": "EXCLUDE",
+        "holdout-10": "EXCLUDE",
+        "holdout-11": "EXCLUDE",
+        "holdout-12": "EXCLUDE",
+        "holdout-13": "EXCLUDE",
+        "holdout-14": "REVIEW",
+        "holdout-15": "REVIEW",
+        "holdout-16": "REVIEW",
+        "holdout-17": "REVIEW"
+      },
+      "native_answers": {
+        "holdout-00": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.94,
+            "probabilities": {
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.96,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-01": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.84,
+            "probabilities": {
+              "UNKNOWN": 0.09,
+              "SUPPORTED": 0.9,
+              "CONTRADICTED": 0.01
+            }
+          }
+        },
+        "holdout-02": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.96,
+            "probabilities": {
+              "UNKNOWN": 0.02,
+              "SUPPORTED": 0.98,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-03": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.01,
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-04": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "UNKNOWN": 0.02,
+              "SUPPORTED": 0.98,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-05": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.96,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-06": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.44,
+            "probabilities": {
+              "UNKNOWN": 0.33,
+              "SUPPORTED": 0.05,
+              "CONTRADICTED": 0.62
+            }
+          }
+        },
+        "holdout-07": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "holdout-08": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "holdout-09": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "holdout-10": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "UNKNOWN": 0.01,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99
+            }
+          }
+        },
+        "holdout-11": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.83,
+            "probabilities": {
+              "UNKNOWN": 0.1,
+              "SUPPORTED": 0.01,
+              "CONTRADICTED": 0.89
+            }
+          }
+        },
+        "holdout-12": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.94,
+            "probabilities": {
+              "UNKNOWN": 0.04,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.96
+            }
+          }
+        },
+        "holdout-13": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "UNKNOWN": 0.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0
+            }
+          }
+        },
+        "holdout-14": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-15": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-16": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0
+            }
+          }
+        },
+        "holdout-17": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 0.8,
+            "probabilities": {
+              "CONTRADICTED": 0.01,
+              "UNKNOWN": 0.87,
+              "SUPPORTED": 0.12
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 833.2,
+      "collection_ms": 0.014,
+      "admission_inference_reduction_ms": 833.118,
+      "input_source_bytes": 1422,
+      "inference_context_bytes": 10526,
+      "returned_context_bytes": 4681,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "network_questions": 18,
+        "workers": 2,
+        "unknown_usage_attempts": 0,
+        "requests": 2
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 2,
+            "known_usage": {
+              "input_tokens": 3579,
+              "output_tokens": 848
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "uncertainty",
+      "case": "held_out_current_establishment",
+      "arm": "treatment",
+      "repeat": 1,
+      "candidate_ids": [
+        "holdout-00",
+        "holdout-01",
+        "holdout-02",
+        "holdout-03",
+        "holdout-04",
+        "holdout-05",
+        "holdout-06",
+        "holdout-07",
+        "holdout-08",
+        "holdout-09",
+        "holdout-10",
+        "holdout-11",
+        "holdout-12",
+        "holdout-13",
+        "holdout-14",
+        "holdout-15",
+        "holdout-16",
+        "holdout-17"
+      ],
+      "quality": {
+        "records": 18,
+        "selected_ids": [
+          "holdout-00",
+          "holdout-01",
+          "holdout-02",
+          "holdout-03",
+          "holdout-04",
+          "holdout-05"
+        ],
+        "review_ids": [
+          "holdout-14",
+          "holdout-15",
+          "holdout-16",
+          "holdout-17"
+        ],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 14,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.7777777777777778,
+        "exact": true
+      },
+      "decisions": {
+        "holdout-00": "MATCH",
+        "holdout-01": "MATCH",
+        "holdout-02": "MATCH",
+        "holdout-03": "MATCH",
+        "holdout-04": "MATCH",
+        "holdout-05": "MATCH",
+        "holdout-06": "EXCLUDE",
+        "holdout-07": "EXCLUDE",
+        "holdout-08": "EXCLUDE",
+        "holdout-09": "EXCLUDE",
+        "holdout-10": "EXCLUDE",
+        "holdout-11": "EXCLUDE",
+        "holdout-12": "EXCLUDE",
+        "holdout-13": "EXCLUDE",
+        "holdout-14": "REVIEW",
+        "holdout-15": "REVIEW",
+        "holdout-16": "REVIEW",
+        "holdout-17": "REVIEW"
+      },
+      "native_answers": {
+        "holdout-00": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "SUPPORTED": 0.95,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.05
+            }
+          }
+        },
+        "holdout-01": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.77,
+            "probabilities": {
+              "SUPPORTED": 0.84,
+              "CONTRADICTED": 0.03,
+              "UNKNOWN": 0.13
+            }
+          }
+        },
+        "holdout-02": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.97,
+            "probabilities": {
+              "SUPPORTED": 0.98,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.02
+            }
+          }
+        },
+        "holdout-03": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-04": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-05": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.92,
+            "probabilities": {
+              "SUPPORTED": 0.95,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.05
+            }
+          }
+        },
+        "holdout-06": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.41,
+            "probabilities": {
+              "CONTRADICTED": 0.61,
+              "SUPPORTED": 0.05,
+              "UNKNOWN": 0.34
+            }
+          }
+        },
+        "holdout-07": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-08": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-09": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-10": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "CONTRADICTED": 0.99,
+              "SUPPORTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-11": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.81,
+            "probabilities": {
+              "SUPPORTED": 0.02,
+              "CONTRADICTED": 0.87,
+              "UNKNOWN": 0.11
+            }
+          }
+        },
+        "holdout-12": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.94,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.96,
+              "UNKNOWN": 0.04
+            }
+          }
+        },
+        "holdout-13": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-14": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-15": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-16": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-17": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 0.86,
+            "probabilities": {
+              "SUPPORTED": 0.07,
+              "CONTRADICTED": 0.02,
+              "UNKNOWN": 0.91
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 884.763,
+      "collection_ms": 0.022,
+      "admission_inference_reduction_ms": 884.674,
+      "input_source_bytes": 1422,
+      "inference_context_bytes": 10526,
+      "returned_context_bytes": 4683,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "network_questions": 18,
+        "workers": 2,
+        "unknown_usage_attempts": 0,
+        "requests": 2
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 2,
+            "known_usage": {
+              "input_tokens": 3579,
+              "output_tokens": 848
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    },
+    {
+      "workflow": "uncertainty",
+      "case": "held_out_current_establishment",
+      "arm": "baseline",
+      "repeat": 1,
+      "candidate_ids": [
+        "holdout-00",
+        "holdout-01",
+        "holdout-02",
+        "holdout-03",
+        "holdout-04",
+        "holdout-05",
+        "holdout-06",
+        "holdout-07",
+        "holdout-08",
+        "holdout-09",
+        "holdout-10",
+        "holdout-11",
+        "holdout-12",
+        "holdout-13",
+        "holdout-14",
+        "holdout-15",
+        "holdout-16",
+        "holdout-17"
+      ],
+      "quality": {
+        "records": 18,
+        "selected_ids": [
+          "holdout-00",
+          "holdout-01",
+          "holdout-02",
+          "holdout-03",
+          "holdout-04",
+          "holdout-05"
+        ],
+        "review_ids": [
+          "holdout-14",
+          "holdout-15",
+          "holdout-16",
+          "holdout-17"
+        ],
+        "false_positive_ids": [],
+        "false_negative_ids": [],
+        "wrong_automatic_ids": [],
+        "not_collected_ids": [],
+        "correct_decisions": 18,
+        "precision": 1.0,
+        "recall": 1.0,
+        "automatic": 14,
+        "automatic_error_rate": 0.0,
+        "coverage": 0.7777777777777778,
+        "exact": true
+      },
+      "decisions": {
+        "holdout-00": "MATCH",
+        "holdout-01": "MATCH",
+        "holdout-02": "MATCH",
+        "holdout-03": "MATCH",
+        "holdout-04": "MATCH",
+        "holdout-05": "MATCH",
+        "holdout-06": "EXCLUDE",
+        "holdout-07": "EXCLUDE",
+        "holdout-08": "EXCLUDE",
+        "holdout-09": "EXCLUDE",
+        "holdout-10": "EXCLUDE",
+        "holdout-11": "EXCLUDE",
+        "holdout-12": "EXCLUDE",
+        "holdout-13": "EXCLUDE",
+        "holdout-14": "REVIEW",
+        "holdout-15": "REVIEW",
+        "holdout-16": "REVIEW",
+        "holdout-17": "REVIEW"
+      },
+      "native_answers": {
+        "holdout-00": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.93,
+            "probabilities": {
+              "CONTRADICTED": 0.0,
+              "SUPPORTED": 0.95,
+              "UNKNOWN": 0.05
+            }
+          }
+        },
+        "holdout-01": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.74,
+            "probabilities": {
+              "CONTRADICTED": 0.02,
+              "SUPPORTED": 0.83,
+              "UNKNOWN": 0.15
+            }
+          }
+        },
+        "holdout-02": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.97,
+            "probabilities": {
+              "SUPPORTED": 0.98,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.02
+            }
+          }
+        },
+        "holdout-03": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-04": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "SUPPORTED": 0.99,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-05": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "SUPPORTED",
+            "confidence": 0.9,
+            "probabilities": {
+              "SUPPORTED": 0.94,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 0.06
+            }
+          }
+        },
+        "holdout-06": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.47,
+            "probabilities": {
+              "SUPPORTED": 0.05,
+              "CONTRADICTED": 0.65,
+              "UNKNOWN": 0.3
+            }
+          }
+        },
+        "holdout-07": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "CONTRADICTED": 1.0,
+              "SUPPORTED": 0.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-08": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-09": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 1.0,
+              "UNKNOWN": 0.0
+            }
+          }
+        },
+        "holdout-10": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.98,
+            "probabilities": {
+              "CONTRADICTED": 0.99,
+              "SUPPORTED": 0.0,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-11": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.83,
+            "probabilities": {
+              "SUPPORTED": 0.01,
+              "CONTRADICTED": 0.89,
+              "UNKNOWN": 0.1
+            }
+          }
+        },
+        "holdout-12": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.94,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.96,
+              "UNKNOWN": 0.04
+            }
+          }
+        },
+        "holdout-13": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "CONTRADICTED",
+            "confidence": 0.99,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.99,
+              "UNKNOWN": 0.01
+            }
+          }
+        },
+        "holdout-14": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-15": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0,
+              "UNKNOWN": 1.0
+            }
+          }
+        },
+        "holdout-16": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 1.0,
+            "probabilities": {
+              "UNKNOWN": 1.0,
+              "SUPPORTED": 0.0,
+              "CONTRADICTED": 0.0
+            }
+          }
+        },
+        "holdout-17": {
+          "current_establishment": {
+            "type": "choice",
+            "choice": "UNKNOWN",
+            "confidence": 0.85,
+            "probabilities": {
+              "UNKNOWN": 0.89,
+              "SUPPORTED": 0.06,
+              "CONTRADICTED": 0.05
+            }
+          }
+        }
+      },
+      "whole_operation_ms": 858.336,
+      "collection_ms": 0.015,
+      "admission_inference_reduction_ms": 858.284,
+      "input_source_bytes": 1422,
+      "inference_context_bytes": 10526,
+      "returned_context_bytes": 4682,
+      "scope_incomplete": false,
+      "verification_ok": true,
+      "telemetry": {
+        "usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "network_questions": 18,
+        "workers": 2,
+        "unknown_usage_attempts": 0,
+        "requests": 2
+      },
+      "model_accounting": {
+        "observed_models": [
+          "jev-1.13.0"
+        ],
+        "known_usage": {
+          "input_tokens": 3579,
+          "output_tokens": 848
+        },
+        "usage_complete": true,
+        "failed_request_ids": [],
+        "failures": [],
+        "by_model": [
+          {
+            "model": "jev-1.13.0",
+            "successful_requests": 2,
+            "known_usage": {
+              "input_tokens": 3579,
+              "output_tokens": 848
+            },
+            "usage_complete": true
+          }
+        ]
+      }
+    }
+  ],
+  "calibration_run": {
+    "candidate_ids": [
+      "calibration-00",
+      "calibration-01",
+      "calibration-02",
+      "calibration-03",
+      "calibration-04",
+      "calibration-05",
+      "calibration-06",
+      "calibration-07",
+      "calibration-08",
+      "calibration-09",
+      "calibration-10",
+      "calibration-11",
+      "calibration-12",
+      "calibration-13",
+      "calibration-14",
+      "calibration-15",
+      "calibration-16",
+      "calibration-17"
+    ],
+    "quality": {
+      "records": 18,
+      "selected_ids": [
+        "calibration-00",
+        "calibration-01",
+        "calibration-02",
+        "calibration-03",
+        "calibration-04",
+        "calibration-05"
+      ],
+      "review_ids": [
+        "calibration-14",
+        "calibration-15",
+        "calibration-16",
+        "calibration-17"
+      ],
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "wrong_automatic_ids": [],
+      "not_collected_ids": [],
+      "correct_decisions": 18,
+      "precision": 1.0,
+      "recall": 1.0,
+      "automatic": 14,
+      "automatic_error_rate": 0.0,
+      "coverage": 0.7777777777777778,
+      "exact": true
+    },
+    "decisions": {
+      "calibration-00": "MATCH",
+      "calibration-01": "MATCH",
+      "calibration-02": "MATCH",
+      "calibration-03": "MATCH",
+      "calibration-04": "MATCH",
+      "calibration-05": "MATCH",
+      "calibration-06": "EXCLUDE",
+      "calibration-07": "EXCLUDE",
+      "calibration-08": "EXCLUDE",
+      "calibration-09": "EXCLUDE",
+      "calibration-10": "EXCLUDE",
+      "calibration-11": "EXCLUDE",
+      "calibration-12": "EXCLUDE",
+      "calibration-13": "EXCLUDE",
+      "calibration-14": "REVIEW",
+      "calibration-15": "REVIEW",
+      "calibration-16": "REVIEW",
+      "calibration-17": "REVIEW"
+    },
+    "native_answers": {
+      "calibration-00": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 0.97,
+          "probabilities": {
+            "SUPPORTED": 0.98,
+            "CONTRADICTED": 0.0,
+            "UNKNOWN": 0.02
+          }
+        }
+      },
+      "calibration-01": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 1.0,
+            "UNKNOWN": 0.0,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-02": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 0.94,
+          "probabilities": {
+            "SUPPORTED": 0.96,
+            "UNKNOWN": 0.04,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-03": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 0.98,
+          "probabilities": {
+            "SUPPORTED": 0.99,
+            "UNKNOWN": 0.01,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-04": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 0.99,
+          "probabilities": {
+            "SUPPORTED": 0.99,
+            "UNKNOWN": 0.01,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-05": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "SUPPORTED",
+          "confidence": 0.95,
+          "probabilities": {
+            "SUPPORTED": 0.97,
+            "UNKNOWN": 0.03,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-06": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 0.99,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.0,
+            "CONTRADICTED": 1.0
+          }
+        }
+      },
+      "calibration-07": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.0,
+            "CONTRADICTED": 1.0
+          }
+        }
+      },
+      "calibration-08": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "CONTRADICTED": 1.0,
+            "UNKNOWN": 0.0
+          }
+        }
+      },
+      "calibration-09": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.0,
+            "CONTRADICTED": 1.0
+          }
+        }
+      },
+      "calibration-10": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 0.98,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.01,
+            "CONTRADICTED": 0.99
+          }
+        }
+      },
+      "calibration-11": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 0.99,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.01,
+            "CONTRADICTED": 0.99
+          }
+        }
+      },
+      "calibration-12": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 0.48,
+          "probabilities": {
+            "SUPPORTED": 0.09,
+            "UNKNOWN": 0.26,
+            "CONTRADICTED": 0.65
+          }
+        }
+      },
+      "calibration-13": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "CONTRADICTED",
+          "confidence": 0.99,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.01,
+            "CONTRADICTED": 0.99
+          }
+        }
+      },
+      "calibration-14": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "UNKNOWN",
+          "confidence": 0.99,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 1.0,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-15": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "UNKNOWN",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 1.0,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-16": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "UNKNOWN",
+          "confidence": 1.0,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 1.0,
+            "CONTRADICTED": 0.0
+          }
+        }
+      },
+      "calibration-17": {
+        "current_establishment": {
+          "type": "choice",
+          "choice": "UNKNOWN",
+          "confidence": 0.93,
+          "probabilities": {
+            "SUPPORTED": 0.0,
+            "UNKNOWN": 0.95,
+            "CONTRADICTED": 0.05
+          }
+        }
+      }
+    },
+    "whole_operation_ms": 891.895,
+    "collection_ms": 0.007,
+    "admission_inference_reduction_ms": 891.817,
+    "input_source_bytes": 1233,
+    "inference_context_bytes": 10337,
+    "returned_context_bytes": 4674,
+    "scope_incomplete": false,
+    "verification_ok": true,
+    "telemetry": {
+      "usage": {
+        "input_tokens": 3542,
+        "output_tokens": 848
+      },
+      "usage_complete": true,
+      "network_questions": 18,
+      "workers": 2,
+      "unknown_usage_attempts": 0,
+      "requests": 2
+    },
+    "model_accounting": {
+      "observed_models": [
+        "jev-1.13.0"
+      ],
+      "known_usage": {
+        "input_tokens": 3542,
+        "output_tokens": 848
+      },
+      "usage_complete": true,
+      "failed_request_ids": [],
+      "failures": [],
+      "by_model": [
+        {
+          "model": "jev-1.13.0",
+          "successful_requests": 2,
+          "known_usage": {
+            "input_tokens": 3542,
+            "output_tokens": 848
+          },
+          "usage_complete": true
+        }
+      ]
+    }
+  },
+  "policy_selection": {
+    "threshold": 0.0,
+    "selection_source": "calibration_only",
+    "status": "selected",
+    "metrics": {
+      "records": 18,
+      "selected_ids": [
+        "calibration-00",
+        "calibration-01",
+        "calibration-02",
+        "calibration-03",
+        "calibration-04",
+        "calibration-05"
+      ],
+      "review_ids": [
+        "calibration-14",
+        "calibration-15",
+        "calibration-16",
+        "calibration-17"
+      ],
+      "false_positive_ids": [],
+      "false_negative_ids": [],
+      "wrong_automatic_ids": [],
+      "not_collected_ids": [],
+      "correct_decisions": 18,
+      "precision": 1.0,
+      "recall": 1.0,
+      "automatic": 14,
+      "automatic_error_rate": 0.0,
+      "coverage": 0.7777777777777778,
+      "exact": true
+    },
+    "candidates": [
+      {
+        "threshold": 0.0,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-00",
+            "calibration-01",
+            "calibration-02",
+            "calibration-03",
+            "calibration-04",
+            "calibration-05"
+          ],
+          "review_ids": [
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 18,
+          "precision": 1.0,
+          "recall": 1.0,
+          "automatic": 14,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.7777777777777778,
+          "exact": true
+        }
+      },
+      {
+        "threshold": 0.55,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-00",
+            "calibration-01",
+            "calibration-02",
+            "calibration-03",
+            "calibration-04",
+            "calibration-05"
+          ],
+          "review_ids": [
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 18,
+          "precision": 1.0,
+          "recall": 1.0,
+          "automatic": 14,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.7777777777777778,
+          "exact": true
+        }
+      },
+      {
+        "threshold": 0.7,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-00",
+            "calibration-01",
+            "calibration-02",
+            "calibration-03",
+            "calibration-04",
+            "calibration-05"
+          ],
+          "review_ids": [
+            "calibration-12",
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 17,
+          "precision": 1.0,
+          "recall": 1.0,
+          "automatic": 13,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.7222222222222222,
+          "exact": false
+        }
+      },
+      {
+        "threshold": 0.85,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-00",
+            "calibration-01",
+            "calibration-02",
+            "calibration-03",
+            "calibration-04",
+            "calibration-05"
+          ],
+          "review_ids": [
+            "calibration-12",
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 17,
+          "precision": 1.0,
+          "recall": 1.0,
+          "automatic": 13,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.7222222222222222,
+          "exact": false
+        }
+      },
+      {
+        "threshold": 0.95,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-00",
+            "calibration-01",
+            "calibration-02",
+            "calibration-03",
+            "calibration-04",
+            "calibration-05"
+          ],
+          "review_ids": [
+            "calibration-12",
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 17,
+          "precision": 1.0,
+          "recall": 1.0,
+          "automatic": 13,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.7222222222222222,
+          "exact": false
+        }
+      },
+      {
+        "threshold": 0.99,
+        "metrics": {
+          "records": 18,
+          "selected_ids": [
+            "calibration-01",
+            "calibration-03",
+            "calibration-04"
+          ],
+          "review_ids": [
+            "calibration-00",
+            "calibration-02",
+            "calibration-05",
+            "calibration-12",
+            "calibration-14",
+            "calibration-15",
+            "calibration-16",
+            "calibration-17"
+          ],
+          "false_positive_ids": [],
+          "false_negative_ids": [
+            "calibration-00",
+            "calibration-02",
+            "calibration-05"
+          ],
+          "wrong_automatic_ids": [],
+          "not_collected_ids": [],
+          "correct_decisions": 14,
+          "precision": 1.0,
+          "recall": 0.5,
+          "automatic": 10,
+          "automatic_error_rate": 0.0,
+          "coverage": 0.5555555555555556,
+          "exact": false
+        }
+      }
+    ],
+    "objective": "Maximum automatic coverage with zero observed automatic calibration errors; lowest threshold breaks ties."
+  },
+  "summary": {
+    "code": {
+      "baseline": {
+        "operations": 6,
+        "median_whole_operation_ms": 854.453,
+        "false_positive": 0,
+        "false_negative": 8,
+        "review": 0,
+        "failed_requests": 0,
+        "exact_operations": 0,
+        "inference_context_bytes": 6736,
+        "known_usage": {
+          "input_tokens": 2872,
+          "output_tokens": 196
+        },
+        "usage_complete": true,
+        "observed_models": [
+          "jev-1.13.0"
+        ]
+      },
+      "treatment": {
+        "operations": 6,
+        "median_whole_operation_ms": 848.5225,
+        "false_positive": 0,
+        "false_negative": 2,
+        "review": 0,
+        "failed_requests": 0,
+        "exact_operations": 4,
+        "inference_context_bytes": 14192,
+        "known_usage": {
+          "input_tokens": 5966,
+          "output_tokens": 664
+        },
+        "usage_complete": true,
+        "observed_models": [
+          "jev-1.13.0"
+        ]
+      }
+    },
+    "diff": {
+      "baseline": {
+        "operations": 2,
+        "median_whole_operation_ms": 502.8095,
+        "false_positive": 8,
+        "false_negative": 0,
+        "review": 0,
+        "failed_requests": 0,
+        "exact_operations": 0,
+        "inference_context_bytes": 0,
+        "known_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0
+        },
+        "usage_complete": true,
+        "observed_models": []
+      },
+      "treatment": {
+        "operations": 2,
+        "median_whole_operation_ms": 1464.7035,
+        "false_positive": 0,
+        "false_negative": 0,
+        "review": 0,
+        "failed_requests": 0,
+        "exact_operations": 2,
+        "inference_context_bytes": 18718,
+        "known_usage": {
+          "input_tokens": 8554,
+          "output_tokens": 758
+        },
+        "usage_complete": true,
+        "observed_models": [
+          "jev-1.13.0"
+        ]
+      }
+    },
+    "uncertainty": {
+      "baseline": {
+        "operations": 2,
+        "median_whole_operation_ms": 885.905,
+        "false_positive": 0,
+        "false_negative": 0,
+        "review": 8,
+        "failed_requests": 0,
+        "exact_operations": 2,
+        "inference_context_bytes": 21052,
+        "known_usage": {
+          "input_tokens": 7158,
+          "output_tokens": 1696
+        },
+        "usage_complete": true,
+        "observed_models": [
+          "jev-1.13.0"
+        ]
+      },
+      "treatment": {
+        "operations": 2,
+        "median_whole_operation_ms": 858.9815000000001,
+        "false_positive": 0,
+        "false_negative": 0,
+        "review": 8,
+        "failed_requests": 0,
+        "exact_operations": 2,
+        "inference_context_bytes": 21052,
+        "known_usage": {
+          "input_tokens": 7158,
+          "output_tokens": 1696
+        },
+        "usage_complete": true,
+        "observed_models": [
+          "jev-1.13.0"
+        ]
+      }
+    }
+  }
+}

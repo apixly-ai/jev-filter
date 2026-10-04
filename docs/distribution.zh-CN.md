@@ -67,7 +67,7 @@ npm trust github PACKAGE --repo apixly-ai/jev-filter \
 配置完成后，续发当前版本：
 
 ```sh
-gh workflow run publish-npm.yml --ref main -f tag=v0.4.0
+gh workflow run publish-npm.yml --ref main -f tag=v0.4.1
 ```
 
 GitHub Release 成功不代表 npm 已发布，必须查看单独的 Publish npm 运行及 Registry 安装验收。未建立 npm 信任时发布会失败，并在摘要说明首次设置条件。参考 [npm trust 前提](https://docs.npmjs.com/cli/v11/commands/npm-trust/) 和[可信发布文档](https://docs.npmjs.com/trusted-publishers/)。

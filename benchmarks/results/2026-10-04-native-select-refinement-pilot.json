@@ -1,0 +1,523 @@
+{
+  "schema_version": 1,
+  "kind": "live-browser-pinned-ab",
+  "created_at": "2026-10-04T07:31:21.146175+00:00",
+  "commits": {
+    "baseline": "39d0bdc21dd3b17de452f413181f422a4c84af18",
+    "treatment": "working-tree-snapshot"
+  },
+  "source_sha256": {
+    "baseline": "329682d8b5e60d9ea81fe6a552ddc11af952c65f4b322db6f9bf42db77a3e18f",
+    "treatment": "4a73f6d212df8f71a41348902558015627935bfd2f972e240ff2f69be8d449d0"
+  },
+  "repeats": 1,
+  "tasks": [
+    "search-filter",
+    "buy-pauses-before-order"
+  ],
+  "fixture_sha256": "2962326329e311f38b3cbe9d74881aedd436db33f23b6f74c1dfb166cd275fa5",
+  "runtime": {
+    "python": "3.14.2",
+    "system": "Darwin"
+  },
+  "whole_benchmark_elapsed_ms": 10800.908,
+  "timing_scope": "fixture setup/navigation + observe/decide/act + independent final checks; browser startup reported separately",
+  "usage_scope": "actual provider-reported input/output tokens; failed or retried unknown usage is preserved",
+  "pricing": {
+    "usd_per_million_input": 0.042,
+    "output_billed": false,
+    "basis": "estimate using stated Jev price, not an invoice"
+  },
+  "scope": "synthetic loopback fixtures in new private Chromium processes; no customer/business execution",
+  "summary": {
+    "baseline": {
+      "runs": 2,
+      "passed": 0,
+      "correct_completions": 0,
+      "correct_gates": 0,
+      "review_or_failure": 2,
+      "statuses": {
+        "needs_review": 2
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 7,
+      "provider_attempts": 7,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 23140,
+        "output_tokens": 1567
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 23140,
+          "output_tokens": 1567
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 3680.368,
+      "whole_operation_median_ms": 1840.184,
+      "request_bytes": 78700,
+      "state_bytes": 10972,
+      "estimated_input_usd": 0.00097188
+    },
+    "treatment": {
+      "runs": 2,
+      "passed": 0,
+      "correct_completions": 0,
+      "correct_gates": 0,
+      "review_or_failure": 2,
+      "statuses": {
+        "needs_review": 2
+      },
+      "false_completions": 0,
+      "wrong_actions": 0,
+      "model_calls": 6,
+      "provider_attempts": 6,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 18808,
+        "output_tokens": 1262
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 18808,
+          "output_tokens": 1262
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "whole_operation_total_ms": 3528.692,
+      "whole_operation_median_ms": 1764.346,
+      "request_bytes": 64531,
+      "state_bytes": 8780,
+      "estimated_input_usd": 0.000789936
+    }
+  },
+  "runs": [
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 462.996,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.54,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "Category",
+      "error_type": null,
+      "error": null,
+      "steps": 3,
+      "kernel_elapsed_ms": 1825,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "results_page": false,
+        "exact_search": false,
+        "category": false,
+        "stock": false,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 1927.005,
+      "model_calls": 4,
+      "provider_attempts": 4,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 13630,
+        "output_tokens": 922
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 13630,
+          "output_tokens": 922
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 46283,
+      "state_bytes": 6564,
+      "estimated_input_usd": 0.00057246,
+      "known_input_usd_lower_bound": 0.00057246,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 764.394
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12903,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 389.116
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13711,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 286
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 236.911
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13701,
+          "state_bytes": 2156,
+          "usage": {
+            "input_tokens": 4120,
+            "output_tokens": 278
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 255.317
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1
+    },
+    {
+      "task": "search-filter",
+      "runtime_version": "0.4.0",
+      "expected": "done",
+      "browser_startup_ms": 380.049,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "operation",
+          "reason": "below_min_top_probability",
+          "actual": 0.5,
+          "threshold": 0.55
+        },
+        {
+          "question": "operation",
+          "reason": "below_min_margin",
+          "actual": 0.020000000000000018,
+          "threshold": 0.1
+        }
+      ],
+      "pending_label": "Category → Shoes",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1663,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "results_page": false,
+        "exact_search": false,
+        "category": false,
+        "stock": false,
+        "consent_rejected": true
+      },
+      "whole_operation_ms": 1734.385,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9404,
+        "output_tokens": 631
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9404,
+          "output_tokens": 631
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32348,
+      "state_bytes": 4390,
+      "estimated_input_usd": 0.000394968,
+      "known_input_usd_lower_bound": 0.000394968,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5968,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 721.22
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12786,
+          "state_bytes": 1603,
+          "usage": {
+            "input_tokens": 3663,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 399.73
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13594,
+          "state_bytes": 2084,
+          "usage": {
+            "input_tokens": 4064,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 408.238
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 370.898,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.4,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "In stock only",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1664,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": false,
+        "exact_cart_preserved": false,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1753.363,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9510,
+        "output_tokens": 645
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9510,
+          "output_tokens": 645
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32417,
+      "state_bytes": 4408,
+      "estimated_input_usd": 0.00039942,
+      "known_input_usd_lower_bound": 0.00039942,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 853.565
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12837,
+          "state_bytes": 1612,
+          "usage": {
+            "input_tokens": 3716,
+            "output_tokens": 256
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 432.241
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13645,
+          "state_bytes": 2093,
+          "usage": {
+            "input_tokens": 4117,
+            "output_tokens": 287
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 249.244
+        }
+      ],
+      "arm": "baseline",
+      "repeat": 1
+    },
+    {
+      "task": "buy-pauses-before-order",
+      "runtime_version": "0.4.0",
+      "expected": "needs_confirmation",
+      "browser_startup_ms": 371.491,
+      "passed": false,
+      "correct_completion": false,
+      "correct_gate": false,
+      "review_or_failure": true,
+      "false_completion": false,
+      "wrong_actions": 0,
+      "status": "needs_review",
+      "reason": "uncertain_decision",
+      "review_reasons": [
+        {
+          "question": "click_target",
+          "reason": "below_min_top_probability",
+          "actual": 0.44,
+          "threshold": 0.55
+        }
+      ],
+      "pending_label": "In stock only",
+      "error_type": null,
+      "error": null,
+      "steps": 2,
+      "kernel_elapsed_ms": 1718,
+      "kernel_usage_complete": true,
+      "kernel_unknown_usage_attempts": 0,
+      "independent_checks": {
+        "expected_pending_action": false,
+        "exact_cart_preserved": false,
+        "no_order_confirmation": true
+      },
+      "whole_operation_ms": 1794.307,
+      "model_calls": 3,
+      "provider_attempts": 3,
+      "provider_retries": 0,
+      "failed_provider_calls": 0,
+      "known_usage": {
+        "input_tokens": 9404,
+        "output_tokens": 631
+      },
+      "model_usage": {
+        "jev-1.13.0": {
+          "input_tokens": 9404,
+          "output_tokens": 631
+        }
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "request_bytes": 32183,
+      "state_bytes": 4390,
+      "estimated_input_usd": 0.000394968,
+      "known_input_usd_lower_bound": 0.000394968,
+      "calls": [
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 5935,
+          "state_bytes": 703,
+          "usage": {
+            "input_tokens": 1677,
+            "output_tokens": 102
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 906.388
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 12720,
+          "state_bytes": 1603,
+          "usage": {
+            "input_tokens": 3663,
+            "output_tokens": 249
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 377.273
+        },
+        {
+          "model": "jev-1.13.0",
+          "request_bytes": 13528,
+          "state_bytes": 2084,
+          "usage": {
+            "input_tokens": 4064,
+            "output_tokens": 280
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "attempts": 1,
+          "elapsed_ms": 293.059
+        }
+      ],
+      "arm": "treatment",
+      "repeat": 1
+    }
+  ],
+  "limitations": [
+    "Small fixture sets and repeated runs cannot establish production reliability or calibrated accuracy.",
+    "This compares released program versions on the same Jev model, not Jev against an LLM.",
+    "Needed confirmation is a correct expected stop; it is never resumed in the benchmark.",
+    "Synthetic final-state checks reject a false DONE but do not prove every intermediate action was optimal."
+  ]
+}

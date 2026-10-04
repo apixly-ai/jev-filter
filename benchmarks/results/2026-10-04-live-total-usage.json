@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-04",
+  "scope": "All paid test operations in this validation turn, including retained negative/pilot iterations; Jev rates are estimates from reported usage, not account invoices. Primary Codex usage is subscription-account token usage, not API billing.",
+  "jev": {
+    "families": [
+      {
+        "family": "native_provider_pilot",
+        "known_input_tokens": 20494,
+        "known_output_tokens": 6110,
+        "reported_calls": 2,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "local pilot retained; successful connectivity/selection only"
+        ]
+      },
+      {
+        "family": "batching_all_12_arms",
+        "known_input_tokens": 600660,
+        "known_output_tokens": 110964,
+        "reported_calls": 588,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "2026-10-04-live-batching.json"
+        ]
+      },
+      {
+        "family": "records_all_3_series",
+        "known_input_tokens": 108766,
+        "known_output_tokens": 17574,
+        "reported_calls": 60,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "canonical 2026-10-04-live-records.json; two earlier series retained locally"
+        ]
+      },
+      {
+        "family": "published_interfaces",
+        "known_input_tokens": 71616,
+        "known_output_tokens": 17562,
+        "reported_calls": 16,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "2026-10-04-live-interfaces.json"
+        ]
+      },
+      {
+        "family": "whole_operation_24_runs",
+        "known_input_tokens": 290028,
+        "known_output_tokens": 50172,
+        "reported_calls": null,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "2026-10-04-live-operations.json"
+        ]
+      },
+      {
+        "family": "browser_all_pilots_and_experiments",
+        "known_input_tokens": 1486918,
+        "known_output_tokens": 100215,
+        "reported_calls": 583,
+        "unknown_usage_attempts": 1,
+        "evidence": [
+          "2026-10-04-live-browser-pilot.json",
+          "2026-10-04-live-browser-ab.json",
+          "2026-10-04-native-select-refinement-pilot.json",
+          "2026-10-04-live-browser-native-select-ab.json",
+          "2026-10-04-live-browser-stronger-cases.json",
+          "2026-10-04-scroll-evidence-pilot.json",
+          "2026-10-04-live-browser-scroll-evidence-ab.json",
+          "2026-10-04-live-browser-final-ab.json"
+        ]
+      },
+      {
+        "family": "planner_reference_both_matrices",
+        "known_input_tokens": 350195,
+        "known_output_tokens": 22175,
+        "reported_calls": null,
+        "unknown_usage_attempts": 0,
+        "evidence": [
+          "2026-10-04-live-planner-recovery.json",
+          "2026-10-04-live-planner-recovery-verified.json"
+        ]
+      }
+    ],
+    "known_input_tokens": 2928677,
+    "known_output_tokens": 324772,
+    "unknown_usage_attempts": 1,
+    "usage_complete": false,
+    "known_input_estimate_usd_lower_bound": 0.123004434,
+    "estimated_total_usd": null,
+    "actual_billed_usd": null,
+    "rate_snapshot": {
+      "input_usd_per_million": 0.042,
+      "output_usd_per_million": 0,
+      "source": "https://docs.typesafe.ai/models",
+      "verified_date": "2026-10-04"
+    }
+  },
+  "primary": {
+    "actual_known_tokens": {
+      "input_tokens": 1463583,
+      "cached_input_tokens": 563200,
+      "output_tokens": 7315
+    },
+    "usage_complete": true,
+    "actual_billed_usd": null,
+    "cost_basis": "per-model Standard short-context API-equivalent estimates only in individual reports"
+  }
+}

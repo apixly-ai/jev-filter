@@ -3,6 +3,29 @@
 The format follows Keep a Changelog; versions follow SemVer within the limitations
 of a 0.x API (minor releases may make documented breaking changes).
 
+## [0.4.1] - 2026-10-04
+
+### Fixed
+- Nested scroll decisions now receive observed container position, dimensions,
+  remaining travel and clipped-control evidence. Clipped text no longer appears
+  actionable; freshness, origin, irreversible and uncertainty gates stay intact.
+- Native dropdown click compatibility is retained, including lazy option loading.
+
+### Validated with live inference
+- 24 whole-agent raw/filtered runs: all selected ID sets correct; filtered 12/12
+  complete versus raw 11/12. Returned context falls 91.6–97.2%, while five of six
+  scenario/model cells have higher latency and one cheap-model cell higher modeled cost.
+- Paid record and published-interface checks include code/diff/query/triage, JS,
+  official MCP, local extraction and survey. Interface E2E passes 13/13.
+- Direct published-0.4-versus-patch browser comparison: nested completion 0/3 to 3/3,
+  existing six tasks 12/18 in both arms. Six strict-policy review stops remain visible.
+- A benchmark-only planner continuation handles reviews and independently rejected
+  DONE, reaching 6/6 expected outcomes while preserving order confirmation gates.
+  It is a reference integration, not a shipped automatic model fallback.
+- Every earlier negative experiment and unknown-usage attempt is retained. Actual
+  billing is unavailable; token-based Jev estimates and subscription/API-equivalent
+  main-model usage are disclosed separately with dated rate sources.
+
 ## [0.4.0] - 2026-10-04
 
 ### Added

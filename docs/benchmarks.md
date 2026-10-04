@@ -2,12 +2,213 @@
 
 [简体中文](benchmarks.zh-CN.md)
 
+## Fresh paid evidence · 2026-10-04
+
+**91.6–97.2% less returned tool context, with the original evidence still recoverable.**
+This is the new whole-operation result: **24 real primary-agent runs**, three fixed
+synthetic scenarios (`code-search`, `triage`, `exec`), two primary models
+(`gpt-5.6-luna`, `gpt-6-astra`), raw/filtered arms and two repetitions per cell.
+Filtering completed **12/12** operations, raw context **11/12**; all **24/24**
+selected the exact expected ID sets. The raw Astra triage arm selected correctly
+but one run failed the full expected response contract; it remains in the denominator.
+
+### Whole operations: context is the win, latency is mixed
+
+| Primary model / scenario | Tool context less | Mean time raw → filtered | Cold API-equivalent change | Completion raw / filtered |
+|---|---:|---:|---:|---:|
+| Luna / code-search | 96.1% | 14.87 → 16.12 s | −14.2% | 2/2 / 2/2 |
+| Luna / triage | 97.2% | 15.21 → 17.09 s | −3.1% | 2/2 / 2/2 |
+| Luna / exec | 91.6% | 15.82 → 15.84 s | **+1.1%** | 2/2 / 2/2 |
+| Astra / code-search | 96.1% | 18.51 → 19.44 s | −22.0% | 2/2 / 2/2 |
+| Astra / triage | 97.2% | 23.12 → 19.58 s | −23.2% | 1/2 / 2/2 |
+| Astra / exec | 91.6% | 18.73 → 22.19 s | −4.8% | 2/2 / 2/2 |
+
+Five of six cells were slower by **0.1–18.4%**. Only Astra triage was faster
+(**15.3%**), and its raw arm contains the failed response contract. Two repetitions
+are a smoke comparison, not a statistical latency study. Fixture setup is excluded
+and recorded separately; collection, Jev inference, real primary-agent shell tool
+use and continuation are timed together. Tool-context bytes count what the tool
+returns, not the entire model prompt. Main input includes the harness and the
+agent's fixed instructions.
+
+Actual token totals, summed over each model's six raw or six filtered runs:
+
+| Primary model / arm | Main input / cached subset / output | Jev input / output |
+|---|---:|---:|
+| Luna / raw | 242,638 / 112,896 / 1,804 | 0 / 0 |
+| Luna / filtered | 199,220 / 109,824 / 1,478 | 145,014 / 25,086 |
+| Astra / raw | 277,875 / 111,360 / 925 | 0 / 0 |
+| Astra / filtered | 227,990 / 144,640 / 891 | 145,014 / 25,086 |
+
+Provider usage is complete for these runs. Codex CLI uses configured account
+access: **actual subscription billing is unknown**. Cold estimates treat main input
+as uncached; cache-adjusted estimates use the observed cached subset. Neither is an
+invoice. Luna `exec` becomes **12.0% more expensive** under the cache-adjusted model;
+Astra `exec` has unusually more cached input in the filtered arm, so its **70.6%**
+adjusted reduction should not be attributed solely to filtering. Pricing is a dated,
+caller-supplied [2026-10-04 rate snapshot](../benchmarks/results/2026-10-04-operations-rates.json).
+Missing usage or unavailable billing remains `null`, never a zero-cost success.
+
+[Per-run JSON](../benchmarks/results/2026-10-04-live-operations.json) ·
+[Summary and exact arithmetic](../benchmarks/results/2026-10-04-live-operations-summary.json) ·
+[CSV](../benchmarks/results/2026-10-04-live-operations.csv) ·
+[Driver](../benchmarks/operations.py)
+
+![Fresh whole-operation context, equivalent cost and latency](assets/operations-live.png)
+
+### Batching: a faster Jev stage, with a smaller input bill
+
+The [fresh native batching test](../benchmarks/results/2026-10-04-live-batching.json)
+uses 96 fixed synthetic records × two predicates, four arms and three repetitions.
+All **12/12** operations returned the exact expected selection and complete usage.
+Single-record parallel uses at most **12** workers; batch-parallel needed two requests
+and two workers, while single-record arms made 96 requests per operation.
+
+| Arm | Mean whole filtering time | Input tokens over three repetitions | Exact runs |
+|---|---:|---:|---:|
+| Single-record serial | 29.50 s | 209,244 | 3/3 |
+| Automatic batch, serial | 1.82 s | 91,086 | 3/3 |
+| Single-record parallel, cap 12 | 3.22 s | 209,244 | 3/3 |
+| Automatic batch + parallel | 1.25 s | 91,086 | 3/3 |
+
+Batching reduces input **56.5%**; batch-parallel is **61.2% faster** than single-record
+parallel in this sample. Time includes planning, native inference and reduction, but
+**no primary-agent continuation**. This is not a whole-agent speedup. Repeated easy
+record templates and network variation limit generalization. Across all arms the
+provider reported **600,660 input / 110,964 output tokens**, complete usage and no
+unknown attempts. This legacy driver exposes requested `jev-1.13.0`, not observed
+response IDs. [Driver](../benchmarks/run.py).
+
+### Record workflows: better selection comes with more work
+
+The [native record A/B](../benchmarks/results/2026-10-04-live-records.json) uses
+fixed synthetic code, full Git before/after files and connection-phase records.
+It times collection → admission → real native Jev → reduction → source freshness.
+There is no primary-agent continuation in this experiment.
+
+| Workflow | Observed quality | Returned bytes / whole-operation trade-off |
+|---|---|---|
+| Exact code vs opt-in recall, both semantically filtered | **4/12 → 10/12** matches; no false positives in either arm. | **5,284 → 9,706 bytes** total. Median **854 → 849 ms** across six operations per arm; no speed claim. |
+| Retain all eight changed files vs semantic diff triage | Four target changes selected in both repetitions; irrelevant selections **8 → 0**, no missed targets. | **11,428 → 8,700 bytes** (23.9% less); median **503 → 1,465 ms**. |
+| Separate 18-record calibration and 18-record holdout | Both holdout arms **36/36** expected dispositions over two repetitions, including eight reviews. | Calibration selected threshold **0.0**: **no additional threshold benefit** on this easy sample. Native inference was fresh in each arm. |
+
+The deliberately missing lexical-overlap case is still missed in both code arms.
+The current recall implementation broadens lexical/symbol/caller candidates; it is
+not exhaustive semantic indexing. Calibration and holdout use distinct records but
+similar handwritten scenarios. The threshold selector fits no probability calibrator
+and establishes no population guarantee.
+
+This canonical series made **20 native requests**, with **35,250 input / 5,858 output
+tokens**, returned model **`jev-1.13.0`**, complete usage and successful freshness checks.
+[Fixed inputs and runner](../benchmarks/live_records.py) disclose the gold labels,
+policy grid, model usage by operation and the negative results.
+
+### Interfaces: real paid calls through the shipped routes
+
+[All 13 checks passed](../benchmarks/results/2026-10-04-live-interfaces.json): Python
+CLI and a **fresh registry installation of npm 0.4.0** each exercised 32-record query,
+code recall, eight correlated events and a six-file diff. An independent official
+MCP client negotiated **2025-11-25**, called filter/search/triage, and recovered the
+exact original plus its SHA-256. Local Chromium extraction selected four in-stock
+USB-C lamps; code parsed the source prices and retained the three under $35. CLI
+survey classified **64/64** topic labels with exact aggregate counts.
+
+These are synthetic interface checks, not open-world accuracy. The survey repeats
+eight simple ticket templates. **16 requests** returned **71,616 input / 17,562 output
+tokens**, complete usage. These public interfaces suppress the returned provider
+model ID; the result records requested `jev-1.13.0` separately and keeps resolved
+identity unavailable. [Runner](../benchmarks/live_interfaces.py) preserves complete
+synthetic output packets while replacing machine paths and receipt locations.
+
+### Browser: strict review, a verified fix, and failed experiments
+
+The [final pinned source A/B](../benchmarks/results/2026-10-04-live-browser-final-ab.json)
+compares the released 0.4.0 source with the scroll-evidence repair on the same
+`jev-1.13.0`, **0.55 top probability / 0.10 margin** policy: eight local fixtures,
+three repetitions per arm, independent DOM/storage checks. Expected outcomes are
+**15/24 → 18/24**: verified completions **12 → 15** plus **three correct irreversible
+stops** in both arms. Wrong actions and false completions are zero in this matrix.
+
+The nested-scroll target changes from **0/3 to 3/3** completed runs. A failed baseline
+stops early; the completed treatment needs **6 → 21** model calls and median time
+**1.33 → 3.25 s** across these three runs. The existing six-task subset has unchanged
+**12/18** expected outcomes: **six ordinary goal runs still need review**. Its known
+input grows **2.36%**, request bytes **7.52%**, and median time **3.58%**. The fix keeps
+the strict thresholds; it does not make pure Jev finish every goal.
+
+Across the final matrix, baseline/treatment use **171,320 / 202,290 input tokens**
+and **12,012 / 12,818 output tokens**, all resolved to `jev-1.13.0` with complete usage.
+Browser startup is reported separately; fixture navigation, observation, decisions,
+actions and independent final checks are included in the operation timing.
+
+Earlier experiments remain public: [native-select pruning](../benchmarks/results/2026-10-04-live-browser-native-select-ab.json)
+reduced expected passes **11/18 → 9/18**; [stronger controls and nested scroll](../benchmarks/results/2026-10-04-live-browser-stronger-cases.json)
+showed no pass improvement; [the scroll-evidence trial](../benchmarks/results/2026-10-04-live-browser-scroll-evidence-ab.json)
+had **one provider failure with unknown usage**. Its total cost is `null`, not zero.
+These failed or incomplete trials are separate from the final complete matrix.
+
+The first [benchmark-only primary-planner recovery](../benchmarks/results/2026-10-04-live-planner-recovery.json)
+reached **5/6** expected outcomes. Its independent check rejected one premature Jev
+`DONE` after adding the right cart item but before reaching the order gate. **A model's
+`DONE` alone is not usable completion.** The negative first matrix stays published.
+
+The [verified continuation reference](../benchmarks/results/2026-10-04-live-planner-recovery-verified.json)
+then reached **6/6**: three search completions and three correct `Place order` stops,
+under the same strict policy on pinned released 0.4.0. It detects and continues one
+premature Jev `DONE`; no wrong actions, accepted false completion claims or main-model
+executed tools occurred. The program owns observation and enumerated action IDs,
+checks main-planner ID/value-reference output, rechecks freshness, executes guarded
+actions and independently verifies the final state. [Reference flow](../benchmarks/live_planner_recovery.py).
+
+This is **reference integration, not a shipped automatic primary-model fallback**.
+Whole operation time is **14.7–51.6 s**, median **33.1 s**, including recovery overhead.
+The six new runs use `gpt-5.6-luna`: **275,556 input / 70,400 cached-input subset /
+1,155 output tokens**, plus actual `jev-1.13.0` **180,522 input / 11,378 output tokens**;
+usage is complete, subscription billing unknown. The result also retains the first
+matrix's spend separately. Reliable recovery adds work; it does not establish a cheap
+or fast universal browser agent.
+
+### Complete audit spend, including failed trials
+
+The [cumulative usage ledger](../benchmarks/results/2026-10-04-live-total-usage.json)
+includes pilots, repeated validation and failed experiments, not just the successful
+canonical tables: known Jev **2,928,677 input / 324,772 output tokens**, plus **one unknown
+provider attempt**. At the stated $0.042/million-input rate, known input corresponds
+to a **$0.123004434 estimate lower bound**; cumulative total and actual invoice remain
+unknown. Primary-account usage is **1,463,583 input / 563,200 cached subset / 7,315 output
+tokens** under subscription access, not a verified API bill. Costs are not silently
+zeroed or summed across incompatible billing bases.
+
+### Reproduce a new paid run
+
+Supply a permitted TypeSafe test credential through `TYPESAFE_API_KEY` or
+`TYPESAFE_API_KEY_FILE`; do not put it into inputs, reports or source. Model calls
+are opt-in and billable. Use new output paths and keep private traces private.
+
+```sh
+python -m pip install -e '.[code,dev,docs,browser-test]'
+# The independent MCP check also needs the official mcp package.
+python -m pip install mcp
+python -m benchmarks.run --live --records 96 --repeats 3 --parallel-workers 12 \
+  --output local-results/batching-new.json
+python -m benchmarks.live_records --live --repeats 2 --output local-results/records-new.json
+python -m benchmarks.live_interfaces --live --output local-results/interfaces-new.json
+python -m benchmarks.operations --live --models gpt-5.6-luna gpt-6-astra \
+  --cases code-search triage exec --repeats 2 --jev-workers 4 \
+  --rate-snapshot benchmarks/results/2026-10-04-operations-rates.json \
+  --report local-results/operations-new.json --private-dir local-results/operations-traces
+```
+
+The workflows above answer different questions: whole-primary-agent context,
+record decision quality, and interface correctness. Do not combine their denominators
+or turn a local stage improvement into a whole-agent saving.
+
 ## Release 0.4 evidence 2026-10-04
 
-These fresh tests target the released program's contracts and real interfaces. The
-three A/B lines below use a pinned 0.3.0 source baseline and fixed synthetic inputs;
-they make **zero semantic model calls**. Their fixture responses, labels and program
-policies are disclosed in the scripts. Historical live inference results follow below.
+These offline checks target the 0.4 program's contracts and interfaces. Contract A/B
+uses pinned source baselines; collector recall compares fixed candidate strategies.
+They make **zero semantic model calls**. Their scripted responses, labels and program
+policies are disclosed. Fresh paid evidence appears above; historical live results follow.
 
 | Scope | Baseline | 0.4 treatment | Tradeoff |
 |---|---:|---:|---|
@@ -194,13 +395,13 @@ and replayed. None of these fixes is in 0.3.0.
 | Link-dense pages exceed the provider's input limit (Hacker News, about 33.6k tokens) | 1 | Removing duplicated row text gave HTTP 200 and the right click |
 | Links that open a new tab are not followed | 1 | Untested |
 
-## Whole-operation benchmark: 48 agent runs
+## Historical whole-operation benchmark: 48 agent runs · 2026-09-23
 
 ![Whole-operation context, cost and latency results](assets/operations.png)
 
 [Per-run JSON](../benchmarks/results/2026-09-23-operations.json) · [CSV](../benchmarks/results/2026-09-23-operations.csv) · [Aggregates](../benchmarks/results/2026-09-23-operations-summary.json) · [Typed decision evidence](../benchmarks/results/2026-09-23-decisions.json)
 
-This is a fresh benchmark of the public core: **two primary models, four scenarios,
+This historical 2026-09-23 benchmark tested the public core: **two primary models, four scenarios,
 raw/filtered arms and three repetitions = 48 real agent operations**. The primary
 agent invoked the same fixed collector exactly once, consumed its output and returned
 structured selected IDs. Each model used medium reasoning. Arm order alternated;

@@ -1,0 +1,6 @@
+{
+  "scope": "Post-measurement formatting only; published reported snapshot hashes remain unchanged.",
+  "space_python_ast_equal": true,
+  "page_javascript_bytes_equal": true,
+  "python_semantics_sha256": "ca28cf1ec0a5565898e0173509e10827f68ea72ecaab1867055fc6d6e9bb1945"
+}

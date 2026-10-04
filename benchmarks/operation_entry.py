@@ -14,7 +14,17 @@ def main():
     base = Path(config["base"])
     case = config["case"]
     if config["arm"] == "filtered":
-        command = [sys.executable, "-I", "-m", "jev_filter", case, "--task", config["task"]]
+        command = [
+            sys.executable,
+            "-I",
+            "-m",
+            "jev_filter",
+            case,
+            "--task",
+            config["task"],
+            "--workers",
+            str(config.get("jev_workers", 4)),
+        ]
         if case == "code-search":
             command += [
                 "session",
