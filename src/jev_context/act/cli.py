@@ -108,6 +108,10 @@ def compact(result):
         "requests",
         "usage",
         "usage_complete",
+        "unknown_usage_attempts",
+        "text_model_usage",
+        "uncertainty",
+        "review_reasons",
         "elapsed_ms",
         "final",
         "verification",
@@ -120,6 +124,7 @@ def compact(result):
         "supplied",
         "origin",
         "error",
+        "error_type",
         "budget",
         "last_confidence",
         "transport",
@@ -147,18 +152,27 @@ def run_goal(surface, args, tool, allowed):
     from .kernel import Run
     from .text import from_environment
 
-    values = load_values(args.values, args.value)
-    if not 1 <= args.max_steps <= 500 or not 1 <= args.max_decisions <= 1000:
-        raise ValueError("budgets out of range")
-    helper = from_environment() if args.text_model else None
-    if args.text_model and helper is None:
-        raise ValueError(
-            "--text-model needs JEV_TEXT_BASE_URL, JEV_TEXT_API_KEY and JEV_TEXT_MODEL"
-        )
-    decide = jev_decider()
     started = time.perf_counter()
-    session = None
+    session = helper = decide = None
     try:
+        values = load_values(args.values, args.value)
+        if not 1 <= args.max_steps <= 500 or not 1 <= args.max_decisions <= 1000:
+            raise ValueError("budgets out of range")
+        helper = from_environment() if args.text_model else None
+        if args.text_model and helper is None:
+            raise ValueError(
+                "--text-model needs JEV_TEXT_BASE_URL, JEV_TEXT_API_KEY and JEV_TEXT_MODEL"
+            )
+        uncertainty = (
+            json.loads(Path(args.uncertainty).read_text(encoding="utf-8"))
+            if getattr(args, "uncertainty", None)
+            else {}
+        )
+        for name in ("min_confidence", "min_top_probability", "min_margin"):
+            value = getattr(args, name, None)
+            if value is not None:
+                uncertainty[name] = value
+        decide = jev_decider()
         run = Run(
             surface,
             args.goal,
@@ -176,8 +190,14 @@ def run_goal(surface, args, tool, allowed):
             verify_text=args.verify_text,
             verify_url=getattr(args, "verify_url", None),
             verify_question=args.verify_question,
+            verify_controls=(
+                json.loads(Path(args.verify_controls).read_text(encoding="utf-8"))
+                if getattr(args, "verify_controls", None)
+                else None
+            ),
             continue_after_confirm=args.continue_after_confirm,
             dry_run=getattr(args, "dry_run", False),
+            uncertainty=uncertainty,
         )
         result = run.run()
         result["transport"] = surface.name
@@ -185,15 +205,22 @@ def run_goal(surface, args, tool, allowed):
             result["dialogs"] = surface.dialogs
         result["decision_log"] = run.decisions
     finally:
-        if args.keep_open and hasattr(surface, "detach"):
-            session = surface.detach()
-        elif args.keep_open:
-            session = {"camofox_tab": surface.tab} if hasattr(surface, "tab") else {"kept": True}
-        elif getattr(args, "close_browser", False) and surface.name == "cdp":
-            surface.close(close_browser=True)
-        else:
-            surface.close()
-        decide.client.close()
+        try:
+            if args.keep_open and hasattr(surface, "detach"):
+                session = surface.detach()
+            elif args.keep_open:
+                session = (
+                    {"camofox_tab": surface.tab} if hasattr(surface, "tab") else {"kept": True}
+                )
+            elif getattr(args, "close_browser", False) and surface.name == "cdp":
+                surface.close(close_browser=True)
+            else:
+                surface.close()
+        finally:
+            if decide is not None:
+                decide.client.close()
+            if helper is not None:
+                helper.close()
     if session:
         result["session"] = session
     result["elapsed_ms"] = round((time.perf_counter() - started) * 1000)
@@ -321,6 +348,11 @@ def add_goal_args(cmd, goal_required=True):
         "--allow-irreversible", action="store_true", help="Execute pay/send/delete-like actions"
     )
     cmd.add_argument("--irreversible-threshold", type=float, default=0.5)
+    cmd.add_argument(
+        "--uncertainty", help="JSON policy with shared/per-question uncertainty floors"
+    )
+    for flag in ("min-confidence", "min-top-probability", "min-margin"):
+        cmd.add_argument("--" + flag, type=float, help="Shared uncertainty floor in 0..1")
     cmd.add_argument("--confirm", help="Confirm token from a previous needs_confirmation result")
     cmd.add_argument(
         "--continue-after-confirm",
@@ -331,6 +363,9 @@ def add_goal_args(cmd, goal_required=True):
     cmd.add_argument("--max-decisions", type=int, default=120)
     cmd.add_argument("--verify-text", help="Text that must appear in the final state")
     cmd.add_argument("--verify-question", help="Yes/no question Jev must affirm on the final state")
+    cmd.add_argument(
+        "--verify-controls", help="JSON list of exact observed control states to verify"
+    )
     cmd.add_argument(
         "--text-model", action="store_true", help="Use JEV_TEXT_* model for unsupplied field text"
     )

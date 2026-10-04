@@ -159,11 +159,19 @@ def _utf8_stdio():
 
 def main():
     _utf8_stdio()
+    if len(sys.argv) > 1 and sys.argv[1] == "mcp":
+        from .mcp import main as mcp_main
+
+        return mcp_main(sys.argv[2:])
+    if len(sys.argv) > 1 and sys.argv[1] == "eval":
+        from .evaluation import main as evaluation_main
+
+        return evaluation_main(sys.argv[2:])
     if len(sys.argv) > 1 and sys.argv[1] == "stats":
         from .stats import main as stats_main
 
         return stats_main(sys.argv[2:])
-    if len(sys.argv) > 1 and sys.argv[1] in ("code-search", "locate", "triage"):
+    if len(sys.argv) > 1 and sys.argv[1] in ("code-search", "locate", "triage", "diff-review"):
         from .tools import main as semantic_main
 
         return semantic_main(sys.argv[1:])
@@ -237,7 +245,7 @@ def main():
             )
         else:
             cmd.add_argument("--input", required=True, help="JSON path or - for stdin")
-    for name in ("code-search", "locate", "triage"):
+    for name in ("code-search", "locate", "triage", "diff-review"):
         commands.add_parser(
             name,
             add_help=False,
@@ -246,6 +254,12 @@ def main():
     for name, text in HOSTED_HELP.items():
         commands.add_parser(name, add_help=False, help=text + "; see " + name + " --help")
     commands.add_parser("stats", help="Local usage ledger and savings dashboard")
+    commands.add_parser(
+        "mcp", add_help=False, help="Read-only scoped MCP stdio adapter; see mcp --help"
+    )
+    commands.add_parser(
+        "eval", add_help=False, help="Offline held-out threshold evaluation; see eval --help"
+    )
     doctor = commands.add_parser(
         "doctor", help="Check local setup; --live makes one billable synthetic request"
     )

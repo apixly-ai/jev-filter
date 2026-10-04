@@ -2,6 +2,35 @@
 
 [English](benchmarks.md) · [中文文档首页](index.zh-CN.md)
 
+## 0.4 发版证据 2026-10-04
+
+新测试覆盖实际发行程序的契约与接口。以下三组 A/B 固定 0.3.0 源码基线和合成输入，**没有语义模型调用**；脚本公开了响应夹具、标注和程序策略。历史 live 推理结果继续保留在后文。
+
+| 范围 | 基线 | 0.4 | 取舍 |
+|---|---:|---:|---|
+| 脚本化决策/记账行为 | 3/13 符合预期 | 13/13 | 复核 0 → 6；返回字节 4,104 → 7,087 |
+| 夹具错误动作 | 3 | 0 | 模糊操作在执行前停下 |
+| 代码 collector 平均召回率 | 27.8% | 66.7% | 平均精确率 66.7% → 47.2%；上下文和耗时增加 |
+| 浏览器观察/执行契约 | 3/15 | 15/15 | 更完整状态与更多完成路径增加上下文/耗时 |
+| freshness 拒绝检查 | 6/6 | 6/6 | 范围、敏感值与来源守卫继续独立 |
+
+决策案例检查错误/未知用量保留和给定概率分布的策略执行，不测 Jev 是否判断正确。无词法线索的检索夹具仍漏掉，最终语义精确率还要独立测。浏览器用真实本地 Chromium 和固定程序策略，排除启动，不估计开放网站或 Jev 驱动成功率。逐例失败、上下文字节、耗时、源码/脚本哈希与零实际模型用量均保留：[决策](../benchmarks/results/2026-10-04-decisions.json)、[检索](../benchmarks/results/2026-10-04-retrieval.json)、[浏览器观察](../benchmarks/results/2026-10-04-browser-observation.json)。
+
+[接口 E2E](../benchmarks/results/2026-10-04-release-e2e.json) 运行 10 项真实进程检查：CLI 就绪与上下文准入、采集、stdin 日志脱敏、tracked diff、survey 规划、离线评测、MCP stdio、真实 JS 客户端及独立官方 MCP 客户端（2025-11-25、四工具、证据回查）。输入为合成数据，命令明确规划或要求缺失上下文，零模型请求证明接口跑通，不能作为语义质量证据。
+
+```sh
+python -m benchmarks.decision_contracts --output decisions.json
+python -m benchmarks.retrieval --repeats 5 --output retrieval.json
+python -m benchmarks.browser_observation --repeats 3 --output browser.json
+python -m benchmarks.release_e2e --output interfaces.json
+# 独立客户端检查：另装 mcp 后增加 --official-mcp。
+jev-filter eval --input examples/evaluation.json --output heldout.json
+```
+
+新提供方比较需安装 `.[code,dev,bench-llm]` 和相应 System One Adapter SDK extra。[固定规划](../benchmarks/results/2026-10-04-provider-plan.json) 记录 32 行、期望结果和完整请求字节，没有推理。`python -m benchmarks.providers --live --provider PROVIDER --model MODEL --output X.json` 明确计费，需指定测试凭据；它只覆盖过滤操作，保留重试总用量和失败未知项，区分 Jev 原生概率与生成式 LLM 概率。离线发版数据没有建立新提供方优势、整轮代理提速或真实账单节省。
+
+默认行为、兼容性及不拟合概率校准器的分组留出评测见[接入与策略契约](integrations.zh-CN.md)。
+
 ## 托管执行：2026-09-30
 
 范围：只用本地合成夹具，真实 Jev（`jev-1.13.x`），每个任务三轮。只有最终状态符合预期、**并且**程序对最终状态的校验成立，才算通过：浏览器看 URL 和存储，桌面看窗口文本，survey 对照生成时的真值。模型报告的 DONE 从不算作成功。夹具里的不可逆动作应当暂停（`needs_confirmation`），并核实它确实没有发生。

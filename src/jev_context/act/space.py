@@ -10,6 +10,8 @@ completion gate are additions for hosted execution.
 import json
 import re
 
+from .. import decision_policy
+
 DEFAULT_MODEL = "jev-1.13.0"
 MAX_OPTIONS = 255
 
@@ -249,6 +251,21 @@ def interpret(answers, targets, controls):
     else:
         decision["action"] = None
     return decision
+
+
+def review_reasons(decision, answers, targets, policy):
+    """Assess only the heads consumed by this decision, before the program acts."""
+    operation = decision["operation"]
+    names = ["operation"]
+    if operation in targets:
+        names.append(operation.lower() + "_target")
+        if operation == "TYPE_TEXT" and "type_value" in answers:
+            names.append("type_value")
+    return [
+        reason
+        for name in names
+        for reason in decision_policy.assess(answers.get(name, {}), name, policy)
+    ]
 
 
 def irreversible(decision, threshold=0.5):

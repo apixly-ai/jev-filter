@@ -90,6 +90,55 @@ with tempfile.TemporaryDirectory() as temp:
     packet = json.loads(result.stdout)
     assert packet["ok"] and packet["telemetry"]["requests"] == 0, packet
     assert "example" in result.stdout, result.stdout
+    # Exercise new adapters against the installed native runtime with no system
+    # Python/rg and an explicit no-inference context-admission fixture.
+    js = "const {createClient}=require(process.argv[1]);createClient().query([{id:'x',text:'fixture'}],{task:'Find current failure',analysis:{required_context:['missing']}}).then(r=>{if(r.exitCode!==2||r.packet.complete!==false)process.exit(1);console.log(JSON.stringify({ok:true}));}).catch(()=>process.exit(1));"
+    reply = subprocess.run(
+        [str(node_bin / "node"), "-e", js, str(base / "node_modules/@apixly/jev-filter")],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert json.loads(reply.stdout)["ok"]
+    requests = [
+        {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "initialize",
+            "params": {"protocolVersion": "2025-11-25"},
+        },
+        {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+        {
+            "jsonrpc": "2.0",
+            "id": 3,
+            "method": "tools/call",
+            "params": {"name": "filter_records", "arguments": {"task": "Fixture", "records": []}},
+        },
+    ]
+    mcp = subprocess.run(
+        [str(cli), "mcp", "--root", str(fixture)],
+        input="\n".join(json.dumps(r) for r in requests) + "\n",
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    messages = [json.loads(line) for line in mcp.stdout.splitlines()]
+    assert len(messages[1]["result"]["tools"]) == 4 and not messages[2]["result"]["isError"]
+    evaluation = subprocess.run(
+        [
+            str(cli),
+            "eval",
+            "--input",
+            str(base / "node_modules/@apixly/jev-filter/examples/evaluation.json"),
+        ],
+        env=env,
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    assert json.loads(evaluation.stdout)["evaluation_usage"]["requests"] == 0
     telemetry = subprocess.run(
         [str(cli), "stats", "report"], env=env, capture_output=True, text=True, check=True
     )
@@ -134,6 +183,9 @@ with tempfile.TemporaryDirectory() as temp:
                 "system_rg_on_path": False,
                 "doctor": doctor,
                 "code_search": True,
+                "javascript_client": True,
+                "mcp_stdio": True,
+                "offline_evaluation": True,
                 "repeated_dashboard_start": True,
             }
         )

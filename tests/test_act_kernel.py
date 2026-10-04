@@ -383,7 +383,12 @@ def test_weak_terminal_choice_falls_back_to_plausible_operation():
             return result
 
     policy = Weak([("CLICK", "Search"), ("DONE",)])
-    result = kernel.Run(surface, "Search", decide=policy).run()
+    result = kernel.Run(
+        surface,
+        "Search",
+        decide=policy,
+        uncertainty={"min_top_probability": 0, "min_margin": 0},
+    ).run()
     assert result["terminal_overrides"] == 1 and surface.executed == [("e3", None)]
     assert result["status"] == "done"
 
@@ -450,3 +455,255 @@ def test_dry_run_decides_one_step_and_executes_nothing():
     result = kernel.Run(surface, "x", decide=Policy([("CLICK", "Search")]), dry_run=True).run()
     assert result["status"] == "dry_run" and result["pending"]["label"] == "Search"
     assert surface.executed == []
+
+
+def test_first_provider_failure_preserves_safe_code_and_unknown_usage():
+    from jev_context.provider import ProviderError
+
+    def failed(body):
+        raise ProviderError("transport_failed_usage_unknown")
+
+    result = kernel.Run(search_flow(), "Search", decide=failed).run()
+    assert result["status"] == "error"
+    assert result["error"] == "transport_failed_usage_unknown"
+    assert result["error_type"] == "ProviderError"
+    assert result["usage_complete"] is False
+    assert result["unknown_usage_attempts"] == 1
+
+
+def test_provider_failure_after_success_preserves_known_usage():
+    from jev_context.provider import ProviderError
+
+    class FailsLater(Policy):
+        def __call__(self, body):
+            if self.bodies:
+                raise ProviderError("response_invalid_usage_unknown")
+            return super().__call__(body)
+
+    result = kernel.Run(search_flow(), "Search", decide=FailsLater([("CLICK", "Search")])).run()
+    assert result["usage"] == {"input_tokens": 100, "output_tokens": 10}
+    assert result["requests"] == 2
+    assert result["usage_complete"] is False and result["unknown_usage_attempts"] == 1
+
+
+def test_reported_unknown_attempts_override_a_contradictory_complete_flag():
+    class Retried(Policy):
+        def __call__(self, body):
+            result = super().__call__(body)
+            result["unknown_usage_attempts"] = 2
+            return result
+
+    result = kernel.Run(search_flow(), "Search", decide=Retried([("DONE",)])).run()
+    assert result["status"] == "done"
+    assert result["usage"] == {"input_tokens": 100, "output_tokens": 10}
+    assert result["usage_complete"] is False and result["unknown_usage_attempts"] == 2
+
+
+def test_verifier_failure_preserves_safe_code_and_unknown_usage():
+    from jev_context.provider import ProviderError
+
+    class FailedVerifier(Policy):
+        def __call__(self, body):
+            if "verified" in body["questions"]:
+                raise ProviderError("transport_failed_usage_unknown")
+            return super().__call__(body)
+
+    result = kernel.Run(
+        search_flow(), "Search", decide=FailedVerifier([("DONE",)]), verify_question="Finished?"
+    ).run()
+    assert result["status"] == "unverified"
+    assert result["verification"]["question_error"] == "transport_failed_usage_unknown"
+    assert result["usage_complete"] is False and result["unknown_usage_attempts"] == 1
+
+
+def test_generic_exception_never_discloses_private_error_text():
+    def failed(body):
+        raise RuntimeError("SECRET evidence https://private.test/?key=secret")
+
+    result = kernel.Run(search_flow(), "Search", decide=failed).run()
+    assert result["error"] == "RuntimeError"
+    assert "SECRET" not in str(result)
+    assert result["usage_complete"] is False
+
+
+def test_uncertain_target_stops_before_action():
+    class Uncertain(Policy):
+        def __call__(self, body):
+            result = super().__call__(body)
+            head = result["answers"]["click_target"]
+            head["probabilities"] = {"1": 0.49, "2": 0.51}
+            head["confidence"] = 0.02
+            return result
+
+    surface = search_flow()
+    result = kernel.Run(surface, "Search", decide=Uncertain([("CLICK", "Search")])).run()
+    assert result["status"] == "needs_review" and not surface.executed
+    assert result["review_reasons"][0]["question"] == "click_target"
+
+
+def test_uncertain_value_stops_before_typing():
+    class Uncertain(Policy):
+        def __call__(self, body):
+            result = super().__call__(body)
+            result["answers"]["type_value"].update(
+                confidence=0.02, probabilities={"query": 0.51, "NONE": 0.49}
+            )
+            return result
+
+    surface = search_flow()
+    result = kernel.Run(
+        surface,
+        "Search",
+        decide=Uncertain([("TYPE_TEXT", "Search products", "query")]),
+        values={"query": "red shoes"},
+    ).run()
+    assert result["status"] == "needs_review" and not surface.executed
+    assert result["review_reasons"][0]["question"] == "type_value"
+
+
+def test_unused_uncertain_heads_do_not_stop_a_confident_click():
+    class UncertainOther(Policy):
+        def __call__(self, body):
+            result = super().__call__(body)
+            if "type_value" in result["answers"]:
+                result["answers"]["type_value"].update(
+                    confidence=0.02, probabilities={"query": 0.51, "NONE": 0.49}
+                )
+            return result
+
+    surface = search_flow()
+    result = kernel.Run(
+        surface,
+        "Search",
+        decide=UncertainOther([("CLICK", "Search"), ("DONE",)]),
+        values={"query": "red shoes"},
+    ).run()
+    assert result["status"] == "done" and surface.executed == [("e3", None)]
+
+
+def test_text_helper_failure_is_a_terminal_result_with_separate_unknown_usage():
+    from jev_context.act.text import TextHelperError
+
+    def failed(context):
+        raise TextHelperError("text_model_unreachable")
+
+    surface = search_flow()
+    result = kernel.Run(
+        surface, "Search", decide=Policy([("TYPE_TEXT", "Search products")]), text_helper=failed
+    ).run()
+    assert result["status"] == "error" and result["error"] == "text_model_unreachable"
+    assert not surface.executed
+    assert result["usage_complete"] is True  # Jev usage remains known.
+    assert result["text_model_usage"]["usage_complete"] is False
+    assert result["text_model_usage"]["unknown_usage_attempts"] == 1
+
+
+def test_control_verification_reads_false_and_deduplicates_same_observed_node():
+    checkbox = {
+        "id": "c1",
+        "node": 9,
+        "label": "Weekly reports",
+        "role": "checkbox",
+        "kind": "click",
+        "checked": False,
+    }
+    state = page(actions=[checkbox, dict(checkbox, id="c2")])
+    result = kernel.Run(
+        Surface([state], {}),
+        "Disable reports",
+        decide=Policy([("DONE",)]),
+        verify_controls=[{"label": "Weekly reports", "role": "checkbox", "checked": False}],
+    ).run()
+    assert result["status"] == "done" and result["verification"]["controls"] is True
+    assert result["verification"]["control_checks"][0]["matched_nodes"] == 1
+
+
+@pytest.mark.parametrize("checked", [True, None])
+def test_control_verification_never_guesses_missing_or_wrong_state(checked):
+    action = {"id": "c1", "node": 9, "label": "Weekly reports", "role": "checkbox", "kind": "click"}
+    if checked is not None:
+        action["checked"] = checked
+    state = page(actions=[action])
+    result = kernel.Run(
+        Surface([state], {}),
+        "Disable reports",
+        decide=Policy([("DONE",)]),
+        verify_controls=[{"label": "Weekly reports", "checked": False}],
+    ).run()
+    assert result["status"] == "unverified" and result["verification"]["controls"] is False
+
+
+def test_control_verification_requires_unique_identity_and_preserves_empty_value():
+    control = {
+        "id": "f1",
+        "node": 1,
+        "label": "Query",
+        "role": "textbox",
+        "kind": "fill",
+        "value": "",
+    }
+    state = page(actions=[control, dict(control, id="f2", node=2)])
+    result = kernel.Run(
+        Surface([state], {}),
+        "Clear query",
+        decide=Policy([("DONE",)]),
+        verify_controls=[{"label": "Query", "value": ""}],
+    ).run()
+    assert result["status"] == "unverified"
+    assert result["verification"]["control_checks"][0]["matched_nodes"] == 2
+
+
+def test_control_verification_rejects_invalid_boolean_before_observation():
+    with pytest.raises(ValueError, match="checked"):
+        kernel.Run(
+            Surface([page()], {}),
+            "Disable reports",
+            decide=Policy([]),
+            verify_controls=[{"label": "Weekly reports", "checked": 0}],
+        )
+
+
+def test_verification_cannot_reuse_an_old_observation_when_fresh_read_fails():
+    class LostObservation(Surface):
+        def observe(self, **kwargs):
+            if getattr(self, "observed", False):
+                raise StalePage("changed while collecting final state")
+            self.observed = True
+            return super().observe(**kwargs)
+
+    state = page(text="Finished")
+    result = kernel.Run(
+        LostObservation([state], {}), "Finish", decide=Policy([("DONE",)]), verify_text="Finished"
+    ).run()
+    assert result["status"] == "unverified"
+    assert result["verification"]["reason"] == "verification_observation_stale"
+
+
+def test_semantic_verifier_cannot_confirm_a_page_that_changed_during_inference():
+    state = page(text="Finished")
+    surface = Surface([state], {})
+
+    class ChangedVerifier(Policy):
+        def __call__(self, body):
+            if "verified" in body["questions"]:
+                surface.current = page(text="Pending again")
+            return super().__call__(body)
+
+    policy = ChangedVerifier([("DONE",)])
+    policy.verified = 0.99
+    result = kernel.Run(
+        surface, "Finish", decide=policy, verify_question="Is the requested goal finished?"
+    ).run()
+    assert result["status"] == "unverified"
+    assert result["verification"]["reason"] == "verification_observation_stale"
+
+
+@pytest.mark.parametrize("threshold", [float("nan"), float("inf"), -0.1, 1.1, True])
+def test_irreversible_threshold_cannot_disable_the_gate_with_invalid_numbers(threshold):
+    with pytest.raises(ValueError, match="irreversible_threshold"):
+        kernel.Run(
+            Surface([page()], {}),
+            "Continue",
+            decide=Policy([]),
+            irreversible_threshold=threshold,
+        )

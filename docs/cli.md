@@ -12,6 +12,9 @@ Use `jev-filter --help` and `<command> --help` for exact flags.
 | `code-search PATTERN --root PATH --task TEXT` | Expand candidate hits to complete code symbols |
 | `locate --session S --tab T --origin URL --task TEXT` | Read-only Camofox control selection and freshness guard |
 | `triage --input FILE --task TEXT` | Group JSON/JSONL events by request ID, then judge |
+| `diff-review --root PATH --base REF --task TEXT` | Complete bounded tracked before/after snapshots; `--staged`/`--unstaged` also supported |
+| `eval --input FILE` | Offline calibration/holdout threshold evaluation |
+| `mcp --root PATH` | Four-tool read-only scoped MCP stdio adapter |
 | `browse --url URL --goal TEXT [--value k=v]` | Hosted browser execution toward a goal ([guide](hosted-execution.md#browser-browse)) |
 | `extract --url URL --task TEXT` | Structure a page into records, then judge like `query` |
 | `desktop --window REGEX --goal TEXT` | Hosted execution in one Windows/macOS application; `--list` shows windows |
@@ -68,3 +71,19 @@ scopes require review. It never clicks, types or navigates. Reverify after chang
 Triage preserves per-correlation event order and duplicate counts, redacts common
 credential patterns, and leaves malformed records visible. Prefer atomic requirements
 for compound inclusion/exclusion. It does not establish live recovery or root cause.
+
+## Release 0.4 controls
+
+`code-search --query TEXT --expand-callers --max-files 2000` adds opt-in bounded BM25
+recall and Python one-hop caller clues. The exact regex baseline remains available;
+this is not exhaustive semantic indexing.
+
+`diff-review` accepts exactly one of `--base REF [--head REF]`, `--staged` or
+`--unstaged`. It pins refs, retains complete bounded tracked snapshots and file modes,
+preserves binary/large-file failures and rechecks sources. It does not execute tests
+or establish a security finding.
+
+Analysis accepts `uncertainty` and versioned `contract` metadata. Hosted defaults use
+probability 0.55 and margin 0.10 before executing selected operation/target/value;
+`needs_review` reports failed metrics. `--uncertainty FILE` configures per-question
+policies; `--verify-controls FILE` checks unique final states. See [integration examples](integrations.md).

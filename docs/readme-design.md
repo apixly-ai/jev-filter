@@ -1,26 +1,59 @@
-# README design notes
+# README and documentation design
 
 [简体中文](readme-design.zh-CN.md)
 
-The README answers five questions in order: what is it, why should I use it, what
-proves that, how do I try it, and how do I connect it to my agent?
+The homepage leads with the outcome: **give the agent the signal, keep the evidence**.
+It then shows three concrete advantages—focused context, traceable decisions and
+program-verified execution—before installation, dated measurements and integration.
+The command catalogue is collapsible so it supports the narrative rather than owning it.
 
-References reviewed for this redesign:
+## Visual system
 
-- [uv README](https://github.com/astral-sh/uv/blob/main/README.md): concise positioning,
-  an early benchmark graphic, highlights, then installation and focused examples.
-- [bat README](https://github.com/sharkdp/bat/blob/master/README.md): visual demonstrations
-  beside features and practical platform-specific installation information.
-- [GitHub README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes): introduce purpose, usefulness and getting started;
-  keep detailed reference material in separate documents.
-- [GitHub image/link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax): relative repository assets keep images attached to the corresponding branch.
+- Repository-owned, bilingual SVG hero: dark navy, mint signal, violet judgment and a small evidence packet illustrating the runnable DNS example.
+- GitHub-compatible HTML, relative assets and standard Markdown. The README works without scripts or a hosted renderer.
+- Responsive documentation landing: the same visual language, clear primary action, task-oriented routes, horizontal navigation on narrow screens and keyboard-visible focus states.
+- Actual data stays in text and tables, with source links. Historical charts remain available inside a details panel; no decorative chart invents a performance result.
 
-Our design uses an original workflow illustration, data-derived charts, three
-advantage/evidence rows and one runnable example. Every metric is linked to its
-scope and data. Historical trade-offs remain visible. Images have descriptive alt
-text; important numbers also appear as text/tables. The project does not borrow
-another project's artwork or imply its performance applies here.
+The hero combines a runnable example with a prominent proof strip: the historical
+88–97% returned-context reduction is directly labelled “48 synthetic agent runs ·
+2026-09-23”. It also shows traceable evidence and the four core integration routes.
+English and Chinese claims, dates, scope and limitations must be kept synchronized.
+The README does not promise universal
+speed, cost savings, automatic correctness or open-web completion rates.
 
-Charts: `python scripts/render_assets.py` after installing `.[docs]`.
-The hero is repository-owned SVG; the statistical charts use Matplotlib. PNGs work
-across GitHub renderers and SVG sources remain available for revision.
+## Evidence and honesty
+
+The strongest measured hook is the 2026-09-23 whole-operation benchmark's 88–97%
+reduction in returned tool context. The same table exposes the cost range, latency
+regressions and synthetic scope. Hosted fixture passes sit beside the weaker real-web
+audit. New release experiments must keep baseline, treatment, failures, review rates,
+returned context, full timing and actual per-model usage visible; offline replay and
+live inference must be named separately.
+
+Optional hybrid retrieval widens candidates. Its recall/precision/context trade-off
+must not be described as an unconditional improvement. Offline evaluation diagnoses
+probabilities and selects thresholds from supplied calibration groups; it does not
+fit a calibrated production probability model.
+
+## Maintain and verify
+
+Edit `docs/assets/hero.svg` and `hero.zh-CN.svg` directly. Styling for the documentation
+site is in `docs/assets/docs.css`; `scripts/build_docs.py` copies it into the build.
+Data-derived charts remain reproducible with `python scripts/render_assets.py` after
+installing `.[docs]`.
+
+```sh
+python scripts/build_docs.py
+python scripts/check_docs.py
+```
+
+Before publication, render desktop and mobile pages, inspect bilingual hero legibility,
+check tables and code for page overflow, follow installation and integration examples,
+and compare all metric claims with their source files. Keep local screenshots outside
+published source (`local-results/`).
+
+Earlier design references retained for context: [uv](https://github.com/astral-sh/uv/blob/main/README.md),
+[bat](https://github.com/sharkdp/bat/blob/master/README.md),
+[GitHub README guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)
+and [GitHub image/link syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+No third-party artwork is incorporated.

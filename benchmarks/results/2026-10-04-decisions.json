@@ -1,0 +1,661 @@
+{
+  "benchmark": "synthetic_core_decision_contracts",
+  "version": 1,
+  "baseline_commit": "feb2bc21f34e5a7c918ae6dde8b35780c16e197a",
+  "treatment_base_commit": "feb2bc21f34e5a7c918ae6dde8b35780c16e197a",
+  "treatment_source_sha256": "44ad0ab2898de612d75660daef4b28178eef2344b2b63349f28d6bb9e393d45a",
+  "benchmark_sha256": "7b0fc0c14d3c34a61c0f2e7fb459ff95f9aa3158312ff67ec0611af567a83a0c",
+  "inputs": "13 fixed scripted synthetic distributions/failures in this module",
+  "uncertainty_treatment": {
+    "min_top_probability": 0.55,
+    "min_margin": 0.1
+  },
+  "baseline": {
+    "label": "baseline",
+    "cases": [
+      {
+        "id": "requirement_clear",
+        "expected": "MATCH",
+        "actual": "MATCH",
+        "correct": true,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 1756125,
+        "request_context_bytes": 815,
+        "returned_context_bytes": 74,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "requirement_weak",
+        "expected": "REVIEW",
+        "actual": "MATCH",
+        "correct": false,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 141750,
+        "request_context_bytes": 815,
+        "returned_context_bytes": 74,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "filter_clear_negative",
+        "expected": "EXCLUDE",
+        "actual": "EXCLUDE",
+        "correct": true,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 126959,
+        "request_context_bytes": 744,
+        "returned_context_bytes": 70,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "filter_weak_negative",
+        "expected": "REVIEW",
+        "actual": "EXCLUDE",
+        "correct": false,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 102334,
+        "request_context_bytes": 744,
+        "returned_context_bytes": 70,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "choose_weak",
+        "expected": "REVIEW",
+        "actual": "MATCH",
+        "correct": false,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 89416,
+        "request_context_bytes": 548,
+        "returned_context_bytes": 74,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "hosted_clear_target",
+        "expected": "done",
+        "actual": "done",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 1,
+        "executed_actions": 1,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 69542,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 570,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 200,
+            "output_tokens": 20
+          },
+          "usage_complete": true,
+          "verification": null
+        }
+      },
+      {
+        "id": "hosted_weak_target",
+        "expected": "needs_review",
+        "actual": "done",
+        "correct": false,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 1,
+        "false_actions": 1,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 39959,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 571,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 200,
+            "output_tokens": 20
+          },
+          "usage_complete": true,
+          "verification": null
+        }
+      },
+      {
+        "id": "hosted_weak_value",
+        "expected": "needs_review",
+        "actual": "done",
+        "correct": false,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 1,
+        "false_actions": 1,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 39125,
+        "request_context_bytes": 16477,
+        "returned_context_bytes": 635,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 200,
+            "output_tokens": 20
+          },
+          "usage_complete": true,
+          "verification": null
+        }
+      },
+      {
+        "id": "hosted_weak_operation",
+        "expected": "needs_review",
+        "actual": "done",
+        "correct": false,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 1,
+        "false_actions": 1,
+        "review": false,
+        "unsafe_automatic": true,
+        "operation_elapsed_ns": 31417,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 586,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 200,
+            "output_tokens": 20
+          },
+          "usage_complete": true,
+          "verification": null
+        }
+      },
+      {
+        "id": "first_provider_failure",
+        "expected": "error",
+        "actual": "error",
+        "correct": false,
+        "bookkeeping_preserved": false,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 10583,
+        "request_context_bytes": 5315,
+        "returned_context_bytes": 344,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "usage_complete": true,
+          "error": "ProviderError",
+          "verification": null
+        }
+      },
+      {
+        "id": "provider_failure_after_success",
+        "expected": "error",
+        "actual": "error",
+        "correct": false,
+        "bookkeeping_preserved": false,
+        "expected_actions": 1,
+        "executed_actions": 1,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 21583,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 574,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "error": "ProviderError",
+          "verification": null
+        }
+      },
+      {
+        "id": "verifier_failure",
+        "expected": "unverified",
+        "actual": "unverified",
+        "correct": false,
+        "bookkeeping_preserved": false,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 15292,
+        "request_context_bytes": 5564,
+        "returned_context_bytes": 412,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "verification": {
+            "passed": false,
+            "question": false,
+            "question_error": "ProviderError"
+          }
+        }
+      },
+      {
+        "id": "text_helper_failure",
+        "expected": "error",
+        "actual": "raised",
+        "correct": false,
+        "bookkeeping_preserved": false,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 23708,
+        "request_context_bytes": 7587,
+        "returned_context_bytes": 50,
+        "bookkeeping": {
+          "error_type": "TextHelperError"
+        }
+      }
+    ],
+    "correct": 3,
+    "case_count": 13,
+    "unsafe_automatic_decisions": 6,
+    "false_actions": 3,
+    "reviews": 0,
+    "operation_elapsed_ns": 2467793,
+    "request_context_bytes": 81305,
+    "returned_context_bytes": 4104,
+    "actual_model_usage": {
+      "requests": 0,
+      "models": {},
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usage_complete": true
+    }
+  },
+  "treatment": {
+    "label": "treatment",
+    "cases": [
+      {
+        "id": "requirement_clear",
+        "expected": "MATCH",
+        "actual": "MATCH",
+        "correct": true,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 1266167,
+        "request_context_bytes": 815,
+        "returned_context_bytes": 74,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "requirement_weak",
+        "expected": "REVIEW",
+        "actual": "REVIEW",
+        "correct": true,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 152208,
+        "request_context_bytes": 815,
+        "returned_context_bytes": 288,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "filter_clear_negative",
+        "expected": "EXCLUDE",
+        "actual": "EXCLUDE",
+        "correct": true,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 151250,
+        "request_context_bytes": 744,
+        "returned_context_bytes": 70,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "filter_weak_negative",
+        "expected": "REVIEW",
+        "actual": "REVIEW",
+        "correct": true,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 139750,
+        "request_context_bytes": 744,
+        "returned_context_bytes": 293,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "choose_weak",
+        "expected": "REVIEW",
+        "actual": "REVIEW",
+        "correct": true,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 115916,
+        "request_context_bytes": 548,
+        "returned_context_bytes": 287,
+        "simulated_usage": {
+          "input_tokens": 100,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "hosted_clear_target",
+        "expected": "done",
+        "actual": "done",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 1,
+        "executed_actions": 1,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 91375,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 788,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 200,
+            "output_tokens": 20
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "hosted_weak_target",
+        "expected": "needs_review",
+        "actual": "needs_review",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 36709,
+        "request_context_bytes": 5315,
+        "returned_context_bytes": 884,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "hosted_weak_value",
+        "expected": "needs_review",
+        "actual": "needs_review",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 37458,
+        "request_context_bytes": 8207,
+        "returned_context_bytes": 884,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "hosted_weak_operation",
+        "expected": "needs_review",
+        "actual": "needs_review",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": true,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 30458,
+        "request_context_bytes": 5315,
+        "returned_context_bytes": 779,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "first_provider_failure",
+        "expected": "error",
+        "actual": "error",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 21125,
+        "request_context_bytes": 5315,
+        "returned_context_bytes": 609,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 0,
+            "output_tokens": 0
+          },
+          "usage_complete": false,
+          "unknown_usage_attempts": 1,
+          "error": "transport_failed_usage_unknown",
+          "error_type": "ProviderError",
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "provider_failure_after_success",
+        "expected": "error",
+        "actual": "error",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 1,
+        "executed_actions": 1,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 44458,
+        "request_context_bytes": 10674,
+        "returned_context_bytes": 839,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": false,
+          "unknown_usage_attempts": 1,
+          "error": "transport_failed_usage_unknown",
+          "error_type": "ProviderError",
+          "verification": null,
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "verifier_failure",
+        "expected": "unverified",
+        "actual": "unverified",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 29958,
+        "request_context_bytes": 5564,
+        "returned_context_bytes": 686,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": false,
+          "unknown_usage_attempts": 1,
+          "verification": {
+            "passed": false,
+            "question": false,
+            "question_error": "response_invalid_usage_unknown",
+            "question_error_type": "ProviderError"
+          },
+          "text_model_usage": {
+            "requests": 0,
+            "models": {},
+            "usage_complete": true,
+            "unknown_usage_attempts": 0
+          }
+        }
+      },
+      {
+        "id": "text_helper_failure",
+        "expected": "error",
+        "actual": "error",
+        "correct": true,
+        "bookkeeping_preserved": true,
+        "expected_actions": 0,
+        "executed_actions": 0,
+        "false_actions": 0,
+        "review": false,
+        "unsafe_automatic": false,
+        "operation_elapsed_ns": 32250,
+        "request_context_bytes": 7587,
+        "returned_context_bytes": 606,
+        "bookkeeping": {
+          "usage": {
+            "input_tokens": 100,
+            "output_tokens": 10
+          },
+          "usage_complete": true,
+          "unknown_usage_attempts": 0,
+          "error": "text_model_unreachable",
+          "error_type": "TextHelperError",
+          "verification": null,
+          "text_model_usage": {
+            "requests": 1,
+            "models": {},
+            "usage_complete": false,
+            "unknown_usage_attempts": 1
+          }
+        }
+      }
+    ],
+    "correct": 13,
+    "case_count": 13,
+    "unsafe_automatic_decisions": 0,
+    "false_actions": 0,
+    "reviews": 6,
+    "operation_elapsed_ns": 2149082,
+    "request_context_bytes": 62317,
+    "returned_context_bytes": 7087,
+    "actual_model_usage": {
+      "requests": 0,
+      "models": {},
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "usage_complete": true
+    }
+  },
+  "harness_elapsed_ns": 332262917,
+  "fee_basis": {
+    "actual_usd": 0.0,
+    "reason": "offline scripted responses; no model requests or credential reads"
+  },
+  "limitations": [
+    "Behavioral regression A/B, not model quality, calibration or real website success measurement.",
+    "Fixture usage envelopes are simulated; actual model usage is explicitly zero for both arms.",
+    "Timing includes complete simulated analysis/hosted operations, not model/network/browser latency.",
+    "The treatment deliberately increases review and decreases automatic completion on ambiguous inputs.",
+    "No result cache is used. Contracts and thresholds do not authorize actions."
+  ]
+}

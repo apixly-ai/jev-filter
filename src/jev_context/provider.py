@@ -20,6 +20,10 @@ ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 class ProviderError(RuntimeError):
     """A sanitized provider failure; response bodies and keys are never attached."""
 
+    def __init__(self, code: str, *, unknown_usage_attempts: int | None = None):
+        super().__init__(code)
+        self.unknown_usage_attempts = unknown_usage_attempts
+
     @property
     def code(self) -> str:
         return str(self)
@@ -136,12 +140,16 @@ class Client:
                     for chunk in response.iter_bytes():
                         size += len(chunk)
                         if size > 4 * 1024 * 1024:
-                            raise ProviderError("response_too_large")
+                            raise ProviderError(
+                                "response_too_large", unknown_usage_attempts=attempt + 1
+                            )
                         chunks.append(chunk)
                     raw = b"".join(chunks)
             except httpx.HTTPError:
                 self._discard(client)
-                raise ProviderError("transport_failed_usage_unknown") from None
+                raise ProviderError(
+                    "transport_failed_usage_unknown", unknown_usage_attempts=attempt + 1
+                ) from None
             if not self.pooled:
                 self._discard(client)
             if status != 200:
@@ -152,12 +160,16 @@ class Client:
                         delay = 0.5 * 2**attempt
                     self.sleep(delay)
                     continue
-                raise ProviderError(f"http_{status}_body_suppressed")
+                raise ProviderError(
+                    f"http_{status}_body_suppressed", unknown_usage_attempts=attempt + 1
+                )
             try:
                 result = json.loads(raw)
                 validate_response(body, result)
             except (ValueError, TypeError, KeyError):
-                raise ProviderError("response_invalid_usage_unknown") from None
+                raise ProviderError(
+                    "response_invalid_usage_unknown", unknown_usage_attempts=attempt + 1
+                ) from None
             return {
                 "ok": True,
                 "model": result["model"],

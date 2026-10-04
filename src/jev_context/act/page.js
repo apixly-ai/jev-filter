@@ -13,12 +13,26 @@
   const SENSITIVE = /^(cc-|one-time-code|current-password|new-password)/;
   const skipped = e => ['password', 'file', 'hidden'].includes(e.type);
   const sensitive = e => SENSITIVE.test((e.getAttribute('autocomplete') || '').trim().toLowerCase());
-  const visible = e => {
+  const painted = e => {
     if (e.closest('[aria-hidden="true"],[inert]')) return false;
     if (e.checkVisibility) return e.checkVisibility({checkOpacity: true, checkVisibilityCSS: true});
     const s = getComputedStyle(e);
     return s.display !== 'none' && s.visibility !== 'hidden' && s.opacity !== '0';
   };
+  // Styled native toggles often use a transparent input and a painted associated label.
+  // The program owns that association and clicks the observed label, retaining input identity.
+  const surface = e => {
+    if (e.tagName === 'INPUT' && ['checkbox', 'radio'].includes(e.type)) {
+      const s = getComputedStyle(e);
+      if (s.opacity === '0' && s.display !== 'none' && s.visibility !== 'hidden' &&
+          !e.closest('[aria-hidden="true"],[inert]')) {
+        const label = [...(e.labels || [])].find(painted);
+        if (label) return label;
+      }
+    }
+    return e;
+  };
+  const visible = e => painted(e) || surface(e) !== e;
   const frameOffset = e => {
     let x = 0, y = 0, w = e.ownerDocument.defaultView;
     while (w && w !== window && w.frameElement) {
@@ -73,7 +87,8 @@
   };
   const ROLES = ['button', 'link', 'checkbox', 'radio', 'switch', 'tab', 'menuitem', 'menuitemradio',
     'menuitemcheckbox', 'option', 'treeitem', 'gridcell', 'combobox', 'textbox', 'searchbox', 'spinbutton'];
-  const SELECTOR = 'a[href],button,input,textarea,select,summary,[contenteditable="true"],[contenteditable=""],' +
+  const SELECTOR = 'a[href],button,input,textarea,select,summary,[onclick],[tabindex],' +
+    '[contenteditable="true"],[contenteditable=""],' +
     ROLES.map(r => '[role="' + r + '"]').join(',');
   const role = e => {
     const explicit = e.getAttribute('role');
@@ -90,6 +105,7 @@
       if (['text', 'email', 'url', 'tel', ''].includes(e.type) || !e.type) return 'textbox';
       if (['date', 'time', 'datetime-local', 'month', 'week'].includes(e.type)) return 'textbox';
     }
+    if (e.hasAttribute('onclick') || (e.tabIndex >= 0 && getComputedStyle(e).cursor === 'pointer')) return 'button';
     return null;
   };
   const section = e => {
@@ -125,16 +141,24 @@
   };
   const all = sel => roots.flatMap(r => [...r.querySelectorAll(sel)]);
 
+  const scrollable = e => {
+    const s = getComputedStyle(e);
+    return ['auto', 'scroll', 'overlay'].includes(s.overflowY) && e.clientHeight > 0 &&
+      e.scrollHeight > e.clientHeight + 2 && visible(e);
+  };
   cache.pageKey = () => [performance.timeOrigin, location.href, scrollX, scrollY, innerWidth, innerHeight,
     all('input,textarea,select').filter(e => !skipped(e))
-      .map(e => [identity(e), sensitive(e) ? Boolean(e.value) : e.value, e.checked, e.selectedIndex, e.disabled, e.readOnly])];
+      .map(e => [identity(e), sensitive(e) ? Boolean(e.value) : e.value, e.checked, e.selectedIndex, e.disabled, e.readOnly]),
+    all('*').filter(scrollable).map(e => [identity(e), e.scrollTop, e.scrollHeight, e.clientHeight])];
   cache.guard = e => {
     if (!e || !e.isConnected || !visible(e)) return null;
     const scope = e.closest('form,dialog,[role="dialog"],article,li,tr,[role="row"]') || e.parentElement;
     return [identity(e), role(e), name(e), sensitive(e) ? Boolean(e.value) : (e.value ?? null),
       e.checked ?? null, e.selectedIndex ?? null, e.readOnly ?? null, e.matches(':disabled'),
       e.getAttribute('aria-disabled'), e.getAttribute('aria-expanded'), e.getAttribute('aria-checked'),
-      e.getAttribute('aria-selected'), e.getAttribute('href'), (scope && scope.innerText || '').slice(0, 4000)];
+      e.getAttribute('aria-selected'), e.getAttribute('aria-pressed'), e.getAttribute('href'),
+      e.scrollTop, e.scrollHeight, e.clientHeight, identity(surface(e)),
+      (scope && scope.innerText || '').slice(0, 4000)];
   };
 
   if (op === 'guard') {
@@ -142,16 +166,23 @@
     return [cache.pageKey(), cache.guard(cache.nodes.get(request.node))];
   }
 
-  if (op === 'resolve') {
+  if (op === 'resolve' || op === 'scroll') {
     const a = request.action, e = cache.nodes.get(a.node);
     if (!e || !e.isConnected || !visible(e) || e.matches(':disabled') ||
         e.closest('[aria-disabled="true"],[inert]')) return {ok: false, reason: 'target_changed'};
     if (a.kind === 'fill' && (e.readOnly || e.getAttribute('aria-readonly') === 'true'))
       return {ok: false, reason: 'target_changed'};
-    const r = rectOf(e), x = r.x + r.w / 2, y = r.y + r.h / 2;
+    const target = surface(e), r = rectOf(target), x = r.x + r.w / 2, y = r.y + r.h / 2;
     if (!r.w || !r.h || x < 0 || y < 0 || x >= innerWidth || y >= innerHeight) return {ok: false, reason: 'offscreen'};
     const hit = deepHit(x, y);
-    if (!hit || !composedContains(e, hit)) return {ok: false, reason: 'covered'};
+    if (!hit || !composedContains(target, hit)) return {ok: false, reason: 'covered'};
+    if (op === 'scroll') {
+      if (a.kind !== 'scroll' || !scrollable(e) || !Number.isInteger(a.delta) || Math.abs(a.delta) > 10000)
+        return {ok: false, reason: 'target_changed'};
+      const before = e.scrollTop;
+      e.scrollTop += a.delta;
+      return {ok: true, scrolled: e.scrollTop !== before};
+    }
     if (a.kind === 'select') {
       if (e.tagName !== 'SELECT') return {ok: false, reason: 'target_changed'};
       const option = [...e.options].find(o => o.value === a.value && !o.disabled && !o.closest('optgroup[disabled]'));
@@ -163,7 +194,7 @@
     }
     if (request.tag) {
       const key = 'a' + a.node + '-' + Math.floor(performance.now());
-      e.setAttribute('data-jev-act', key);
+      (a.kind === 'click' ? target : e).setAttribute('data-jev-act', key);
       return {ok: true, x, y, selector: '[data-jev-act="' + key + '"]'};
     }
     return {ok: true, x, y};
@@ -252,15 +283,20 @@
   for (const e of all(SELECTOR)) {
     if (scopeRoot && !composedContains(scopeRoot, e)) continue;
     if (skipped(e) || !visible(e) || e.matches(':disabled') || e.closest('[aria-disabled="true"]')) continue;
+    // Native SELECT actions carry observed option values for execution. Keep sensitive
+    // dropdowns out of the action table rather than exposing secret values or inventing them.
+    if (e.tagName === 'SELECT' && sensitive(e)) continue;
     const rname = role(e);
     if (!rname) continue;
-    const r = rectOf(e), x = r.x + r.w / 2, y = r.y + r.h / 2;
+    const target = surface(e), r = rectOf(target), x = r.x + r.w / 2, y = r.y + r.h / 2;
+    if (scopeRoot && !composedContains(scopeRoot, target)) continue;
     if (r.w <= 0 || r.h <= 0) continue;
     if (x < 0 || y < 0 || x >= innerWidth || y >= innerHeight) { if (y >= innerHeight) below++; continue; }
     if (rname === 'gridcell' && e.querySelector('button,[role="button"]')) continue;
     const hit = deepHit(x, y);
-    if (!hit || !composedContains(e, hit)) { covered++; continue; }
-    const base = {node: identity(e), role: rname, label: name(e) || rname, section: section(e)};
+    if (!hit || !composedContains(target, hit)) { covered++; continue; }
+    const base = {node: identity(e), role: rname, label: name(e) || rname,
+      control_label: name(e) || rname, section: section(e)};
     const row = e.closest('tr,[role="row"],li,article,[role="listitem"],[role="article"]');
     if (row) {
       const rowText = rowText_(row);
@@ -268,15 +304,18 @@
     }
     for (const key of ['checked', 'selected', 'expanded', 'pressed']) {
       const v = e.getAttribute('aria-' + key);
-      if (v !== null) base[key] = v;
+      if (v !== null) base[key] = v === 'true' ? true : v === 'false' ? false : v;
     }
-    if (['checkbox', 'radio'].includes(e.type)) base.checked = String(e.checked);
+    if (['checkbox', 'radio'].includes(e.type)) base.checked = e.checked;
+    if (e.tagName === 'OPTION') base.selected = e.selected;
     if (e.tagName === 'A' && e.href) base.href = e.href;
     if (e.ownerDocument !== document) base.frame = true;
     if (e.tagName === 'SELECT') {
       const current = [...e.selectedOptions].map(o => o.label).join(', ');
+      base.control_value = String(e.value);
       for (const o of e.options) if (!o.selected && !o.disabled && !o.closest('optgroup[disabled]'))
         actions.push({...base, kind: 'select', value: o.value, current_value: current, label: base.label + ' → ' + o.label});
+      actions.push({...base, kind: 'click', value: String(e.value), current_value: current});
     } else {
       const editable = !e.readOnly && e.getAttribute('aria-readonly') !== 'true' &&
         (['textbox', 'searchbox', 'spinbutton'].includes(rname) ||
@@ -285,6 +324,21 @@
       actions.push({...base, kind: editable ? 'fill' : 'click', value, sensitive: sensitive(e) || undefined});
       if (editable) actions.push({...base, kind: 'click', value, label: 'Open ' + base.label});
     }
+  }
+  // Only observed, visible scroll containers produce scroll operations. No model coordinates.
+  for (const e of all('*').filter(scrollable)) {
+    if (e === document.documentElement || e === document.body || (scopeRoot && !composedContains(scopeRoot, e))) continue;
+    const r = rectOf(e), x = r.x + r.w / 2, y = r.y + r.h / 2;
+    if (!r.w || !r.h || x < 0 || y < 0 || x >= innerWidth || y >= innerHeight) continue;
+    const hit = deepHit(x, y);
+    if (!hit || !composedContains(e, hit)) continue;
+    const node = identity(e), label = name(e) || section(e) || 'scrollable panel';
+    const delta = Math.max(1, Math.round(e.clientHeight * 0.7));
+    const frame = e.ownerDocument !== document || undefined;
+    if (e.scrollTop + e.clientHeight < e.scrollHeight - 2)
+      actions.push({node, kind: 'scroll', label: 'Scroll down in ' + label.slice(0, 120), delta, frame});
+    if (e.scrollTop > 0)
+      actions.push({node, kind: 'scroll', label: 'Scroll up in ' + label.slice(0, 120), delta: -delta, frame});
   }
   const words = [];
   let lastRow = null;
@@ -316,7 +370,7 @@
   // Copies: ids assigned below must not leak into the freshness marker.
   const semantics = actions.map(a => ({...a}));
   const marker = [performance.timeOrigin, location.href, scrollX, scrollY, innerWidth, innerHeight,
-    document.title, text, semantics, pageKey[6]];
+    document.title, text, semantics, pageKey[6], pageKey[7]];
   if (op === 'marker') return marker;
   const limit = Math.max(1, Math.min(request.limit || 250, 1000));
   const omitted = Math.max(0, actions.length - limit);

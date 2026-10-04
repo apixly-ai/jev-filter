@@ -18,7 +18,7 @@ from .pool import worker_count
 HERE = Path(__file__).resolve().parent
 
 
-def collect_code(root, pattern, limit=200):
+def _collect_exact_code(root, pattern, limit=200):
     if limit < 1:
         raise ValueError("limit must be positive")
     root = Path(root).resolve(strict=True)
@@ -163,6 +163,23 @@ def collect_code(root, pattern, limit=200):
         "candidate_limit_reached": capped,
         "scope": "lexical rg candidates; Python/JS/TS/Go symbol expansion; not exhaustive semantic indexing",
         "root": str(root),
+    }
+
+
+def collect_code(root, pattern, limit=200, *, query=None, expand_callers=False, max_files=2000):
+    records, meta = _collect_exact_code(root, pattern, limit)
+    if query is None and not expand_callers:
+        return records, meta
+    from .retrieval import recall
+
+    records, retrieval = recall(root, records, query, expand_callers, limit, max_files)
+    return records, {
+        **meta,
+        "retrieval": retrieval,
+        "candidate_limit_reached": meta["candidate_limit_reached"]
+        or retrieval["candidate_limit_reached"],
+        "truncated": retrieval["truncated"],
+        "scope": "exact rg hits plus bounded lexical/symbol recall and optional Python caller clues; not exhaustive semantic indexing",
     }
 
 
@@ -311,6 +328,7 @@ def analyze_records(records, task, spec, collection, workers="auto", budget=4000
             in (
                 "usage",
                 "usage_complete",
+                "unknown_usage_attempts",
                 "requests",
                 "workers",
                 "network_questions",
@@ -320,6 +338,33 @@ def analyze_records(records, task, spec, collection, workers="auto", budget=4000
         },
         "analysis_ms": round((time.perf_counter() - start) * 1000),
     }
+
+
+def guard_code_sources(result, records):
+    """Revalidate all admitted source revisions after inference, including exclusions."""
+    revisions, changed = {}, []
+    for record in records:
+        path = record.get("path")
+        if not path or not record.get("source_sha256"):
+            continue
+        if path not in revisions:
+            try:
+                with open(path, "rb") as stream:
+                    raw = stream.read(1_000_001)
+                revisions[path] = hashlib.sha256(raw).hexdigest() if len(raw) <= 1_000_000 else None
+            except OSError:
+                revisions[path] = None
+        if revisions[path] != record["source_sha256"]:
+            changed.append(record["id"])
+    if changed:
+        result["selected_ids"] = [rid for rid in result["selected_ids"] if rid not in changed]
+        result["review_ids"] = list(dict.fromkeys(result["review_ids"] + changed))
+        result["complete"] = False
+        result["changed_sources"] = changed
+        for row in result["excerpts"]:
+            if row.get("source_id") in changed:
+                row.update(decision="REVIEW", status="SOURCE_CHANGED")
+    return result
 
 
 def safe_control(record):
@@ -386,7 +431,7 @@ def main(argv=None):
     _utf8_stdio()
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
-    for name in ("code-search", "locate", "triage"):
+    for name in ("code-search", "diff-review", "locate", "triage"):
         cmd = sub.add_parser(name)
         cmd.add_argument("--task", required=True)
         cmd.add_argument(
@@ -399,6 +444,25 @@ def main(argv=None):
             cmd.add_argument("pattern")
             cmd.add_argument("--root", default=".")
             cmd.add_argument("--limit", type=int, default=200)
+            cmd.add_argument(
+                "--query", help="Optional lexical recall query; regex hits retain priority"
+            )
+            cmd.add_argument(
+                "--expand-callers",
+                action="store_true",
+                help="Add one-hop Python syntactic caller clues, not resolved calls",
+            )
+            cmd.add_argument("--max-files", type=int, default=2000)
+        elif name == "diff-review":
+            cmd.add_argument("--root", default=".")
+            revisions = cmd.add_mutually_exclusive_group(required=True)
+            revisions.add_argument("--base", help="Before commit/ref, pinned before collection")
+            revisions.add_argument("--staged", action="store_true")
+            revisions.add_argument("--unstaged", action="store_true")
+            cmd.add_argument("--head", help="After commit/ref; defaults to HEAD with --base")
+            cmd.add_argument("--limit", type=int, default=200)
+            cmd.add_argument("--max-file-bytes", type=int, default=64_000)
+            cmd.add_argument("--max-total-bytes", type=int, default=2_000_000)
         elif name == "locate":
             cmd.add_argument("--session", required=True)
             cmd.add_argument("--tab", required=True)
@@ -431,7 +495,27 @@ def main(argv=None):
         return 2
     start = time.perf_counter()
     if args.command == "code-search":
-        records, collection = collect_code(args.root, args.pattern, args.limit)
+        records, collection = collect_code(
+            args.root,
+            args.pattern,
+            args.limit,
+            query=args.query,
+            expand_callers=args.expand_callers,
+            max_files=args.max_files,
+        )
+    elif args.command == "diff-review":
+        from .diff import collect_diff
+
+        records, collection = collect_diff(
+            args.root,
+            base=args.base,
+            head=args.head,
+            staged=args.staged,
+            unstaged=args.unstaged,
+            limit=args.limit,
+            max_file_bytes=args.max_file_bytes,
+            max_total_bytes=args.max_total_bytes,
+        )
     elif args.command == "locate":
         if not 1 <= args.limit <= 253:
             raise ValueError("locate limit must be 1..253")
@@ -448,8 +532,14 @@ def main(argv=None):
             data, collection = collect_command(command, split="whole")
             text = data[0]["text"]
         else:
-            with open(args.input, "rb") as stream:
-                raw = stream.read(2_000_001)
+            if args.input == "-":
+                stream = getattr(sys.stdin, "buffer", None)
+                raw = (
+                    stream.read(2_000_001) if stream else sys.stdin.read(2_000_001).encode("utf-8")
+                )
+            else:
+                with open(args.input, "rb") as stream:
+                    raw = stream.read(2_000_001)
             if len(raw) > 2_000_000:
                 raise ValueError("Log input exceeds 2 MB; narrow collection")
             text = raw.decode("utf-8")
@@ -496,23 +586,21 @@ def main(argv=None):
             result = apply_guard(result, guard)
         else:
             result["executed"] = False
-    elif args.command == "code-search":
-        selected = {r["id"]: r for r in records if r["id"] in result["selected_ids"]}
+    elif args.command in ("code-search", "diff-review"):
         changed = []
-        for rid, r in selected.items():
-            try:
-                current = hashlib.sha256(Path(r["path"]).read_bytes()).hexdigest()
-            except OSError:
-                current = None
-            if current != r["source_sha256"]:
-                changed.append(rid)
+        if args.command == "diff-review":
+            from .diff import changed_diff_sources
+
+            changed = changed_diff_sources(records, collection)
+        else:
+            result = guard_code_sources(result, records)
         if changed:
             result["selected_ids"] = [rid for rid in result["selected_ids"] if rid not in changed]
             result["review_ids"] = list(dict.fromkeys(result["review_ids"] + changed))
             result["complete"] = False
             result["changed_sources"] = changed
             for row in result["excerpts"]:
-                if row["source_id"] in changed:
+                if row.get("source_id") in changed:
                     row.update(decision="REVIEW", status="SOURCE_CHANGED")
     result.update(tool=args.command, elapsed_ms=round((time.perf_counter() - start) * 1000))
     from .cli import save_archive

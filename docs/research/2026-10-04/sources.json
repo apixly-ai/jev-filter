@@ -1,0 +1,356 @@
+{
+  "observed_on": "2026-10-04",
+  "local_baseline": "feb2bc21f34e5a7c918ae6dde8b35780c16e197a",
+  "repos": [
+    {
+      "repo": "TrustifAI/typed_evals",
+      "commit": {
+        "sha": "ab9fc8a5c3e032ca5732cc0afa318cdd44d331af",
+        "date": "2026-09-27T19:11:37+05:30",
+        "subject": "Remove redundant sources and scope section from BENCHMARK.md"
+      },
+      "files": 77,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "examples/calibrated_pipeline.py",
+        "examples/rag_evaluation.py",
+        "examples/agent_evaluation.py",
+        "README.md",
+        "docs/EVALUATION.md",
+        "docs/CALIBRATION.md",
+        "tests/test_calibration.py",
+        "tests/test_evaluator.py",
+        "tests/test_calibration_multimetric.py",
+        "typed_evals/_utils.py",
+        "typed_evals/__main__.py",
+        "typed_evals/data/__init__.py",
+        "typed_evals/data/datasets.py",
+        "typed_evals/data/models.py",
+        "typed_evals/errors.py",
+        "typed_evals/evaluation/decorators.py",
+        "typed_evals/evaluation/evaluator.py",
+        "typed_evals/evaluation/pipeline.py",
+        "typed_evals/evaluation/__init__.py",
+        "typed_evals/cli.py",
+        "typed_evals/adapters/langchain.py",
+        "typed_evals/adapters/agent_framework.py",
+        "typed_evals/adapters/__init__.py",
+        "typed_evals/adapters/crewai.py",
+        "typed_evals/__init__.py",
+        "typed_evals/runtime/agents.py",
+        "typed_evals/runtime/__init__.py",
+        "typed_evals/runtime/tools.py"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/TrustifAI/typed_evals/tree/ab9fc8a5c3e032ca5732cc0afa318cdd44d331af"
+    },
+    {
+      "repo": "browser-use/jev-ultrafast",
+      "commit": {
+        "sha": "1231850a0bf1a0c0341fe408ef1668dbbfdfac46",
+        "date": "2026-09-18T09:28:35-07:00",
+        "subject": "docs: announce the Cloud waitlist below the README title (#30)"
+      },
+      "files": 38,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "README.md",
+        "jev_ultrafast/model.py"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/browser-use/jev-ultrafast/tree/1231850a0bf1a0c0341fe408ef1668dbbfdfac46"
+    },
+    {
+      "repo": "huzeyfe07/jev-route",
+      "commit": {
+        "sha": "4730aeebe08e87d3a1b2899fd0e95d229b0c4adf",
+        "date": "2026-09-26T16:18:10+03:00",
+        "subject": "docs: add why-section, gate before/after, PyPI badge, fix demo gif"
+      },
+      "files": 15,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "src/jev_route/router.py",
+        "README.md"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/huzeyfe07/jev-route/tree/4730aeebe08e87d3a1b2899fd0e95d229b0c4adf"
+    },
+    {
+      "repo": "jonathanavis96/jev-kit",
+      "commit": {
+        "sha": "c1a236b0b717c85ff5cd6e5f12cc1f63663e949b",
+        "date": "2026-10-02T05:17:34+02:00",
+        "subject": "R7-root-delete: a spaced case pattern, -co pipefail, and no flags after -- (#35)"
+      },
+      "files": 287,
+      "licenses": [
+        "vendor/jev-ultrafast/LICENSE",
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "belay/README.md",
+        "vendor/jev-ultrafast/README.md",
+        "vendor/jev-ultrafast/jev_ultrafast/model.py",
+        "docclass/README.md",
+        "monitoring/README.md",
+        "shim/README.md",
+        "shim/retrieval-prompt.md",
+        "eval/decisions-tier.lock.json",
+        "eval/README.md",
+        "eval/ablation.py",
+        "eval/decisions-search.lock.json",
+        "browse/README.md",
+        "tuning/policy_text.py",
+        "tuning/README.md",
+        "review/README.md",
+        "hooks/airlock.py",
+        "hooks/plumbline.py",
+        "hooks/airlock_session_check.py",
+        "hooks/jev_guard.py",
+        "hooks/airlock_browse_unlock.py",
+        "browser/README.md",
+        "README.md",
+        "filesearch/README.md",
+        "docs/assets/README.md",
+        "docs/jev-reference/README.md",
+        "compaction/README.md",
+        "tests/test_policy.py",
+        "tests/latency_hook.py"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/jonathanavis96/jev-kit/tree/c1a236b0b717c85ff5cd6e5f12cc1f63663e949b"
+    },
+    {
+      "repo": "keiffff/jev-kit",
+      "commit": {
+        "sha": "3f84bcfa9887a897e7383a36027d1c4331115edc",
+        "date": "2026-10-04T11:34:38+09:00",
+        "subject": "Enable automatic merging of Changesets release PRs (#15)"
+      },
+      "files": 73,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "packages/decision-eval/src/index.ts",
+        "packages/decision-eval/tsconfig.json",
+        "packages/decision-eval/package.json",
+        "packages/decision-eval/README.md",
+        "packages/decision-eval/CHANGELOG.md",
+        "packages/decision-eval/test/decision-eval.test.ts",
+        "packages/cli/README.md",
+        "packages/semantic-diff/README.md",
+        "packages/decision-router/src/index.ts",
+        "packages/decision-router/tsconfig.json",
+        "packages/decision-router/package.json",
+        "packages/decision-router/README.md",
+        "packages/decision-router/CHANGELOG.md",
+        "packages/decision-router/test/decision-router.test.ts",
+        "packages/agent-review/README.md",
+        "packages/agent-review/schemas/review-request.schema.json",
+        "packages/evidence-check/README.md",
+        "packages/hook-adapters/src/index.ts",
+        "packages/hook-adapters/tsconfig.json",
+        "packages/hook-adapters/package.json",
+        "packages/hook-adapters/README.md",
+        "packages/hook-adapters/CHANGELOG.md",
+        "packages/hook-adapters/test/hook-adapters.test.ts",
+        "packages/decision-contract/README.md",
+        "scripts/run-agent-review-eval.mjs",
+        "examples/review-request.json",
+        "examples/agent-review-policy.json",
+        "examples/review-request-defer.json"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/keiffff/jev-kit/tree/3f84bcfa9887a897e7383a36027d1c4331115edc"
+    },
+    {
+      "repo": "supercorp-ai/supercov",
+      "commit": {
+        "sha": "c0ad877c3f92149be4f9ed1d520887e3493fab15",
+        "date": "2026-10-04T06:09:55+03:00",
+        "subject": "Merge pull request #73 from supercorp-ai/feat/focused-test-order"
+      },
+      "files": 713,
+      "licenses": [
+        "LICENSE",
+        "plugins/supercov/LICENSE"
+      ],
+      "interesting_files": [
+        "scripts/agent-query-eval.mjs",
+        "examples/react-verification/README.md",
+        "examples/checkout-verification/README.md",
+        "examples/checkout-verification/agent-run/README.md",
+        "examples/checkout-verification/recorded/README.md",
+        "README.md",
+        "spikes/query-index/README.md",
+        "spikes/python-monitoring/README.md",
+        "docs/quality.md",
+        "crates/supercov-engine/src/frontend_protocol.rs",
+        "contracts/coverage-model-v1/README.md",
+        "crates/supercov-cli/assets/docs/quality.md",
+        "contracts/frontend-v2/README.md",
+        "crates/supercov-cli/src/quality.rs",
+        "crates/supercov-cli/src/quality/candidates.rs",
+        "crates/supercov-cli/src/quality/tests.rs",
+        "crates/supercov-cli/src/quality/risks.json",
+        "crates/supercov-cli/src/quality/scope.rs",
+        "crates/supercov-cli/src/quality/changes.rs",
+        "crates/supercov-cli/src/quality/catalog.rs",
+        "crates/supercov-cli/src/quality/security.json",
+        "crates/supercov-cli/src/quality/properties.json",
+        "crates/supercov-cli/src/quality/store.rs",
+        "crates/supercov-cli/src/quality/query.rs",
+        "plugins/supercov/README.md",
+        "plugins/supercov/commands/quality.md",
+        "contracts/rust-probe-transport-v1/README.md",
+        "contracts/rust-probe-transport-v3/README.md"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/supercorp-ai/supercov/tree/c0ad877c3f92149be4f9ed1d520887e3493fab15"
+    },
+    {
+      "repo": "tamaratran/fast-jev-compaction",
+      "commit": {
+        "sha": "e3f262a7f4d42bd8dd32ced30d26176f7cb545b0",
+        "date": "2026-09-17T22:29:18Z",
+        "subject": "Merge pull request #17 from tamaratran/devin/1789683249-readme-tagline"
+      },
+      "files": 23,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "src/client.ts",
+        "src/compact.ts",
+        "src/request.ts",
+        "tsconfig.hooks.json",
+        "hooks/hooks.json",
+        "hooks/fast-jev.ts",
+        "hooks/README.md",
+        "README.md",
+        "tests/fast-jev-compaction.test.ts",
+        "tests/hook.test.ts"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/tamaratran/fast-jev-compaction/tree/e3f262a7f4d42bd8dd32ced30d26176f7cb545b0"
+    },
+    {
+      "repo": "typesafe-ai/system-one-adapter-python",
+      "commit": {
+        "sha": "e1d4cc938204b22fc5a3c3aca7044072fe3f712d",
+        "date": "2026-09-22T12:24:27Z",
+        "subject": "Release v0.2.1"
+      },
+      "files": 75,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "src/system_one_adapter/_client.py",
+        "README.md",
+        "tests/test_provider_requests.py",
+        "tests/test_client_with_live_apis.py",
+        "tests/test_client_with_fake_model.py",
+        "tests/cassettes/test_client_with_live_apis/test_live_typesafe_response_matches_reference_shape.json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-prompted-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[discrete-prompted-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-native-openai].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[probabilities-prompted-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[discrete-native-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[probabilities-native-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-native-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-prompted-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-prompted-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[probabilities-native-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-native-openai].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-prompted-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-native-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[probabilities-prompted-openai].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[discrete-prompted-openai].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[probabilities-prompted-openai].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[probabilities-prompted-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[discrete-prompted-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_models_follow_question_instructions_and_criteria[discrete-native-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-native-gemini].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-native-anthropic].json",
+        "tests/cassettes/test_client_with_live_apis/test_live_responses_match_reference_shape[discrete-prompted-openai].json"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/typesafe-ai/system-one-adapter-python/tree/e1d4cc938204b22fc5a3c3aca7044072fe3f712d"
+    },
+    {
+      "repo": "typesafe-ai/typesafe-sdk-python",
+      "commit": {
+        "sha": "f078f1e208a0d885154dc758344ae4fce77ac168",
+        "date": "2026-09-26T21:19:40Z",
+        "subject": "Release v0.7.2"
+      },
+      "files": 61,
+      "licenses": [
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "src/typesafe_sdk/_core/client/sync/__init__.py",
+        "src/typesafe_sdk/_core/client/sync/client.py",
+        "src/typesafe_sdk/_core/client/sync/models.py",
+        "src/typesafe_sdk/_core/client/aio/__init__.py",
+        "src/typesafe_sdk/_core/client/aio/client.py",
+        "src/typesafe_sdk/_core/client/aio/models.py",
+        "src/typesafe_sdk/_core/client/__init__.py",
+        "README.md",
+        "tests/test_clients.py",
+        "tests/typing/negative/sync_client.py",
+        "tests/typing/negative/async_client.py"
+      ],
+      "license_header": "MIT License",
+      "url": "https://github.com/typesafe-ai/typesafe-sdk-python/tree/f078f1e208a0d885154dc758344ae4fce77ac168"
+    },
+    {
+      "repo": "xcjy8bao/baoer_signal_grep",
+      "commit": {
+        "sha": "2f87cb23356ffa4e0af8b58c81d532b52fb4fa0f",
+        "date": "2026-10-03T19:19:17-07:00",
+        "subject": "fix: isolate external path searches for #106 (#107)"
+      },
+      "files": 159,
+      "licenses": [
+        "plugins/sift-light/LICENSE",
+        "LICENSE"
+      ],
+      "interesting_files": [
+        "src/hybrid-search.ts",
+        "src/request-contract.ts",
+        "src/pi-search-policy.ts",
+        "src/search-policy-commands.ts",
+        "src/path-policy.ts",
+        "src/semantic-judge-batches.ts",
+        "src/request-aliases.ts",
+        "src/request.ts",
+        "src/mcp-semantic-judge.ts",
+        "src/search-policy-shell.ts",
+        "src/search-policy.ts",
+        "src/request-contract-error.ts",
+        "src/request-contract-catalog.ts",
+        "src/search-policy-recovery.ts",
+        "src/semantic-judge.ts",
+        "src/search-policy-hook.ts",
+        "README.zh-CN.md",
+        "scripts/search-policy-artifact.ts",
+        "README.md",
+        "plugins/sift-light/hooks/hooks.json",
+        "plugins/sift-light/hooks/search-policy.mjs"
+      ],
+      "license_header": "GNU AFFERO GENERAL PUBLIC LICENSE",
+      "canonical_repo": "lightsifter/sift-light",
+      "url": "https://github.com/lightsifter/sift-light/tree/2f87cb23356ffa4e0af8b58c81d532b52fb4fa0f"
+    }
+  ]
+}

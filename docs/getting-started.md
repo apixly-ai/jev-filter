@@ -12,7 +12,7 @@ npm install -g @apixly/jev-filter
 jev-filter doctor
 ```
 
-Pin a version with `npm install -g @apixly/jev-filter@0.1.0`.
+Pin a version with `npm install -g @apixly/jev-filter@0.4.0`.
 For a project-local dependency, use `npm install @apixly/jev-filter` and invoke
 `npx jev-filter`. Avoid `--omit=optional`: the correct platform binary is an optional
 dependency. Installation does not run a postinstall script or configure your agent.
@@ -20,7 +20,7 @@ dependency. Installation does not run a postinstall script or configure your age
 GitHub release fallback (the same npm package):
 
 ```sh
-npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.1.0/apixly-jev-filter-0.1.0.tgz
+npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.4.0/apixly-jev-filter-0.4.0.tgz
 ```
 
 ## Configure your key
@@ -98,7 +98,7 @@ install ripgrep separately for source-based search.
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.1.0'
+python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'
 ```
 
 The wheel in GitHub Releases is also supported. No PyPI publication is assumed.

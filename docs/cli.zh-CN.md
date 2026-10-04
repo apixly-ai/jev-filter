@@ -61,3 +61,13 @@
 
 日志分流保留同一请求内的事件顺序和重复次数，脱敏常见凭据格式，保留格式错误记录。
 复合筛选条件优先使用原子判断。分类不能证明实时恢复或根因。
+
+## 0.4 新增控制
+
+`code-search --query TEXT --expand-callers --max-files 2000` 在精确命中之外按需加入有界 BM25 召回和 Python 一跳调用线索；仍可使用原来的正则基线，不是全量语义索引。
+
+`diff-review` 必须明确选择 `--base REF [--head REF]`、`--staged` 或 `--unstaged` 之一。它固定 ref，保留完整有界的 tracked 前后快照与文件模式，保留二进制/大文件失败并重新核对来源；不执行测试、不建立安全漏洞结论。
+
+`eval --input FILE` 离线评测分为校准与留出组的已标注概率；`mcp --root PATH` 提供四工具只读 stdio 服务。分析支持 `uncertainty` 和版本化 `contract`。
+
+托管执行默认在操作/目标/值选择前要求胜出概率 0.55、前两名差距 0.10；`needs_review` 报告未达标项，`--uncertainty FILE` 配置每个问题。`--verify-controls FILE` 检查唯一最终控件状态。详见[接入示例](integrations.zh-CN.md)。

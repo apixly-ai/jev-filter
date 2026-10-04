@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "kind": "offline_real_interface_e2e",
+  "version": "0.4.0",
+  "checks": [
+    {
+      "name": "installed_cli_doctor",
+      "passed": true,
+      "version": "0.4.0"
+    },
+    {
+      "name": "cli_context_admission",
+      "passed": true
+    },
+    {
+      "name": "cli_code_collection",
+      "passed": true
+    },
+    {
+      "name": "cli_stdin_triage_redaction",
+      "passed": true
+    },
+    {
+      "name": "cli_complete_diff",
+      "passed": true
+    },
+    {
+      "name": "cli_survey_plan",
+      "passed": true
+    },
+    {
+      "name": "cli_heldout_evaluation",
+      "passed": true
+    },
+    {
+      "name": "mcp_stdio_process",
+      "passed": true
+    },
+    {
+      "name": "javascript_real_cli",
+      "passed": true,
+      "partial_preserved": true
+    },
+    {
+      "name": "official_mcp_client",
+      "passed": true,
+      "protocol": "2025-11-25",
+      "tools": 4,
+      "review_and_evidence_roundtrip": true
+    }
+  ],
+  "passed": true,
+  "elapsed_ms": 1197,
+  "actual_model_usage": {
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "scope": "Real process/interface checks on synthetic data; no semantic inference, primary-agent continuation or external business action.",
+  "script_sha256": "e4ad2c54c7a74abd879b153e68945892fbee8b504edb806b252f39827d50aeff"
+}

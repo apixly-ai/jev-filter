@@ -122,6 +122,31 @@ def test_browse_argument_errors(monkeypatch):
         cli.main(["browse", "--url", "https://a.test/", "--goal", "x", "--text-model"])
 
 
+def test_invalid_uncertainty_cleans_up_open_surface_and_text_client(tmp_path, monkeypatch):
+    path = tmp_path / "broken-policy.json"
+    path.write_text("{")
+    surface = closable(search_flow())
+    helper = helper_with(chat('{"text": null}'))
+    monkeypatch.setattr(cli, "open_page", lambda args: surface)
+    monkeypatch.setattr(text, "from_environment", lambda: helper)
+    monkeypatch.setattr(cli, "jev_decider", lambda: fake_decider([]))
+    with pytest.raises(json.JSONDecodeError):
+        cli.main(
+            [
+                "browse",
+                "--url",
+                "https://shop.test/",
+                "--goal",
+                "Search",
+                "--uncertainty",
+                str(path),
+                "--text-model",
+            ]
+        )
+    assert surface.closed == [False]
+    assert helper.client.is_closed
+
+
 def test_desktop_list_and_goal(monkeypatch, capsys):
     import jev_context.act.desktop as desktop
 
