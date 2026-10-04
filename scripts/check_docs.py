@@ -48,8 +48,16 @@ def canonical_destination(url, root):
 
 def check(root=ROOT):
     root = root.resolve()
+    verification = root.parent / "docs/site-verification"
+    ownership_artifacts = (
+        {root / proof.name for proof in verification.iterdir() if proof.is_file()}
+        if verification.exists()
+        else set()
+    )
     pages = {}
     for path in root.rglob("*.html"):
+        if path in ownership_artifacts:
+            continue
         parser = Page()
         parser.feed(path.read_text(encoding="utf-8"))
         pages[path.resolve()] = parser

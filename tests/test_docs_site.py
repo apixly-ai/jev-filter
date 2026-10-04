@@ -42,6 +42,8 @@ class ParsedPage(HTMLParser):
         self.meta = {}
         self.scripts = []
         self._json = False
+        self._title = False
+        self.title = ""
         self.feed(source)
 
     def handle_starttag(self, tag, attrs):
@@ -52,14 +54,20 @@ class ParsedPage(HTMLParser):
             self.meta[fields.get("name", fields.get("property"))] = fields.get("content")
         if tag == "script" and fields.get("type") == "application/ld+json":
             self._json = True
+        if tag == "title":
+            self._title = True
 
     def handle_data(self, data):
         if self._json:
             self.scripts.append(json.loads(data))
+        if self._title:
+            self.title += data
 
     def handle_endtag(self, tag):
         if tag == "script":
             self._json = False
+        if tag == "title":
+            self._title = False
 
 
 @pytest.fixture
@@ -108,6 +116,25 @@ def built_site(tmp_path):
         '# Filter "retrieved" records & evidence\n\n'
         'Keep **quoted** "records" & their evidence, with `stable IDs`.\n',
         encoding="utf-8",
+    )
+    for suffix, purpose in (
+        ("", "Jev Filter screens retrieved evidence and keeps originals recoverable."),
+        (".zh-CN", "Jev Filter 筛选检索证据，并保留可回查原文。"),
+    ):
+        (fixture / f"README{suffix}.md").write_text(
+            '<p align="center"><a href="docs/getting-started.md">Quick start</a> · '
+            '<a href="docs/faq.md">Documentation</a> · '
+            '<a href="docs/agent-quickstart.md">Agent setup</a></p>\n\n'
+            "```sh\n# A fenced shell comment is not the page title\n```\n\n"
+            "# Jev Filter: **semantic evidence**\n\n"
+            f"{purpose}\n\n",
+            encoding="utf-8",
+        )
+    proofs = fixture / "docs/site-verification"
+    proofs.mkdir()
+    # Ownership proofs are byte-preserved artifacts, not documentation to parse.
+    (proofs / "google-synthetic.html").write_bytes(
+        b'google-site-verification: synthetic\r\n<a href="unavailable.txt">proof</a>\r\n'
     )
     subprocess.run(
         [sys.executable, str(fixture / "scripts/build_docs.py")], check=True, capture_output=True
@@ -222,3 +249,40 @@ def test_checker_checks_anchors_on_canonical_directory_home_links(built_site):
     )
     assert checked.returncode != 0
     assert "missing anchor ../#missing-home-section" in checked.stderr
+
+
+@pytest.mark.parametrize(
+    ("filename", "purpose"),
+    (
+        ("README.html", "Jev Filter screens retrieved evidence and keeps originals recoverable."),
+        ("README.zh-CN.html", "Jev Filter 筛选检索证据，并保留可回查原文。"),
+    ),
+)
+def test_readme_title_uses_rendered_heading(built_site, filename, purpose):
+    page = ParsedPage((built_site / "site" / filename).read_text(encoding="utf-8"))
+    assert page.title == "Jev Filter: semantic evidence · Jev Filter"
+    assert page.meta["og:title"] == page.title
+
+
+@pytest.mark.parametrize(
+    ("filename", "purpose"),
+    (
+        ("README.html", "Jev Filter screens retrieved evidence and keeps originals recoverable."),
+        ("README.zh-CN.html", "Jev Filter 筛选检索证据，并保留可回查原文。"),
+    ),
+)
+def test_readme_description_uses_introductory_prose(built_site, filename, purpose):
+    page = ParsedPage((built_site / "site" / filename).read_text(encoding="utf-8"))
+    assert page.meta["description"] == purpose
+    assert page.meta["og:description"] == purpose
+
+
+def test_site_verification_is_copied_as_uninterpreted_artifact(built_site):
+    source = built_site / "docs/site-verification/google-synthetic.html"
+    target = built_site / "site/google-synthetic.html"
+    assert target.read_bytes() == source.read_bytes()
+    assert BASE + target.name not in (built_site / "site/sitemap.xml").read_text(encoding="utf-8")
+    checked = subprocess.run(
+        [sys.executable, str(built_site / "scripts/check_docs.py")], capture_output=True, text=True
+    )
+    assert checked.returncode == 0, checked.stdout + checked.stderr

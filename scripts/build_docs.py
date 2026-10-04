@@ -50,39 +50,66 @@ DESCRIPTIONS = {
 }
 
 
-class Paragraphs(HTMLParser):
-    """Extract readable introductory prose without images or language-switch links."""
+class PageText(HTMLParser):
+    """Read actual headings and prose, excluding images and link-only navigation."""
 
     def __init__(self):
         super().__init__()
         self.paragraphs = []
         self.current = None
+        self.nonlink = []
+        self.links = 0
+        self.link_depth = 0
+        self.aligned = False
+        self.heading = None
+        self.title = ""
 
     def handle_starttag(self, tag, attrs):
         if tag == "p":
-            self.current = [] if dict(attrs).get("class") != "home-actions" else None
+            fields = dict(attrs)
+            self.current = [] if "home-actions" not in fields.get("class", "").split() else None
+            self.nonlink = []
+            self.links = 0
+            self.aligned = fields.get("align") == "center"
+        if tag == "a":
+            self.link_depth += 1
+            if self.current is not None:
+                self.links += 1
+        if tag == "h1" and not self.title:
+            self.heading = []
 
     def handle_data(self, data):
         if self.current is not None:
             self.current.append(data)
+            if self.link_depth == 0:
+                self.nonlink.append(data)
+        if self.heading is not None:
+            self.heading.append(data)
 
     def handle_endtag(self, tag):
+        if tag == "a":
+            self.link_depth = max(0, self.link_depth - 1)
+        if tag == "h1" and self.heading is not None:
+            self.title = re.sub(r"\s+", " ", "".join(self.heading)).strip()
+            self.heading = None
         if tag == "p" and self.current is not None:
             text = re.sub(r"\s+", " ", "".join(self.current)).strip()
-            if text and not re.fullmatch(
-                r"(?:English|简体中文|中文文档首页|中文使用说明|·|\s)+", text
+            only_links = self.links and re.fullmatch(r"[\s·|•—–\-→↗,:;/]*", "".join(self.nonlink))
+            navigation = only_links and (self.aligned or self.links >= 2)
+            if (
+                text
+                and not navigation
+                and not re.fullmatch(r"(?:English|简体中文|中文文档首页|中文使用说明|·|\s)+", text)
             ):
                 self.paragraphs.append(text)
             self.current = None
 
 
-def description_for(source, body, title):
+def description_for(source, content, title):
     if source.parent.name == "docs" and source.name in DESCRIPTIONS:
         return DESCRIPTIONS[source.name]
-    parser = Paragraphs()
-    parser.feed(body)
     text = next(
-        (p for p in parser.paragraphs if len(p) >= 12), f"{title} — Jev Filter documentation."
+        (p for p in content.paragraphs if len(p) >= 12), f"{title} — Jev Filter documentation."
     )
     if len(text) > 200:
         text = text[:197].rsplit(" ", 1)[0] if " " in text[:197] else text[:197]
@@ -142,13 +169,15 @@ def render_page(root, source, target, version):
     cn = ".zh-CN." in source.name
     locale = ".zh-CN" if cn else ""
     text = source.read_text(encoding="utf-8").replace("<details>", '<details markdown="1">')
-    title = next((line[2:] for line in text.splitlines() if line.startswith("# ")), "Jev Filter")
     body = markdown.markdown(
         text,
         extensions=["tables", "fenced_code", "toc", "md_in_html"],
         extension_configs={"toc": {"slugify": slugify_unicode}},
     )
-    description = description_for(source, body, title)
+    content = PageText()
+    content.feed(body)
+    title = content.title or "Jev Filter"
+    description = description_for(source, content, title)
     body = rebase_links(body, rel, target)
     other_name = source.name.replace(".zh-CN", "") if cn else source.stem + ".zh-CN.md"
     other_source = source.with_name(other_name)
@@ -257,6 +286,19 @@ def build(root=ROOT):
         if not re.fullmatch(r"[a-fA-F0-9]{32}", key):
             raise ValueError("IndexNow public verification key must be 32 hexadecimal characters")
         (out / f"{key}.txt").write_text(key, encoding="utf-8")
+    # Provider-issued ownership proof files are public, byte-preserved artifacts;
+    # they are not Markdown pages or sitemap entries.
+    verification = root / "docs/site-verification"
+    if verification.exists():
+        for proof in sorted(verification.iterdir()):
+            if not proof.is_file():
+                continue
+            target = out / proof.name
+            if target.exists():
+                raise ValueError(
+                    f"Site verification proof conflicts with generated file: {proof.name}"
+                )
+            shutil.copyfile(proof, target)
     (out / ".nojekyll").touch()
     return out
 
