@@ -4,6 +4,11 @@
 
 ## Fresh paid evidence · 2026-10-04
 
+**96 records screened in a median 1.313 seconds, with exactly the same selected IDs.**
+The new same-output experiment compares the available Jev API and signed-in Codex CLI
+screening paths. All **9/9** runs were exact and complete. This stage result is separate
+from the whole-agent context A/B below.
+
 **91.6–97.2% less returned tool context, with the original evidence still recoverable.**
 This is the new whole-operation result: **24 real primary-agent runs**, three fixed
 synthetic scenarios (`code-search`, `triage`, `exec`), two primary models
@@ -11,6 +16,61 @@ synthetic scenarios (`code-search`, `triage`, `exec`), two primary models
 Filtering completed **12/12** operations, raw context **11/12**; all **24/24**
 selected the exact expected ID sets. The raw Astra triage arm selected correctly
 but one run failed the full expected response contract; it remains in the denominator.
+
+### Same-output screening: fast selection through the measured paths
+
+The [same-output dataset](../benchmarks/results/2026-10-04-live-selection-speed.json)
+uses the same 96 synthetic records, two atomic semantic conditions and expected output
+of 48 matching IDs. Jev performs auto-batched API filtering; signed-in Codex CLI directly
+screens the supplied records with **medium reasoning and no tools**. Arm order rotates
+over three repetitions; every run is fresh, without an inference-result cache.
+The fixture repeats **eight easy bilingual templates twelve times** with distinct
+service IDs. It covers clear current/historical and pre/post-response distinctions,
+not 96 independent difficult cases.
+
+| Measured path | Median screening time | Observed range | Exact complete runs |
+|---|---:|---:|---:|
+| **Jev `jev-1.13.0` · auto-batched API** | **1.313 s** | 1.238–1.375 s | **3/3** |
+| Luna `gpt-5.6-luna` · signed-in Codex CLI | 13.421 s | 13.210–13.932 s | 3/3 |
+| Astra `gpt-6-astra` · signed-in Codex CLI | 14.543 s | 14.333–15.593 s | 3/3 |
+
+**This measures execution-path screening latency, not isolated native model/API latency
+or a whole-agent speedup.** Jev timing includes planning, transport, typed parsing and
+program reduction. Codex timing includes prompt serialization, process startup,
+the provider/agent turn and final response. Prepared fixture directories are timed
+separately and excluded. Native inference time and CLI startup overhead cannot be
+separated; request-level latency was not captured. No primary-agent continuation
+follows Jev. **Direct primary-model APIs were not benchmarked.** Three repetitions
+are a smoke sample, not a confidence interval or a
+broad workload guarantee; repeated simple templates limit the claim. Provider caching
+may occur even though there is no inference-result cache.
+
+![Same-output screening paths, each 3/3 exact: Jev API 1.313 s, Codex CLI Luna 13.421 s and Astra 14.543 s](assets/selection-speed-live.png)
+
+All nine runs returned the same **375-byte** normalized decision and had zero false
+positives, missed IDs, reviews, timeouts, failed requests or unknown-usage attempts.
+This is equal output and source evidence, **not equal serialized prompts**: records
+alone are **12,351 bytes**; Jev's typed requests total **93,226 bytes** per run,
+while each primary prompt is **13,224 bytes** plus a **196-byte** output schema and
+the CLI's own harness. Jev used two physical requests per run. Primary paths reported
+one turn per run; their physical provider request count is unavailable.
+
+| Path | Actual input / cached subset / output tokens over three runs |
+|---|---:|
+| Jev | **91,086 / unavailable / 27,546** |
+| Luna | 59,052 / 0 / 788 |
+| Astra | 66,216 / 0 / 492 |
+
+**Jev used more input tokens than either primary path** in this same-output test.
+Output tokens also include Jev's typed per-record judgments rather than only the
+final ID list. Usage is complete; actual billed amounts remain `null`. The primary
+paths use subscription authentication, so these timings and tokens establish no
+invoice saving. Jev response IDs resolve to `jev-1.13.0`; the CLI exposes requested
+primary models without independently exposing provider-resolved model IDs.
+
+[Report and limitations](https://github.com/apixly-ai/jev-filter/blob/main/benchmarks/results/2026-10-04-live-selection-speed-summary.md) ·
+[Separate usage receipt](../benchmarks/results/2026-10-04-live-selection-speed-usage.json) ·
+[Reproducible driver](../benchmarks/selection_speed.py)
 
 ### Whole operations: context is the win, latency is mixed
 
@@ -71,8 +131,9 @@ and two workers, while single-record arms made 96 requests per operation.
 | Single-record parallel, cap 12 | 3.22 s | 209,244 | 3/3 |
 | Automatic batch + parallel | 1.25 s | 91,086 | 3/3 |
 
-Batching reduces input **56.5%**; batch-parallel is **61.2% faster** than single-record
-parallel in this sample. Time includes planning, native inference and reduction, but
+Batching reduces input **56.5%**; batch-parallel has **2.58× filtering speed** and
+**61.2% less elapsed time** than single-record parallel (**3.215 → 1.246 s**) in this
+sample. Time includes planning, native inference and reduction, but
 **no primary-agent continuation**. This is not a whole-agent speedup. Repeated easy
 record templates and network variation limit generalization. Across all arms the
 provider reported **600,660 input / 110,964 output tokens**, complete usage and no
@@ -168,7 +229,7 @@ usage is complete, subscription billing unknown. The result also retains the fir
 matrix's spend separately. Reliable recovery adds work; it does not establish a cheap
 or fast universal browser agent.
 
-### Complete audit spend, including failed trials
+### Earlier cumulative audit usage, including failed trials
 
 The [cumulative usage ledger](../benchmarks/results/2026-10-04-live-total-usage.json)
 includes pilots, repeated validation and failed experiments, not just the successful
@@ -178,6 +239,10 @@ to a **$0.123004434 estimate lower bound**; cumulative total and actual invoice 
 unknown. Primary-account usage is **1,463,583 input / 563,200 cached subset / 7,315 output
 tokens** under subscription access, not a verified API bill. Costs are not silently
 zeroed or summed across incompatible billing bases.
+
+This earlier series remains unchanged. The new same-output speed experiment adds
+**91,086 Jev input / 27,546 output** and **125,268 primary input / 0 cached / 1,280
+output tokens**, recorded in a [separate incremental receipt](../benchmarks/results/2026-10-04-live-selection-speed-usage.json).
 
 ### Reproduce a new paid run
 
@@ -191,6 +256,9 @@ python -m pip install -e '.[code,dev,docs,browser-test]'
 python -m pip install mcp
 python -m benchmarks.run --live --records 96 --repeats 3 --parallel-workers 12 \
   --output local-results/batching-new.json
+python -m benchmarks.selection_speed --live --records 96 --repeats 3 --workers 12 \
+  --models gpt-5.6-luna gpt-6-astra --output local-results/selection-speed-new.json \
+  --private-dir ../jev-selection-private-new
 python -m benchmarks.live_records --live --repeats 2 --output local-results/records-new.json
 python -m benchmarks.live_interfaces --live --output local-results/interfaces-new.json
 python -m benchmarks.operations --live --models gpt-5.6-luna gpt-6-astra \
@@ -199,8 +267,10 @@ python -m benchmarks.operations --live --models gpt-5.6-luna gpt-6-astra \
   --report local-results/operations-new.json --private-dir local-results/operations-traces
 ```
 
-The workflows above answer different questions: whole-primary-agent context,
-record decision quality, and interface correctness. Do not combine their denominators
+The workflows above answer different questions: screening-path speed,
+whole-primary-agent context, record decision quality, and interface correctness.
+The same-output speed test also requires a signed-in Codex CLI; its private directory
+must be fresh and outside the repository. Do not combine the experiments' denominators
 or turn a local stage improvement into a whole-agent saving.
 
 ## Release 0.4 evidence 2026-10-04

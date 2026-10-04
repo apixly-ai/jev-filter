@@ -6,6 +6,24 @@
 
 <p class="home-actions"><a class="primary" href="getting-started.zh-CN.md">快速开始 →</a><a href="agent-quickstart.zh-CN.md">接入你的 AI</a><a href="benchmarks.zh-CN.md">核对实测证据</a></p>
 
+## 96 条记录，同样精确的选中结果，1.31 秒。
+
+**更快的语义筛选，用相同答案核验。** 最新付费同输出测试按两个语义条件筛选 96 条合成记录，全部 **9/9** 次都精确返回同样的 48 个匹配 ID。
+
+| 实测路径 | 筛选耗时中位 | 精确完整结果 |
+|---|---:|---:|
+| **Jev `jev-1.13.0` · 自动合批 API** | **1.313 秒** | **3/3** |
+| Luna `gpt-5.6-luna` · 已登录 Codex CLI | 13.421 秒 | 3/3 |
+| Astra `gpt-6-astra` · 已登录 Codex CLI | 14.543 秒 | 3/3 |
+
+这里对比执行路径：CLI 包含启动与主模型回合，模型原生延迟未分离，Jev 后面没有主模型续跑；主模型路径均为 medium 推理、不使用工具。每条路径三次是 smoke 样本，不是整轮 agent 提速或跨任务保证。[逐次数据](../benchmarks/results/2026-10-04-live-selection-speed.json) · [方法与复现](benchmarks.zh-CN.md#同输出筛选实测执行路径的速度)。
+
+![同输出筛选路径，每条 3/3 精确：Jev API 1.313 秒，Codex CLI Luna 13.421 秒、Astra 14.543 秒](assets/selection-speed-live.zh-CN.png)
+
+**合批处理重复判断。** 另一组 Jev 合批测试从 **96 个请求变成 2 个**，输入 tokens **减少 56.5%**，筛选速度为单条并发 Jev 调用的 **2.58 倍**（**3.215 → 1.246 秒**，耗时**减少 61.2%**）；全部 **12/12** 次结果精确，不依赖结果缓存。[合批阶段证据](../benchmarks/results/2026-10-04-live-batching.json)。
+
+![相同 Jev 工作量，2.58 倍筛选速度](assets/speed-live.zh-CN.png)
+
 ## 用更少噪声，支撑更多推理
 
 **返回工具上下文减少 91.6–97.2%**。2026-10-04 实测 **24 次真实 agent 运行**：三个合成场景、两个主模型、每个实验臂重复两次。过滤后的 agent **12/12** 次完整完成任务，原文臂 **11/12**；全部 **24/24** 次返回正确 ID 集。
@@ -15,8 +33,6 @@
 | 在一次程序操作内采集与判断，主模型接收相关证据及待复核 ID。 | 按来源 ID 保留完整原文、类型化判断与收据；来源新鲜度和终态独立验证。 | Python CLI、全新已发布 npm JS/原生包、官方 MCP、本地提取与 survey 的 **13/13 项付费 E2E 通过**。 |
 
 **找回更多相关代码。** 可选召回结合原生筛选，正确匹配 **10/12**，精确候选为 **4/12**，误报为零。**查对真正要查的变更。** 有界 diff 筛查在两次重复中都选对四个目标变更，相比保留全部文件，返回上下文**减少 23.9%**。[真实调用数据与增加的工作](benchmarks.zh-CN.md)。
-
-**把重复判断合批处理。** 最新 96 条记录测试中，Jev 输入 tokens **少 56.5%**，合批并发筛选比单条并发**快 61.2%**，**12/12** 次结果精确。这只衡量 Jev 操作，不代表整轮 agent 提速。[阶段数据](../benchmarks/results/2026-10-04-live-batching.json)。
 
 同一核心接入 **CLI、Python、JavaScript / TypeScript 与只读 MCP**，并提供可移植的 agent skill。自动合批、最多 30 个并发请求、不缓存推理结果，把重复判断留在程序里。[接入你的 AI](agent-quickstart.zh-CN.md#javascript-与-mcp)。
 

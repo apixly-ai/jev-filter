@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
 <title id="title">Jev Filter — give your agent the signal</title>
-<desc id="desc">Collect once, decide with context, return the proof. A program-owned collector sends records to typed Jev inference; the primary agent receives selected evidence and review IDs, with local originals available by ID. Paid 2026-10-04 benchmark: 91.6–97.2 percent less returned tool context over 24 real agent runs on three synthetic scenarios with two primary models and two repetitions per arm. All expected ID sets matched; latency and cost vary.</desc>
+<desc id="desc">Collect once, decide with context, return the proof. A program-owned collector sends records to typed Jev inference; the primary agent receives selected evidence and review IDs, with local originals available by ID. Paid 2026-10-04 benchmark: 91.6–97.2 percent less returned tool context over 24 real agent runs on three synthetic scenarios with two primary models and two repetitions per arm. All expected ID sets matched; latency and cost vary. Separate Jev-stage batching test: 2.58 times the filtering speed versus single-record parallel, 96 synthetic records in 1.25 instead of 3.22 seconds. Same-output test: median Jev API screening of 96 records was 1.31 seconds over three runs; primary-model Codex CLI paths include process overhead.</desc>
 <defs>
   <linearGradient id="background" x2="1" y2="1"><stop stop-color="#080e1c"/><stop offset="1" stop-color="#14213b"/></linearGradient>
   <linearGradient id="signal" x2="1" y2="1"><stop stop-color="#77efc5"/><stop offset="1" stop-color="#95a2ff"/></linearGradient>
@@ -51,10 +51,10 @@
   <text x="54" y="479" fill="#91edc9" font-size="36" font-weight="750" letter-spacing="-1">91.6–97.2%</text>
   <text x="54" y="506" fill="#d5e6f0" font-size="16" font-weight="600">less returned tool context</text>
   <text x="54" y="530" fill="#a3b5cf" font-size="14">24 real agent runs · 2026-10-04</text>
-  <text x="443" y="480" fill="#e3e7ff" font-size="25" font-weight="650" letter-spacing="-.5">24/24 exact ID sets</text>
-  <text x="443" y="506" fill="#c2cce2" font-size="14">12/12 filtered runs complete</text>
-  <text x="443" y="530" fill="#a3b5cf" font-size="14">Local originals remain recoverable</text>
-  <text x="840" y="480" fill="#e8eef8" font-size="25" font-weight="650" letter-spacing="-.5">13/13 live interfaces</text>
-  <text x="840" y="506" fill="#c2cce2" font-size="15">CLI · Python · JS / TS · MCP</text>
-  <text x="840" y="530" fill="#a3b5cf" font-size="14">Paid synthetic E2E · exact verification</text>
+  <text x="443" y="480" fill="#e3e7ff" font-size="36" font-weight="750" letter-spacing="-1">1.31 seconds</text>
+  <text x="443" y="506" fill="#c2cce2" font-size="15">96-record semantic selection</text>
+  <text x="443" y="530" fill="#a3b5cf" font-size="13">Jev API workflow · median of 3 runs</text>
+  <text x="840" y="480" fill="#e8eef8" font-size="25" font-weight="650" letter-spacing="-.5">24/24 exact ID sets</text>
+  <text x="840" y="506" fill="#c2cce2" font-size="15">13/13 paid interface checks</text>
+  <text x="840" y="530" fill="#a3b5cf" font-size="14">Synthetic tests · inspect the proof</text>
 </g></svg>

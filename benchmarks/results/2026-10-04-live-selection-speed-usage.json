@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "incremental-live-selection-speed-usage",
+  "incremental_series_only": true,
+  "source": "2026-10-04-live-selection-speed.json",
+  "source_sha256": "53da9f9a51d071ece31e3c98d524232daf75d8f22abef4944a65a814df04a153",
+  "previous_cumulative_usage_file_unchanged": "2026-10-04-live-total-usage.json",
+  "usage_totals_by_arm": {
+    "jev": {
+      "known_usage": {
+        "input_tokens": 91086,
+        "output_tokens": 27546
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "actual_billed_usd": null
+    },
+    "gpt-5.6-luna": {
+      "known_usage": {
+        "input_tokens": 59052,
+        "cached_input_tokens": 0,
+        "output_tokens": 788
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "actual_billed_usd": null
+    },
+    "gpt-6-astra": {
+      "known_usage": {
+        "input_tokens": 66216,
+        "cached_input_tokens": 0,
+        "output_tokens": 492
+      },
+      "usage_complete": true,
+      "unknown_usage_attempts": 0,
+      "actual_billed_usd": null
+    }
+  },
+  "known_jev_input_tokens": 91086,
+  "known_jev_output_tokens": 27546,
+  "known_primary_input_tokens": 125268,
+  "known_primary_cached_input_tokens": 0,
+  "known_primary_output_tokens": 1280,
+  "jev_logical_requests": 6,
+  "jev_physical_requests": 6,
+  "primary_completed_turns": 6,
+  "unknown_usage_attempts": 0,
+  "usage_complete": true,
+  "jev_price_snapshot": {
+    "date_verified": "2026-10-04",
+    "unit": "USD per million tokens",
+    "input": 0.042,
+    "output": 0,
+    "source": "https://docs.typesafe.ai/models"
+  },
+  "estimated_jev_usage_usd": 0.003825612,
+  "actual_billed_usd": null,
+  "cost_caveat": "Jev estimate uses reported usage and the dated published rate; actual invoice unavailable. Primary calls used Codex subscription authentication and are not priced as direct API invoices. Provider caching is distinct from inference-result caching; no result cache was used."
+}

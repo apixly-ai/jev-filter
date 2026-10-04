@@ -6,6 +6,24 @@
 
 <p class="home-actions"><a class="primary" href="getting-started.md">Get started →</a><a href="agent-quickstart.md">Connect your agent</a><a href="benchmarks.md">Inspect the evidence</a></p>
 
+## 96 records. Same exact selections. 1.31 seconds.
+
+**Fast semantic selection, with the same answer to check.** In the paid same-output test, all **9/9** runs returned the exact same 48 matching IDs from 96 synthetic records and two semantic conditions.
+
+| Measured path | Median screening time | Exact complete runs |
+|---|---:|---:|
+| **Jev `jev-1.13.0` · auto-batched API** | **1.313 s** | **3/3** |
+| Luna `gpt-5.6-luna` · signed-in Codex CLI | 13.421 s | 3/3 |
+| Astra `gpt-6-astra` · signed-in Codex CLI | 14.543 s | 3/3 |
+
+This compares execution paths: CLI startup and the primary-agent turn are included, native model latency is not isolated, and no primary-agent continuation follows Jev. Primary paths use medium reasoning and no tools. Three repetitions per path are a smoke sample, not a whole-agent speedup or workload guarantee. [Per-run data](../benchmarks/results/2026-10-04-live-selection-speed.json) · [Method and reproduction](benchmarks.md#same-output-screening-fast-selection-through-the-measured-paths).
+
+![Same-output screening paths, each 3/3 exact: Jev API 1.313 s, Codex CLI Luna 13.421 s and Astra 14.543 s](assets/selection-speed-live.png)
+
+**Batch the repeated work.** A separate Jev batching test cut **96 requests to 2**, used **56.5% fewer input tokens** and achieved **2.58× filtering speed** compared with single-record parallel Jev calls (**3.215 → 1.246 s**, **61.2% less time**). All **12/12** runs were exact, without a result cache. [Batch-stage evidence](../benchmarks/results/2026-10-04-live-batching.json).
+
+![Same Jev workload, 2.58 times the filtering speed](assets/speed-live.png)
+
 ## Put more reasoning behind less noise
 
 **91.6–97.2% less returned tool context**, measured in **24 real agent runs** on 2026-10-04: three synthetic scenarios, two primary models and two repetitions per arm. The filtered agent completed **12/12** operations; raw context completed **11/12**. All **24/24** returned the exact expected ID sets.
@@ -15,8 +33,6 @@
 | Collect and judge inside one program operation. The primary agent receives the selected evidence and unresolved IDs. | Keep originals by source ID, typed judgments and decision receipts. Source freshness and final checks remain independent. | **13/13 paid E2E checks passed** on Python CLI, freshly installed published npm JS/native, official MCP, local extraction and survey. |
 
 **Find more relevant code.** Native filtering after opt-in recall recovered **10/12** matches, versus **4/12** with exact candidates, with no false positives. **Inspect the right changes.** Bounded diff triage found all four target changes in both repetitions while returning **23.9% less context** than retaining every file. [Live source data and the added work](benchmarks.md).
-
-**Batch the repeated judgments.** Fresh 96-record tests used **56.5% fewer Jev input tokens** and made batch-parallel filtering **61.2% faster** than single-record parallel. All **12/12** runs were exact. This measures the Jev operation, not whole-agent speed. [Stage data](../benchmarks/results/2026-10-04-live-batching.json).
 
 The same core fits **CLI, Python, JavaScript / TypeScript and read-only MCP**, plus a portable agent skill. Automatic batching, at most 30 concurrent requests and no inference-result cache keep the repeated work in the program. [Connect your agent](agent-quickstart.md#javascript-and-mcp).
 
