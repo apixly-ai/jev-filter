@@ -12,6 +12,8 @@
   <a href="README.zh-CN.md">简体中文</a> · <a href="#quick-start">Quick start</a> · <a href="https://apixly-ai.github.io/jev-filter/">Documentation</a> · <a href="docs/agent-quickstart.md">Agent setup</a> · <a href="docs/benchmarks.md">Benchmarks</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">Releases</a>
 </p>
 
+# Jev Filter: semantic filtering for AI agent tools
+
 **Give your agent the signal. Keep the evidence.** Jev Filter turns large tool outputs into compact, typed decisions before they enter your agent's context. Commands, code, logs and page records stay inside the program; your agent receives relevant evidence and the IDs that need its attention.
 
 **Semantic filtering for retrieved evidence and agent tool results.** Maintained by Apixly as an independent MIT project, the official package is **`@apixly/jev-filter`**. Use it after a search or collector produces candidates: screen them against your task and supplied facts, keep unresolved cases visible, and recover originals by ID. [What it does and when to use it](docs/faq.md).

@@ -12,6 +12,8 @@
   <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
 </p>
 
+# Jev Filter：AI agent 工具结果的语义筛选
+
 **把关键信号交给 AI，把判断证据留给你。** Jev Filter 在整批工具输出进入主模型之前，将它变成精简、类型化的判断结果。命令、代码、日志和网页记录保留在程序内部；主模型只接收相关证据，以及需要它接管的 ID。
 
 **检索证据与 agent 工具结果的语义筛选。** 项目由 Apixly 独立维护，采用 MIT 许可证；官方 npm 包为 **`@apixly/jev-filter`**。在搜索或采集器生成候选之后，根据任务与明确提供的事实筛选，保留未知项，并按 ID 回查原文。[功能与适用条件](docs/faq.zh-CN.md)。
