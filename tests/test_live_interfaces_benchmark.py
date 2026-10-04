@@ -42,3 +42,12 @@ def test_survey_fixture_balanced_labels_and_extract_exact_rule():
     assert len(records) == len(labels) == sum(expected.values()) == 64
     assert expected["billing"] == expected["bug"] == 16
     assert live_interfaces.extract_price_filter(["L1", "L3", "L4", "L7"]) == ["L1", "L4", "L7"]
+
+
+def test_public_packet_sanitizes_foreign_platform_absolute_paths():
+    for value in [
+        r"C:\private\fixture\sample.py",
+        r"\\server\private\sample.py",
+        "/private/fixture/sample.py",
+    ]:
+        assert live_interfaces.public_packet({"path": value})["path"] == "sample.py"

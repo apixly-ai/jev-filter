@@ -63,12 +63,12 @@ def chart(cn=False):
     columns = [
         (
             "context_bytes_reduction_pct",
-            "工具返回上下文减少" if cn else "Returned tool context less",
+            "工具返回上下文减少" if cn else "Returned tool context reduction",
             MINT,
         ),
         (
             "cold_cost_reduction_pct",
-            "冷输入 API 等价费用减少" if cn else "Cold API-equivalent cost less",
+            "冷输入 API 等价费用减少" if cn else "Cold API-equivalent savings",
             VIOLET,
         ),
         (

@@ -20,7 +20,7 @@ import time
 from collections import Counter
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 
 from jev_context import __version__
 
@@ -144,8 +144,11 @@ def public_packet(value, key=None):
     if isinstance(value, str):
         if key in {"archive", "receipt", "analysis_receipt", "raw_archive"}:
             return "receipt:" + hashlib.sha256(value.encode()).hexdigest()[:16]
-        if key in {"path", "root"} and Path(value).is_absolute():
-            return Path(value).name
+        if key in {"path", "root"}:
+            if PurePosixPath(value).is_absolute():
+                return PurePosixPath(value).name
+            if PureWindowsPath(value).is_absolute():
+                return PureWindowsPath(value).name
         return re.sub(r"127\.0\.0\.1:\d+", "127.0.0.1:PORT", value)
     return value
 
