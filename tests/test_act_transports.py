@@ -177,7 +177,14 @@ def test_stale_marker_blocks_scroll_and_stale_guard_blocks_click(camofox):
         page.act(state["actions"][0], state)
 
 
-def test_unreachable_camofox_is_a_clean_error():
+def test_unreachable_camofox_is_a_clean_error(monkeypatch):
+    import urllib.error
+
+    def unavailable(*_args, **_kwargs):
+        raise urllib.error.URLError("synthetic connection refusal")
+
+    # The transport boundary is deterministic even when the host configures a proxy.
+    monkeypatch.setattr(browser.urllib.request, "urlopen", unavailable)
     with pytest.raises(RuntimeError, match="camofox_unavailable"):
         CamofoxPage("bench", url="http://127.0.0.1:9/", base="http://127.0.0.1:9")
 

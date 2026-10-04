@@ -10,7 +10,7 @@ npm install -g @apixly/jev-filter
 jev-filter doctor
 ```
 
-固定版本：`npm install -g @apixly/jev-filter@0.1.0`。
+固定版本：`npm install -g @apixly/jev-filter@0.4.0`。
 项目内安装：`npm install @apixly/jev-filter`，使用 `npx jev-filter` 运行。
 不要使用 `--omit=optional`，对应平台的二进制通过 optional dependencies 安装。
 安装不会执行 postinstall 脚本，也不会自动改写 AI 配置。
@@ -18,7 +18,7 @@ jev-filter doctor
 也可以安装 GitHub Release 中的相同 npm 包：
 
 ```sh
-npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.1.0/apixly-jev-filter-0.1.0.tgz
+npm install -g https://github.com/apixly-ai/jev-filter/releases/download/v0.4.0/apixly-jev-filter-0.4.0.tgz
 ```
 
 ## 配置 key
@@ -83,7 +83,7 @@ jev-filter read ARCHIVE_PATH --id SOURCE_ID
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.1.0'
+python -m pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'
 ```
 
 也可使用 Release wheel。目前不假设已经发布到 PyPI。[Python 接入示例](agents.zh-CN.md)。

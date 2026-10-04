@@ -1,7 +1,7 @@
 {
   "name": "@apixly/jev-filter",
-  "version": "0.3.0",
-  "description": "Task-aware semantic tools for AI agents. Native runtime included.",
+  "version": "0.4.0",
+  "description": "Give AI agents the signal: typed decisions, traceable evidence and bounded execution. Native runtime included.",
   "license": "MIT",
   "author": "JIA-ss",
   "repository": {
@@ -15,12 +15,22 @@
   "engines": {
     "node": ">=22"
   },
+  "main": "npm/client/index.cjs",
+  "types": "npm/client/index.d.cts",
   "bin": {
     "jev-filter": "npm/bin/jev-filter.cjs",
     "jev-context": "npm/bin/jev-filter.cjs"
   },
+  "exports": {
+    ".": {
+      "types": "./npm/client/index.d.cts",
+      "require": "./npm/client/index.cjs",
+      "default": "./npm/client/index.cjs"
+    }
+  },
   "files": [
     "npm/bin",
+    "npm/client",
     "skills",
     "examples",
     "README.md",
@@ -32,10 +42,10 @@
     "test": "node --test npm/tests/*.test.cjs"
   },
   "optionalDependencies": {
-    "@apixly/jev-filter-darwin-arm64": "0.3.0",
-    "@apixly/jev-filter-darwin-x64": "0.3.0",
-    "@apixly/jev-filter-linux-arm64": "0.3.0",
-    "@apixly/jev-filter-linux-x64": "0.3.0"
+    "@apixly/jev-filter-darwin-arm64": "0.4.0",
+    "@apixly/jev-filter-darwin-x64": "0.4.0",
+    "@apixly/jev-filter-linux-arm64": "0.4.0",
+    "@apixly/jev-filter-linux-x64": "0.4.0"
   },
   "publishConfig": {
     "access": "public"

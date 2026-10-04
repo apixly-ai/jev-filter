@@ -11,6 +11,10 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
 - Choose `code-search` for symbol-expanded source candidates, `locate` for an
   observed Camofox target, `triage` for correlated JSON/JSONL events, and `exec` or
   `query` for a custom collector. Use `--help` for exact flags.
+- Use `code-search --query TEXT --expand-callers` when an exact regex is unlikely
+  to recall enough implementations; the additional shortlist is still bounded.
+  Use `diff-review --base REF`, `--staged` or `--unstaged` for tracked before/after
+  evidence. Both recheck source revisions after judgment.
 - Keep collection and analysis in one program segment. Do not first read the whole
   raw output into the main model and then call a redundant classifier.
 - Provide the precise goal, intended scope, confirmed facts with sources and success
@@ -31,8 +35,18 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
   anything longer and call once per sub-goal. `--dry-run` shows the next step only.
 - Only `status: done` (exit 0) is success. `needs_confirmation` (`pending`,
   `confirm_token`), `needs_value` (`field`/`fields`), `blocked` (`challenge`,
-  `login_required`) and `unverified` are your turn: ask the user before passing
-  `--confirm` or `--allow-irreversible`. Never supply passwords.
+  `login_required`), `needs_review` and `unverified` require the planner's attention.
+  For review, inspect the reported uncertainty or gather fresh facts. For confirmation,
+  reconcile the state-bound action with the human user's existing authorization;
+  ask only when it is missing. Never supply passwords.
+- Analysis `uncertainty` thresholds are optional and caller-owned. Hosted defaults
+  require probability 0.55 and margin 0.10; a confident choice is not permission.
+  `--verify-controls FILE` checks unique current checked/pressed/selected/value states.
+  `contract` ID/version/fingerprint ties evaluation to the exact rule and model.
+- `eval --input FILE` evaluates saved labeled probabilities on separate calibration
+  and holdout groups without model calls. It does not fit a probability calibrator.
+  JavaScript and scoped read-only MCP adapters share the core; see the
+  [integration guide](https://apixly-ai.github.io/jev-filter/docs/integrations.html).
 - `extract` turns a page into `row`/`heading`/`block`/`link` records, then follows the
   `query` contract.
 - `survey` takes records (JSONL/JSON/CSV/directory) and a spec: `task`, 1..16 typed

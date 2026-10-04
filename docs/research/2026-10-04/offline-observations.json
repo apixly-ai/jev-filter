@@ -1,0 +1,44 @@
+{
+  "kind": "offline_behavior_observation",
+  "live_inference": false,
+  "requirements": {
+    "response_valid": true,
+    "top_probability": 0.36,
+    "runner_up_probability": 0.33,
+    "confidence": 0.04,
+    "observed_decision": "MATCH"
+  },
+  "hosted_target": {
+    "target_probability": 0.51,
+    "runner_up_probability": 0.49,
+    "target_confidence": 0.02,
+    "executed": [
+      "help"
+    ],
+    "status": "done",
+    "verification": {
+      "passed": true,
+      "text": true
+    },
+    "note": "The action is reversible and verified; this only demonstrates the absent uncertainty gate."
+  },
+  "code_collection": {
+    "nonmatching_lexical_query_records": 0,
+    "exact_symbol_query_records": 1,
+    "collection_ok": true,
+    "scope": "lexical rg candidates; Python/JS/TS/Go symbol expansion; not exhaustive semantic indexing",
+    "note": "Documented lexical scope limitation; this is not a measured semantic recall rate."
+  },
+  "failed_usage": {
+    "injected_error": "transport_failed_usage_unknown",
+    "status": "error",
+    "reported_error": "ProviderError",
+    "reported_usage": {
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    "reported_usage_complete": true,
+    "executed_steps": 0,
+    "note": "Synthetic transport failure: actual provider usage is unknown, not measured zero."
+  }
+}

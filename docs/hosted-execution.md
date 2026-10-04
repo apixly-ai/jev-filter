@@ -2,6 +2,13 @@
 
 [简体中文](hosted-execution.zh-CN.md)
 
+**New in 0.4:** ambiguous operation/target/value choices return `needs_review` before
+execution (default top probability 0.55, margin 0.10). Independent `--verify-controls`
+checks unique current checked/pressed/selected/value states; invalid or stale final
+observations cannot prove completion. The observer supports explicit roleless controls,
+labelled transparent toggles and guarded nested vertical scrolling. New-tab following
+remains unsupported. See [policy and integration examples](integrations.md).
+
 Jev Filter can execute, not only filter. Three commands run a program-owned loop in which Jev
 chooses among options the program enumerated, the program acts, and the program checks the
 result:
@@ -122,7 +129,7 @@ projection behave identically. Nothing is clicked.
 ## Desktop: `desktop`
 
 ```sh
-pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # Windows: UI Automation + OCR; macOS: pyobjc
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'   # Windows: UI Automation + OCR; macOS: pyobjc
 jev-filter desktop --list                  # candidate windows
 jev-filter desktop --window '^Invoice Tool$' \
   --goal 'Set the customer name to Ada Lovelace, choose the Pro plan and save' \

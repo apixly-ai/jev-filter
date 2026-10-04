@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "model": "synthetic-fixture",
+  "contract": {"id": "example.connection", "version": "1", "fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+  "label_provenance": "Synthetic manually defined demonstration labels; replace with representative independent human-reviewed labels.",
+  "records": [
+    {"id": "c1", "group": "calibration-a", "split": "calibration", "label": true, "probability": 0.95},
+    {"id": "c2", "group": "calibration-b", "split": "calibration", "label": false, "probability": 0.05},
+    {"id": "c3", "group": "calibration-c", "split": "calibration", "label": false, "probability": 0.62},
+    {"id": "h1", "group": "holdout-a", "split": "holdout", "label": true, "probability": 0.9},
+    {"id": "h2", "group": "holdout-b", "split": "holdout", "label": false, "probability": 0.15},
+    {"id": "h3", "group": "holdout-c", "split": "holdout", "label": true, "probability": 0.52},
+    {"id": "h4", "group": "holdout-d", "split": "holdout", "label": false, "status": "failed", "probability": null}
+  ]
+}

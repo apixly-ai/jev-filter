@@ -1,269 +1,169 @@
 <p align="center">
-  <img src="docs/assets/hero.zh-CN.svg" alt="Jev Filter：程序采集原始结果，结合任务上下文判断，再把证据交给主模型" width="100%">
+  <img src="docs/assets/hero.zh-CN.svg" alt="Jev Filter：把关键信号交给 AI。采集一次，结合上下文判断，返回可回查的证据。" width="100%">
 </p>
-<p align="center">
-  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://apixly-ai.github.io/jev-filter/docs/index.zh-CN.html">中文文档</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
-</p>
+
 <p align="center">
   <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=12846b" alt="Release"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-7958d6" alt="MIT"></a>
+  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="最新版本"></a>
+  <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm 版本"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT 许可证"></a>
 </p>
-
-**放在工具与主模型之间的语义筛选器兼托管执行器。** 在 CLI 内部采集命令输出、搜索结果、网页控件或日志，用 Jev 根据 AI 提供的任务与上下文判断，再返回相关证据和待复核 ID，减少整批原始结果进入主模型上下文。**0.3 新增：**让 CLI 自己操作网页或桌面应用，或对上千条记录做调研汇总，决策同样是类型化、可复核的。[托管执行 →](#托管执行浏览器桌面与数据)
-
 <p align="center">
-  <a href="https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh"><img src="docs/assets/showcase/browse.zh-CN.gif" alt="jev-filter browse 在测试商店上的真实录制：每一步显示 Jev 对下一步操作和目标的概率；下单按钮暂停等人确认，确认后校验购买成功" width="100%"></a>
+  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/docs/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
 </p>
-<p align="center"><sub>在合成测试商店上真实录制，概率是 Jev 的原始输出 · <a href="https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh">交互式回放：浏览器、桌面、调研</a> · <a href="docs/showcase.zh-CN.md">录制方法</a></sub></p>
 
-## 本地节省统计看板
+**把关键信号交给 AI，把判断证据留给你。** Jev Filter 在整批工具输出进入主模型之前，将它变成精简、类型化的判断结果。命令、代码、日志和网页记录保留在程序内部；主模型只接收相关证据，以及需要它接管的 ID。
 
-配置本地数值账本后，运行 `jev-filter stats dashboard`（8765 被占用时自动选择空闲端口）即可自动打开浏览器，查看估算输入 token 减少量、美元输入价值、Jev 成本与净值，按模型/日期筛选，并导出 JSON 或独立 HTML。未知和负收益明确保留；这些是输入等价值估算，不是账单节省。参见[配置与统计口径](docs/statistics.zh-CN.md)。
+48 次整段任务测试中，**返回工具上下文减少 88–97%**。所有原文仍可按 ID 回查。[带日期的证据与代价 →](#实测优势)
 
-## 三个核心优势
+## 让主模型的每一分注意力都更有价值
 
-- **让主模型少读无关内容。** 先筛选再返回，需要时按 ID 取回原文。新完成的 48 次整段任务测试中，返回上下文减少 **88–97%**。[证据与代价 →](docs/benchmarks.zh-CN.md)
-- **减少 Jev 的重复输入开销。** 自动合批，最多 30 个请求并发。公开测试输入 token 减少 **56.5%**，相比单条并发快 **32.4%**。[复现方法 →](docs/benchmarks.zh-CN.md)
-- **规则由 AI 控制，结果可复核。** 自定义上下文、问题与输出；缺事实保留 `REVIEW`。**8/8 组测试结果正确**，三条已安装流程通过验收。[公开数据](benchmarks/results/2026-09-22-live.json) · [集成证据](benchmarks/results/2026-09-22-migration.json)
+| **聚焦关键内容** | **每个判断都有出处** | **让程序完成并验证目标** |
+|---|---|---|
+| 按任务与上下文筛选大量记录，主模型把注意力放在选中的证据与困难项。 | 类型化答案、来源 ID、本地原文和收据。缺事实、不确定与部分失败都明确保留。 | 对短浏览器或桌面目标，Jev 在观察到的控件中选择；程序拥有执行权、安全门禁与终态验证。 |
 
-适合 **记录多、语义判断重复、标准明确** 的任务。精确路径、ID、selector、计算和少量短结果优先用原生工具；开放推理和写作仍交给主模型。
+形成清楚的分工：**程序采集与验证，Jev 做重复语义判断，主模型规划、推理与写作。** 自动合批减少重复输入，最多 30 个请求并发，不用结果缓存掩盖新观察。
 
-## 托管执行：浏览器、桌面与数据
+## 0.4：判断更可靠，接入更完整
 
-Jev 负责选，程序负责做。每一步先观察页面或窗口，用一次 Jev 请求在程序枚举的控件里选出下一步操作和目标，重新核对目标后再执行。Jev 从不产出选择器、坐标、命令或文字。`browse` 和 `desktop` 输出一个 JSON 包，只有 `status: done`（退出码 0）才算成功；`extract` 和 `survey` 只有结果 `ok` 且 `complete` 时才以退出码 0 结束。命令无法启动时 stdout 没有输出，原因写在 stderr。
+- **明确处理模糊情况。** 可按问题配置概率、候选差距与 confidence 复核策略；未知的提供方用量保持不完整。
+- **查行为，也查变更。** 可选混合代码检索合并词法候选、符号和一跳调用者线索。`diff-review` 采集有界 Git 差异，带来源收据交给语义判断。
+- **同一核心，多种接入。** 类型化 JavaScript 客户端与只读 MCP 服务复用已有 CLI 和证据核心，保留可用的部分结果。
+- **先评测，再自动化。** 离线 `eval` 提供错误、复核与概率诊断，并检查按组分离的留出集。评测适配器比较提供方，不新增生产自动回退。
 
-### 操作网页
-
-```sh
-jev-filter browse --url https://shop.example/ \
-  --goal 'Buy the cheapest in-stock red shoes in size 42' \
-  --value query='red shoes' --keep-open
-```
-
-它会停在下单按钮前，把决定交还给你（测试商店上的真实输出，有删节）：
-
-```json
-{
-  "status": "needs_confirmation",
-  "steps": 8, "requests": 9, "elapsed_ms": 3820,
-  "usage": {"input_tokens": 26220, "output_tokens": 1678},
-  "pending": {"label": "Place order", "role": "button"},
-  "reason": "label_rule", "irreversible_probability": 0.67,
-  "confirm_token": "0e5a2ab5892ab560:e2",
-  "session": {"cdp_port": 61129, "target_id": "04C5D2DC…"},
-  "trace": [{"step": 1, "operation": "CLICK", "action": "Reject optional cookies"},
-            {"step": 2, "operation": "TYPE_TEXT", "action": "Search products", "value_key": "query"}, "…"]
-}
-```
-
-用户同意后在同一个标签页续跑，只执行被确认的那个动作，然后校验：
-
-```sh
-jev-filter browse --cdp-port 61129 --target-id 04C5D2DC… --confirm 0e5a2ab5892ab560:e2 \
-  --goal 'Buy the cheapest in-stock red shoes in size 42' \
-  --verify-text 'order has been placed' --close-browser
-# {"status": "done", "confirmed": true, "verification": {"passed": true, "text": true}, …}
-```
-
-需要说明用途或不能进日志的值，用文件传：`--values values.json`，内容如 `{"email": {"value": "…", "description": "contact email", "sensitive": true}}`。要用你自己已登录的浏览器，加 `--cdp-port`；也可以用 `--transport camofox --session NAME`。`--dry-run` 把选中的控件放在 `pending` 里返回，什么都不执行。
-
-### 从网页取结构化数据
-
-```sh
-jev-filter extract --url 'https://shop.example/results?q=shoes' \
-  --task 'In-stock products under $70' --analysis analysis.json
-```
-
-```json
-{"requirements": [
-  {"id": "product",  "statement": "The record is a product row, not a heading or a link.", "expected": true},
-  {"id": "in_stock", "statement": "The product is in stock.", "expected": true},
-  {"id": "under_70", "statement": "The product costs less than $70.", "expected": true}],
- "fields": ["source_id", "text"]}
-```
-
-表格会变成带表头的行。测试页上 14 条记录，排除了 12 条：
-
-```json
-{"selected_ids": ["r1", "r3"], "review_ids": [], "complete": true,
- "excerpts": [{"source_id": "r1", "text": "Product: Red Runner | Category: shoes | Price: $59 | Rating: 4.4 | Availability: In stock"},
-              {"source_id": "r3", "text": "Product: Blue Runner | Category: shoes | Price: $55 | Rating: 4.1 | Availability: In stock"}]}
-```
-
-每个条件单独写成一条 requirement。不给 `--analysis` 时默认只问相关性，同一页面还会把 72 美元和 99 美元的鞋也选进来。
-
-### 操作桌面应用
-
-<p align="center"><img src="docs/assets/showcase/desktop.zh-CN.gif" alt="jev-filter desktop 在 Windows Forms 应用里的真实录制：填写姓名、在下拉框里选套餐、勾选复选框并保存；第二个目标“删除全部记录”在删除前停下" width="100%"></p>
-
-```sh
-pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # UI Automation + OCR，或 macOS 辅助功能
-jev-filter desktop --list             # 列出可选窗口
-jev-filter desktop --window '^Invoice Tool$' \
-  --goal 'Set the customer name to Ada Lovelace, choose the Pro plan, turn on the weekly report, and save the profile' \
-  --value name='Ada Lovelace' --verify-text 'saved Ada Lovelace'
-```
-
-输出包的结构和 `browse` 相同。“Delete all records”这类目标会在删除前以 `needs_confirmation` 结束。终端、密码管理器和系统设置会被拒绝；创建 `~/.jev-filter/STOP` 或把鼠标停在屏幕左上角可以随时停止。
-
-### 对上千条记录做调研
-
-<p align="center"><img src="docs/assets/showcase/survey.zh-CN.png" alt="2000 条生成的客服工单的调研看板：主题分布、情绪占比、流失比例、主题交叉表、置信度最高的样例，以及对照生成器标签的准确率" width="100%"></p>
-
-```sh
-jev-filter survey --input tickets.jsonl --spec survey.json --dry-run   # 只估算，不推理
-jev-filter survey --input tickets.jsonl --spec survey.json --format md
-```
-
-```json
-{"task": "Summarise what customers contact support about, how they feel, and churn risk.",
- "keep": ["product"],
- "screen": {"instructions": "The record is a genuine support request (not spam)."},
- "questions": {
-   "topic": {"type": "choice", "instructions": "Main topic?",
-             "criteria": {"billing": "…", "bug": "…", "feature_request": "…", "account": "…", "shipping": "…", "other": "…"}},
-   "sentiment": {"type": "score", "instructions": "How does the customer feel?",
-                 "criteria": ["Angry", "Neutral", "Positive"]},
-   "churn": {"type": "noul", "instructions": "The customer threatens to cancel or switch."}},
- "group_by": ["topic", "product"]}
-```
-
-报告里有各选项的数量和占比、评分分档、交叉表、每组置信度最高的样例、不确定和失败的 ID、用量与费用。Jev 不写文字，由你的 agent 根据报告来叙述。上面这 2000 条生成的工单：76 次请求、9.3 秒、约 0.044 美元输入费用；对照生成器的标签，主题准确率 100%，情绪 95.2%。这些记录天生容易判断，请用 `--labels` 在自己的数据上测。
-
-### 在 agent 里使用
-
-让 agent 继续做规划。它按短小的子目标逐次调用 `browse` 或 `desktop`，带上值和校验条件，然后读 `status`。`needs_confirmation` 和 `needs_value` 要回到用户；`blocked` 且原因是 `challenge` 或 `login_required` 时也一样。[skill 参考：输入、输出和每种状态的处理 →](https://github.com/apixly-ai/jev-filter/blob/main/skills/jev-filter/references/hosted.md)
-
-### 测了什么
-
-- **安全由结构保证。** 支付、发送、删除类动作会暂停等待确认；导航限制在起始来源内；密码和验证码一律交还，不代为处理；桌面执行拒绝终端和凭据管理器，出现 STOP 文件即停止。
-- **在本地合成夹具上用真实 Jev 实测**（每项三轮，成功与否由程序校验，不以模型的 DONE 为准）：
-
-| 线 | 任务数 | 通过 | 单任务耗时中位范围 |
-|---|---:|---:|---|
-| 浏览器（Camofox） | 5 | 15/15 | 0.7–13.7 s |
-| 浏览器（Chromium，CDP） | 6 | 18/18 | 0.7–3.9 s |
-| 桌面（Windows UIA + OCR） | 4 | 12/12 | 0.8–5.6 s |
-| survey（10,000 条） | 1 | 主题 100.0%，情绪 95.7% | 19.6 s，375 次请求，约 $0.22 输入费用 |
-
-这些是小规模合成测试，记录由模板生成、难度较低，展示的是机制和成本，不代表开放网络上的成功率。在真实公开网站上情况要差一些：一次只读审计中 24 个目标跑了 48 次，去掉被人机验证、登录墙或接口故障挡住的运行后，34 次里有 16 次达成目标，其中自定义组件最弱。[真实网站审计 →](docs/benchmarks.zh-CN.md#真实网站与应用2026-09-30) · [使用说明与限制 →](docs/hosted-execution.zh-CN.md) · [测试方法 →](docs/benchmarks.zh-CN.md#托管执行2026-09-30)
-
-## 实测收益与代价
-
-![两个主模型、四类任务的整段测试结果](docs/assets/operations.zh-CN.png)
-
-**48 次真实 agent 运行：**Astra 和 Luna、四类场景、原生/筛选两组、各三轮。
-所有运行都选对预期 ID；原生组四次要求额外复核，筛选组没有。工具返回上下文减少 **88–97%**，
-冷输入 API 等价费用从 **下降 20.8% 到上升 0.6%**，耗时有升有降。这是小规模合成测试，不是生产保证。
-
-[方法与完整结果](docs/benchmarks.zh-CN.md) · [逐次 JSON](benchmarks/results/2026-09-23-operations.json) · [CSV](benchmarks/results/2026-09-23-operations.csv) · [判断证据](benchmarks/results/2026-09-23-decisions.json)
-
-<details>
-<summary><strong>自动合批和并发带来了什么</strong></summary>
-
-![合批使 Jev 重复输入减少 56.5%](docs/assets/batch-benchmark.zh-CN.png)
-
-96 条合成记录，每条两个条件，每组两轮。合批使 Jev 输入 token 减少 **56.5%**，
-合批并发比单条并发快 **32.4%**。这是 Jev 阶段，不是主模型整轮加速。
-[原始数据](benchmarks/results/2026-09-22-live.json) · [复现](docs/benchmarks.zh-CN.md)
-
-</details>
-
+[接入示例 →](docs/agent-quickstart.zh-CN.md#javascript-与-mcp) · [命令参考 →](docs/cli.zh-CN.md)
 
 ## 快速开始
 
-**Node.js 22+ · macOS / Linux · npm 发行包不需要另外安装 Python。** Windows 可用 WSL，或从 GitHub Release 的 wheel / `pip install 'jev-filter[code] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'` 原生安装 Python 包（Python 3.10+；`search` 需要 PATH 里有 `rg`；未发布到 PyPI）。只有实际推理才需要 TypeSafe Jev API key。
-
-通过 npm 安装：
+**Node.js 22+ · macOS / Linux · npm 发行包内置 Python。** Windows 可用 WSL，或[原生安装 Python 包](docs/getting-started.zh-CN.md#python-工作流继续使用原接口)。安装与 `doctor` 可离线完成；推理需要 TypeSafe Jev API key。
 
 ```sh
 npm install -g @apixly/jev-filter
 jev-filter doctor
 ```
 
-
-配置 key 后，在**任意目录**运行这个完整例子：
+在任意目录运行：
 
 ```sh
 export TYPESAFE_API_KEY='your-key'
 
 jev-filter query --input - --mode choose \
-  --task '选择当前仍未恢复的 DNS 故障记录' <<'JSON'
+  --task '选择当前仍未恢复的 DNS 故障' <<'JSON'
 [
-  {"id":"a","text":"之前 DNS 失败，现已恢复，请求成功。"},
-  {"id":"b","text":"DNS 解析仍失败，无法建立连接。"}
+  {"id":"a","text":"DNS 已恢复，请求成功。"},
+  {"id":"b","text":"DNS 仍失败，无法建立连接。"}
 ]
 JSON
 ```
 
-预期选中 `b`，以下省略了诊断元数据：
+预期选中 `b`，以下省略诊断元数据：
 
 ```json
 {"selected_ids":["b"],"review_ids":[],"complete":true}
 ```
 
-小例子用于学习接口；这么短的实际输入通常直接用原生工具更合适。处理真实批量数据时，让 CLI 自己执行采集命令：
+处理实际批量数据时，在原文进入聊天之前，让 CLI 在**一次调用**内完成采集与筛选：
 
 ```sh
 jev-filter exec --task '找出尚未恢复的网络故障' \
   --analysis analysis.json -- your-collector --json
 ```
 
-先复制 [分析契约示例](docs/recipes.zh-CN.md)，再替换采集命令。命令以参数数组透传，不隐式启动 shell。[如何读结果与退出码 →](docs/getting-started.zh-CN.md#读懂结果)
+从[可复制的分析契约](docs/recipes.zh-CN.md)开始。退出码 **2** 仍需解析结果包：`complete=false` 与 `review_ids` 表示需要关注。小例子用于了解接口；精确路径、ID、selector、计算和少量短输出通常使用原生工具。[安装、密钥与结果处理 →](docs/getting-started.zh-CN.md)
 
-## 接入你的 AI
+## 实测优势
 
-能执行命令的 AI 都可以接入。不需要再启动一个代理，也不要求先部署 MCP 服务。
+我们公开输入、方法、逐次数据与退步项。每个数字都属于下面标明的实验；是否更快、更省，请对自己的任务测量。
 
-**1. 安装配套 skill。** npm 全局安装后，以 Codex 为例：
+| 实验 | 实测结果 | 测了什么 |
+|---|---|---|
+| **0.4 判断契约** · 2026-10-04 | 预期行为 **3/13 → 13/13**；错误夹具动作 **3 → 0**。 | 离线构造的概率分布与失败响应，**未调用模型**。复核 **0 → 6**，返回上下文 **4,104 → 7,087 bytes**。[数据](benchmarks/results/2026-10-04-decisions.json) |
+| **0.4 浏览器观察** · 2026-10-04 | 本地夹具检查 **3/15 → 15/15**；类型化状态召回 **20% → 100%**。 | 程序拥有动作，**没有 Jev 推理**。整段耗时与计划上下文增加；未测模型驱动的完成率。[数据](benchmarks/results/2026-10-04-browser-observation.json) |
+| **0.4 混合代码候选** · 2026-10-04 | 采集召回均值 **27.8% → 66.7%**，精度 **66.7% → 47.2%**。 | 固定合成用例，**没有语义推理**。候选上下文与采集耗时增加；检索须主动启用，无法解决词法完全无交集的情况。[数据](benchmarks/results/2026-10-04-retrieval.json) |
+| **主模型整段任务** · 2026-09-23 | **返回工具上下文减少 88–97%**；所有运行选对预期 ID。 | 48 次运行、2 个主模型、4 类合成任务。冷输入 API 等价费用从**下降 20.8% 到上升 0.6%**，耗时有升有降。 |
+| **Jev 合批** · 2026-09-22 | **输入 token 减少 56.5%**；合批并发比单条并发**快 32.4%**。 | 96 条合成记录 × 2 个条件，每组 2 轮。测量 Jev 阶段，不是主模型整轮加速。 |
+| **浏览器与桌面夹具** · 2026-09-30 | 浏览器：**Camofox 15/15**、**CDP 18/18**；桌面：**12/12**。 | 小规模本地合成夹具，每任务 3 轮，终态由程序校验。 |
+| **真实公开网站** · 2026-09-30 | 只读运行中 **16/48** 达成目标；排除人机验证、登录墙与接口故障后为 **16/34**。 | 一个环境中的 24 个目标，自定义控件和验证仍是弱项；不代表开放网络成功率。 |
+
+<details>
+<summary><strong>查看整段任务图表与复现数据</strong></summary>
+
+![两个主模型、四类任务中的整段收益与退步项](docs/assets/operations.zh-CN.png)
+
+[方法与完整结果](docs/benchmarks.zh-CN.md) · [逐次 JSON](benchmarks/results/2026-09-23-operations.json) · [CSV](benchmarks/results/2026-09-23-operations.csv) · [Jev 阶段数据](benchmarks/results/2026-09-22-live.json)
+
+</details>
+
+## 看程序如何把目标变成可验证的结果
+
+<p align="center">
+  <a href="https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh"><img src="docs/assets/showcase/browse.zh-CN.gif" alt="合成商店的真实录制：Jev 选择观察到的控件，程序在下单前暂停，确认后再验证结果" width="100%"></a>
+</p>
+
+每一步先观察页面或窗口，让 Jev 在程序枚举的操作与控件里选择，重新核对目标，再执行和验证。模型输出不会变成 selector、坐标、命令或未经检查的文字。不可逆动作会暂停等待确认。
 
 ```sh
+jev-filter browse --url https://shop.example/ \
+  --goal 'Find in-stock red shoes in size 42' \
+  --value query='red shoes' --verify-text 'Search results'
+```
+
+把示例网址替换成允许测试的页面，并提供有意义的校验条件。`browse`、`desktop` 只有 `status: done` 才成功；`extract`、`survey` 要求 `ok` 且 `complete`。选中动作不等于已经完成目标。
+
+[交互式回放：浏览器、桌面、调研](https://apixly-ai.github.io/jev-filter/docs/assets/showcase/index.html?lang=zh) · [录制方法](docs/showcase.zh-CN.md) · [安全门禁与限制](docs/hosted-execution.zh-CN.md)
+
+## 一套核心，接入现有 AI
+
+**CLI · Python · JavaScript / TypeScript · MCP。** 可以调用 shell、嵌入 `jev_filter.batch.run`、从 `@apixly/jev-filter` 导入 `createClient`，或向 MCP host 提供四个只读工具。每条接入路线复用同一核心，保留证据与部分结果。[JavaScript 与 MCP 示例 →](docs/agent-quickstart.zh-CN.md#javascript-与-mcp)
+
+配套 skill 支持 Codex、Claude Code 或兼容的工具框架：
+
+```sh
+# Codex；Claude Code 使用 ~/.claude/skills。
 mkdir -p ~/.codex/skills
 cp -R "$(npm root -g)/@apixly/jev-filter/skills/jev-filter" ~/.codex/skills/
 ```
 
-其他 AI 将同一个 skill 放入其支持的目录即可。[Claude Code 与通用工具接入 →](docs/agents.zh-CN.md)
-
-**2. 给 AI 一段明确的使用规则。**
+给 agent 一段明确的使用规则：
 
 ```text
 大量记录需要标准明确的语义判断时使用 jev-filter。
 传入任务、范围、排除条件、成功标准和有来源的已知事实。
-让采集→分析→精简输出在一次工具调用内部完成。
-复核未确定的 ID，不重复判断已完成项，不再次封装已有 Jev 流程。
-精确查询和少量短结果使用原生工具。
+让采集 → 分析 → 精简输出在一次工具调用内部完成。
+复核未确定的 ID；精确查询和少量短结果使用原生工具。
+不重复已完成判断，不再次封装已有 Jev 流程。
 ```
 
-**3. 把决定答案所需的上下文传进去。** Jev 不会自动继承聊天历史。共享事实放 `context`，各记录的历史随记录传入，用必要字段声明拦住缺信息的请求。问题、筛选、排序和输出投影都由调用者控制。[完整接入指南 →](docs/agents.zh-CN.md) · [上下文契约 →](docs/context-contract.zh-CN.md)
+Jev 不会自动继承聊天历史。共享事实放 `context`，历史随各记录传入，并声明必要字段。授权与执行验证继续由现有程序负责。[五分钟接入 →](docs/agent-quickstart.zh-CN.md) · [完整接入指南 →](docs/agents.zh-CN.md)
 
-## 按任务选择入口
+<details>
+<summary><strong>按任务选择入口</strong></summary>
 
-| 你要处理什么 | 使用 | 示例 |
+| 任务 | 命令 / API | 指南 |
 |---|---|---|
-| 自定义命令的大量输出 | `exec` | [采集命令](docs/recipes.zh-CN.md) |
-| JSON 候选记录 | `query` | [结合上下文选择](docs/recipes.zh-CN.md) |
-| 广泛关键词命中的源代码 | `code-search` | [完整代码符号](docs/recipes.zh-CN.md) |
-| 本地 Camofox 页面上的控件 | `locate` | [网页选择](docs/recipes.zh-CN.md) |
-| 多请求的 JSON/JSONL 日志 | `triage` | [关联事件](docs/recipes.zh-CN.md) |
-| 让 CLI 完成一个网页目标 | `browse` | [托管执行](docs/hosted-execution.zh-CN.md#浏览器browse) |
-| 从网页取结构化数据 | `extract` | [页面数据](docs/hosted-execution.zh-CN.md#页面数据extract) |
-| 在 Windows/macOS 应用里完成目标 | `desktop` | [桌面](docs/hosted-execution.zh-CN.md#桌面desktop) |
-| 上千条记录要分类汇总 | `survey` | [大量记录](docs/hosted-execution.zh-CN.md#大量记录survey) |
-| 已有类型化 Jev 流程 | Python `batch.run` / CLI `batch` | [程序内接入](docs/agents.zh-CN.md) |
+| 采集可信命令的输出 | `exec` | [采集命令](docs/recipes.zh-CN.md) |
+| 筛选或分类 JSON 候选 | `query` | [结合上下文选择](docs/recipes.zh-CN.md) |
+| 定位代码行为 | `code-search` | [完整代码符号](docs/recipes.zh-CN.md) |
+| 检查有界 Git 变更 | `diff-review` | [命令参考](docs/cli.zh-CN.md) |
+| 归类关联的 JSON/JSONL 事件 | `triage` | [关联日志](docs/recipes.zh-CN.md) |
+| 选择本地 Camofox 页面控件 | `locate` | [网页选择](docs/recipes.zh-CN.md) |
+| 完成短网页目标或采集页面记录 | `browse` · `extract` | [浏览器托管执行](docs/hosted-execution.zh-CN.md) |
+| 完成 Windows/macOS 应用目标 | `desktop` | [桌面](docs/hosted-execution.zh-CN.md#桌面desktop) |
+| 对大量记录分类汇总 | `survey` | [大量记录](docs/hosted-execution.zh-CN.md#大量记录survey) |
+| 在 Python 中嵌入类型化推理 | `jev_filter.batch.run` | [Python 接入](docs/agents.zh-CN.md) |
+| 离线评测标注判断 | `eval` | [评测示例](docs/integrations.zh-CN.md#离线评测保存的判断) |
+| 接入 Node.js 程序或 MCP host | `createClient` · `mcp` | [接入示例](docs/agent-quickstart.zh-CN.md#javascript-与-mcp) |
 
-[全部参数](docs/cli.zh-CN.md) · [原文复核](docs/getting-started.zh-CN.md#读懂结果) · [架构](docs/architecture.zh-CN.md)
+</details>
 
-## 我们自己也在用
+## 从输入到发行，每一步都可核对
 
-资料标注、Telegram 维护计划和 SRE 分流已保留原接口，并用真实 Jev 调用、合成数据通过验收。私有身份、密钥和生产数据不进入开源仓库。
+- **有界推理，无结果缓存。** 自动合批，最多 30 个请求并发；不缓存判断结果。
+- **本地证据与数值统计。** 私有原文可按 ID 回查；可选[本地看板](docs/statistics.zh-CN.md)展示用量、未知项和负净值，输入等价值估算不作为账单节省。
+- **明确的信任边界。** 推理输入会发送到 TypeSafe；`exec` 执行你的可信命令，不是沙箱。托管执行保留新鲜度、来源和桌面安全门禁。[安全策略](SECURITY.zh-CN.md)
+- **可移植、可核验的发行包。** Python 核心、内置运行时的 npm 平台包、校验和与构建来源。[发行与恢复](docs/distribution.zh-CN.md)
 
-- **不使用结果缓存。** 明确上下文、采集边界、失败项和模型用量。
-- **受保护的发布。** 必须通过 CI/安全检查，发布标签不可改写，安装包附校验和与来源证明。
-- **可复用的内核。** Python library 与 npm CLI；自动合批，最多 30 个在途请求。
-- **明确的边界。** 参与推理的输入会发送给 TypeSafe；`exec` 执行你提供的命令，不是沙箱；托管执行只执行程序枚举出的动作，不可逆动作会先暂停。[安全说明 →](SECURITY.zh-CN.md)
-
-完成一次 npm 包信任配置后，GitHub Release 成功会自动通过 OIDC 发布五个包，并从注册表全新安装验收，无需保存长期 npm token。参见[首次配置与续办](docs/distribution.zh-CN.md#首次-npm-信任配置)。
+旧 `jev-context` 命令与 Python imports 保持兼容。Jev Filter 由 **Apixly / JIA-ss** 独立维护，与 TypeSafe 无隶属关系。
 
 ## 参与开发
 
@@ -276,6 +176,4 @@ sh scripts/check.sh
 npm test
 ```
 
-[贡献指南](CONTRIBUTING.zh-CN.md) · [开发与发布](docs/development.zh-CN.md) · [项目治理](GOVERNANCE.zh-CN.md) · [更新记录](CHANGELOG.zh-CN.md) · [报告问题](https://github.com/apixly-ai/jev-filter/issues/new/choose)
-
-**Apixly / JIA-ss** 维护 · [MIT](LICENSE) · 独立于 TypeSafe。
+[贡献指南](CONTRIBUTING.zh-CN.md) · [开发与发布](docs/development.zh-CN.md) · [更新日志](CHANGELOG.zh-CN.md) · [反馈问题](https://github.com/apixly-ai/jev-filter/issues/new/choose) · [MIT 许可证](LICENSE)

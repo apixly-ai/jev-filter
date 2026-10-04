@@ -160,3 +160,101 @@ def test_long_form_reports_content_below_the_fold(browser, origin):
     browser.settle(scroll)
     later = browser.observe()
     assert any(a["label"].startswith("Topic") for a in later["actions"])
+
+
+def synthetic(browser, body):
+    browser.navigate("about:blank")
+    import json
+
+    browser.evaluate("document.body.innerHTML=" + json.dumps(body))
+
+
+def test_native_and_aria_control_state_remains_verifiable(browser):
+    synthetic(
+        browser,
+        '<label><input type="checkbox">Keep notifications</label>'
+        '<button aria-label="Pin item" aria-pressed="false">Pin</button>'
+        '<div role="tab" aria-selected="false">History</div>'
+        '<label>Sort<select><option value="recent">Recent</option>'
+        '<option value="old">Oldest</option></select></label>'
+        '<input aria-label="Note" value="">',
+    )
+    state = browser.observe()
+    assert by_label(state, "Keep notifications")["checked"] is False
+    assert by_label(state, "Pin item")["pressed"] is False
+    assert by_label(state, "History")["selected"] is False
+    assert by_label(state, "Note", "fill")["value"] == ""
+    select = by_label(state, "Sort", "click")
+    assert select["control_value"] == "recent"
+    option = by_label(state, "Sort → Oldest", "select")
+    assert select["node"] == option["node"]
+    assert option["control_label"] == "Sort"
+
+
+def test_roleless_clickable_and_transparent_native_toggle(browser):
+    synthetic(
+        browser,
+        '<div tabindex="0" style="cursor:pointer;width:150px;height:30px"'
+        " onclick=\"this.textContent='Opened'\">Open details</div>"
+        '<label style="display:block;width:220px;height:30px">'
+        '<input type="checkbox" style="opacity:0;width:15px;height:15px">Styled toggle</label>',
+    )
+    state = browser.observe()
+    browser.act(by_label(state, "Open details"), state)
+    state = browser.observe()
+    assert "Opened" in state["text"]
+    toggle = by_label(state, "Styled toggle")
+    assert toggle["checked"] is False
+    browser.act(toggle, state)
+    assert by_label(browser.observe(), "Styled toggle")["checked"] is True
+
+
+def test_nested_scroll_is_enumerated_and_guarded(browser):
+    synthetic(
+        browser,
+        '<section aria-label="Results panel" style="overflow-y:auto;height:120px;width:400px">'
+        '<div style="height:500px">Earlier results</div><button>Load target</button></section>',
+    )
+    state = browser.observe()
+    scroll = next(a for a in state["actions"] if a["kind"] == "scroll" and a.get("node"))
+    assert "Results panel" in scroll["label"]
+    assert by_label(state, "Wait for the page to update")["kind"] == "wait"
+    record = browser.act(scroll, state)
+    assert record["scrolled"]
+    assert not browser.fresh(state, scroll)
+    for _ in range(8):
+        state = browser.observe()
+        target = next((a for a in state["actions"] if a["label"] == "Load target"), None)
+        if target:
+            browser.act(target, state)
+            break
+        scroll = next(
+            a
+            for a in state["actions"]
+            if a["kind"] == "scroll" and a.get("node") and a["delta"] > 0
+        )
+        browser.act(scroll, state)
+    else:
+        pytest.fail("nested scrolling never revealed the target")
+
+
+def test_transparent_toggle_surface_must_be_in_the_observed_scope(browser):
+    synthetic(
+        browser,
+        '<main id="scope"><input id="toggle" type="checkbox" style="opacity:0"></main>'
+        '<label for="toggle">Outside toggle</label>',
+    )
+    state = browser.observe(scope="#scope")
+    assert all(a.get("control_label") != "Outside toggle" for a in state["actions"])
+
+
+def test_sensitive_native_select_does_not_expose_option_values(browser):
+    synthetic(
+        browser,
+        '<label>Verification code<select autocomplete="one-time-code">'
+        '<option value="PRIVATE_OTP_CURRENT">Provided code</option>'
+        '<option value="PRIVATE_OTP_ALTERNATIVE">Alternate code</option></select></label>',
+    )
+    state = browser.observe()
+    assert "PRIVATE_OTP" not in str(state)
+    assert all(a.get("control_label") != "Verification code" for a in state["actions"])

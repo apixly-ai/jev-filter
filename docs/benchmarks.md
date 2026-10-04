@@ -2,6 +2,60 @@
 
 [简体中文](benchmarks.zh-CN.md)
 
+## Release 0.4 evidence 2026-10-04
+
+These fresh tests target the released program's contracts and real interfaces. The
+three A/B lines below use a pinned 0.3.0 source baseline and fixed synthetic inputs;
+they make **zero semantic model calls**. Their fixture responses, labels and program
+policies are disclosed in the scripts. Historical live inference results follow below.
+
+| Scope | Baseline | 0.4 treatment | Tradeoff |
+|---|---:|---:|---|
+| Scripted decision/accounting behavior | 3/13 expected cases | 13/13 | Review 0 → 6; returned bytes 4,104 → 7,087 |
+| False fixture actions | 3 | 0 | Ambiguous operations stop before action |
+| Code collector mean recall | 27.8% | 66.7% | Mean precision 66.7% → 47.2%; more context and time |
+| Browser observer/action contract | 3/15 | 15/15 | More control state and completed paths increase context/time |
+| Freshness rejection checks | 6/6 | 6/6 | Scope, sensitive-value and source guards remain separate |
+
+The decision cases check error/unknown-usage preservation and the application of
+supplied probability distributions. They do not measure whether Jev predicted the
+right answer. The code collector still misses the fixture with no overlapping
+lexical clues; final semantic precision needs its own evaluation. Browser tests run
+real local Chromium with a fixed program policy, excluding browser startup; they do
+not estimate open-web or Jev-driven success. All per-case failures, context bytes,
+timing, source/script hashes and zero actual model usage are retained:
+[decisions](../benchmarks/results/2026-10-04-decisions.json),
+[retrieval](../benchmarks/results/2026-10-04-retrieval.json),
+[browser observation](../benchmarks/results/2026-10-04-browser-observation.json).
+
+The [interface E2E](../benchmarks/results/2026-10-04-release-e2e.json) runs 10 actual
+process checks: CLI setup and context admission, collection, stdin triage/redaction,
+tracked diff, survey planning, offline evaluation, MCP stdio, the real JS client and
+an independent official MCP client (protocol 2025-11-25; four tools; evidence roundtrip).
+Inputs are synthetic and commands deliberately plan or require missing context;
+zero model requests means this is interface proof rather than semantic quality evidence.
+
+```sh
+python -m benchmarks.decision_contracts --output decisions.json
+python -m benchmarks.retrieval --repeats 5 --output retrieval.json
+python -m benchmarks.browser_observation --repeats 3 --output browser.json
+python -m benchmarks.release_e2e --output interfaces.json
+# Independent client check: install mcp separately, then add --official-mcp.
+jev-filter eval --input examples/evaluation.json --output heldout.json
+```
+
+For a new provider comparison, install `.[code,dev,bench-llm]` and the provider's
+System One Adapter SDK extra. [The frozen plan](../benchmarks/results/2026-10-04-provider-plan.json)
+records 32 input rows, fixed expectations and complete request bytes with no inference.
+`python -m benchmarks.providers --live --provider PROVIDER --model MODEL --output X.json`
+is explicitly billable and requires supplied test credentials. It measures the filtering
+operation, keeps retry-total known usage and unknown failed attempts, and separates
+native Jev probabilities from generated LLM probabilities. No fresh provider superiority,
+whole-agent speedup or invoice saving is established by the offline release evidence.
+
+See [integration and policy contracts](integrations.md) for defaults, compatibility
+and a group-separated held-out evaluation that does not fit a probability calibrator.
+
 ## Hosted execution: 2026-09-30
 
 Scope: synthetic local fixtures only, live Jev (`jev-1.13.x`), three repetitions per task. A run
@@ -374,4 +428,3 @@ python -m benchmarks.distribution --live \
   --native /path/to/native/jev-filter \
   --output local-results/distribution-new.json
 ```
-

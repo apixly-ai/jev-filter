@@ -1,8 +1,11 @@
 """Caller-defined typed Jev questions, deterministic filtering and rendering."""
 
 import copy
+import hashlib
 import json
 import re
+
+from . import decision_policy
 
 DEFAULT_QUESTION = {
     "type": "choice",
@@ -29,6 +32,7 @@ FIELDS = {
     "source",
     "display_truncated",
     "decision",
+    "review_reasons",
 }
 
 
@@ -50,6 +54,8 @@ def validate(spec):
         "requirements",
         "required_context",
         "required_record_fields",
+        "uncertainty",
+        "contract",
     }:
         raise ValueError("Unknown analysis specification field")
     if (
@@ -125,6 +131,31 @@ def validate(spec):
             or question["type"] not in ("choice", "noul", "score")
         ):
             raise ValueError("Invalid question name/type")
+    if "uncertainty" in spec:
+        spec["uncertainty"] = decision_policy.validate(
+            spec["uncertainty"], questions={"target"} if mode == "choose" else set(questions)
+        )
+    if "contract" in spec:
+        contract = spec["contract"]
+        if (
+            not isinstance(contract, dict)
+            or set(contract) - {"id", "version", "fingerprint"}
+            or any(
+                not isinstance(contract.get(key), str)
+                or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}", contract[key])
+                for key in ("id", "version")
+            )
+            or (
+                "fingerprint" in contract
+                and not re.fullmatch(r"[0-9a-f]{64}", str(contract["fingerprint"]))
+            )
+        ):
+            raise ValueError("contract needs bounded id/version and optional SHA-256 fingerprint")
+        if (
+            contract.get("fingerprint")
+            and contract["fingerprint"] != contract_metadata(spec)["fingerprint"]
+        ):
+            raise ValueError("analysis contract fingerprint mismatch")
     if len(json.dumps(spec, ensure_ascii=False)) > 16000:
         raise ValueError("Analysis spec too large (16000 characters max)")
     size = spec.get("batch_size", "auto")
@@ -175,6 +206,49 @@ def validate(spec):
     if spec.get("format", "json") not in ("json", "jsonl", "text"):
         raise ValueError("format must be json, jsonl or text")
     return spec
+
+
+def contract_metadata(spec):
+    """Stable rule/model fingerprint; display and batching cannot change its identity.
+
+    The task and records are run inputs. A fingerprint is a reproducibility receipt and does
+    not confer execution authority or prove calibration remains applicable to a new dataset.
+    """
+    if "contract" not in spec:
+        return None
+    semantic = {
+        key: spec[key]
+        for key in (
+            "questions",
+            "requirements",
+            "filter",
+            "review",
+            "selection_policy",
+            "context",
+            "required_context",
+            "required_record_fields",
+        )
+        if key in spec
+    }
+    semantic.update(
+        mode=spec.get("mode", "filter"),
+        model=spec.get("model", "jev-1.13.0"),
+        uncertainty=decision_policy.validate(spec.get("uncertainty")),
+    )
+    fingerprint = hashlib.sha256(
+        json.dumps(semantic, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode()
+    ).hexdigest()
+    return {
+        "id": spec["contract"]["id"],
+        "version": spec["contract"]["version"],
+        "fingerprint": fingerprint,
+        "model": semantic["model"],
+    }
+
+
+def contract_fields(spec):
+    metadata = contract_metadata(spec)
+    return {"contract": metadata} if metadata else {}
 
 
 def value(answer):
@@ -261,6 +335,7 @@ def context_admission(spec):
         "excerpts": [],
         "collection_skipped": True,
         "cache_enabled": False,
+        **contract_fields(spec),
         "telemetry": {
             "requests": 0,
             "usage": {"input_tokens": 0, "output_tokens": 0},
@@ -367,6 +442,7 @@ def evaluate(parts, task, workers="auto", spec=None):
     context_details = {
         k: planned[k] for k in ("missing_context", "missing_record_fields") if k in planned
     }
+    context_details.update(contract_fields(spec))
     if "missing_record_fields" in context_details:
         names = {p["id"]: p["source_id"] for p in parts}
         context_details["missing_record_fields"] = {
@@ -389,11 +465,20 @@ def evaluate(parts, task, workers="auto", spec=None):
     if planned["mode"] == "choose":
         row = result["results"][0]
         choice = row["answers"]["target"]["choice"] if row["ok"] else "REVIEW"
+        reasons = (
+            decision_policy.assess(row["answers"]["target"], "target", spec.get("uncertainty"))
+            if row["ok"]
+            else []
+        )
+        if reasons:
+            choice = "REVIEW"
+            result["selection_review_reasons"] = reasons
         selected = planned["routes"]["choose"].get(choice)
         for part in parts:
             judgments[part["id"]] = {
-                "status": "OK" if row["ok"] else "UNAVAILABLE",
+                "status": "UNCERTAIN" if reasons else ("OK" if row["ok"] else "UNAVAILABLE"),
                 "answers": {},
+                **({"review_reasons": reasons} if reasons else {}),
                 "decision": "REVIEW"
                 if choice == "REVIEW"
                 else ("MATCH" if part["id"] == selected else "EXCLUDE"),
@@ -451,13 +536,21 @@ def decision(entry, spec, part=None):
     if spec.get("requirements"):
         unknown = False
         for requirement in spec["requirements"]:
-            answer = entry["answers"][requirement["id"]]["choice"]
+            native = entry["answers"].get(requirement["id"], {})
+            if not native or decision_policy.assess(
+                native, requirement["id"], spec.get("uncertainty")
+            ):
+                unknown = True
+                continue
+            answer = native["choice"]
             expected = "SUPPORTED" if requirement["expected"] else "CONTRADICTED"
             if answer in ("SUPPORTED", "CONTRADICTED") and answer != expected:
                 return "EXCLUDE"
             if answer == "UNKNOWN":
                 unknown = True
         return "REVIEW" if unknown else "MATCH"
+    if review_reasons(entry, spec):
+        return "REVIEW"
     if spec.get("review") and rule_matches(entry, spec["review"]):
         return "REVIEW"
     if any(
@@ -469,18 +562,36 @@ def decision(entry, spec, part=None):
     return "MATCH" if not spec.get("filter") or rule_matches(entry, spec["filter"]) else "EXCLUDE"
 
 
+def review_reasons(entry, spec):
+    if entry.get("review_reasons"):
+        return entry["review_reasons"]
+    if entry.get("status") != "OK":
+        return []
+    return [
+        reason
+        for name in spec["questions"]
+        for reason in decision_policy.assess(
+            entry.get("answers", {}).get(name, {}), name, spec.get("uncertainty")
+        )
+    ]
+
+
 def summarize(parts, judgments, spec):
-    selected, review = [], []
+    selected, review, reasons = [], [], {}
     for part in parts:
         entry = judgments.get(part["id"], {"status": "NOT_EVALUATED", "answers": {}})
         d = decision(entry, spec, part)
         destination = selected if d == "MATCH" else review if d == "REVIEW" else None
         if destination is not None and part["source_id"] not in destination:
             destination.append(part["source_id"])
+        if d == "REVIEW" and review_reasons(entry, spec):
+            reasons.setdefault(part["source_id"], []).extend(review_reasons(entry, spec))
     return {
         "selected_ids": selected,
         "review_ids": review,
         "complete": not review and not missing_context(spec),
+        **({"review_reasons": reasons} if reasons else {}),
+        **contract_fields(spec),
         **({"missing_context": missing_context(spec)} if missing_context(spec) else {}),
         "excluded_count": len(parts)
         - sum(
@@ -502,6 +613,8 @@ def select(parts, judgments, spec, budget):
     ]
     for row in rows:
         row["decision"] = decision(row, spec, row)
+        if row["decision"] == "REVIEW" and review_reasons(row, spec):
+            row["review_reasons"] = review_reasons(row, spec)
     rows = [r for r in rows if r["decision"] != "EXCLUDE"]
     rule = spec.get("order")
     if rule:
@@ -562,6 +675,8 @@ def render(output, spec):
         if "decision" in raw:
             rendered["decision"] = raw["decision"]
             rendered["source_id"] = raw["source_id"]
+            if raw.get("review_reasons"):
+                rendered["review_reasons"] = raw["review_reasons"]
         rows.append(rendered)
     meta = {k: v for k, v in output.items() if k != "excerpts"}
     fmt = spec.get("format", "json")

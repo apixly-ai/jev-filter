@@ -128,6 +128,55 @@
         }
       },
       "additionalProperties": false
+    },
+    "uncertainty": {
+      "type": "object",
+      "properties": {
+        "min_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "min_top_probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "min_margin": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "questions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/thresholds"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "contract": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}$"
+        },
+        "fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "$defs": {
@@ -204,6 +253,27 @@
           ]
         }
       ],
+      "additionalProperties": false
+    },
+    "thresholds": {
+      "type": "object",
+      "properties": {
+        "min_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "min_top_probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "min_margin": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
       "additionalProperties": false
     }
   }

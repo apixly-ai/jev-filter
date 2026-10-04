@@ -1,5 +1,7 @@
 # 托管执行
 
+**0.4 新增：**操作/目标/值选择不充分时会在执行前返回 `needs_review`，默认胜出概率 0.55、前两名差距 0.10。独立 `--verify-controls` 检查唯一当前 checked/pressed/selected/值，失效的最终观察不能证明完成。观察支持显式无角色控件、带可见标签的透明控件和受守卫的嵌套垂直滚动；新标签页跟随仍不支持。详见[策略与接入示例](integrations.zh-CN.md)。
+
 [English](hosted-execution.md)
 
 Jev Filter 不只过滤，也能执行。下面的命令都跑在程序自己掌控的循环里：程序枚举候选，Jev 在候选里选择，程序执行并校验结果。
@@ -80,7 +82,7 @@ jev-filter extract --url 'https://shop.example/results?q=red' \
 ## 桌面：`desktop`
 
 ```sh
-pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.3.0'   # Windows：UI Automation + OCR；macOS：pyobjc
+pip install 'jev-filter[desktop] @ git+https://github.com/apixly-ai/jev-filter.git@v0.4.0'   # Windows：UI Automation + OCR；macOS：pyobjc
 jev-filter desktop --list                  # 列出候选窗口
 jev-filter desktop --window '^Invoice Tool$' \
   --goal 'Set the customer name to Ada Lovelace, choose the Pro plan and save' \

@@ -1,0 +1,674 @@
+{
+  "schema_version": 1,
+  "kind": "offline_collector_recall",
+  "version": "0.4.0",
+  "timestamp_utc": "2026-10-04T05:29:30.996817+00:00",
+  "python": "3.14.2",
+  "platform": "Darwin",
+  "fixture_sha256": "283a714e259eb1f882bc2697b08ab1535e3354bb3a63413d7740589e07307b02",
+  "result_cache": false,
+  "model_usage": [],
+  "cost_assumption": "No model requests; measured cost is zero for deterministic collection only.",
+  "scope": "Whole deterministic collection operation only; fixed synthetic recall labels; not semantic judgment quality or a production speed/cost claim.",
+  "limitations": [
+    "Lexical recall deliberately fails the no_lexical_overlap case in both arms.",
+    "Treatment can increase irrelevant candidates, source context and elapsed time.",
+    "Python call clues match names syntactically; they do not resolve imports or dispatch.",
+    "No model classification, live credential, browser action or customer data used."
+  ],
+  "summary": {
+    "baseline": {
+      "mean_recall": 0.2777777777777778,
+      "mean_precision": 0.6666666666666666,
+      "median_elapsed_ms": 5.847,
+      "mean_source_context_bytes": 46.666666666666664,
+      "failures": 0,
+      "incomplete_scopes": 0
+    },
+    "treatment": {
+      "mean_recall": 0.6666666666666666,
+      "mean_precision": 0.4722222222222222,
+      "median_elapsed_ms": 12.993,
+      "mean_source_context_bytes": 154,
+      "failures": 0,
+      "incomplete_scopes": 0
+    }
+  },
+  "runs": [
+    {
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 0,
+      "elapsed_ms": 6.231,
+      "candidate_symbols": [
+        "persist_token"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 0.3333333333333333,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 0,
+      "elapsed_ms": 13.952,
+      "candidate_symbols": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 269,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 0,
+      "elapsed_ms": 4.704,
+      "candidate_symbols": [
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 0,
+      "elapsed_ms": 11.903,
+      "candidate_symbols": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 1.0,
+      "precision": 0.6666666666666666,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 193,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 0,
+      "elapsed_ms": 5.759,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 0,
+      "elapsed_ms": 12.993,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 1,
+      "elapsed_ms": 11.907,
+      "candidate_symbols": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 269,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 1,
+      "elapsed_ms": 5.847,
+      "candidate_symbols": [
+        "persist_token"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 0.3333333333333333,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 1,
+      "elapsed_ms": 13.073,
+      "candidate_symbols": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 1.0,
+      "precision": 0.6666666666666666,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 193,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 1,
+      "elapsed_ms": 5.921,
+      "candidate_symbols": [
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 1,
+      "elapsed_ms": 13.25,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 1,
+      "elapsed_ms": 6.798,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 2,
+      "elapsed_ms": 6.583,
+      "candidate_symbols": [
+        "persist_token"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 0.3333333333333333,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 2,
+      "elapsed_ms": 12.002,
+      "candidate_symbols": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 269,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 2,
+      "elapsed_ms": 4.726,
+      "candidate_symbols": [
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 2,
+      "elapsed_ms": 13.847,
+      "candidate_symbols": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 1.0,
+      "precision": 0.6666666666666666,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 193,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 2,
+      "elapsed_ms": 6.141,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 2,
+      "elapsed_ms": 11.168,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 3,
+      "elapsed_ms": 11.713,
+      "candidate_symbols": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 269,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 3,
+      "elapsed_ms": 5.278,
+      "candidate_symbols": [
+        "persist_token"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 0.3333333333333333,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 3,
+      "elapsed_ms": 14.328,
+      "candidate_symbols": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 1.0,
+      "precision": 0.6666666666666666,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 193,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 3,
+      "elapsed_ms": 5.326,
+      "candidate_symbols": [
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 3,
+      "elapsed_ms": 13.356,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 3,
+      "elapsed_ms": 6.82,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "baseline",
+      "repeat": 4,
+      "elapsed_ms": 5.357,
+      "candidate_symbols": [
+        "persist_token"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 0.3333333333333333,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "credentials_and_caller",
+      "arm": "treatment",
+      "repeat": 4,
+      "elapsed_ms": 11.042,
+      "candidate_symbols": [
+        "display_credentials_help",
+        "persist_token",
+        "refresh_credentials",
+        "renew_session"
+      ],
+      "expected_symbols": [
+        "persist_token",
+        "renew_session",
+        "refresh_credentials"
+      ],
+      "recall": 1.0,
+      "precision": 0.75,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 269,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "baseline",
+      "repeat": 4,
+      "elapsed_ms": 4.999,
+      "candidate_symbols": [
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 0.5,
+      "precision": 1.0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 70,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "permission_and_caller",
+      "arm": "treatment",
+      "repeat": 4,
+      "elapsed_ms": 13.05,
+      "candidate_symbols": [
+        "deny_permission",
+        "permission_notice",
+        "verify_access"
+      ],
+      "expected_symbols": [
+        "verify_access",
+        "deny_permission"
+      ],
+      "recall": 1.0,
+      "precision": 0.6666666666666666,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 193,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "baseline",
+      "repeat": 4,
+      "elapsed_ms": 6.409,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    },
+    {
+      "case": "no_lexical_overlap",
+      "arm": "treatment",
+      "repeat": 4,
+      "elapsed_ms": 12.188,
+      "candidate_symbols": [],
+      "expected_symbols": [
+        "verify_access"
+      ],
+      "recall": 0.0,
+      "precision": 0,
+      "failures": [],
+      "scope_incomplete": false,
+      "source_context_bytes": 0,
+      "model_usage": [],
+      "requests": 0,
+      "cost_usd": 0
+    }
+  ]
+}

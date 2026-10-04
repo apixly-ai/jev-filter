@@ -86,7 +86,11 @@ class Page:
         raise StalePage("Page did not settle")
 
     def fresh(self, page, action=None):
-        if action is not None and action.get("kind") in ("click", "select", "fill"):
+        if (
+            action is not None
+            and action.get("node") is not None
+            and action.get("kind") in ("click", "select", "fill", "scroll")
+        ):
             current = self.call({"op": "guard", "node": action["node"]})
             return current == [page["page_key"], page["guards"].get(str(action["node"]))]
         return self.call({"op": "marker"}) == page["marker"]
@@ -261,6 +265,11 @@ class CDPPage(Page):
     def _execute(self, action, text):
         kind = action["kind"]
         if kind == "scroll":
+            if action.get("node") is not None:
+                result = self.call({"op": "scroll", "action": action})
+                if not result or not result.get("ok"):
+                    raise StalePage("scroll target changed")
+                return {"scrolled": result["scrolled"]}
             before = self.evaluate("scrollY")
             self.cmd(
                 "Input.dispatchMouseEvent",
@@ -442,6 +451,11 @@ class CamofoxPage(Page):
     def _execute(self, action, text):
         kind = action["kind"]
         if kind == "scroll":
+            if action.get("node") is not None:
+                result = self.call({"op": "scroll", "action": action})
+                if not result or not result.get("ok"):
+                    raise StalePage("scroll target changed")
+                return {"scrolled": result["scrolled"]}
             self.evaluate(f"window.scrollBy(0, {int(action['delta'])})")
             return {}
         if kind == "key":

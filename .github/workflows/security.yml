@@ -20,6 +20,7 @@ jobs:
         with:
           python-version: '3.13'
       - run: python -m pip install --upgrade pip
+      - run: python -m pip install --upgrade pip
       - run: python -m pip install '.[code,stats]' pip-audit
       - run: python -m pip_audit
   codeql:

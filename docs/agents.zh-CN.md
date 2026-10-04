@@ -5,6 +5,8 @@
 Jev Filter 提供 CLI 与 Python library。能执行命令的 AI 即可使用，不要求 MCP 服务或另一个代理。
 核心要求是：**采集 → 判断 → 精简结果，在程序内部完成**。
 
+宿主需要相应接口时，可使用[带类型的 JavaScript 客户端或限定范围的只读 MCP](integrations.zh-CN.md)，保留部分结果与证据而不重复推断。`eval` 离线评测保存的概率；问题策略与版本化契约让路由决策可查证。
+
 ## 安装 skill
 
 先完成 [npm 安装](getting-started.zh-CN.md)，再选择对应目录：

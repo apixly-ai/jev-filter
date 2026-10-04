@@ -87,3 +87,33 @@ def test_invalid_distribution_rejected():
     bad["answers"]["q"]["probabilities"] = {"yes": 1, "no": 1}
     with pytest.raises(ValueError):
         validate_response(BODY, bad)
+
+
+def test_failed_retries_preserve_every_unknown_physical_attempt():
+    with Client(
+        api_key="test-key",
+        transport=httpx.MockTransport(lambda _: httpx.Response(503, headers={"retry-after": "0"})),
+        sleep=lambda _: None,
+    ) as client:
+        with pytest.raises(ProviderError) as caught:
+            client.call(BODY)
+        assert caught.value.code == "http_503_body_suppressed"
+        assert caught.value.unknown_usage_attempts == client.stats["requests"] == 3
+
+
+def test_invalid_response_after_retry_keeps_unknown_attempt_count():
+    responses = iter(
+        [
+            httpx.Response(429, headers={"retry-after": "0"}),
+            httpx.Response(200, text="PRIVATE_BODY"),
+        ]
+    )
+    with Client(
+        api_key="test-key",
+        transport=httpx.MockTransport(lambda _: next(responses)),
+        sleep=lambda _: None,
+    ) as client:
+        with pytest.raises(ProviderError) as caught:
+            client.call(BODY)
+        assert caught.value.unknown_usage_attempts == 2
+        assert "PRIVATE_BODY" not in str(caught.value)

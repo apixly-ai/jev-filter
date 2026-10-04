@@ -40,6 +40,9 @@ class TextHelper:
         self.model = model
         self.client = httpx.Client(timeout=timeout, transport=transport, follow_redirects=False)
 
+    def close(self):
+        self.client.close()
+
     def __call__(self, context):
         started = time.perf_counter()
         body = {
@@ -69,7 +72,12 @@ class TextHelper:
         if set(output) != {"text"}:
             raise TextHelperError("text_model_invalid_output")
         if value is None:
-            return None, {"source": "text_model", "model": self.model, "declined": True}
+            return None, {
+                "source": "text_model",
+                "model": self.model,
+                "declined": True,
+                "usage": data.get("usage", {}),
+            }
         if not isinstance(value, str) or not value.strip() or len(value) > 2000:
             raise TextHelperError("text_model_invalid_output")
         return value, {

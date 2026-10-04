@@ -1,25 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-<title id="title">jev-filter</title><desc id="desc">Capture tool output, apply task-aware Jev judgments, deliver evidence to the agent. Originals stay available locally.</desc>
-<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101b2b"/><stop offset="1" stop-color="#192442"/></linearGradient><linearGradient id="accent"><stop stop-color="#83e3c4"/><stop offset="1" stop-color="#a6a0ff"/></linearGradient></defs>
-<rect width="1200" height="420" rx="22" fill="url(#bg)"/>
-<circle cx="1100" cy="0" r="240" fill="#8074df" opacity=".065"/>
-<g font-family="Arial,Helvetica,sans-serif">
-<text x="55" y="52" fill="#8eacc8" font-size="14" letter-spacing="3">TASK-AWARE TOOLS FOR AI AGENTS</text>
-<text x="52" y="128" fill="#f4f8ff" font-size="68" font-weight="700">jev<tspan fill="#8ce1c6">-filter</tspan></text>
-<text x="55" y="173" fill="#c5d2e5" font-size="23">Filter tool output before it reaches your agent.</text>
-<rect x="55" y="222" width="270" height="113" rx="13" fill="#23314a" stroke="#3a4a66"/>
-<text x="77" y="254" fill="#9aacbf" font-size="13" letter-spacing="1.5">01 / CAPTURE</text>
-<text x="77" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Tools &amp; records</text>
-<text x="77" y="311" fill="#9aacbf" font-size="16">Commands · code · DOM · logs</text>
-<path d="M337 277 H419 m-9 -8 9 8 -9 8" stroke="#83e3c4" stroke-width="2" fill="none"/>
-<rect x="433" y="222" width="295" height="113" rx="13" fill="#173b3c" stroke="#518f81"/>
-<text x="455" y="254" fill="#8fe4c8" font-size="13" letter-spacing="1.5">02 / JUDGE</text>
-<text x="455" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Jev + your context</text>
-<text x="455" y="311" fill="#a4c8c2" font-size="16">Typed decisions · batch · parallel</text>
-<path d="M740 277 H822 m-9 -8 9 8 -9 8" stroke="#aba6f3" stroke-width="2" fill="none"/>
-<rect x="838" y="222" width="307" height="113" rx="13" fill="#2c2d4e" stroke="#66628b"/>
-<text x="860" y="254" fill="#b9b2fa" font-size="13" letter-spacing="1.5">03 / REASON</text>
-<text x="860" y="286" fill="#f3f7ff" font-size="23" font-weight="600">Evidence for the agent</text>
-<text x="860" y="311" fill="#b7b7d0" font-size="16">Relevant records + unresolved IDs</text>
-<text x="55" y="383" fill="#91a5bd" font-size="16">Originals retained locally</text><text x="433" y="383" fill="#91a5bd" font-size="16">Up to 30 concurrent requests</text><text x="838" y="383" fill="#91a5bd" font-size="16">No result cache</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+<title id="title">Jev Filter — give your agent the signal</title>
+<desc id="desc">Collect once, decide with context, return the proof. A program-owned collector sends records to typed Jev inference; the primary agent receives selected evidence and review IDs, with local originals available by ID. Historical 2026-09-23 benchmark: 88–97 percent less returned tool context over 48 synthetic agent runs.</desc>
+<defs>
+  <linearGradient id="background" x2="1" y2="1"><stop stop-color="#080e1c"/><stop offset="1" stop-color="#14213b"/></linearGradient>
+  <linearGradient id="signal" x2="1" y2="1"><stop stop-color="#77efc5"/><stop offset="1" stop-color="#95a2ff"/></linearGradient>
+  <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1e3048"/><stop offset="1" stop-color="#132239"/></linearGradient>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#8293bb" stroke-opacity=".07"/></pattern>
+</defs>
+<rect width="1200" height="560" rx="24" fill="url(#background)"/>
+<rect width="1200" height="560" rx="24" fill="url(#grid)"/>
+<circle cx="1080" cy="36" r="275" fill="#786cf5" opacity=".055"/>
+<circle cx="590" cy="570" r="290" fill="#34d3a3" opacity=".045"/>
+<g font-family="Inter,Arial,Helvetica,sans-serif">
+  <rect x="54" y="45" width="181" height="30" rx="15" fill="#15382f" stroke="#2e6759"/>
+  <circle cx="73" cy="60" r="4" fill="#73edc4"/>
+  <text x="86" y="65" fill="#9deace" font-size="12" font-weight="600" letter-spacing="1.1">THE DECISION LAYER</text>
+  <text x="51" y="151" fill="#f2f6fd" font-size="68" font-weight="750" letter-spacing="-2.5">jev<tspan fill="#83ebc6">-filter</tspan></text>
+  <text x="54" y="216" fill="#f3f7fd" font-size="40" font-weight="650" letter-spacing="-1.2">Give your agent</text>
+  <text x="54" y="265" fill="url(#signal)" font-size="40" font-weight="650" letter-spacing="-1.2">the signal.</text>
+  <text x="56" y="310" fill="#9badc8" font-size="18">Collect once. Decide with context.</text>
+  <text x="56" y="337" fill="#9badc8" font-size="18">Return the proof.</text>
+  <g font-size="12" font-weight="600">
+    <rect x="55" y="365" width="64" height="27" rx="7" fill="#1f2e45" stroke="#35465e"/><text x="76" y="383" fill="#c4d1e8">CLI</text>
+    <rect x="127" y="365" width="85" height="27" rx="7" fill="#1f2e45" stroke="#35465e"/><text x="148" y="383" fill="#c4d1e8">Python</text>
+    <rect x="220" y="365" width="90" height="27" rx="7" fill="#1f2e45" stroke="#35465e"/><text x="237" y="383" fill="#c4d1e8">JS / TS</text>
+    <rect x="318" y="365" width="67" height="27" rx="7" fill="#1f2e45" stroke="#35465e"/><text x="337" y="383" fill="#c4d1e8">MCP</text>
+    <rect x="393" y="365" width="112" height="27" rx="7" fill="#1f2e45" stroke="#35465e"/><text x="411" y="383" fill="#c4d1e8">Agent skills</text>
+  </g>
+  <rect x="589" y="64" width="548" height="75" rx="14" fill="#152237" stroke="#31425d"/>
+  <circle cx="612" cy="90" r="4" fill="#7484a0"/>
+  <text x="625" y="95" fill="#94a5bf" font-size="12" font-weight="600" letter-spacing="1.8">TOOL OUTPUT</text>
+  <text x="611" y="120" fill="#c2cde0" font-size="15" font-family="ui-monospace,Consolas,monospace">a · DNS recovered.  b · DNS still fails.</text>
+  <path d="M863 139V173" stroke="#53768e" stroke-width="2"/>
+  <path d="m858 168 5 5 5-5" fill="none" stroke="#53768e" stroke-width="2"/>
+  <rect x="718" y="180" width="290" height="64" rx="13" fill="#143d36" stroke="#4b9a7f"/>
+  <text x="742" y="206" fill="#a5f0d5" font-size="12" font-weight="650" letter-spacing="1.2">JEV + YOUR CONTEXT</text>
+  <text x="742" y="229" fill="#d2ede5" font-size="16">Which failure is unresolved?</text>
+  <path d="M863 244V278" stroke="#6fc8ae" stroke-width="2"/>
+  <path d="m858 273 5 5 5-5" fill="none" stroke="#6fc8ae" stroke-width="2"/>
+  <rect x="626" y="285" width="474" height="121" rx="14" fill="url(#panel)" stroke="#566795"/>
+  <rect x="648" y="301" width="108" height="22" rx="6" fill="#263a53"/>
+  <text x="660" y="317" fill="#c4d2eb" font-size="11" font-weight="700" letter-spacing="1">EVIDENCE PACKET</text>
+  <g font-family="ui-monospace,Consolas,monospace" font-size="15">
+    <text x="649" y="345" fill="#b0c3e7">selected_ids: <tspan fill="#91eac5">["b"]</tspan></text>
+    <text x="649" y="370" fill="#b0c3e7">review_ids:   <tspan fill="#cad8ec">[]</tspan></text>
+    <text x="649" y="394" fill="#839bbd" font-size="12">originals ↗ by source ID · receipts ↗</text>
+  </g>
+  <line x1="54" y1="439" x2="1146" y2="439" stroke="#2e3e58"/>
+  <path d="M410 458V528M805 458V528" stroke="#2e3e58"/>
+  <text x="54" y="479" fill="#91edc9" font-size="36" font-weight="750" letter-spacing="-1">88–97%</text>
+  <text x="54" y="506" fill="#d5e6f0" font-size="16" font-weight="600">less returned tool context</text>
+  <text x="54" y="530" fill="#a3b5cf" font-size="14">48 synthetic agent runs · 2026-09-23</text>
+  <text x="443" y="480" fill="#e3e7ff" font-size="25" font-weight="650" letter-spacing="-.5">Traceable evidence</text>
+  <text x="443" y="506" fill="#c2cce2" font-size="14">Originals by ID · decision receipts</text>
+  <text x="443" y="530" fill="#a3b5cf" font-size="14">Unknowns and failures stay visible</text>
+  <text x="840" y="480" fill="#e8eef8" font-size="25" font-weight="650" letter-spacing="-.5">One core. Four ways.</text>
+  <text x="840" y="506" fill="#c2cce2" font-size="15">CLI · Python · JS / TS · MCP</text>
+  <text x="840" y="530" fill="#a3b5cf" font-size="14">Same evidence and decision core</text>
 </g></svg>

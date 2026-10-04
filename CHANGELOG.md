@@ -3,6 +3,46 @@
 The format follows Keep a Changelog; versions follow SemVer within the limitations
 of a 0.x API (minor releases may make documented breaking changes).
 
+## [0.4.0] - 2026-10-04
+
+### Added
+- One shared uncertainty policy for filtering, atomic requirements, candidate choice,
+  and hosted operation/target/value selection. Failed metrics retain review reasons.
+- Versioned analysis contracts with semantic fingerprints tied to rule and model.
+- Opt-in bounded BM25 code recall and Python one-hop caller clues, preserving exact
+  matches, source hashes and explicit coverage limits.
+- `diff-review` for pinned commit ranges, staged or unstaged tracked changes with
+  complete bounded before/after evidence and post-inference freshness checks.
+- A typed JavaScript/TypeScript client and four-tool read-only scoped MCP stdio adapter
+  sharing the core, partial results, receipts and input/output budgets.
+- Offline group-separated `eval` for saved probabilities, threshold selection and
+  holdout reliability/coverage diagnostics. No model calls or fitted calibrator.
+- Deterministic `--verify-controls` for unique observed current control states and
+  guarded nested vertical scrolling.
+- Reproducible fixed-input behavior, retrieval and browser observation A/B reports,
+  optional official System One Adapter comparison, and outcome-led bilingual pages.
+
+### Fixed
+- Hosted failures preserve sanitized provider codes and unknown request usage,
+  including retries, verifier failures and separate text-model accounting.
+- Stale independent final observations cannot verify an earlier page as completed.
+- Explicit roleless controls and labelled transparent native toggles are observable;
+  current SELECT values and native/ARIA boolean states support verification.
+- `triage --input -` accepts bounded UTF-8 stdin for programmatic callers.
+- JS cancellation terminates the process tree with bounded escalation, waits for close
+  before cleanup, and preserves analysis modes and exit-2 partial packets.
+- Documentation folding renders Markdown tables, images and links consistently.
+
+### Compatibility and measured scope
+- Analysis uncertainty remains opt-in. Hosted defaults stop with `needs_review`
+  below a 0.55 selected probability or 0.10 top-two margin; zero thresholds reproduce
+  legacy behavior. Permission, freshness and independent verification remain separate.
+- MCP supports connection-scoped revisions 2024-11-05 through 2025-11-25; newer stateless
+  protocol support, per-request in-flight cancellation and new-tab following are excluded.
+- New A/B data is offline/scripted, with no semantic inference: extra recall lowers
+  fixture precision and grows context/time; safer decisions increase review.
+  Historical live measurements stay dated and are not 0.4 open-web success promises.
+
 ## [0.3.0] - 2026-09-30
 
 ### Added

@@ -6,6 +6,11 @@ Jev Filter is a CLI and Python library. A shell-capable agent can use it immedia
 no MCP server or extra autonomous agent is required. The key design rule is:
 **collect → judge → compact packet inside the program**.
 
+Prefer the [typed JavaScript client or scoped read-only MCP](integrations.md) when
+your host needs those interfaces. They preserve partial results and evidence without
+duplicating inference. `eval` checks saved probabilities offline; per-question policy
+and versioned contracts keep routing decisions inspectable.
+
 ## Install the portable skill
 
 After the [npm installation](getting-started.md), choose your agent:

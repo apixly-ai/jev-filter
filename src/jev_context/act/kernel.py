@@ -10,8 +10,12 @@ import json
 import re
 import time
 
+from .. import decision_policy
+from ..provider import ProviderError
+from ..validation import number
 from . import space
 from .browser import ActionFailed, StalePage, origin_of
+from .text import TextHelperError
 
 TERMINAL = (
     "done",
@@ -22,7 +26,32 @@ TERMINAL = (
     "error",
     "unverified",
     "origin_blocked",
+    "needs_review",
 )
+
+
+def error_fields(error):
+    """Only fixed provider/helper codes may cross the exception boundary."""
+    code = str(error)
+    provider_codes = {
+        "credentials_missing",
+        "credentials_invalid",
+        "credential_file_permissions",
+        "client_closed",
+        "transport_failed_usage_unknown",
+        "response_invalid_usage_unknown",
+        "response_too_large",
+        "retry_exhausted",
+    }
+    helper_codes = {"text_model_unreachable", "text_model_invalid_output"}
+    safe = (
+        isinstance(error, ProviderError)
+        and (code in provider_codes or re.fullmatch(r"http_[1-5][0-9]{2}_body_suppressed", code))
+    ) or (
+        isinstance(error, TextHelperError)
+        and (code in helper_codes or re.fullmatch(r"text_model_http_[1-5][0-9]{2}", code))
+    )
+    return {"error": code if safe else type(error).__name__, "error_type": type(error).__name__}
 
 
 def confirm_token(page, action):
@@ -37,6 +66,34 @@ def describe(action):
         return None
     keep = ("id", "kind", "label", "role", "section", "href", "key")
     return {k: action[k] for k in keep if action.get(k) not in (None, "")}
+
+
+def validate_controls(controls):
+    """A caller-owned bounded list of exact facts, independent of model completion claims."""
+    if controls is None:
+        return []
+    if not isinstance(controls, list) or not 1 <= len(controls) <= 100:
+        raise ValueError("verify-controls needs 1..100 control checks")
+    for control in controls:
+        if (
+            not isinstance(control, dict)
+            or set(control) - {"label", "role", "checked", "pressed", "selected", "value"}
+            or not isinstance(control.get("label"), str)
+            or not 1 <= len(control["label"]) <= 500
+            or not set(control) & {"checked", "pressed", "selected", "value"}
+            or ("role" in control and not isinstance(control["role"], str))
+        ):
+            raise ValueError("verify-controls needs label, optional role and exact state fields")
+        for field in ("checked", "pressed", "selected"):
+            if field in control and type(control[field]) is not bool:
+                raise ValueError("verify-controls " + field + " must be a boolean")
+        if "value" in control and not (
+            isinstance(control["value"], str)
+            or type(control["value"]) in (int, float)
+            and -float("inf") < control["value"] < float("inf")
+        ):
+            raise ValueError("verify-controls value must be text or a finite number")
+    return controls
 
 
 class Run:
@@ -62,6 +119,7 @@ class Run:
         verify_text=None,
         verify_url=None,
         verify_question=None,
+        verify_controls=None,
         verify_threshold=0.7,
         stall_steps=3,
         continue_after_confirm=False,
@@ -70,10 +128,19 @@ class Run:
         context=None,
         terminal_threshold=0.5,
         fallback_floor=0.15,
+        uncertainty=None,
         clock=time.perf_counter,
     ):
         if not goal or not goal.strip():
             raise ValueError("A goal is required")
+        for name, threshold in (
+            ("irreversible_threshold", irreversible_threshold),
+            ("verify_threshold", verify_threshold),
+            ("terminal_threshold", terminal_threshold),
+            ("fallback_floor", fallback_floor),
+        ):
+            if not number(threshold):
+                raise ValueError(name + " must be a finite number in 0..1")
         self.surface = surface
         self.goal = goal.strip()
         self.decide = decide
@@ -92,6 +159,7 @@ class Run:
         self.verify_text = verify_text
         self.verify_url = verify_url
         self.verify_question = verify_question
+        self.verify_controls = validate_controls(verify_controls)
         self.verify_threshold = verify_threshold
         self.stall_steps = stall_steps
         self.continue_after_confirm = continue_after_confirm
@@ -99,6 +167,17 @@ class Run:
         self.dry_run = dry_run
         self.terminal_threshold = terminal_threshold
         self.fallback_floor = fallback_floor
+        self.uncertainty = decision_policy.validate(
+            uncertainty,
+            questions={
+                "operation",
+                "click_target",
+                "type_text_target",
+                "select_target",
+                "type_value",
+            },
+            defaults=decision_policy.HOSTED_DEFAULT,
+        )
         self.overrides = 0
         self.unfillable = {}  # node -> label of fields the run has no value for
         self.visits = {}  # page fingerprint -> times observed after an action
@@ -108,6 +187,13 @@ class Run:
         self.decisions = []
         self.usage = {"input_tokens": 0, "output_tokens": 0}
         self.usage_complete = True
+        self.unknown_usage_attempts = 0
+        self.text_model_usage = {
+            "requests": 0,
+            "models": {},
+            "usage_complete": True,
+            "unknown_usage_attempts": 0,
+        }
         self.requests = 0
         self.stale = 0
         self.pending_text = None
@@ -123,13 +209,40 @@ class Run:
 
     def ask(self, body):
         self.requests += 1
-        result = self.decide(body)
+        try:
+            result = self.decide(body)
+        except Exception as error:
+            code = error_fields(error)["error"]
+            unknown = getattr(error, "unknown_usage_attempts", None)
+            if type(unknown) is not int or unknown < 0:
+                unknown = (
+                    0
+                    if code
+                    in {
+                        "credentials_missing",
+                        "credentials_invalid",
+                        "credential_file_permissions",
+                        "client_closed",
+                    }
+                    else 1
+                )
+            self.unknown_usage_attempts += unknown
+            if unknown:
+                self.usage_complete = False
+            raise
         usage = result.get("usage") or {}
         for k in self.usage:
-            if isinstance(usage.get(k), int):
+            if type(usage.get(k)) is int and usage[k] >= 0:
                 self.usage[k] += usage[k]
-        if not result.get("usage_complete", False):
+        reported_unknown = result.get("unknown_usage_attempts")
+        unknown = reported_unknown if type(reported_unknown) is int and reported_unknown >= 0 else 0
+        if (
+            result.get("usage_complete") is not True
+            or unknown > 0
+            or any(type(usage.get(k)) is not int or usage[k] < 0 for k in self.usage)
+        ):
             self.usage_complete = False
+            self.unknown_usage_attempts += unknown or 1
         return result
 
     def elapsed(self):
@@ -137,12 +250,25 @@ class Run:
 
     def finish(self, status, page, **extra):
         verification = None
-        if status == "done" and (self.verify_text or self.verify_url or self.verify_question):
+        if status == "done" and (
+            self.verify_text or self.verify_url or self.verify_question or self.verify_controls
+        ):
             try:
                 final = self.observe()
             except StalePage:
                 final = page
-            verification = self.verify(final)
+                verification = {"passed": False, "reason": "verification_observation_stale"}
+            else:
+                verification = (
+                    self.verify(final)
+                    if self.surface.fresh(final)
+                    else {
+                        "passed": False,
+                        "reason": "verification_observation_stale",
+                    }
+                )
+                if not self.surface.fresh(final):
+                    verification.update(passed=False, reason="verification_observation_stale")
             page = final
             if not verification["passed"]:
                 status = "unverified"
@@ -162,6 +288,9 @@ class Run:
             "requests": self.requests,
             "usage": self.usage,
             "usage_complete": self.usage_complete,
+            "unknown_usage_attempts": self.unknown_usage_attempts,
+            "text_model_usage": self.text_model_usage,
+            "uncertainty": self.uncertainty,
             "elapsed_ms": self.elapsed(),
             "final": {k: page.get(k) for k in ("url", "title") if page and page.get(k) is not None},
             "verification": verification,
@@ -175,6 +304,51 @@ class Run:
             checks["text"] = self.verify_text.casefold() in (page.get("text") or "").casefold()
         if self.verify_url:
             checks["url"] = bool(re.search(self.verify_url, page.get("url") or ""))
+        if self.verify_controls:
+            control_checks = []
+            for requested in self.verify_controls:
+                matched = {}
+                for action in page.get("actions", []):
+                    if action.get("control_label", action.get("label")) != requested["label"]:
+                        continue
+                    if "role" in requested and action.get("role") != requested["role"]:
+                        continue
+                    node = action.get("node", "action:" + action.get("id", "unknown"))
+                    matched.setdefault(str(node), []).append(action)
+                states = {}
+                if len(matched) == 1:
+                    for field in set(requested) - {"label", "role"}:
+                        observed = []
+                        for action in next(iter(matched.values())):
+                            key = field
+                            if field == "value":
+                                key = next(
+                                    (
+                                        k
+                                        for k in ("control_value", "current_value", "value")
+                                        if k in action
+                                    ),
+                                    "value",
+                                )
+                            if key in action:
+                                observed.append(action[key])
+                        states[field] = bool(observed) and all(
+                            type(value) is type(requested[field]) and value == requested[field]
+                            for value in observed
+                        )
+                passed = len(matched) == 1 and bool(states) and all(states.values())
+                control_checks.append(
+                    {
+                        "label": requested["label"],
+                        "matched_nodes": len(matched),
+                        "passed": passed,
+                        "state_matches": states,
+                    }
+                )
+            checks["controls"] = all(c["passed"] for c in control_checks) and not bool(
+                page.get("omitted_actions") or page.get("truncated")
+            )
+            checks["control_checks"] = control_checks
         if self.verify_question:
             body = {
                 "model": self.model,
@@ -190,8 +364,10 @@ class Run:
                 checks["question_probability"] = p
             except Exception as error:  # a failed verifier is a failed verification
                 checks["question"] = False
-                checks["question_error"] = type(error).__name__
-        passed = all(v for k, v in checks.items() if k in ("text", "url", "question"))
+                fields = error_fields(error)
+                checks["question_error"] = fields["error"]
+                checks["question_error_type"] = fields["error_type"]
+        passed = all(v for k, v in checks.items() if k in ("text", "url", "question", "controls"))
         return {"passed": passed, **checks}
 
     def text_for(self, decision, page):
@@ -210,7 +386,28 @@ class Run:
             }
             if self.pending_text and self.pending_text[0] == context:
                 return self.pending_text[1], self.pending_text[2]
-            text, meta = self.text_helper(context)
+            self.text_model_usage["requests"] += 1
+            try:
+                text, meta = self.text_helper(context)
+            except Exception:
+                self.text_model_usage["usage_complete"] = False
+                self.text_model_usage["unknown_usage_attempts"] += 1
+                raise
+            usage = (meta or {}).get("usage") or {}
+            counts = {
+                "input_tokens": usage.get("input_tokens", usage.get("prompt_tokens")),
+                "output_tokens": usage.get("output_tokens", usage.get("completion_tokens")),
+            }
+            model = str((meta or {}).get("model") or "unknown")
+            known = self.text_model_usage["models"].setdefault(
+                model, {"input_tokens": 0, "output_tokens": 0}
+            )
+            for key, count in counts.items():
+                if type(count) is int and count >= 0:
+                    known[key] += count
+            if any(type(v) is not int or v < 0 for v in counts.values()):
+                self.text_model_usage["usage_complete"] = False
+                self.text_model_usage["unknown_usage_attempts"] += 1
             self.pending_text = (context, text, meta)
             return text, meta
         return None, None
@@ -272,9 +469,12 @@ class Run:
             try:
                 result = self.ask(body)
             except Exception as error:
-                return self.finish("error", page, error=type(error).__name__)
+                return self.finish("error", page, **error_fields(error))
             decision = space.interpret(result["answers"], targets, controls)
             decision = self.gate_terminal(decision, result["answers"], targets, controls)
+            reasons = space.review_reasons(decision, result["answers"], targets, self.uncertainty)
+            if reasons:
+                decision["review_reasons"] = reasons
             decision.update(
                 latency_ms=round((self.clock() - started) * 1000), fingerprint=page["fingerprint"]
             )
@@ -283,6 +483,15 @@ class Run:
                 | {"action": describe(decision.get("action"))}
             )
             operation = decision["operation"]
+            if reasons:
+                return self.finish(
+                    "needs_review",
+                    page,
+                    reason="uncertain_decision",
+                    review_reasons=reasons,
+                    pending=describe(decision.get("action")),
+                    operation=operation,
+                )
             if operation in ("DONE", "BLOCKED"):
                 if not self.surface.fresh(page):
                     self.stale += 1
@@ -319,7 +528,10 @@ class Run:
                     self.stale += 1
                     page = self.observe()
                     continue
-                text, text_meta = self.text_for(decision, page)
+                try:
+                    text, text_meta = self.text_for(decision, page)
+                except Exception as error:
+                    return self.finish("error", page, **error_fields(error))
                 if text is None:
                     if action["node"] in self.unfillable or len(self.unfillable) >= 8:
                         return self.finish(

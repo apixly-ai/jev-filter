@@ -2,7 +2,7 @@
 
 [简体中文](agent-quickstart.zh-CN.md)
 
-[Chinese](agent-quickstart.zh-CN.md) · [Full integration reference](agents.md)
+[Full integration reference](agents.md)
 
 **One tool call in; a compact evidence packet out.** Your agent supplies the task
 and context. Jev Filter collects and judges internally. The agent handles planning,
@@ -80,3 +80,90 @@ are enabled; no result cache is used. [Context details](context-contract.md).
 
 The legacy `jev-context` command and `jev_context` Python imports remain compatible.
 For new Python integrations, use `from jev_filter.batch import run`.
+
+## JavaScript and MCP
+
+The npm package also exports a typed Node.js client. Install it in your project with
+`npm install @apixly/jev-filter`, then call the same CLI core:
+
+```js
+import { createClient } from '@apixly/jev-filter';
+
+const client = createClient({ timeoutMs: 120_000 });
+const { packet, exitCode } = await client.query([
+  { id: 'a', text: 'DNS recovered; requests now succeed.' },
+  { id: 'b', text: 'DNS lookup still fails before connection.' },
+], {
+  task: 'Find current unresolved DNS failures',
+  analysis: {
+    requirements: [
+      { id: 'unresolved', statement: 'DNS currently fails and has not recovered.', expected: true },
+    ],
+  },
+});
+
+console.log(packet.selected_ids, packet.review_ids, exitCode);
+// Exit 2 returns a usable packet with partial/review results.
+```
+
+`query`, `codeSearch`, `triage` and `diffReview` support an `AbortSignal` and bounded
+output; the client has a configurable timeout. Handle cancellation as an uncertain
+in-flight operation, not as permission to rerun a collector. The client does not
+implement a second provider transport.
+
+For an MCP-capable host, start a read-only server with a fixed workspace:
+
+```sh
+jev-filter mcp --root /path/to/workspace
+```
+
+A typical host configuration is:
+
+```json
+{
+  "mcpServers": {
+    "jev-filter": {
+      "command": "jev-filter",
+      "args": ["mcp", "--root", "/path/to/workspace"]
+    }
+  }
+}
+```
+
+Configure credentials in the host's process environment, using its secret mechanism.
+The server exposes only `filter_records`, `search_code`, `triage_events` and
+`read_evidence`. Code collection is restricted to the workspace; evidence reading is
+restricted to unchanged receipts created in that server session. It exposes no shell
+execution, browser actions or arbitrary file reads. Inference remains billable and
+still sends admitted input to TypeSafe. [Complete adapter contract](integrations.md) ·
+[Command reference](cli.md).
+
+## Improve a workflow with measured evidence
+
+Use opt-in retrieval when a code task needs more than an exact lexical match:
+
+```sh
+jev-filter code-search 'quota|billing' --root . \
+  --query 'deduct balance after a completed request' --expand-callers \
+  --max-files 100 --task 'Find implementations that deduct the user balance'
+
+jev-filter diff-review --root . --base main \
+  --task 'Find changes that weaken authorization checks'
+```
+
+These collectors return review candidates and scope receipts. A broader candidate
+pool may increase recall, irrelevant results and returned context. Semantic diff
+judgments guide inspection; they do not replace compilation, tests or review.
+
+Evaluate saved labeled decisions without a model call:
+
+```sh
+# From a repository checkout; use your own dataset for a real assessment.
+jev-filter eval --input examples/evaluation.json --threshold 0.5 --threshold 0.8
+```
+
+Prepare the input using the [evaluation guide](integrations.md#evaluate-saved-judgments-offline).
+Keep groups separated between
+calibration and test sets, inspect failures and review coverage, and measure the
+whole operation before changing routing. The report diagnoses probabilities; it does
+not fit or apply a calibrated probability model to production decisions.

@@ -1,0 +1,1016 @@
+{
+  "schema_version": 1,
+  "kind": "offline_local_browser_observation_action_ab",
+  "timestamp_utc": "2026-10-04T05:42:15.600353+00:00",
+  "version": "0.4.0",
+  "python": "3.14.2",
+  "platform": "Darwin",
+  "baseline_commit": "feb2bc21f34e5a7c918ae6dde8b35780c16e197a",
+  "baseline_page_js_sha256": "24b2289731daa9eb166e4222fad0c5320539eaa3f55d2bc0f143953fc0436dd7",
+  "treatment_page_js_sha256": "a4e9a24f14a7b32360b5c6df22b08157b091e9350d3bf75bf40330b9e54c15ba",
+  "fixture_sha256": "0e18064442115fb678662ff0621716df31387e6eefd448ce3de965842aca3a31",
+  "result_cache": false,
+  "model_usage": [],
+  "scope": "Pinned old and current DOM observer with identical current CDP transport, fixed program-owned action policy, synthetic about:blank HTML; no Jev inference or external accounts.",
+  "cost_assumption": "No inference requests: zero model tokens and inference cost, not a hosted end-to-end model cost estimate.",
+  "timing_boundary": "Fixture navigation plus injection, observation, action and independent DOM checks; browser startup excluded.",
+  "limitations": [
+    "Typed-state probe requires boolean ARIA/native states and exact current SELECT value; it is an observation contract check, not model accuracy.",
+    "More observed controls and successful multi-step scrolling increase context and runtime; medians combine different task completion paths.",
+    "Roleless controls require explicit onclick or focusable pointer styling; transparent inputs supported only for labelled native checkbox/radio toggles.",
+    "Nested scrolling is vertical; new-tab switching, closed shadow roots and cross-origin frames remain outside scope."
+  ],
+  "summary": {
+    "baseline": {
+      "passed_cases": 3,
+      "cases": 15,
+      "typed_state_recall": 0.2,
+      "wrong_actions": 0,
+      "freshness_rejections": 6,
+      "freshness_checks": 6,
+      "median_whole_operation_ms": 6.266,
+      "mean_planned_context_bytes": 5423
+    },
+    "treatment": {
+      "passed_cases": 15,
+      "cases": 15,
+      "typed_state_recall": 1.0,
+      "wrong_actions": 0,
+      "freshness_rejections": 6,
+      "freshness_checks": 6,
+      "median_whole_operation_ms": 13.042,
+      "mean_planned_context_bytes": 9838
+    }
+  },
+  "runs": [
+    {
+      "case": "typed_states",
+      "arm": "baseline",
+      "repeat": 0,
+      "passed": false,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": null,
+          "match": false
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 0.2,
+      "missing_or_mismatched_controls": 4,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 34.974,
+      "planned_context_bytes": 8053,
+      "context_samples_bytes": [
+        8053
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "typed_states",
+      "arm": "treatment",
+      "repeat": 0,
+      "passed": true,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": "recent",
+          "match": true
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 1.0,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 17.995,
+      "planned_context_bytes": 8200,
+      "context_samples_bytes": [
+        8200
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "baseline",
+      "repeat": 0,
+      "passed": false,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 10.074,
+      "planned_context_bytes": 2840,
+      "context_samples_bytes": [
+        2840
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "treatment",
+      "repeat": 0,
+      "passed": true,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 13.042,
+      "planned_context_bytes": 5242,
+      "context_samples_bytes": [
+        5242
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "baseline",
+      "repeat": 0,
+      "passed": false,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 6.351,
+      "planned_context_bytes": 2845,
+      "context_samples_bytes": [
+        2845
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "treatment",
+      "repeat": 0,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 24.904,
+      "planned_context_bytes": 5319,
+      "context_samples_bytes": [
+        5319
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "baseline",
+      "repeat": 0,
+      "passed": false,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.989,
+      "planned_context_bytes": 2873,
+      "context_samples_bytes": [
+        2873
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "treatment",
+      "repeat": 0,
+      "passed": true,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 6,
+      "executed_observed_actions": 6,
+      "whole_operation_ms": 27.112,
+      "planned_context_bytes": 19925,
+      "context_samples_bytes": [
+        2909,
+        2926,
+        2926,
+        2926,
+        2926,
+        5312
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "baseline",
+      "repeat": 0,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 8.502,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "treatment",
+      "repeat": 0,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 9.733,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "typed_states",
+      "arm": "treatment",
+      "repeat": 1,
+      "passed": true,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": "recent",
+          "match": true
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 1.0,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.992,
+      "planned_context_bytes": 8200,
+      "context_samples_bytes": [
+        8200
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "typed_states",
+      "arm": "baseline",
+      "repeat": 1,
+      "passed": false,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": null,
+          "match": false
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 0.2,
+      "missing_or_mismatched_controls": 4,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.181,
+      "planned_context_bytes": 8053,
+      "context_samples_bytes": [
+        8053
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "treatment",
+      "repeat": 1,
+      "passed": true,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 20.038,
+      "planned_context_bytes": 5242,
+      "context_samples_bytes": [
+        5242
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "baseline",
+      "repeat": 1,
+      "passed": false,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.547,
+      "planned_context_bytes": 2840,
+      "context_samples_bytes": [
+        2840
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "treatment",
+      "repeat": 1,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 12.624,
+      "planned_context_bytes": 5319,
+      "context_samples_bytes": [
+        5319
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "baseline",
+      "repeat": 1,
+      "passed": false,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 6.266,
+      "planned_context_bytes": 2845,
+      "context_samples_bytes": [
+        2845
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "treatment",
+      "repeat": 1,
+      "passed": true,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 6,
+      "executed_observed_actions": 6,
+      "whole_operation_ms": 25.96,
+      "planned_context_bytes": 19925,
+      "context_samples_bytes": [
+        2909,
+        2926,
+        2926,
+        2926,
+        2926,
+        5312
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "baseline",
+      "repeat": 1,
+      "passed": false,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.786,
+      "planned_context_bytes": 2873,
+      "context_samples_bytes": [
+        2873
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "treatment",
+      "repeat": 1,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 6.879,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "baseline",
+      "repeat": 1,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 8.462,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "typed_states",
+      "arm": "baseline",
+      "repeat": 2,
+      "passed": false,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": "false",
+          "match": false
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": null,
+          "match": false
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 0.2,
+      "missing_or_mismatched_controls": 4,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.717,
+      "planned_context_bytes": 8053,
+      "context_samples_bytes": [
+        8053
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "typed_states",
+      "arm": "treatment",
+      "repeat": 2,
+      "passed": true,
+      "probes": [
+        {
+          "label": "Notifications",
+          "field": "checked",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Pin item",
+          "field": "pressed",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "History",
+          "field": "selected",
+          "expected": false,
+          "actual": false,
+          "match": true
+        },
+        {
+          "label": "Sort",
+          "field": "control_value",
+          "expected": "recent",
+          "actual": "recent",
+          "match": true
+        },
+        {
+          "label": "Note",
+          "field": "value",
+          "expected": "",
+          "actual": "",
+          "match": true
+        }
+      ],
+      "typed_state_recall": 1.0,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 7.11,
+      "planned_context_bytes": 8200,
+      "context_samples_bytes": [
+        8200
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "baseline",
+      "repeat": 2,
+      "passed": false,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.416,
+      "planned_context_bytes": 2840,
+      "context_samples_bytes": [
+        2840
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "roleless_click",
+      "arm": "treatment",
+      "repeat": 2,
+      "passed": true,
+      "probes": [
+        {
+          "noninteractive_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 12.234,
+      "planned_context_bytes": 5242,
+      "context_samples_bytes": [
+        5242
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "baseline",
+      "repeat": 2,
+      "passed": false,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 6.742,
+      "planned_context_bytes": 2845,
+      "context_samples_bytes": [
+        2845
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "transparent_toggle",
+      "arm": "treatment",
+      "repeat": 2,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 1,
+      "whole_operation_ms": 25.648,
+      "planned_context_bytes": 5319,
+      "context_samples_bytes": [
+        5319
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "baseline",
+      "repeat": 2,
+      "passed": false,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 1,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 1,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 5.956,
+      "planned_context_bytes": 2873,
+      "context_samples_bytes": [
+        2873
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "nested_scroll",
+      "arm": "treatment",
+      "repeat": 2,
+      "passed": true,
+      "probes": [],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 0,
+      "freshness_checks": 0,
+      "observations": 6,
+      "executed_observed_actions": 6,
+      "whole_operation_ms": 25.746,
+      "planned_context_bytes": 19925,
+      "context_samples_bytes": [
+        2909,
+        2926,
+        2926,
+        2926,
+        2926,
+        5312
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "baseline",
+      "repeat": 2,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 7.929,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    },
+    {
+      "case": "freshness_occlusion",
+      "arm": "treatment",
+      "repeat": 2,
+      "passed": true,
+      "probes": [
+        {
+          "disabled_excluded": true
+        }
+      ],
+      "typed_state_recall": null,
+      "missing_or_mismatched_controls": 0,
+      "wrong_actions": 0,
+      "freshness_rejections": 2,
+      "freshness_checks": 2,
+      "observations": 2,
+      "executed_observed_actions": 0,
+      "whole_operation_ms": 7.414,
+      "planned_context_bytes": 10504,
+      "context_samples_bytes": [
+        5252,
+        5252
+      ],
+      "model_usage": [],
+      "model_requests": 0,
+      "inference_cost_usd": 0
+    }
+  ]
+}
