@@ -1,0 +1,5 @@
+{"request_id":"recovered","attempt":1,"phase":"tcp","status":"failed","message":"Earlier attempt failed before HTTP response."}
+{"request_id":"current-tls","attempt":1,"phase":"tls","status":"failed","response_headers":false,"message":"CURRENT attempt failed certificate verification before HTTP response."}
+{"request_id":"recovered","attempt":2,"phase":"response","status":"succeeded","http_status":200,"response_headers":true,"message":"CURRENT attempt returned HTTP 200 with a valid body."}
+{"request_id":"current-http","attempt":1,"phase":"response","status":"failed","http_status":503,"response_headers":true,"message":"CURRENT attempt received HTTP 503; response headers were received."}
+{"request_id":"unknown-phase","attempt":1,"status":"failed","message":"CURRENT attempt failed; failure phase and presence of HTTP response headers were not recorded."}

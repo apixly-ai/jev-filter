@@ -17,7 +17,7 @@ dependencies = ["httpx>=0.28.1,<0.29"]
 [project.optional-dependencies]
 stats = ["tiktoken>=0.9,<1"]
 code = ["tree-sitter>=0.25.2,<0.27", "tree-sitter-javascript>=0.25,<0.26", "tree-sitter-typescript>=0.23.2,<0.24", "tree-sitter-go>=0.25,<0.26"]
-dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "build>=1.2,<2", "twine>=7,<8", "pip-audit>=2.8,<3", "jsonschema>=4.23,<5", "pyyaml>=6,<7"]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "build>=1.2,<2", "twine>=7,<8", "pip-audit>=2.8,<3", "jsonschema>=4.23,<5", "pyyaml>=6,<7", "markdown>=3.7,<4"]
 docs = ["matplotlib>=3.10,<4", "markdown>=3.7,<4"]
 bench-llm = ["system-one-adapter>=0.2.1,<0.3"]
 bundle = ["pyinstaller>=6.16,<7", "tiktoken>=0.9,<1"]
@@ -44,7 +44,7 @@ jev-context = "jev_context.cli:entrypoint"
 
 [project.urls]
 Homepage = "https://github.com/apixly-ai/jev-filter"
-Documentation = "https://github.com/apixly-ai/jev-filter/tree/main/docs"
+Documentation = "https://apixly-ai.github.io/jev-filter/"
 Issues = "https://github.com/apixly-ai/jev-filter/issues"
 Changelog = "https://github.com/apixly-ai/jev-filter/blob/main/CHANGELOG.md"
 

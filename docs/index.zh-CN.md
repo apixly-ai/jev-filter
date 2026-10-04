@@ -1,6 +1,10 @@
 <p><img src="assets/hero.zh-CN.svg" alt="Jev Filter：把关键信号交给 AI。采集一次，结合上下文判断，返回可回查的证据。"></p>
 
-# 把关键信号交给 AI。
+# Jev Filter：AI agent 工具结果的语义筛选
+
+Jev Filter 是由 Apixly 独立维护、采用 MIT 许可证的工具。它根据任务与明确提供的上下文筛选搜索结果、代码候选、日志和命令输出，返回包含来源 ID 与待复核项的精简、类型化证据包；保留的完整原文仍可按 ID 回查。官方 npm 包为 **`@apixly/jev-filter`**，也可通过 Python、JavaScript / TypeScript 与只读 MCP 接入。
+
+适用于大量记录需要按同一明确标准做语义判断：哪些检索段落符合证据要求，哪段代码实现某种行为，哪些关联日志表明当前故障。程序负责采集与验证，Jev 做重复判断，主模型规划、推理与写作。[安装说明](getting-started.zh-CN.md) · [常见问题](faq.zh-CN.md)。
 
 **返回工具上下文减少 91.6–97.2%。** 2026-10-04 付费 A/B：24 次真实 agent 运行、三个合成场景、两个主模型、每臂重复两次。把相关证据交给 AI，完整原文仍可按 ID 回查。
 
@@ -43,6 +47,16 @@
 **浏览器的已验证进展：** 补充观察到的滚动容器证据后，嵌套滚动夹具在同一严格 **0.55 / 0.10** 策略下，完成 **0/3 → 3/3**。六次普通目标运行仍需复核；模型返回 `DONE`，还必须通过独立终态检查。[当前浏览器证据、失败变体与接管研究](benchmarks.zh-CN.md)。
 
 [完整测试](benchmarks.zh-CN.md) · [安装并运行](getting-started.zh-CN.md) · [合成流程录制](showcase.zh-CN.md)
+
+## 实用教程
+
+| 任务 | 可运行教程 |
+|---|---|
+| 在主模型阅读前筛选检索候选 | [RAG 与 AI agent 的搜索结果筛选](search-result-filtering.zh-CN.md) |
+| 在有界词法候选中定位代码行为 | [Coding agent 的语义代码搜索](semantic-code-search.zh-CN.md) |
+| 区分当前事故与已经恢复的历史故障 | [通过语义筛选排查关联日志](log-triage.zh-CN.md) |
+
+每篇包含合成输入、由调用方定义的契约、预期结果与离线准备步骤。推理需要 TypeSafe Jev API key 并消耗提供方用量；这些示例不构成新的实测结果。
 
 ## 从实际任务开始
 

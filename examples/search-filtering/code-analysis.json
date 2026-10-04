@@ -1,0 +1,28 @@
+{
+  "mode": "filter",
+  "context": {
+    "goal": "Find the implementation that retries transient TimeoutError failures with bounded attempts and backoff.",
+    "scope": "Complete Python function candidates from the synthetic code.py fixture only.",
+    "exclusions": "Comments/logging about retries and one-shot error handling do not count as retry implementations."
+  },
+  "required_context": ["goal", "scope", "exclusions"],
+  "required_record_fields": ["source.symbol", "source.path", "source.source_sha256"],
+  "requirements": [
+    {
+      "id": "retry_timeout",
+      "statement": "The function invokes the operation again after a TimeoutError.",
+      "expected": true
+    },
+    {
+      "id": "bounded_attempts",
+      "statement": "The function limits the number of attempts.",
+      "expected": true
+    },
+    {
+      "id": "backoff",
+      "statement": "The function waits between failed attempts.",
+      "expected": true
+    }
+  ],
+  "fields": ["source_id", "text", "answers", "source"]
+}

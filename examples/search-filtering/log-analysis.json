@@ -1,0 +1,24 @@
+{
+  "mode": "filter",
+  "context": {
+    "goal": "Find current unresolved network establishment failures.",
+    "scope": "Synthetic request histories, grouped by request_id. Input order is observed event order; the largest attempt number is the current attempt within each request.",
+    "success": "The current attempt fails during DNS, TCP or TLS before receiving HTTP response headers.",
+    "exclusions": "An earlier failed attempt followed by a successful current attempt, and HTTP failures after response headers. Do not guess missing phases."
+  },
+  "required_context": ["goal", "scope", "success", "exclusions"],
+  "required_record_fields": ["source.event_count"],
+  "requirements": [
+    {
+      "id": "establishment",
+      "statement": "The CURRENT attempt fails during DNS, TCP or TLS establishment.",
+      "expected": true
+    },
+    {
+      "id": "response",
+      "statement": "The CURRENT attempt received HTTP response headers.",
+      "expected": false
+    }
+  ],
+  "fields": ["source_id", "answers", "source"]
+}

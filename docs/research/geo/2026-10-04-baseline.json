@@ -1,0 +1,674 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-04 13:15:08 UTC",
+  "evaluator": "Independent validation agent",
+  "search_surface": "web.run search_query, one query per request, response_length=long",
+  "measurement_scope": "Metadata from the returned search sample. Returned order is not a verified search-engine SERP rank. The underlying search provider, geography, personalization, and index state are not exposed.",
+  "design": {
+    "query_count": 8,
+    "brand_queries": 2,
+    "nonbrand_queries": 6,
+    "queries_frozen_before_changes": true,
+    "rerun_rule": "Use EXACT strings with the same tool and response_length; retain unfavorable and unchanged outcomes."
+  },
+  "project_identity": {
+    "repository": "https://github.com/apixly-ai/jev-filter",
+    "docs_prefix": "https://apixly-ai.github.io/jev-filter/",
+    "npm": "https://www.npmjs.com/package/@apixly/jev-filter",
+    "python_distribution": "https://pypi.org/project/jev-filter/",
+    "exclusions": [
+      "https://pypi.org/project/jevfilter/ is a different project.",
+      "https://jevlist.ai/projects/bytebell-jev-filter is a different or historical ByteBell listing and is not the official apixly-ai project URL.",
+      "Third-party GitHub mirrors are not official sources."
+    ],
+    "identity_correction": "The npm package is scoped @apixly/jev-filter. Confirmed from the current maintained README; frozen search queries unchanged. No baseline result URL matched the scoped npm package; an unofficial GitHub mirror mentioned it in page content."
+  },
+  "baseline": {
+    "official_url_found_query_count": 0,
+    "official_url_found_brand_queries": 0,
+    "official_url_found_nonbrand_queries": 0,
+    "answer_citation_measurement": "not measured",
+    "answer_recommendation_measurement": "not measured"
+  },
+  "limitations": [
+    "Search samples do not establish whether a page is indexed.",
+    "No live billable model calls or answer-engine trials were run.",
+    "Finding a URL in search is separate from a generated answer citing or recommending it.",
+    "Search results vary; same-day before/after changes cannot isolate cause without recrawl evidence.",
+    "A return position in this tool must not be called a Google or Bing rank."
+  ],
+  "queries": [
+    {
+      "id": "brand_01",
+      "query": "\"jev-filter\"",
+      "type": "brand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        },
+        {
+          "returned_order": 2,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        }
+      ],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 16,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        },
+        {
+          "returned_order": 2,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        },
+        {
+          "returned_order": 3,
+          "title": "Select tests from a Git change \u2014 JevMade guide notes",
+          "url": "https://jevmade.com/guides/jev-test-filter-guide?sort=newest&topic=all"
+        },
+        {
+          "returned_order": 4,
+          "title": "jev-test-filter: Extracting Only Relevant Tests from git diff",
+          "url": "https://zenn.dev/mizchi/articles/jev-test-filter-intro?locale=en"
+        },
+        {
+          "returned_order": 5,
+          "title": "jev-test-filter: git diff \u304b\u3089\u95a2\u9023\u3059\u308b\u30c6\u30b9\u30c8\u3060\u3051\u3092\u62bd\u51fa\u3059\u308b",
+          "url": "https://zenn.dev/mizchi/articles/jev-test-filter-intro"
+        },
+        {
+          "returned_order": 6,
+          "title": "pgjev - ask your Postgres tables questions in plain language",
+          "url": "https://pgjev.com/"
+        },
+        {
+          "returned_order": 7,
+          "title": "Semble + Jev (semble-jev) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/semble-jev"
+        },
+        {
+          "returned_order": 8,
+          "title": "jev \u2013 DuckDB Community Extensions",
+          "url": "https://duckdb.org/community_extensions/extensions/jev"
+        },
+        {
+          "returned_order": 9,
+          "title": "Jev.Store",
+          "url": "https://www.jev.store/"
+        },
+        {
+          "returned_order": 11,
+          "title": "SCIENTIFIC ANNUAL REPORT FOR 2016LAO-OXFORD-MAHOSOT HOSPITAL-WELLCOME TRUST RESEARCH UNIT (LOMWRU)",
+          "url": "https://www.tropmedres.ac/files/lomwru-files/lomwru-2016-annual-report-to-lao-moh.pdf"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "brand_02",
+      "query": "\"Jev Filter\" semantic filter",
+      "type": "brand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        }
+      ],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 18,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        },
+        {
+          "returned_order": 2,
+          "title": "jev-filter \u2014 Jev Library",
+          "url": "https://jevlibrary.dev/projects/apixly-ai-jev-filter"
+        },
+        {
+          "returned_order": 3,
+          "title": "jev/README.en.md at main \u00b7 okooo5km/jev \u00b7 GitHub",
+          "url": "https://github.com/okooo5km/jev/blob/main/README.en.md"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - apixly-ai/jev-filter: Semantic filtering for AI tool results. Native npm CLI, caller-controlled context, batching, and reproducible benchmarks. \u00b7 GitHub",
+          "url": "https://www.tempodimare.com/?_=%2Fapixly-ai%2Fjev-filter%23nIKhFiPUZajtbREHkyDmOJub"
+        },
+        {
+          "returned_order": 5,
+          "title": "GitHub - thehumanworks/jevgrep \u00b7 GitHub",
+          "url": "https://github.com/thehumanworks/jevgrep"
+        },
+        {
+          "returned_order": 6,
+          "title": "jev \u2013 DuckDB Community Extensions",
+          "url": "https://duckdb.org/community_extensions/extensions/jev"
+        },
+        {
+          "returned_order": 7,
+          "title": "GitHub - okooo5km/jev: Typed decisions from the shell: an unofficial stdlib-Python CLI and Agent Skill for TypeSafe's Jev model, via the TypeSafe API (default) or OpenRouter. Yes/no, choice and ordinal scores with calibrated probabilities, semantic grep and batch mode. \u00b7 GitHub",
+          "url": "https://github.com/okooo5km/jev"
+        },
+        {
+          "returned_order": 8,
+          "title": "Context Filter | GPT Researcher",
+          "url": "https://docs.gptr.dev/docs/gpt-researcher/gptr/context-filter"
+        },
+        {
+          "returned_order": 9,
+          "title": "Winnow \u00b7 GhalebDweikat \u00b7 Context GC & Filter \u2014 Jev open-source project \u00b7 Jev Tutorial",
+          "url": "https://www.jev-tutorial.org/projects/winnow"
+        },
+        {
+          "returned_order": 10,
+          "title": "jevql \u2014 Jev \u00b7 Data & Search | Awesome Jev",
+          "url": "https://logicrw.github.io/awesome-jev-projects/en/projects/kylemclaren/jevql/"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": [
+        {
+          "returned_order": 2,
+          "title": "jev-filter \u2014 Jev Library",
+          "url": "https://jevlibrary.dev/projects/apixly-ai-jev-filter"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - apixly-ai/jev-filter: Semantic filtering for AI tool results. Native npm CLI, caller-controlled context, batching, and reproducible benchmarks. \u00b7 GitHub",
+          "url": "https://www.tempodimare.com/?_=%2Fapixly-ai%2Fjev-filter%23nIKhFiPUZajtbREHkyDmOJub"
+        }
+      ]
+    },
+    {
+      "id": "task_01",
+      "query": "semantic code search CLI for AI coding agents",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 36,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://github.com/bartolli/codanna"
+        },
+        {
+          "returned_order": 2,
+          "title": "GitHub - probelabs/probe: AI-friendly semantic code search engine for large codebases. Combines ripgrep speed with tree-sitter AST parsing. Powers AI coding assistants with precise, context-aware code understanding. \u00b7 GitHub",
+          "url": "https://github.com/probelabs/probe"
+        },
+        {
+          "returned_order": 3,
+          "title": "GitHub - get-sema/sema: Local semantic code index and MCP server for Claude Code, Codex, and opencode. Includes semantic search, reuse checks, impact analysis, and a VS Code chat and agent supporting local CLIs and API providers\u2014all powered by tree-sitter, SBERT, and ChromaDB. \u00b7 GitHub",
+          "url": "https://github.com/get-sema/sema"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - CodeBendKit/codeseek: Rust-powered code intelligence CLI for AI coding agents. Builds call graphs and hybrid semantic search indexes (Dense + Sparse + RRF + Reranker) across 7 languages. Ships as native MCP tools for Claude Code and Codex CLI. \u00b7 GitHub",
+          "url": "https://github.com/CodeBendKit/codeseek"
+        },
+        {
+          "returned_order": 5,
+          "title": "@semacode/cli - npm",
+          "url": "https://www.npmjs.com/package/%40semacode/cli"
+        },
+        {
+          "returned_order": 6,
+          "title": "Semantic Code Search for AI Agents | grepai",
+          "url": "https://yoanbernabeu.github.io/grepai/"
+        },
+        {
+          "returned_order": 7,
+          "title": "GitHub - Stahldavid/sensegrep: Semantic + structural code search for AI-native development \u00b7 GitHub",
+          "url": "https://github.com/Stahldavid/sensegrep"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://github.itlym.cn/bartolli/codanna"
+        },
+        {
+          "returned_order": 9,
+          "title": "Semantic Code Search for AI Agents | grepai",
+          "url": "https://yoanbernabeu.github.io/grepai"
+        },
+        {
+          "returned_order": 10,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://owu.terracat.net/browse/aHR0cHM6Ly9naXRodWIuY29t/bartolli/codanna"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "task_02",
+      "query": "LLM log triage tool with structured output",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 37,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "GitHub - afridiharis/llm-test-triage: LLM-powered triage for failing test logs \u2014 parses pytest/behave output, extracts failures, produces structured root-cause analysis. Works offline with a deterministic mock backend by default; upgrades to Anthropic or OpenAI when an API key is set. \u00b7 GitHub",
+          "url": "https://github.com/afridiharis/llm-test-triage"
+        },
+        {
+          "returned_order": 2,
+          "title": "apxi/qwen3-5-0-8b-security-triage-v4-7-gguf \u00b7 Hugging Face",
+          "url": "https://huggingface.co/apxi/qwen3-5-0-8b-security-triage-v4-7-gguf"
+        },
+        {
+          "returned_order": 3,
+          "title": "GitHub - parnikarakshe/llm-log-analyzer: AI-powered log analysis pipeline using Gemini to triage failures and generate bug reports \u00b7 GitHub",
+          "url": "https://github.com/parnikarakshe/llm-log-analyzer"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - MohitDholakiya/llm-soc-triage: Read-only LLM-powered SOC triage assistant with a kill switch. Strict JSON schema, confidence threshold, feedback loop, and pluggable Ollama / vLLM / Wazuh / Elastic backends. \u00b7 GitHub",
+          "url": "https://github.com/MohitDholakiya/llm-soc-triage"
+        },
+        {
+          "returned_order": 5,
+          "title": "GitHub - Keerthija5/llm_document_intelligence: LLM-based business document triage dashboard with BART/T5 comparison and structured extraction. \u00b7 GitHub",
+          "url": "https://github.com/Keerthija5/llm_document_intelligence"
+        },
+        {
+          "returned_order": 6,
+          "title": "GHOSTPLUSE INCIDENTRESPONSE COPILOT | Devpost",
+          "url": "https://devpost.com/software/ghostpluse-incidentresponse-copilot"
+        },
+        {
+          "returned_order": 7,
+          "title": "Log Tail \u2192 LLM Triage - Voice AI Agent | Strongly.AI",
+          "url": "https://www.strongly.ai/marketplace/log-tail-llm-triage.html"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - OALabs/asftriage: LLM Agent Session Forensics Tool \u00b7 GitHub",
+          "url": "https://github.com/OALabs/asftriage"
+        },
+        {
+          "returned_order": 9,
+          "title": "LLM Observability & Guardrails Platform | Sigmoda",
+          "url": "https://www.sigmoda.com/"
+        },
+        {
+          "returned_order": 10,
+          "title": "Velgent \u2014 AI products for enterprise IT operations",
+          "url": "https://www.velgent.com/products/triage"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "task_03",
+      "query": "Python semantic filtering for RAG retrieval results",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 31,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "SeCon-RAG: A Two-Stage Semantic Filtering and Conflict-Free Framework for Trustworthy RAG",
+          "url": "https://arxiv.org/abs/2510.09710"
+        },
+        {
+          "returned_order": 2,
+          "title": "Retrieval | OpenAI API",
+          "url": "https://developers.openai.com/api/docs/guides/retrieval"
+        },
+        {
+          "returned_order": 3,
+          "title": "Build a RAG Pipeline with Python | FoxNose Documentation",
+          "url": "https://www.foxnose.net/docs/guides/build-rag-pipeline-python"
+        },
+        {
+          "returned_order": 4,
+          "title": "Build Metadata Filtering for RAG in Python",
+          "url": "https://mindforgecore.com/build-metadata-filtering-for-rag-in-python/"
+        },
+        {
+          "returned_order": 5,
+          "title": "Reducing Redundancy in Retrieval-Augmented Generation through Chunk Filtering",
+          "url": "https://arxiv.org/abs/2604.24334"
+        },
+        {
+          "returned_order": 6,
+          "title": "Filter RAG Passages with Jev Before Sending Them to an LLM | Jev Manual",
+          "url": "https://jevmanual.com/tutorials/rag-passage-filtering/"
+        },
+        {
+          "returned_order": 7,
+          "title": "GitHub - superlinear-ai/raglite: \ud83e\udd64 RAGLite is a Python toolkit for Retrieval-Augmented Generation (RAG) with DuckDB or PostgreSQL \u00b7 GitHub",
+          "url": "https://github.com/superlinear-ai/raglite"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - Nizarassad/rag-semantic-search: Offline-first, production-grade RAG / semantic search \u2014 pluggable backends, FastAPI, Docker, CI, and an honest eval harness with real measured metrics. \u00b7 GitHub",
+          "url": "https://github.com/Nizarassad/rag-semantic-search"
+        },
+        {
+          "returned_order": 10,
+          "title": "Learning to Filter Context for RAG",
+          "url": "https://www.dhiwise.com/post/learning-to-filter-context-for-retrieval-augmented-generation"
+        },
+        {
+          "returned_order": 11,
+          "title": "How to Add Metadata Filters to RAG Retrieval with Python",
+          "url": "https://datatweets.com/tutorials/add-metadata-filters-rag-python/"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "task_04",
+      "query": "reduce tool output context for AI agents",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 41,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "Tool Output Reduction Layers for AI Agents Without Losing the Important Bits \u00b7 Anirudh Negi",
+          "url": "https://negiadventures.github.io/blog/tool-output-reduction-ai-agents"
+        },
+        {
+          "returned_order": 2,
+          "title": "Manage tool context - Claude Platform Docs",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context"
+        },
+        {
+          "returned_order": 3,
+          "title": "How to Prune AI Tool Output Without Losing Context",
+          "url": "https://www.itechguides.com/how-to-prune-ai-tool-output-without-losing-context/"
+        },
+        {
+          "returned_order": 4,
+          "title": "Context management - OpenAI Agents SDK",
+          "url": "https://openai.github.io/openai-agents-python/context/"
+        },
+        {
+          "returned_order": 5,
+          "title": "DTOC: Dynamic Tool Output Compression for Adaptive Context Management in AI Agents",
+          "url": "https://arxiv.org/abs/2609.26121"
+        },
+        {
+          "returned_order": 6,
+          "title": "Rule-Based Tool-Output Pruning: How AI Agent Context Filters Work",
+          "url": "https://www.itechguides.com/what-is-rule-based-tool-output-pruning-and-how-does-it-work/"
+        },
+        {
+          "returned_order": 7,
+          "title": "How to Safely Trim Irrelevant AI Tool Output",
+          "url": "https://www.itechguides.com/how-to-write-rules-that-safely-trim-irrelevant-ai-tool-output/"
+        },
+        {
+          "returned_order": 8,
+          "title": "Agent - OpenAI Agents SDK",
+          "url": "https://openai.github.io/openai-agents-python/ref/agent/"
+        },
+        {
+          "returned_order": 9,
+          "title": "vscode-docs/docs/agents/concepts/context.md at main \u00b7 microsoft/vscode-docs \u00b7 GitHub",
+          "url": "https://github.com/microsoft/vscode-docs/blob/main/docs/agents/concepts/context.md"
+        },
+        {
+          "returned_order": 10,
+          "title": "Less Context, Better Agents: Efficient Context Engineering for Long-Horizon Tool-Using LLM Agents",
+          "url": "https://arxiv.org/abs/2606.10209"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "task_05",
+      "query": "filter JSONL records with an LLM command line",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 30,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "llm-mr \u00b7 PyPI",
+          "url": "https://pypi.org/project/llm-mr/"
+        },
+        {
+          "returned_order": 2,
+          "title": "JSONL on the Command Line \u2014 jq, split, shuf, awk Recipes",
+          "url": "https://jsonlkit.com/jsonl-in-bash"
+        },
+        {
+          "returned_order": 3,
+          "title": "JSONL: a practical guide to JSON Lines",
+          "url": "https://flaviocopes.com/jsonl/"
+        },
+        {
+          "returned_order": 4,
+          "title": "JSONL Format (JSON Lines): Read, Write, and Stream Line-Delimited JSON \u2014 Jsonic",
+          "url": "https://jsonic.io/guides/jsonl-format"
+        },
+        {
+          "returned_order": 5,
+          "title": "Overview - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/cli/overview/"
+        },
+        {
+          "returned_order": 6,
+          "title": "NDJSON / JSON Lines Filter \u2014 gizza.ai",
+          "url": "https://gizza.ai/tools/ndjson-filter/"
+        },
+        {
+          "returned_order": 7,
+          "title": "JSONL Tutorial \u2014 Create, Read, Validate & Convert JSONL F...",
+          "url": "https://jsonl.co/guide/jsonl-tutorial"
+        },
+        {
+          "returned_order": 8,
+          "title": "Quick Start - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/getting-started/quickstart/"
+        },
+        {
+          "returned_order": 9,
+          "title": "How to use jq to output JSONL (one independent JSON object per line) - Stack Overflow",
+          "url": "https://stackoverflow.com/questions/42178636/how-to-use-jq-to-output-jsonl-one-independent-json-object-per-line/42178695"
+        },
+        {
+          "returned_order": 10,
+          "title": "FAQ - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/faq/"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    },
+    {
+      "id": "task_06",
+      "query": "RAG evidence filtering recoverable source records",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:15:08 UTC",
+      "official_project_matches": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null,
+      "parsable_result_entries": 33,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "Retrieval-Augmented LLMs for Security Incident Analysis",
+          "url": "https://arxiv.org/abs/2603.18196"
+        },
+        {
+          "returned_order": 2,
+          "title": "EvidentialRAG: Quantifying and Mitigating Information Conflict in Multi-Source Retrieval-Augmented Generation via Evidential Deep Learning",
+          "url": "https://arxiv.org/abs/2607.10491"
+        },
+        {
+          "returned_order": 3,
+          "title": "Assessing the Downstream Utility of Evidence-Aware Retrieval in RAG",
+          "url": "https://arxiv.org/abs/2608.26379"
+        },
+        {
+          "returned_order": 4,
+          "title": "Methodology | Raggression",
+          "url": "https://www.raggression.com/methodology"
+        },
+        {
+          "returned_order": 5,
+          "title": "Does More Retrieved Evidence Help Visual Retrieval-Augmented Generation with Diffusion Language Models?",
+          "url": "https://arxiv.org/abs/2608.07006"
+        },
+        {
+          "returned_order": 6,
+          "title": "RAG API with Citations and Filters | CorpusMesh",
+          "url": "https://corpusmesh.com/developers/retrieval-api"
+        },
+        {
+          "returned_order": 7,
+          "title": "Rag.NET/docs/guide/retrieval.md at main \u00b7 MarcelRoozekrans/Rag.NET \u00b7 GitHub",
+          "url": "https://github.com/MarcelRoozekrans/Rag.NET/blob/main/docs/guide/retrieval.md"
+        },
+        {
+          "returned_order": 8,
+          "title": "RAG Reliability: Retrieval, Reranking, Grounding and Evaluation | D2 Group",
+          "url": "https://d2group.co/insights/automation/rag-reliability"
+        },
+        {
+          "returned_order": 9,
+          "title": "RAG Fault Isolation: Is the Answer Defensible? | Reliable Context",
+          "url": "https://reliablecontext.com/articles/rag-fault-isolation-matrix"
+        },
+        {
+          "returned_order": 10,
+          "title": "Retrieval (RAG) over patient records - Responsible Clinical AI",
+          "url": "https://responsible-clinical-ai.org/architecture/rag/"
+        }
+      ],
+      "nonofficial_mentions_of_apixly_ai_project": []
+    }
+  ],
+  "live_fetch_baseline": [
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/",
+      "captured_at_utc": "2026-10-04T13:18:40.451379+00:00",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 173,
+      "body_sha256": "3351b9c301f06ae86c90de944b37a7851ffe48998e07f9b31bf76aa4f422cd07",
+      "title": "",
+      "description": null,
+      "canonical": [],
+      "meta_refresh": "0;url=docs/index.html",
+      "robots_meta": null,
+      "h1_count": 0
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/",
+      "captured_at_utc": "2026-10-04T13:18:40.451639+00:00",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10098,
+      "body_sha256": "197279b0e01c39bb902775dc9b1f3f487a592f7f2bd5d5915daadf839178413e",
+      "title": "Give your agent the signal. \u00b7 Jev Filter",
+      "description": "Jev Filter turns large tool outputs into typed decisions with traceable evidence for AI agents.",
+      "canonical": [],
+      "meta_refresh": null,
+      "robots_meta": null,
+      "h1_count": 1
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+      "captured_at_utc": "2026-10-04T13:18:40.451726+00:00",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 67164,
+      "body_sha256": "d628fd49199969f79037e53de5a903fb315bf7bc5d23c3a4c6d04a21dfa92f32",
+      "title": "Benchmarks \u00b7 Jev Filter",
+      "description": "Jev Filter turns large tool outputs into typed decisions with traceable evidence for AI agents.",
+      "canonical": [],
+      "meta_refresh": null,
+      "robots_meta": null,
+      "h1_count": 1
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/sitemap.xml",
+      "captured_at_utc": "2026-10-04T13:18:40.451793+00:00",
+      "status": 404,
+      "error_kind": "http_error"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/robots.txt",
+      "captured_at_utc": "2026-10-04T13:18:40.451845+00:00",
+      "status": 404,
+      "error_kind": "http_error"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/robots.txt",
+      "captured_at_utc": "2026-10-04T13:18:40.451890+00:00",
+      "status": 404,
+      "error_kind": "http_error"
+    },
+    {
+      "requested_url": "https://github.com/apixly-ai/jev-filter",
+      "captured_at_utc": "2026-10-04T13:18:40.451933+00:00",
+      "status": 200,
+      "final_url": "https://github.com/apixly-ai/jev-filter",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 403139,
+      "body_sha256": "9b7bf8d8c84494e66f9748542a17d65a4fe2dba400395582c6aa7e728902a265",
+      "title": "GitHub - apixly-ai/jev-filter: Fast semantic selection for AI agents: 96 records in 1.31s and 91.6\u201397.2% less returned tool context in synthetic live benchmarks. CLI \u00b7 Python \u00b7 TypeScript \u00b7 MCP. \u00b7 GitHub",
+      "description": "Fast semantic selection for AI agents: 96 records in 1.31s and 91.6\u201397.2% less returned tool context in synthetic live benchmarks. CLI \u00b7 Python \u00b7 TypeScript \u00b7 MCP. - apixly-ai/jev-filter",
+      "canonical": [],
+      "meta_refresh": null,
+      "robots_meta": null,
+      "h1_count": 0
+    }
+  ]
+}
