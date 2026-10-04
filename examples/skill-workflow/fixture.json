@@ -1,0 +1,92 @@
+{
+  "records": [
+    {
+      "id": "r1",
+      "text": "The CURRENT request failed DNS lookup before any connection or HTTP response.",
+      "source_url": "fixture://connection/r1",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r2",
+      "text": "The CURRENT request was refused during TCP establishment and received no HTTP headers.",
+      "source_url": "fixture://connection/r2",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r3",
+      "text": "The CURRENT TLS handshake failed, so no HTTP response headers were received.",
+      "source_url": "fixture://connection/r3",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r4",
+      "text": "DNS failed historically but the CURRENT request succeeded and returned HTTP 200 headers.",
+      "source_url": "fixture://connection/r4",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r5",
+      "text": "The CURRENT server returned HTTP 503 headers with an empty response body.",
+      "source_url": "fixture://connection/r5",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r6",
+      "text": "No evidence about CURRENT connection establishment or HTTP headers has been observed.",
+      "source_url": "fixture://connection/r6",
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r7",
+      "text": "The CURRENT request failed DNS lookup before any HTTP response.",
+      "source_url": null,
+      "observed_at": "2026-10-04T00:00:00Z"
+    },
+    {
+      "id": "r8",
+      "text": "The CURRENT request succeeded and returned HTTP 200 response headers.",
+      "source_url": "fixture://connection/r8",
+      "observed_at": "2026-10-04T00:00:00Z"
+    }
+  ],
+  "analysis": {
+    "model": "jev-1.13.0",
+    "contract": {
+      "id": "skill.connection-screen",
+      "version": "1"
+    },
+    "context": {
+      "scope": "Synthetic current connection incidents"
+    },
+    "required_context": [
+      "scope"
+    ],
+    "required_record_fields": [
+      "source.source_url",
+      "source.observed_at"
+    ],
+    "requirements": [
+      {
+        "id": "establishment",
+        "statement": "The CURRENT request failed during DNS, TCP or TLS establishment.",
+        "expected": true
+      },
+      {
+        "id": "headers",
+        "statement": "The CURRENT request received HTTP response headers.",
+        "expected": false
+      }
+    ]
+  },
+  "gold": {
+    "selected_ids": [
+      "r1",
+      "r2",
+      "r3"
+    ],
+    "review_ids": [
+      "r6",
+      "r7"
+    ]
+  }
+}

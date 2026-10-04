@@ -33,7 +33,9 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
   `--values` JSON object whose entries may be `{"value", "description", "sensitive"}`)
   and at least one verifier (`--verify-text`, `--verify-url`). Stay the planner for
   anything longer and call once per sub-goal. `--dry-run` shows the next step only.
-- Only `status: done` (exit 0) is success. `needs_confirmation` (`pending`,
+- `status: done` (exit 0) is the runtime's completion report. Verify the independent
+  final-state criteria and the owning operator's receipt before reporting a business
+  outcome. `needs_confirmation` (`pending`,
   `confirm_token`), `needs_value` (`field`/`fields`), `blocked` (`challenge`,
   `login_required`), `needs_review` and `unverified` require the planner's attention.
   For review, inspect the reported uncertainty or gather fresh facts. For confirmation,
@@ -57,6 +59,20 @@ Requires an installed `jev-filter` CLI and the user's TypeSafe credentials. Use
 - New semantic integrations need an A/B with fixed inputs, quality, failures, complete
   operation time and actual usage. Keep negative results; do not promise universal
   cost or latency improvement.
+
+## Maintained read-only skill routes
+
+Use [workflow recipes](references/workflows.md) and the
+[one-invocation helper](https://github.com/apixly-ai/jev-filter/blob/main/skills/jev-filter/scripts/workflow.py)
+for skill-owned records, code, diff, sanitized logs, surveys and offline eval.
+Existing collectors or business operators already using Jev keep their entrypoints;
+there is no second classifier around their completed packet. Explain the input,
+candidate set and judgment criterion before inference. The helper preserves stdin,
+compact stdout and partial exit 2, and exposes no action or shell-command route.
+
+Preserve explicit REVIEW/EXCLUDE and review reasons even when transport status is OK.
+Saved contract fingerprints bind the rule and model; domain thresholds remain
+caller-owned and require labelled evidence before adoption.
 
 - [references/contract.md](references/contract.md): records, analysis specs and the
   `query`/`exec`/`extract` output.
