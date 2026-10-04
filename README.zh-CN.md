@@ -9,10 +9,14 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT 许可证"></a>
 </p>
 <p align="center">
-  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/docs/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
+  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
 </p>
 
+# Jev Filter：AI agent 工具结果的语义筛选
+
 **把关键信号交给 AI，把判断证据留给你。** Jev Filter 在整批工具输出进入主模型之前，将它变成精简、类型化的判断结果。命令、代码、日志和网页记录保留在程序内部；主模型只接收相关证据，以及需要它接管的 ID。
+
+**检索证据与 agent 工具结果的语义筛选。** 项目由 Apixly 独立维护，采用 MIT 许可证；官方 npm 包为 **`@apixly/jev-filter`**。在搜索或采集器生成候选之后，根据任务与明确提供的事实筛选，保留未知项，并按 ID 回查原文。[功能与适用条件](docs/faq.zh-CN.md)。
 
 **96 条记录，1.31 秒筛完，选中结果完全一致。** 最新付费同输出 A/B：Jev 合批 API 路径中位 **1.313 秒**，已登录 Codex CLI 的 Luna 为 **13.421 秒**、Astra 为 **14.543 秒**；全部 **9/9** 次都选对同样的 48 个 ID。合成输入、每条路径重复三次；CLI 包含启动耗时，Jev 后面没有主模型续跑。[核对实测路径 →](#实测优势)
 
@@ -77,6 +81,14 @@ jev-filter exec --task '找出尚未恢复的网络故障' \
 ```
 
 从[可复制的分析契约](docs/recipes.zh-CN.md)开始。退出码 **2** 仍需解析结果包：`complete=false` 与 `review_ids` 表示需要关注。小例子用于了解接口；精确路径、ID、selector、计算和少量短输出通常使用原生工具。[安装、密钥与结果处理 →](docs/getting-started.zh-CN.md)
+
+## 实用教程
+
+- [RAG 与 AI agent 的搜索结果筛选](docs/search-result-filtering.zh-CN.md)：根据明确证据要求筛选段落，再交给主模型。
+- [按行为搜索代码](docs/semantic-code-search.zh-CN.md)：完整代码符号、可选有界召回与语义判断相结合。
+- [排查关联日志](docs/log-triage.zh-CN.md)：保留请求历史，区分当前故障和已经恢复的事件。
+
+提供可复制的合成输入与分析契约。[在文档站阅读教程](https://apixly-ai.github.io/jev-filter/index.zh-CN.html) · [常见问题](docs/faq.zh-CN.md)。
 
 ## 实测优势
 

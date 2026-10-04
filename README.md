@@ -12,7 +12,11 @@
   <a href="README.zh-CN.md">简体中文</a> · <a href="#quick-start">Quick start</a> · <a href="https://apixly-ai.github.io/jev-filter/">Documentation</a> · <a href="docs/agent-quickstart.md">Agent setup</a> · <a href="docs/benchmarks.md">Benchmarks</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">Releases</a>
 </p>
 
+# Jev Filter: semantic filtering for AI agent tools
+
 **Give your agent the signal. Keep the evidence.** Jev Filter turns large tool outputs into compact, typed decisions before they enter your agent's context. Commands, code, logs and page records stay inside the program; your agent receives relevant evidence and the IDs that need its attention.
+
+**Semantic filtering for retrieved evidence and agent tool results.** Maintained by Apixly as an independent MIT project, the official package is **`@apixly/jev-filter`**. Use it after a search or collector produces candidates: screen them against your task and supplied facts, keep unresolved cases visible, and recover originals by ID. [What it does and when to use it](docs/faq.md).
 
 **96 records screened in 1.31 seconds. The same exact result.** Paid same-output A/B: Jev's batched API path took a median **1.313 s**, versus **13.421 s** for Luna and **14.543 s** for Astra through signed-in Codex CLI. All **9/9** runs selected the same correct 48 IDs. Three repetitions per path on synthetic inputs; CLI startup is included, and no primary-agent continuation follows Jev. [Compare the measured paths →](#measured-advantages)
 
@@ -77,6 +81,14 @@ jev-filter exec --task 'Find unresolved network failures' \
 ```
 
 Start with the [copyable analysis contract](docs/recipes.md#1-custom-command-output). Parse the packet even on exit **2**: `complete=false` and `review_ids` need attention. Small examples teach the interface; exact paths, IDs, selectors, calculations and short outputs usually belong in native tools. [Installation, keys and result handling →](docs/getting-started.md)
+
+## Practical tutorials
+
+- [Filter search results for RAG and AI agents](docs/search-result-filtering.md): select passages against explicit evidence requirements before they enter the main model's context.
+- [Search code by behavior](docs/semantic-code-search.md): combine complete code symbols, optional bounded recall and semantic judgment.
+- [Triage correlated logs](docs/log-triage.md): preserve request history and separate current failures from recovered events.
+
+Copyable synthetic inputs and analysis contracts are included. [Read the tutorials on the documentation site](https://apixly-ai.github.io/jev-filter/) · [FAQ](docs/faq.md).
 
 ## Measured advantages
 

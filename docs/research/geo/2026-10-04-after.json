@@ -1,0 +1,2517 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-04 13:32:08 UTC",
+  "evaluator": "Independent validation agent",
+  "deployment_sha": "e138b6965e02eb4768c4d4abc8f4b49b28bae9ca",
+  "pull_request": "https://github.com/apixly-ai/jev-filter/pull/27",
+  "search_surface": "web.run search_query, one query per request, response_length=long",
+  "baseline_file": "2026-10-04-baseline.json",
+  "measurement_scope": "Metadata from the returned search sample. Returned order is not a verified search-engine SERP rank. The underlying provider, geography, personalization, and index state are not exposed.",
+  "frozen_query_options": true,
+  "baseline": {
+    "official_url_found_queries": 0,
+    "brand": 0,
+    "nonbrand": 0
+  },
+  "after": {
+    "official_url_found_queries": 0,
+    "brand": 0,
+    "nonbrand": 0
+  },
+  "search_conclusion": "No observed improvement in exact official URL discovery in this fixed same-day query sample. Third-party project mentions remain visible for one brand query.",
+  "answer_citation_measurement": "not measured",
+  "answer_recommendation_measurement": "not measured",
+  "causal_effect_established": false,
+  "limitations": [
+    "Search samples do not establish whether a page is indexed.",
+    "No live billable model calls or answer-engine trials were run.",
+    "A changed result order is not a verified Google/Bing rank.",
+    "Technical readiness, notification receipt, search discovery, citation, recommendation, and installation are distinct.",
+    "Indexing/recrawl delays and search variation prevent a guaranteed same-day effect."
+  ],
+  "queries": [
+    {
+      "id": "brand_01",
+      "query": "\"jev-filter\"",
+      "type": "brand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 16,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        },
+        {
+          "returned_order": 2,
+          "title": "jevfilter (PyPI) \u2014 Safety Package & Vulnerability Database",
+          "url": "https://getsafety.com/packages/pypi/jevfilter/"
+        },
+        {
+          "returned_order": 3,
+          "title": "Select tests from a Git change \u2014 JevMade guide notes",
+          "url": "https://jevmade.com/guides/jev-test-filter-guide?sort=newest&topic=all"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - thehumanworks/jevgrep \u00b7 GitHub",
+          "url": "https://github.com/thehumanworks/jevgrep"
+        },
+        {
+          "returned_order": 5,
+          "title": "GitHub - HuXioAn/jev-telegram-channel-router: Jev as a channel message router | Jev\u9891\u9053\u6d88\u606f\u8def\u7531 \u00b7 GitHub",
+          "url": "https://github.com/HuXioAn/jev-telegram-channel-router"
+        },
+        {
+          "returned_order": 6,
+          "title": "Everyone's Talking About Jev. Am I the Only One Not Using It?",
+          "url": "https://zenn.dev/unsoluble_sugar/articles/jev-system-one-model-intro?locale=en"
+        },
+        {
+          "returned_order": 7,
+          "title": "What can you do with 'Jev', the ultra-fast AI that doesn't write text? Practical use cases from 30 major GitHub repositories\uff5cMaki@Sunwood.ai.labs",
+          "url": "https://note.com/sunwood_ai_labs/n/ncdd304204226?hl=en"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - MersivMedia/jev-rag-retrieval: Jev-steered ingestion and retrieval for any vector database: paragraph screening, passage classification and an answerability gate \u00b7 GitHub",
+          "url": "https://github.com/MersivMedia/jev-rag-retrieval"
+        },
+        {
+          "returned_order": 10,
+          "title": "SCIENTIFIC ANNUAL REPORT FOR 2016LAO-OXFORD-MAHOSOT HOSPITAL-WELLCOME TRUST RESEARCH UNIT (LOMWRU)",
+          "url": "https://www.tropmedres.ac/files/lomwru-files/lomwru-2016-annual-report-to-lao-moh.pdf"
+        },
+        {
+          "returned_order": 11,
+          "title": "Jev Builds \u2014 what people actually built with Jev",
+          "url": "https://jev.openchamber.dev/"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [
+        {
+          "returned_order": 1,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        }
+      ],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "brand_02",
+      "query": "\"Jev Filter\" semantic filter",
+      "type": "brand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 18,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        },
+        {
+          "returned_order": 2,
+          "title": "jev-filter \u2014 Jev Library",
+          "url": "https://jevlibrary.dev/projects/apixly-ai-jev-filter"
+        },
+        {
+          "returned_order": 3,
+          "title": "jev/README.en.md at main \u00b7 okooo5km/jev \u00b7 GitHub",
+          "url": "https://github.com/okooo5km/jev/blob/main/README.en.md"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - apixly-ai/jev-filter: Semantic filtering for AI tool results. Native npm CLI, caller-controlled context, batching, and reproducible benchmarks. \u00b7 GitHub",
+          "url": "https://www.tempodimare.com/?_=%2Fapixly-ai%2Fjev-filter%23nIKhFiPUZajtbREHkyDmOJub"
+        },
+        {
+          "returned_order": 5,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        },
+        {
+          "returned_order": 6,
+          "title": "GitHub - thehumanworks/jevgrep \u00b7 GitHub",
+          "url": "https://github.com/thehumanworks/jevgrep"
+        },
+        {
+          "returned_order": 7,
+          "title": "jev \u2013 DuckDB Community Extensions",
+          "url": "https://duckdb.org/community_extensions/extensions/jev"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - okooo5km/jev: Typed decisions from the shell: an unofficial stdlib-Python CLI and Agent Skill for TypeSafe's Jev model, via the TypeSafe API (default) or OpenRouter. Yes/no, choice and ordinal scores with calibrated probabilities, semantic grep and batch mode. \u00b7 GitHub",
+          "url": "https://github.com/okooo5km/jev"
+        },
+        {
+          "returned_order": 9,
+          "title": "Context Filter | GPT Researcher",
+          "url": "https://docs.gptr.dev/docs/gpt-researcher/gptr/context-filter"
+        },
+        {
+          "returned_order": 10,
+          "title": "Winnow \u00b7 GhalebDweikat \u00b7 Context GC & Filter \u2014 Jev open-source project \u00b7 Jev Tutorial",
+          "url": "https://www.jev-tutorial.org/projects/winnow"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [
+        {
+          "returned_order": 2,
+          "title": "jev-filter \u2014 Jev Library",
+          "url": "https://jevlibrary.dev/projects/apixly-ai-jev-filter"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - apixly-ai/jev-filter: Semantic filtering for AI tool results. Native npm CLI, caller-controlled context, batching, and reproducible benchmarks. \u00b7 GitHub",
+          "url": "https://www.tempodimare.com/?_=%2Fapixly-ai%2Fjev-filter%23nIKhFiPUZajtbREHkyDmOJub"
+        }
+      ],
+      "brand_name_collisions": [
+        {
+          "returned_order": 1,
+          "title": "jevfilter \u00b7 PyPI",
+          "url": "https://pypi.org/project/jevfilter/"
+        },
+        {
+          "returned_order": 5,
+          "title": "jev-filter (ByteBell) \u2014 Jev Project Guide \u00b7 JevList",
+          "url": "https://jevlist.ai/projects/bytebell-jev-filter"
+        }
+      ],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_01",
+      "query": "semantic code search CLI for AI coding agents",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 36,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://github.com/bartolli/codanna"
+        },
+        {
+          "returned_order": 2,
+          "title": "GitHub - get-sema/sema: Local semantic code index and MCP server for Claude Code, Codex, and opencode. Includes semantic search, reuse checks, impact analysis, and a VS Code chat and agent supporting local CLIs and API providers\u2014all powered by tree-sitter, SBERT, and ChromaDB. \u00b7 GitHub",
+          "url": "https://github.com/get-sema/sema"
+        },
+        {
+          "returned_order": 3,
+          "title": "GitHub - CodeBendKit/codeseek: Rust-powered code intelligence CLI for AI coding agents. Builds call graphs and hybrid semantic search indexes (Dense + Sparse + RRF + Reranker) across 7 languages. Ships as native MCP tools for Claude Code and Codex CLI. \u00b7 GitHub",
+          "url": "https://github.com/CodeBendKit/codeseek"
+        },
+        {
+          "returned_order": 4,
+          "title": "@semacode/cli - npm",
+          "url": "https://www.npmjs.com/package/%40semacode/cli"
+        },
+        {
+          "returned_order": 5,
+          "title": "Semantic Code Search for AI Agents | grepai",
+          "url": "https://yoanbernabeu.github.io/grepai/"
+        },
+        {
+          "returned_order": 6,
+          "title": "GitHub - Stahldavid/sensegrep: Semantic + structural code search for AI-native development \u00b7 GitHub",
+          "url": "https://github.com/Stahldavid/sensegrep"
+        },
+        {
+          "returned_order": 7,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://github.itlym.cn/bartolli/codanna"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - probelabs/probe: AI-friendly semantic code search engine for large codebases. Combines ripgrep speed with tree-sitter AST parsing. Powers AI coding assistants with precise, context-aware code understanding. \u00b7 GitHub",
+          "url": "https://qgithub.com/probelabs/probe"
+        },
+        {
+          "returned_order": 9,
+          "title": "Semantic Code Search for AI Agents | grepai",
+          "url": "https://yoanbernabeu.github.io/grepai"
+        },
+        {
+          "returned_order": 10,
+          "title": "GitHub - bartolli/codanna: Local code intelligence MCP server and CLI for AI coding agents \u00b7 GitHub",
+          "url": "https://owu.terracat.net/browse/aHR0cHM6Ly9naXRodWIuY29t/bartolli/codanna"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_02",
+      "query": "LLM log triage tool with structured output",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 37,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "GitHub - afridiharis/llm-test-triage: LLM-powered triage for failing test logs \u2014 parses pytest/behave output, extracts failures, produces structured root-cause analysis. Works offline with a deterministic mock backend by default; upgrades to Anthropic or OpenAI when an API key is set. \u00b7 GitHub",
+          "url": "https://github.com/afridiharis/llm-test-triage"
+        },
+        {
+          "returned_order": 2,
+          "title": "apxi/qwen3-5-0-8b-security-triage-v4-7-gguf \u00b7 Hugging Face",
+          "url": "https://huggingface.co/apxi/qwen3-5-0-8b-security-triage-v4-7-gguf"
+        },
+        {
+          "returned_order": 3,
+          "title": "GitHub - parnikarakshe/llm-log-analyzer: AI-powered log analysis pipeline using Gemini to triage failures and generate bug reports \u00b7 GitHub",
+          "url": "https://github.com/parnikarakshe/llm-log-analyzer"
+        },
+        {
+          "returned_order": 4,
+          "title": "GitHub - MohitDholakiya/llm-soc-triage: Read-only LLM-powered SOC triage assistant with a kill switch. Strict JSON schema, confidence threshold, feedback loop, and pluggable Ollama / vLLM / Wazuh / Elastic backends. \u00b7 GitHub",
+          "url": "https://github.com/MohitDholakiya/llm-soc-triage"
+        },
+        {
+          "returned_order": 5,
+          "title": "GitHub - Keerthija5/llm_document_intelligence: LLM-based business document triage dashboard with BART/T5 comparison and structured extraction. \u00b7 GitHub",
+          "url": "https://github.com/Keerthija5/llm_document_intelligence"
+        },
+        {
+          "returned_order": 6,
+          "title": "GHOSTPLUSE INCIDENTRESPONSE COPILOT | Devpost",
+          "url": "https://devpost.com/software/ghostpluse-incidentresponse-copilot"
+        },
+        {
+          "returned_order": 7,
+          "title": "Log Tail \u2192 LLM Triage - Voice AI Agent | Strongly.AI",
+          "url": "https://www.strongly.ai/marketplace/log-tail-llm-triage.html"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - OALabs/asftriage: LLM Agent Session Forensics Tool \u00b7 GitHub",
+          "url": "https://github.com/OALabs/asftriage"
+        },
+        {
+          "returned_order": 9,
+          "title": "LLM Observability & Guardrails Platform | Sigmoda",
+          "url": "https://www.sigmoda.com/"
+        },
+        {
+          "returned_order": 10,
+          "title": "Velgent \u2014 AI products for enterprise IT operations",
+          "url": "https://www.velgent.com/products/triage"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_03",
+      "query": "Python semantic filtering for RAG retrieval results",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 31,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "SeCon-RAG: A Two-Stage Semantic Filtering and Conflict-Free Framework for Trustworthy RAG",
+          "url": "https://arxiv.org/abs/2510.09710"
+        },
+        {
+          "returned_order": 2,
+          "title": "Retrieval | OpenAI API",
+          "url": "https://developers.openai.com/api/docs/guides/retrieval"
+        },
+        {
+          "returned_order": 3,
+          "title": "Build a RAG Pipeline with Python | FoxNose Documentation",
+          "url": "https://www.foxnose.net/docs/guides/build-rag-pipeline-python"
+        },
+        {
+          "returned_order": 4,
+          "title": "Build Metadata Filtering for RAG in Python",
+          "url": "https://mindforgecore.com/build-metadata-filtering-for-rag-in-python/"
+        },
+        {
+          "returned_order": 5,
+          "title": "Reducing Redundancy in Retrieval-Augmented Generation through Chunk Filtering",
+          "url": "https://arxiv.org/abs/2604.24334"
+        },
+        {
+          "returned_order": 6,
+          "title": "Filter RAG Passages with Jev Before Sending Them to an LLM | Jev Manual",
+          "url": "https://jevmanual.com/tutorials/rag-passage-filtering/"
+        },
+        {
+          "returned_order": 7,
+          "title": "GitHub - superlinear-ai/raglite: \ud83e\udd64 RAGLite is a Python toolkit for Retrieval-Augmented Generation (RAG) with DuckDB or PostgreSQL \u00b7 GitHub",
+          "url": "https://github.com/superlinear-ai/raglite"
+        },
+        {
+          "returned_order": 8,
+          "title": "GitHub - Nizarassad/rag-semantic-search: Offline-first, production-grade RAG / semantic search \u2014 pluggable backends, FastAPI, Docker, CI, and an honest eval harness with real measured metrics. \u00b7 GitHub",
+          "url": "https://github.com/Nizarassad/rag-semantic-search"
+        },
+        {
+          "returned_order": 10,
+          "title": "Learning to Filter Context for RAG",
+          "url": "https://www.dhiwise.com/post/learning-to-filter-context-for-retrieval-augmented-generation"
+        },
+        {
+          "returned_order": 11,
+          "title": "How to Add Metadata Filters to RAG Retrieval with Python",
+          "url": "https://datatweets.com/tutorials/add-metadata-filters-rag-python/"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_04",
+      "query": "reduce tool output context for AI agents",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 41,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "Tool Output Reduction Layers for AI Agents Without Losing the Important Bits \u00b7 Anirudh Negi",
+          "url": "https://negiadventures.github.io/blog/tool-output-reduction-ai-agents"
+        },
+        {
+          "returned_order": 2,
+          "title": "Manage tool context - Claude Platform Docs",
+          "url": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/manage-tool-context"
+        },
+        {
+          "returned_order": 3,
+          "title": "How to Prune AI Tool Output Without Losing Context",
+          "url": "https://www.itechguides.com/how-to-prune-ai-tool-output-without-losing-context/"
+        },
+        {
+          "returned_order": 4,
+          "title": "Context management - OpenAI Agents SDK",
+          "url": "https://openai.github.io/openai-agents-python/context/"
+        },
+        {
+          "returned_order": 5,
+          "title": "DTOC: Dynamic Tool Output Compression for Adaptive Context Management in AI Agents",
+          "url": "https://arxiv.org/abs/2609.26121"
+        },
+        {
+          "returned_order": 6,
+          "title": "Rule-Based Tool-Output Pruning: How AI Agent Context Filters Work",
+          "url": "https://www.itechguides.com/what-is-rule-based-tool-output-pruning-and-how-does-it-work/"
+        },
+        {
+          "returned_order": 7,
+          "title": "How to Safely Trim Irrelevant AI Tool Output",
+          "url": "https://www.itechguides.com/how-to-write-rules-that-safely-trim-irrelevant-ai-tool-output/"
+        },
+        {
+          "returned_order": 8,
+          "title": "vscode-docs/docs/agents/concepts/context.md at main \u00b7 microsoft/vscode-docs \u00b7 GitHub",
+          "url": "https://github.com/microsoft/vscode-docs/blob/main/docs/agents/concepts/context.md"
+        },
+        {
+          "returned_order": 9,
+          "title": "Less Context, Better Agents: Efficient Context Engineering for Long-Horizon Tool-Using LLM Agents",
+          "url": "https://arxiv.org/abs/2606.10209"
+        },
+        {
+          "returned_order": 10,
+          "title": "context_editing | langchain | LangChain Reference",
+          "url": "https://reference.langchain.com/python/langchain/agents/middleware/context_editing"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_05",
+      "query": "filter JSONL records with an LLM command line",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 31,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "llm-mr \u00b7 PyPI",
+          "url": "https://pypi.org/project/llm-mr/"
+        },
+        {
+          "returned_order": 2,
+          "title": "JSONL on the Command Line \u2014 jq, split, shuf, awk Recipes",
+          "url": "https://jsonlkit.com/jsonl-in-bash"
+        },
+        {
+          "returned_order": 3,
+          "title": "JSONL: a practical guide to JSON Lines",
+          "url": "https://flaviocopes.com/jsonl/"
+        },
+        {
+          "returned_order": 4,
+          "title": "JSONL Format (JSON Lines): Read, Write, and Stream Line-Delimited JSON \u2014 Jsonic",
+          "url": "https://jsonic.io/guides/jsonl-format"
+        },
+        {
+          "returned_order": 5,
+          "title": "Overview - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/cli/overview/"
+        },
+        {
+          "returned_order": 6,
+          "title": "NDJSON / JSON Lines Filter \u2014 gizza.ai",
+          "url": "https://gizza.ai/tools/ndjson-filter/"
+        },
+        {
+          "returned_order": 7,
+          "title": "JSONL Tutorial \u2014 Create, Read, Validate & Convert JSONL F...",
+          "url": "https://jsonl.co/guide/jsonl-tutorial"
+        },
+        {
+          "returned_order": 8,
+          "title": "Quick Start - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/getting-started/quickstart/"
+        },
+        {
+          "returned_order": 9,
+          "title": "How to use jq to output JSONL (one independent JSON object per line) - Stack Overflow",
+          "url": "https://stackoverflow.com/questions/42178636/how-to-use-jq-to-output-jsonl-one-independent-json-object-per-line/42178695"
+        },
+        {
+          "returned_order": 10,
+          "title": "FAQ - JSONL Algebra",
+          "url": "https://queelius.github.io/jsonl-algebra/faq/"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    },
+    {
+      "id": "task_06",
+      "query": "RAG evidence filtering recoverable source records",
+      "type": "nonbrand",
+      "captured_at_utc": "2026-10-04 13:32:08 UTC",
+      "parsable_result_entries": 33,
+      "first_10_parsed_result_entries": [
+        {
+          "returned_order": 1,
+          "title": "Retrieval-Augmented LLMs for Security Incident Analysis",
+          "url": "https://arxiv.org/abs/2603.18196"
+        },
+        {
+          "returned_order": 2,
+          "title": "EvidentialRAG: Quantifying and Mitigating Information Conflict in Multi-Source Retrieval-Augmented Generation via Evidential Deep Learning",
+          "url": "https://arxiv.org/abs/2607.10491"
+        },
+        {
+          "returned_order": 3,
+          "title": "Assessing the Downstream Utility of Evidence-Aware Retrieval in RAG",
+          "url": "https://arxiv.org/abs/2608.26379"
+        },
+        {
+          "returned_order": 4,
+          "title": "Methodology | Raggression",
+          "url": "https://www.raggression.com/methodology"
+        },
+        {
+          "returned_order": 5,
+          "title": "Does More Retrieved Evidence Help Visual Retrieval-Augmented Generation with Diffusion Language Models?",
+          "url": "https://arxiv.org/abs/2608.07006"
+        },
+        {
+          "returned_order": 6,
+          "title": "Rag.NET/docs/guide/retrieval.md at main \u00b7 MarcelRoozekrans/Rag.NET \u00b7 GitHub",
+          "url": "https://github.com/MarcelRoozekrans/Rag.NET/blob/main/docs/guide/retrieval.md"
+        },
+        {
+          "returned_order": 7,
+          "title": "RAG Reliability: Retrieval, Reranking, Grounding and Evaluation | D2 Group",
+          "url": "https://d2group.co/insights/automation/rag-reliability"
+        },
+        {
+          "returned_order": 8,
+          "title": "RAG Fault Isolation: Is the Answer Defensible? | Reliable Context",
+          "url": "https://reliablecontext.com/articles/rag-fault-isolation-matrix"
+        },
+        {
+          "returned_order": 9,
+          "title": "Retrieval (RAG) over patient records - Responsible Clinical AI",
+          "url": "https://responsible-clinical-ai.org/architecture/rag/"
+        },
+        {
+          "returned_order": 10,
+          "title": "How to Build an Auditable Enterprise RAG Pipeline | DocuShell",
+          "url": "https://docushell.com/blog/how-do-you-build-an-auditable-rag-pipeline-for-enterprise-documents"
+        }
+      ],
+      "official_project_matches": [],
+      "nonofficial_mentions_of_apixly_ai_project": [],
+      "brand_name_collisions": [],
+      "found_in_returned_sample": false,
+      "cited_in_generated_answer": null,
+      "recommended_in_generated_answer": null
+    }
+  ],
+  "live_fetch_summary": {
+    "sitemap_status": 200,
+    "canonical_url_count": 51,
+    "unique_canonical_url_count": 51,
+    "sitemap_contains_home_aliases": false,
+    "sitemap_contains_research_or_agents": false,
+    "canonical_pages_200": 51,
+    "required_public_pages_checked": 13,
+    "internal_link_references_checked": 615,
+    "additional_target_urls_checked": 15,
+    "validation_errors": [
+      {
+        "url": "https://apixly-ai.github.io/jev-filter/README.html",
+        "issue": "missing_or_mismatched_page_metadata"
+      },
+      {
+        "url": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+        "issue": "missing_or_mismatched_page_metadata"
+      }
+    ],
+    "all_requested_checks_passed": false
+  },
+  "live_fetch_after": [
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/",
+      "captured_at_utc": "2026-10-04T13:34:17.303718+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13465,
+      "body_sha256": "04b70f8944bc9b25795590d101e4112991aea91da3236b4a1100b2f651b39249",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html",
+      "captured_at_utc": "2026-10-04T13:34:17.303971+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 16443,
+      "body_sha256": "c01512945d47db8cb7a0e8d304242a220e5ed6d217e099b2df3365edca387535",
+      "title": "Changelog \u00b7 Jev Filter",
+      "description": "The format follows Keep a Changelog; versions follow SemVer within the limitations of a 0.x API (minor releases may make documented breaking changes).",
+      "og_description": "The format follows Keep a Changelog; versions follow SemVer within the limitations of a 0.x API (minor releases may make documented breaking changes).",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/CHANGELOG.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Changelog",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:17.304292+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 14135,
+      "body_sha256": "5dd6aa95993088fff154ec6e1f08260632eea48ea60af4bbfa62b1c433711494",
+      "title": "\u66f4\u65b0\u8bb0\u5f55 \u00b7 Jev Filter",
+      "description": "--input - \u4e0e JSON \u8f93\u51fa\u5f3a\u5236 UTF-8\uff0c\u4e0d\u518d\u53d7\u63a7\u5236\u53f0\u4ee3\u7801\u9875\u5f71\u54cd\uff1bWindows\uff08GBK\uff09\u4e0b\u7ba1\u9053\u4f20\u5165\u8bb0\u5f55\u6b64\u524d\u4f1a\u62a5 JSONDecodeError\u3002",
+      "og_description": "--input - \u4e0e JSON \u8f93\u51fa\u5f3a\u5236 UTF-8\uff0c\u4e0d\u518d\u53d7\u63a7\u5236\u53f0\u4ee3\u7801\u9875\u5f71\u54cd\uff1bWindows\uff08GBK\uff09\u4e0b\u7ba1\u9053\u4f20\u5165\u8bb0\u5f55\u6b64\u524d\u4f1a\u62a5 JSONDecodeError\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u66f4\u65b0\u8bb0\u5f55",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/CHANGELOG.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/CHANGELOG.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/CODE_OF_CONDUCT.html",
+      "captured_at_utc": "2026-10-04T13:34:17.304711+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/CODE_OF_CONDUCT.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 3516,
+      "body_sha256": "5368f51dca33e3046abe2b607822b4fe66ba4bf6a6f36eec39e9d7b8abdd7fdd",
+      "title": "Community code of conduct \u00b7 Jev Filter",
+      "description": "Be respectful, constructive and specific. Welcome people with different experience and backgrounds. Critique code and evidence, not people. Harassment, threats, discriminatory abuse, unwanted\u2026",
+      "og_description": "Be respectful, constructive and specific. Welcome people with different experience and backgrounds. Critique code and evidence, not people. Harassment, threats, discriminatory abuse, unwanted\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/CODE_OF_CONDUCT.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/CODE_OF_CONDUCT.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Community code of conduct",
+      "alternates": {},
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html",
+      "captured_at_utc": "2026-10-04T13:34:17.304872+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 4763,
+      "body_sha256": "457ccc3a81575f2a6c667a8d4a06e809ba0b2aa24a8af1295f1157e04a0ad546",
+      "title": "Contributing \u00b7 Jev Filter",
+      "description": "Thanks for helping make semantic tools measurable and inspectable.",
+      "og_description": "Thanks for helping make semantic tools measurable and inspectable.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Contributing",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:17.304980+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 4831,
+      "body_sha256": "5b8bc975a247bca561a0051afdc577f3b3d54740f1af4773d616b0a770779f36",
+      "title": "\u8d21\u732e\u6307\u5357 \u00b7 Jev Filter",
+      "description": "PR \u6807\u9898\u4f7f\u7528 fix:\u3001feat:\u3001docs:\u3001test:\u3001chore: \u7b49\u7ea6\u5b9a\u524d\u7f00\u3002\u4e3b\u5206\u652f\u53d7\u4fdd\u62a4\uff0c\u5fc5\u987b\u901a\u8fc7\u68c0\u67e5\uff0c \u7981\u6b62\u5f3a\u63a8\u548c\u5220\u9664\u3002\u5355\u7ef4\u62a4\u8005\u9636\u6bb5\u8981\u6c42 PR \u4e0e\u68c0\u67e5\uff0c\u4e0d\u8bbe\u7f6e\u65e0\u6cd5\u5b8c\u6210\u7684\u7b2c\u4e8c\u4eba\u6279\u51c6\uff1b\u5916\u90e8\u8d21\u732e\u7531\u7ef4\u62a4\u8005\u5ba1\u6838\u3002",
+      "og_description": "PR \u6807\u9898\u4f7f\u7528 fix:\u3001feat:\u3001docs:\u3001test:\u3001chore: \u7b49\u7ea6\u5b9a\u524d\u7f00\u3002\u4e3b\u5206\u652f\u53d7\u4fdd\u62a4\uff0c\u5fc5\u987b\u901a\u8fc7\u68c0\u67e5\uff0c \u7981\u6b62\u5f3a\u63a8\u548c\u5220\u9664\u3002\u5355\u7ef4\u62a4\u8005\u9636\u6bb5\u8981\u6c42 PR \u4e0e\u68c0\u67e5\uff0c\u4e0d\u8bbe\u7f6e\u65e0\u6cd5\u5b8c\u6210\u7684\u7b2c\u4e8c\u4eba\u6279\u51c6\uff1b\u5916\u90e8\u8d21\u732e\u7531\u7ef4\u62a4\u8005\u5ba1\u6838\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u8d21\u732e\u6307\u5357",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/CONTRIBUTING.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html",
+      "captured_at_utc": "2026-10-04T13:34:17.305448+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 4098,
+      "body_sha256": "b5fb6b9c52b31c989067ad2fe4f8be9ae9061be6fa279d600c79ae04aaede4e5",
+      "title": "Governance and support \u00b7 Jev Filter",
+      "description": "JIA-ss is the initial maintainer and release owner. Decisions are documented through issues, pull requests, changelog entries and benchmark reports. The project is independent of TypeSafe and\u2026",
+      "og_description": "JIA-ss is the initial maintainer and release owner. Decisions are documented through issues, pull requests, changelog entries and benchmark reports. The project is independent of TypeSafe and\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Governance and support",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:17.305832+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 4134,
+      "body_sha256": "ad3574d19f556af7712d7c91a12d13e4bd71ca16a32bed7273b65fc24b69655a",
+      "title": "\u9879\u76ee\u6cbb\u7406\u4e0e\u652f\u6301 \u00b7 Jev Filter",
+      "description": "JIA-ss \u662f\u521d\u59cb\u7ef4\u62a4\u8005\u4e0e\u53d1\u5e03\u8d1f\u8d23\u4eba\uff0c\u9879\u76ee\u4f4d\u4e8e Apixly \u7ec4\u7ec7\u3002\u51b3\u7b56\u901a\u8fc7 issue\u3001PR\u3001\u66f4\u65b0\u8bb0\u5f55\u548c\u6d4b\u8bd5\u62a5\u544a\u8bb0\u5f55\u3002 \u9879\u76ee\u72ec\u7acb\u4e8e TypeSafe\u3001\u6d4f\u89c8\u5668\u4e0e\u6a21\u578b\u4f9b\u5e94\u5546\u3002",
+      "og_description": "JIA-ss \u662f\u521d\u59cb\u7ef4\u62a4\u8005\u4e0e\u53d1\u5e03\u8d1f\u8d23\u4eba\uff0c\u9879\u76ee\u4f4d\u4e8e Apixly \u7ec4\u7ec7\u3002\u51b3\u7b56\u901a\u8fc7 issue\u3001PR\u3001\u66f4\u65b0\u8bb0\u5f55\u548c\u6d4b\u8bd5\u62a5\u544a\u8bb0\u5f55\u3002 \u9879\u76ee\u72ec\u7acb\u4e8e TypeSafe\u3001\u6d4f\u89c8\u5668\u4e0e\u6a21\u578b\u4f9b\u5e94\u5546\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u9879\u76ee\u6cbb\u7406\u4e0e\u652f\u6301",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/GOVERNANCE.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/README.html",
+      "captured_at_utc": "2026-10-04T13:34:17.305998+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/README.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 26332,
+      "body_sha256": "8e0dfdf0b977820b7880fe75375e5c6c5a5386830fd2306c0cfef2e9262c9cc7",
+      "title": "Codex; use ~/.claude/skills for Claude Code. \u00b7 Jev Filter",
+      "description": "\u7b80\u4f53\u4e2d\u6587 \u00b7 Quick start \u00b7 Documentation \u00b7 Agent setup \u00b7 Benchmarks \u00b7 Releases",
+      "og_description": "\u7b80\u4f53\u4e2d\u6587 \u00b7 Quick start \u00b7 Documentation \u00b7 Agent setup \u00b7 Benchmarks \u00b7 Releases",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/README.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/README.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/README.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/README.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:17.306260+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 25378,
+      "body_sha256": "41c86e0e5917d0b34c9a9d4c964926c8176f129ed916e7ab4be6209aa3d3f936",
+      "title": "Codex\uff1bClaude Code \u4f7f\u7528 ~/.claude/skills\u3002 \u00b7 Jev Filter",
+      "description": "English \u00b7 \u5feb\u901f\u5f00\u59cb \u00b7 \u4e2d\u6587\u6587\u6863 \u00b7 \u63a5\u5165 AI \u00b7 Benchmark \u00b7 \u7248\u672c\u53d1\u5e03",
+      "og_description": "English \u00b7 \u5feb\u901f\u5f00\u59cb \u00b7 \u4e2d\u6587\u6587\u6863 \u00b7 \u63a5\u5165 AI \u00b7 Benchmark \u00b7 \u7248\u672c\u53d1\u5e03",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/README.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/README.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/README.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/README.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/SECURITY.html",
+      "captured_at_utc": "2026-10-04T13:34:17.306444+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/SECURITY.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 6470,
+      "body_sha256": "e2a87f17b83e70604df2a8adda72b3c949544c59a0a37fe0799939b2a0e5cc82",
+      "title": "Security policy \u00b7 Jev Filter",
+      "description": "Use GitHub's Report a vulnerability button at https://github.com/apixly-ai/jev-filter/security/advisories/new . Do not put sensitive proofs or credentials in public issues. Reports are handled on\u2026",
+      "og_description": "Use GitHub's Report a vulnerability button at https://github.com/apixly-ai/jev-filter/security/advisories/new . Do not put sensitive proofs or credentials in public issues. Reports are handled on\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/SECURITY.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/SECURITY.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Security policy",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/SECURITY.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/SECURITY.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:17.306680+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 6133,
+      "body_sha256": "5ed79896ddef1cb349fb7dd56a55745674ef0ff04f9b64e1f785517d1a5eccee",
+      "title": "\u5b89\u5168\u653f\u7b56 \u00b7 Jev Filter",
+      "description": "\u901a\u8fc7 \u79c1\u5bc6\u6f0f\u6d1e\u62a5\u544a \u63d0\u4ea4\uff0c \u4e0d\u8981\u5728\u516c\u5f00 issue \u4e2d\u653e\u654f\u611f\u8bc1\u636e\u6216\u51ed\u636e\u3002\u5c3d\u529b\u5904\u7406\uff0c\u4e0d\u627f\u8bfa\u5408\u540c\u7ea7\u54cd\u5e94\u65f6\u95f4\u3002",
+      "og_description": "\u901a\u8fc7 \u79c1\u5bc6\u6f0f\u6d1e\u62a5\u544a \u63d0\u4ea4\uff0c \u4e0d\u8981\u5728\u516c\u5f00 issue \u4e2d\u653e\u654f\u611f\u8bc1\u636e\u6216\u51ed\u636e\u3002\u5c3d\u529b\u5904\u7406\uff0c\u4e0d\u627f\u8bfa\u5408\u540c\u7ea7\u54cd\u5e94\u65f6\u95f4\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u5b89\u5168\u653f\u7b56",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/SECURITY.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/SECURITY.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/SECURITY.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/",
+      "captured_at_utc": "2026-10-04T13:34:18.229754+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13230,
+      "body_sha256": "88524b06fa73ca1699248ed9f37d098e7a565c7ff6890056b641284f3a945c2f",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html",
+      "captured_at_utc": "2026-10-04T13:34:18.290103+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10664,
+      "body_sha256": "620ce3d8d4cb76f1d2aa844ff20764e35b4eef6e97389b27f6ef0c3b05056326",
+      "title": "Agent quickstart \u00b7 Jev Filter",
+      "description": "Full integration reference",
+      "og_description": "Full integration reference",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Agent quickstart",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:18.291144+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10525,
+      "body_sha256": "354f37bba88a0ef6712f4615698e94c1df8b526ba2a8d1ec6e128276bc57dc25",
+      "title": "\u9762\u5411 agent \u7684\u5feb\u901f\u63a5\u5165 \u00b7 Jev Filter",
+      "description": "English \u00b7 \u5b8c\u6574\u63a5\u5165\u53c2\u8003",
+      "og_description": "English \u00b7 \u5b8c\u6574\u63a5\u5165\u53c2\u8003",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u9762\u5411 agent \u7684\u5feb\u901f\u63a5\u5165",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/agent-quickstart.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/agents.html",
+      "captured_at_utc": "2026-10-04T13:34:18.293505+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/agents.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9773,
+      "body_sha256": "9d7d50963c728134f1e155bfafcd7dfde74d5b6f561b61acf09a81edcede5782",
+      "title": "Connect your agent \u00b7 Jev Filter",
+      "description": "Jev Filter is a CLI and Python library. A shell-capable agent can use it immediately; no MCP server or extra autonomous agent is required. The key design rule is: collect \u2192 judge \u2192 compact packet\u2026",
+      "og_description": "Jev Filter is a CLI and Python library. A shell-capable agent can use it immediately; no MCP server or extra autonomous agent is required. The key design rule is: collect \u2192 judge \u2192 compact packet\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/agents.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/agents.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Connect your agent",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/agents.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/agents.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:18.294568+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9249,
+      "body_sha256": "2e22c2188ccbe934ddb8f89877f032de4ecf07a7c7cca755133fad68bf3cb2c5",
+      "title": "\u63a5\u5165 AI \u4e0e\u5df2\u6709\u5de5\u4f5c\u6d41 \u00b7 Jev Filter",
+      "description": "Jev Filter \u63d0\u4f9b CLI \u4e0e Python library\u3002\u80fd\u6267\u884c\u547d\u4ee4\u7684 AI \u5373\u53ef\u4f7f\u7528\uff0c\u4e0d\u8981\u6c42 MCP \u670d\u52a1\u6216\u53e6\u4e00\u4e2a\u4ee3\u7406\u3002 \u6838\u5fc3\u8981\u6c42\u662f\uff1a\u91c7\u96c6 \u2192 \u5224\u65ad \u2192 \u7cbe\u7b80\u7ed3\u679c\uff0c\u5728\u7a0b\u5e8f\u5185\u90e8\u5b8c\u6210\u3002",
+      "og_description": "Jev Filter \u63d0\u4f9b CLI \u4e0e Python library\u3002\u80fd\u6267\u884c\u547d\u4ee4\u7684 AI \u5373\u53ef\u4f7f\u7528\uff0c\u4e0d\u8981\u6c42 MCP \u670d\u52a1\u6216\u53e6\u4e00\u4e2a\u4ee3\u7406\u3002 \u6838\u5fc3\u8981\u6c42\u662f\uff1a\u91c7\u96c6 \u2192 \u5224\u65ad \u2192 \u7cbe\u7b80\u7ed3\u679c\uff0c\u5728\u7a0b\u5e8f\u5185\u90e8\u5b8c\u6210\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u63a5\u5165 AI \u4e0e\u5df2\u6709\u5de5\u4f5c\u6d41",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/agents.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/agents.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/agents.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.html",
+      "captured_at_utc": "2026-10-04T13:34:18.295250+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 6374,
+      "body_sha256": "c5361151c44ff90320a3ed0403bf8aa4b8b221a61c597d807b70b75a5baaa98d",
+      "title": "Architecture \u00b7 Jev Filter",
+      "description": "Collection and inference stay inside the program. The main agent sees the selected packet, not a raw-output roundtrip followed by a second classification.",
+      "og_description": "Collection and inference stay inside the program. The main agent sees the selected packet, not a raw-output roundtrip followed by a second classification.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/architecture.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Architecture",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/architecture.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/architecture.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:18.296640+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 6587,
+      "body_sha256": "4faf1f156b04f659196b8a661bf7e3bbccdb1d79f3616f6300d52588c5db520f",
+      "title": "\u67b6\u6784\u4e0e\u804c\u8d23 \u00b7 Jev Filter",
+      "description": "\u91c7\u96c6\u4e0e\u63a8\u7406\u5747\u5728\u7a0b\u5e8f\u5185\u5b8c\u6210\uff0c\u4e3b\u6a21\u578b\u63a5\u6536\u7b5b\u9009\u7ed3\u679c\uff0c\u907f\u514d\u539f\u6587\u5148\u8fdb\u5165\u5bf9\u8bdd\u540e\u53c8\u91cd\u590d\u5206\u7c7b\u3002",
+      "og_description": "\u91c7\u96c6\u4e0e\u63a8\u7406\u5747\u5728\u7a0b\u5e8f\u5185\u5b8c\u6210\uff0c\u4e3b\u6a21\u578b\u63a5\u6536\u7b5b\u9009\u7ed3\u679c\uff0c\u907f\u514d\u539f\u6587\u5148\u8fdb\u5165\u5bf9\u8bdd\u540e\u53c8\u91cd\u590d\u5206\u7c7b\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u67b6\u6784\u4e0e\u804c\u8d23",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/architecture.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/architecture.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/architecture.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+      "captured_at_utc": "2026-10-04T13:34:18.297347+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 67960,
+      "body_sha256": "7e07ba2c9b6ac0f016b5a1220860500fff846658fceff1a40ff2f9bb00990716",
+      "title": "Benchmarks \u00b7 Jev Filter",
+      "description": "Reproducible synthetic benchmarks for Jev Filter: expected IDs, context bytes, whole-operation timing, model usage, failures and trade-offs.",
+      "og_description": "Reproducible synthetic benchmarks for Jev Filter: expected IDs, context bytes, whole-operation timing, model usage, failures and trade-offs.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Benchmarks",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:18.300689+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 64726,
+      "body_sha256": "6cbc3cd80611d7546debfe826f7696ee62c7c87b598bfd71c9322e9123103235",
+      "title": "\u6027\u80fd\u3001\u8d39\u7528\u4e0e\u8d28\u91cf\u6d4b\u8bd5 \u00b7 Jev Filter",
+      "description": "Jev Filter \u53ef\u590d\u73b0\u5408\u6210\u6d4b\u8bd5\uff1a\u671f\u671b ID\u3001\u8fd4\u56de\u4e0a\u4e0b\u6587\u5b57\u8282\u3001\u6574\u6bb5\u8017\u65f6\u3001\u6a21\u578b\u7528\u91cf\u3001\u5931\u8d25\u4e0e\u9002\u7528\u9650\u5236\u3002",
+      "og_description": "Jev Filter \u53ef\u590d\u73b0\u5408\u6210\u6d4b\u8bd5\uff1a\u671f\u671b ID\u3001\u8fd4\u56de\u4e0a\u4e0b\u6587\u5b57\u8282\u3001\u6574\u6bb5\u8017\u65f6\u3001\u6a21\u578b\u7528\u91cf\u3001\u5931\u8d25\u4e0e\u9002\u7528\u9650\u5236\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u6027\u80fd\u3001\u8d39\u7528\u4e0e\u8d28\u91cf\u6d4b\u8bd5",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/benchmarks.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/cli.html",
+      "captured_at_utc": "2026-10-04T13:34:18.569597+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/cli.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9533,
+      "body_sha256": "3686c5ebd50edbfc4cde053c1b6b63b475d80c0b421104fb273ae84fe3b14f50",
+      "title": "CLI reference \u00b7 Jev Filter",
+      "description": "Use jev-filter --help and <command> --help for exact flags.",
+      "og_description": "Use jev-filter --help and <command> --help for exact flags.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/cli.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/cli.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "CLI reference",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/cli.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/cli.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:18.573573+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9535,
+      "body_sha256": "33b84ba542a755f300974a198abfb273414618af295895a315782831d227d6fe",
+      "title": "CLI \u53c2\u6570\u53c2\u8003 \u00b7 Jev Filter",
+      "description": "\u4f7f\u7528 jev-filter --help \u548c jev-filter <command> --help \u67e5\u770b\u51c6\u786e\u53c2\u6570\u3002",
+      "og_description": "\u4f7f\u7528 jev-filter --help \u548c jev-filter <command> --help \u67e5\u770b\u51c6\u786e\u53c2\u6570\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "CLI \u53c2\u6570\u53c2\u8003",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/cli.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/cli.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/cli.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html",
+      "captured_at_utc": "2026-10-04T13:34:18.577260+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 5992,
+      "body_sha256": "9f933b513d273352f652675cf9b67007055ee46609b42336f3bba84ca4100d98",
+      "title": "Context and decision contract \u00b7 Jev Filter",
+      "description": "Jev cannot see the calling agent's chat history. Supply the information that can change the decision: precise goal, intended scope, verified facts with references, exclusions, success criteria and\u2026",
+      "og_description": "Jev cannot see the calling agent's chat history. Supply the information that can change the decision: precise goal, intended scope, verified facts with references, exclusions, success criteria and\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/context-contract.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Context and decision contract",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.250393+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 6483,
+      "body_sha256": "06956c2739b1697488bdfa0cdc4165f16a17ea34f1a9ec0ed69f890862846d09",
+      "title": "\u4e0a\u4e0b\u6587\u4e0e\u5224\u65ad\u5951\u7ea6 \u00b7 Jev Filter",
+      "description": "Jev \u770b\u4e0d\u5230\u8c03\u7528\u8005\u7684\u804a\u5929\u5386\u53f2\u3002\u4f20\u5165\u4f1a\u6539\u53d8\u7b54\u6848\u7684\u4fe1\u606f\uff1a\u76ee\u6807\u3001\u8303\u56f4\u3001\u6709\u6765\u6e90\u7684\u4e8b\u5b9e\u3001\u6392\u9664\u6761\u4ef6\u3001 \u6210\u529f\u6807\u51c6\u548c\u8f93\u51fa\u8981\u6c42\u3002\u5171\u4eab\u89c4\u5219\u653e context\uff1b\u8bf7\u6c42\u3001\u9875\u9762\u6216\u5ba2\u6237\u81ea\u5df1\u7684\u5386\u53f2\u968f\u5bf9\u5e94\u8bb0\u5f55\u4f20\u5165\u3002",
+      "og_description": "Jev \u770b\u4e0d\u5230\u8c03\u7528\u8005\u7684\u804a\u5929\u5386\u53f2\u3002\u4f20\u5165\u4f1a\u6539\u53d8\u7b54\u6848\u7684\u4fe1\u606f\uff1a\u76ee\u6807\u3001\u8303\u56f4\u3001\u6709\u6765\u6e90\u7684\u4e8b\u5b9e\u3001\u6392\u9664\u6761\u4ef6\u3001 \u6210\u529f\u6807\u51c6\u548c\u8f93\u51fa\u8981\u6c42\u3002\u5171\u4eab\u89c4\u5219\u653e context\uff1b\u8bf7\u6c42\u3001\u9875\u9762\u6216\u5ba2\u6237\u81ea\u5df1\u7684\u5386\u53f2\u968f\u5bf9\u5e94\u8bb0\u5f55\u4f20\u5165\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u4e0a\u4e0b\u6587\u4e0e\u5224\u65ad\u5951\u7ea6",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/context-contract.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/context-contract.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/development.html",
+      "captured_at_utc": "2026-10-04T13:34:19.359479+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/development.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 7500,
+      "body_sha256": "0a58640df307bc1a2cdaa1f20d005cdd568a09b6f2445429ef67e3605fb9af87",
+      "title": "Development, releases and reproducibility \u00b7 Jev Filter",
+      "description": "CI checks Linux/Python versions, macOS, lint/format, >=80% line coverage, package build/install, public-content hygiene, offline benchmark planning, documentation examples. Live model tests are\u2026",
+      "og_description": "CI checks Linux/Python versions, macOS, lint/format, >=80% line coverage, package build/install, public-content hygiene, offline benchmark planning, documentation examples. Live model tests are\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/development.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/development.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Development, releases and reproducibility",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/development.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/development.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.395141+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 7698,
+      "body_sha256": "ca9ee122a3295410a5e6c096b3ed7c7330bb4ebe36f7a97464a917e2deee8b4d",
+      "title": "\u5f00\u53d1\u3001\u53d1\u5e03\u4e0e\u4fdd\u62a4\u89c4\u5219 \u00b7 Jev Filter",
+      "description": "CI \u68c0\u67e5 Python \u7248\u672c\u77e9\u9635\u3001macOS\u3001\u683c\u5f0f\u3001\u81f3\u5c11 80% \u884c\u8986\u76d6\u7387\u3001\u5305\u6784\u5efa/\u5b89\u88c5\u3001\u516c\u5f00\u5185\u5bb9\u68c0\u67e5\u3001\u79bb\u7ebf\u89c4\u5212\u3001 \u6587\u6863\u793a\u4f8b\u548c\u6d4f\u89c8\u5668\u884c\u4e3a\u3002\u771f\u5b9e\u6a21\u578b\u6d4b\u8bd5\u5fc5\u987b\u663e\u5f0f\u542f\u7528\uff0c\u4e0d\u5728\u5916\u90e8 PR \u4e2d\u8fd0\u884c\u3002 \u684c\u9762\u6d4b\u8bd5\uff08-m desktop\uff09\u4f1a\u6253\u5f00\u771f\u5b9e\u7a97\u53e3\u5e76\u62a2\u5360\u952e\u76d8\u7126\u70b9\uff0c\u6240\u4ee5\u9ed8\u8ba4\u8df3\u8fc7\uff0c\u53ea\u6709\u8bbe\u7f6e JEV_DESKTOP_TESTS=1 \u624d\u8fd0\u884c\uff1bCI \u7684 desktop-windows \u548c\u2026",
+      "og_description": "CI \u68c0\u67e5 Python \u7248\u672c\u77e9\u9635\u3001macOS\u3001\u683c\u5f0f\u3001\u81f3\u5c11 80% \u884c\u8986\u76d6\u7387\u3001\u5305\u6784\u5efa/\u5b89\u88c5\u3001\u516c\u5f00\u5185\u5bb9\u68c0\u67e5\u3001\u79bb\u7ebf\u89c4\u5212\u3001 \u6587\u6863\u793a\u4f8b\u548c\u6d4f\u89c8\u5668\u884c\u4e3a\u3002\u771f\u5b9e\u6a21\u578b\u6d4b\u8bd5\u5fc5\u987b\u663e\u5f0f\u542f\u7528\uff0c\u4e0d\u5728\u5916\u90e8 PR \u4e2d\u8fd0\u884c\u3002 \u684c\u9762\u6d4b\u8bd5\uff08-m desktop\uff09\u4f1a\u6253\u5f00\u771f\u5b9e\u7a97\u53e3\u5e76\u62a2\u5360\u952e\u76d8\u7126\u70b9\uff0c\u6240\u4ee5\u9ed8\u8ba4\u8df3\u8fc7\uff0c\u53ea\u6709\u8bbe\u7f6e JEV_DESKTOP_TESTS=1 \u624d\u8fd0\u884c\uff1bCI \u7684 desktop-windows \u548c\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u5f00\u53d1\u3001\u53d1\u5e03\u4e0e\u4fdd\u62a4\u89c4\u5219",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/development.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/development.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/development.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.html",
+      "captured_at_utc": "2026-10-04T13:34:19.397204+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8939,
+      "body_sha256": "523638561cd6286b2e3c7da2104a53ac91af4c8b8505d725b607db72e4918c6f",
+      "title": "npm and native distribution \u00b7 Jev Filter",
+      "description": "The primary installation is npm install -g @apixly/jev-filter. Python users keep the release wheel/library interface. Both call the same semantic core.",
+      "og_description": "The primary installation is npm install -g @apixly/jev-filter. Python users keep the release wheel/library interface. Both call the same semantic core.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/distribution.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "npm and native distribution",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/distribution.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/distribution.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.409748+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8457,
+      "body_sha256": "50a517aebe9e04ae642aa17eab7df1a2d1582ef3d4931f8a6012bb1fcac7cd38",
+      "title": "npm \u4e0e\u539f\u751f\u53d1\u884c\u5305 \u00b7 Jev Filter",
+      "description": "\u4e3b\u8981\u5b89\u88c5\u65b9\u5f0f\u662f npm install -g @apixly/jev-filter\u3002Python \u7528\u6237\u7ee7\u7eed\u4f7f\u7528 wheel \u548c library\uff0c \u4e24\u79cd\u65b9\u5f0f\u8c03\u7528\u76f8\u540c\u7684\u8bed\u4e49\u5185\u6838\u3002",
+      "og_description": "\u4e3b\u8981\u5b89\u88c5\u65b9\u5f0f\u662f npm install -g @apixly/jev-filter\u3002Python \u7528\u6237\u7ee7\u7eed\u4f7f\u7528 wheel \u548c library\uff0c \u4e24\u79cd\u65b9\u5f0f\u8c03\u7528\u76f8\u540c\u7684\u8bed\u4e49\u5185\u6838\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "npm \u4e0e\u539f\u751f\u53d1\u884c\u5305",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/distribution.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/distribution.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/distribution.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/faq.html",
+      "captured_at_utc": "2026-10-04T13:34:19.433354+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/faq.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10611,
+      "body_sha256": "6034fee12a6e58899b98864642b3d6c50cdaa4739cee697b2a7ac56c94a4b91a",
+      "title": "Jev Filter FAQ: search, evidence and agent integration \u00b7 Jev Filter",
+      "description": "Jev Filter provides typed semantic filtering for retrieved records and AI agent tool results, with source IDs, review cases and recoverable originals. This guide explains its supported role,\u2026",
+      "og_description": "Jev Filter provides typed semantic filtering for retrieved records and AI agent tool results, with source IDs, review cases and recoverable originals. This guide explains its supported role,\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/faq.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/faq.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter FAQ: search, evidence and agent integration",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/faq.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/faq.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.470007+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10109,
+      "body_sha256": "6250dde78b7a058f1f73a16165b196f604be2c2155699f77f4d89edf3fd96bab",
+      "title": "Jev Filter \u5e38\u89c1\u95ee\u9898\uff1a\u641c\u7d22\u3001\u8bc1\u636e\u4e0e agent \u63a5\u5165 \u00b7 Jev Filter",
+      "description": "Jev Filter \u4e3a\u68c0\u7d22\u5019\u9009\u548c AI agent \u5de5\u5177\u7ed3\u679c\u63d0\u4f9b\u7c7b\u578b\u5316\u8bed\u4e49\u7b5b\u9009\uff0c\u8fd4\u56de\u6765\u6e90 ID\u3001\u5f85\u590d\u6838\u9879\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002\u672c\u9875\u8bf4\u660e\u5b83\u7684\u5b9a\u4f4d\u3001\u5b89\u88c5\u3001\u63a8\u7406\u8981\u6c42\u548c\u5b9e\u6d4b\u8fb9\u754c\u3002",
+      "og_description": "Jev Filter \u4e3a\u68c0\u7d22\u5019\u9009\u548c AI agent \u5de5\u5177\u7ed3\u679c\u63d0\u4f9b\u7c7b\u578b\u5316\u8bed\u4e49\u7b5b\u9009\uff0c\u8fd4\u56de\u6765\u6e90 ID\u3001\u5f85\u590d\u6838\u9879\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002\u672c\u9875\u8bf4\u660e\u5b83\u7684\u5b9a\u4f4d\u3001\u5b89\u88c5\u3001\u63a8\u7406\u8981\u6c42\u548c\u5b9e\u6d4b\u8fb9\u754c\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "Jev Filter \u5e38\u89c1\u95ee\u9898\uff1a\u641c\u7d22\u3001\u8bc1\u636e\u4e0e agent \u63a5\u5165",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/faq.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/faq.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/faq.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html",
+      "captured_at_utc": "2026-10-04T13:34:19.592058+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8889,
+      "body_sha256": "4d2a9396d3a41d8acd673aad5c8deb9300fda808578c5f87a03e98739cac4619",
+      "title": "Install, run, read the result \u00b7 Jev Filter",
+      "description": "Node.js 22+ on macOS or Linux; Windows users can use WSL or install the Python package natively (see Python library / source install; there is no PyPI package). The platform package includes the\u2026",
+      "og_description": "Node.js 22+ on macOS or Linux; Windows users can use WSL or install the Python package natively (see Python library / source install; there is no PyPI package). The platform package includes the\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/getting-started.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Install, run, read the result",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.593656+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8422,
+      "body_sha256": "d7d554cac802295558f422aa702d8abbcc5e24c4a18707926808dd66d737c40c",
+      "title": "\u5b89\u88c5\u3001\u8fd0\u884c\u4e0e\u7ed3\u679c\u89e3\u8bfb \u00b7 Jev Filter",
+      "description": "\u9700\u8981 Node.js 22+\uff0c\u652f\u6301 macOS / Linux\uff1bWindows \u53ef\u7528 WSL\uff0c\u6216\u539f\u751f\u5b89\u88c5 Python \u5305\uff08\u89c1\u4e0b\u6587\u300cPython \u5de5\u4f5c\u6d41\u7ee7\u7eed\u4f7f\u7528\u539f\u63a5\u53e3\u300d\u4e00\u8282\uff1b\u672a\u53d1\u5e03\u5230 PyPI\uff09\u3002 \u5e73\u53f0\u5305\u5305\u542b Python \u8fd0\u884c\u65f6\u548c\u4ee3\u7801\u89e3\u6790\u5668\uff0c\u65e0\u9700\u81ea\u5df1\u914d\u7f6e Python \u73af\u5883\u3002",
+      "og_description": "\u9700\u8981 Node.js 22+\uff0c\u652f\u6301 macOS / Linux\uff1bWindows \u53ef\u7528 WSL\uff0c\u6216\u539f\u751f\u5b89\u88c5 Python \u5305\uff08\u89c1\u4e0b\u6587\u300cPython \u5de5\u4f5c\u6d41\u7ee7\u7eed\u4f7f\u7528\u539f\u63a5\u53e3\u300d\u4e00\u8282\uff1b\u672a\u53d1\u5e03\u5230 PyPI\uff09\u3002 \u5e73\u53f0\u5305\u5305\u542b Python \u8fd0\u884c\u65f6\u548c\u4ee3\u7801\u89e3\u6790\u5668\uff0c\u65e0\u9700\u81ea\u5df1\u914d\u7f6e Python \u73af\u5883\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u5b89\u88c5\u3001\u8fd0\u884c\u4e0e\u7ed3\u679c\u89e3\u8bfb",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/getting-started.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/getting-started.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html",
+      "captured_at_utc": "2026-10-04T13:34:19.595223+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 23043,
+      "body_sha256": "02f13d3aa84a27687435969efe1c092d71a4305edaa91aa0683a2fa717886b29",
+      "title": "Hosted execution \u00b7 Jev Filter",
+      "description": "New in 0.4: ambiguous operation/target/value choices return needs_review before execution (default top probability 0.55, margin 0.10). Independent --verify-controls checks unique current\u2026",
+      "og_description": "New in 0.4: ambiguous operation/target/value choices return needs_review before execution (default top probability 0.55, margin 0.10). Independent --verify-controls checks unique current\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Hosted execution",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:19.730469+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 22698,
+      "body_sha256": "084180b7e04eb30508648528776141af50a0a00b0610d78a43eeef3628b5c860",
+      "title": "\u6258\u7ba1\u6267\u884c \u00b7 Jev Filter",
+      "description": "0.4 \u65b0\u589e\uff1a\u64cd\u4f5c/\u76ee\u6807/\u503c\u9009\u62e9\u4e0d\u5145\u5206\u65f6\u4f1a\u5728\u6267\u884c\u524d\u8fd4\u56de needs_review\uff0c\u9ed8\u8ba4\u80dc\u51fa\u6982\u7387 0.55\u3001\u524d\u4e24\u540d\u5dee\u8ddd 0.10\u3002\u72ec\u7acb --verify-controls \u68c0\u67e5\u552f\u4e00\u5f53\u524d checked/pressed/selected/\u503c\uff0c\u5931\u6548\u7684\u6700\u7ec8\u89c2\u5bdf\u4e0d\u80fd\u8bc1\u660e\u5b8c\u6210\u3002\u89c2\u5bdf\u652f\u6301\u663e\u5f0f\u65e0\u89d2\u8272\u63a7\u4ef6\u3001\u5e26\u53ef\u89c1\u6807\u7b7e\u7684\u900f\u660e\u63a7\u4ef6\u548c\u53d7\u5b88\u536b\u7684\u5d4c\u5957\u5782\u76f4\u6eda\u52a8\uff1b\u65b0\u6807\u7b7e\u9875\u8ddf\u968f\u4ecd\u4e0d\u652f\u6301\u3002\u8be6\u89c1\u7b56\u7565\u4e0e\u63a5\u5165\u793a\u4f8b\u3002",
+      "og_description": "0.4 \u65b0\u589e\uff1a\u64cd\u4f5c/\u76ee\u6807/\u503c\u9009\u62e9\u4e0d\u5145\u5206\u65f6\u4f1a\u5728\u6267\u884c\u524d\u8fd4\u56de needs_review\uff0c\u9ed8\u8ba4\u80dc\u51fa\u6982\u7387 0.55\u3001\u524d\u4e24\u540d\u5dee\u8ddd 0.10\u3002\u72ec\u7acb --verify-controls \u68c0\u67e5\u552f\u4e00\u5f53\u524d checked/pressed/selected/\u503c\uff0c\u5931\u6548\u7684\u6700\u7ec8\u89c2\u5bdf\u4e0d\u80fd\u8bc1\u660e\u5b8c\u6210\u3002\u89c2\u5bdf\u652f\u6301\u663e\u5f0f\u65e0\u89d2\u8272\u63a7\u4ef6\u3001\u5e26\u53ef\u89c1\u6807\u7b7e\u7684\u900f\u660e\u63a7\u4ef6\u548c\u53d7\u5b88\u536b\u7684\u5d4c\u5957\u5782\u76f4\u6eda\u52a8\uff1b\u65b0\u6807\u7b7e\u9875\u8ddf\u968f\u4ecd\u4e0d\u652f\u6301\u3002\u8be6\u89c1\u7b56\u7565\u4e0e\u63a5\u5165\u793a\u4f8b\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u6258\u7ba1\u6267\u884c",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/hosted-execution.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/index.html",
+      "captured_at_utc": "2026-10-04T13:34:19.739965+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/index.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13230,
+      "body_sha256": "88524b06fa73ca1699248ed9f37d098e7a565c7ff6890056b641284f3a945c2f",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/index.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.224289+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/index.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 12921,
+      "body_sha256": "0ec6a7dd8f8d126cf2f22d73cf213fee4ae1a3453b5ea60530751f86a124ecbc",
+      "title": "Jev Filter\uff1aAI agent \u5de5\u5177\u7ed3\u679c\u7684\u8bed\u4e49\u7b5b\u9009 \u00b7 Jev Filter",
+      "description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+      "og_description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/index.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "Jev Filter\uff1aAI agent \u5de5\u5177\u7ed3\u679c\u7684\u8bed\u4e49\u7b5b\u9009",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+          "url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.html",
+      "captured_at_utc": "2026-10-04T13:34:20.306671+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10383,
+      "body_sha256": "c2cff6e266024c56f09b69368a293d37a6c3fa265d8568ac50c8340e5b7fe604",
+      "title": "One decision core across your agent stack \u00b7 Jev Filter",
+      "description": "Use the native CLI, the Python API, the typed JavaScript client or read-only MCP. Each retains selected IDs, unresolved IDs, private evidence receipts and honest usage. The core owns collection\u2026",
+      "og_description": "Use the native CLI, the Python API, the typed JavaScript client or read-only MCP. Each retains selected IDs, unresolved IDs, private evidence receipts and honest usage. The core owns collection\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/integrations.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "One decision core across your agent stack",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/integrations.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/integrations.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.348804+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9977,
+      "body_sha256": "3b9d2b87c43106ffd58c8a194729238e4096053d672f611f535116595b420412",
+      "title": "\u540c\u4e00\u51b3\u7b56\u6838\u5fc3\u63a5\u5165\u4f60\u7684\u4ee3\u7406\u5de5\u4f5c\u6d41 \u00b7 Jev Filter",
+      "description": "\u539f\u751f CLI\u3001Python API\u3001\u5e26\u7c7b\u578b\u7684 JavaScript \u5ba2\u6237\u7aef\u548c\u53ea\u8bfb MCP \u5171\u7528\u540c\u4e00\u6838\u5fc3\uff0c\u4fdd\u7559\u9009\u4e2d\u4e0e\u5f85\u590d\u6838 ID\u3001\u79c1\u6709\u8bc1\u636e\u6536\u636e\u548c\u771f\u5b9e\u7684\u7528\u91cf\u72b6\u6001\u3002\u7a0b\u5e8f\u8d1f\u8d23\u91c7\u96c6\u4e0e\u5224\u65ad\uff0c\u4e1a\u52a1\u6267\u884c\u5668\u7ee7\u7eed\u8d1f\u8d23\u8eab\u4efd\u3001\u6388\u6743\u3001\u5e42\u7b49\u548c\u7ed3\u679c\u9a8c\u8bc1\u3002",
+      "og_description": "\u539f\u751f CLI\u3001Python API\u3001\u5e26\u7c7b\u578b\u7684 JavaScript \u5ba2\u6237\u7aef\u548c\u53ea\u8bfb MCP \u5171\u7528\u540c\u4e00\u6838\u5fc3\uff0c\u4fdd\u7559\u9009\u4e2d\u4e0e\u5f85\u590d\u6838 ID\u3001\u79c1\u6709\u8bc1\u636e\u6536\u636e\u548c\u771f\u5b9e\u7684\u7528\u91cf\u72b6\u6001\u3002\u7a0b\u5e8f\u8d1f\u8d23\u91c7\u96c6\u4e0e\u5224\u65ad\uff0c\u4e1a\u52a1\u6267\u884c\u5668\u7ee7\u7eed\u8d1f\u8d23\u8eab\u4efd\u3001\u6388\u6743\u3001\u5e42\u7b49\u548c\u7ed3\u679c\u9a8c\u8bc1\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u540c\u4e00\u51b3\u7b56\u6838\u5fc3\u63a5\u5165\u4f60\u7684\u4ee3\u7406\u5de5\u4f5c\u6d41",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/integrations.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/integrations.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/integrations.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html",
+      "captured_at_utc": "2026-10-04T13:34:20.374557+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 11357,
+      "body_sha256": "ee8198c839e6796dc0da61bd603244bf2896f9503a6472fa0179b1d9d5f52d88",
+      "title": "Triage correlated logs without mistaking recovered failures for incidents \u00b7 Jev Filter",
+      "description": "Jev Filter's triage groups JSON or JSONL events by a correlation field, preserves observed event order within each group, and judges the resulting request histories against typed conditions. It\u2026",
+      "og_description": "Jev Filter's triage groups JSON or JSONL events by a correlation field, preserves observed event order within each group, and judges the resulting request histories against typed conditions. It\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/log-triage.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Triage correlated logs without mistaking recovered failures for incidents",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.401150+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10866,
+      "body_sha256": "77f4275537cf9487e5470473f1acf0c6a69fdd35c8f58d60787ebe222a293a2f",
+      "title": "\u7b5b\u9009\u5173\u8054\u65e5\u5fd7\uff0c\u907f\u514d\u628a\u5df2\u6062\u590d\u7684\u5386\u53f2\u5931\u8d25\u5f53\u6210\u65b0\u4e8b\u6545 \u00b7 Jev Filter",
+      "description": "Jev Filter \u7684 triage \u6309\u5173\u8054\u5b57\u6bb5\u628a JSON \u6216 JSONL \u4e8b\u4ef6\u7ec4\u6210\u8bf7\u6c42\u5386\u53f2\uff0c \u4fdd\u7559\u6bcf\u7ec4\u5185\u89c2\u5bdf\u5230\u7684\u4e8b\u4ef6\u987a\u5e8f\uff0c\u518d\u6309\u7c7b\u578b\u5316\u6761\u4ef6\u5224\u5b9a\u3002 \u5b83\u8fd4\u56de\u5339\u914d\u4e0e\u590d\u6838 ID\uff0c\u5e76\u4fdd\u7559\u91c7\u96c6\u8bc1\u636e\u3002\u8bed\u4e49\u6807\u7b7e\u4e0d\u8bc1\u660e\u5b9e\u65f6\u4e8b\u6545\u3001\u6062\u590d\u6216\u6839\u56e0\u3002",
+      "og_description": "Jev Filter \u7684 triage \u6309\u5173\u8054\u5b57\u6bb5\u628a JSON \u6216 JSONL \u4e8b\u4ef6\u7ec4\u6210\u8bf7\u6c42\u5386\u53f2\uff0c \u4fdd\u7559\u6bcf\u7ec4\u5185\u89c2\u5bdf\u5230\u7684\u4e8b\u4ef6\u987a\u5e8f\uff0c\u518d\u6309\u7c7b\u578b\u5316\u6761\u4ef6\u5224\u5b9a\u3002 \u5b83\u8fd4\u56de\u5339\u914d\u4e0e\u590d\u6838 ID\uff0c\u5e76\u4fdd\u7559\u91c7\u96c6\u8bc1\u636e\u3002\u8bed\u4e49\u6807\u7b7e\u4e0d\u8bc1\u660e\u5b9e\u65f6\u4e8b\u6545\u3001\u6062\u590d\u6216\u6839\u56e0\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u7b5b\u9009\u5173\u8054\u65e5\u5fd7\uff0c\u907f\u514d\u628a\u5df2\u6062\u590d\u7684\u5386\u53f2\u5931\u8d25\u5f53\u6210\u65b0\u4e8b\u6545",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/log-triage.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/log-triage.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html",
+      "captured_at_utc": "2026-10-04T13:34:20.433958+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 7540,
+      "body_sha256": "fe641dbb9b21eacd2aa240a05577cab99b2619899d083b5945558efb25f1902f",
+      "title": "README and documentation design \u00b7 Jev Filter",
+      "description": "The homepage leads with the outcome: give the agent the signal, keep the evidence. It then shows three concrete advantages\u2014focused context, traceable decisions and program-verified\u2026",
+      "og_description": "The homepage leads with the outcome: give the agent the signal, keep the evidence. It then shows three concrete advantages\u2014focused context, traceable decisions and program-verified\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/readme-design.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "README and documentation design",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.491651+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 7314,
+      "body_sha256": "daebcb28c457c17deb24fd45e2484852832579ce894c61b78f0ad7520da02d5e",
+      "title": "README \u4e0e\u6587\u6863\u8bbe\u8ba1 \u00b7 Jev Filter",
+      "description": "\u9996\u9875\u5148\u7ed9\u660e\u786e\u7ed3\u679c\uff1a\u628a\u5173\u952e\u4fe1\u53f7\u4ea4\u7ed9 AI\uff0c\u628a\u5224\u65ad\u8bc1\u636e\u7559\u7ed9\u4f60\u3002\u63a5\u7740\u5c55\u793a\u805a\u7126\u4e0a\u4e0b\u6587\u3001 \u5224\u65ad\u6709\u51fa\u5904\u3001\u7a0b\u5e8f\u9a8c\u8bc1\u6267\u884c\u4e09\u4e2a\u5b9e\u9645\u4f18\u52bf\uff0c\u518d\u63d0\u4f9b\u5b89\u88c5\u3001\u5e26\u65e5\u671f\u7684\u6d4b\u91cf\u4e0e\u63a5\u5165\u8def\u7ebf\u3002 \u547d\u4ee4\u76ee\u5f55\u6298\u53e0\u5c55\u793a\uff0c\u4e3a\u4ea7\u54c1\u53d9\u4e8b\u670d\u52a1\u3002",
+      "og_description": "\u9996\u9875\u5148\u7ed9\u660e\u786e\u7ed3\u679c\uff1a\u628a\u5173\u952e\u4fe1\u53f7\u4ea4\u7ed9 AI\uff0c\u628a\u5224\u65ad\u8bc1\u636e\u7559\u7ed9\u4f60\u3002\u63a5\u7740\u5c55\u793a\u805a\u7126\u4e0a\u4e0b\u6587\u3001 \u5224\u65ad\u6709\u51fa\u5904\u3001\u7a0b\u5e8f\u9a8c\u8bc1\u6267\u884c\u4e09\u4e2a\u5b9e\u9645\u4f18\u52bf\uff0c\u518d\u63d0\u4f9b\u5b89\u88c5\u3001\u5e26\u65e5\u671f\u7684\u6d4b\u91cf\u4e0e\u63a5\u5165\u8def\u7ebf\u3002 \u547d\u4ee4\u76ee\u5f55\u6298\u53e0\u5c55\u793a\uff0c\u4e3a\u4ea7\u54c1\u53d9\u4e8b\u670d\u52a1\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "README \u4e0e\u6587\u6863\u8bbe\u8ba1",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/readme-design.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/readme-design.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.html",
+      "captured_at_utc": "2026-10-04T13:34:20.534886+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8561,
+      "body_sha256": "d6df411934b411abb047e0ba5393b050de379a270ba3805e6cc969fcd04aed44",
+      "title": "Recipes: from an actual task to one CLI call \u00b7 Jev Filter",
+      "description": "Choose a recipe, write the contract, and replace only the collector or input path. The agent should see the resulting packet\u2014not the full input before filtering.",
+      "og_description": "Choose a recipe, write the contract, and replace only the collector or input path. The agent should see the resulting packet\u2014not the full input before filtering.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/recipes.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Recipes: from an actual task to one CLI call",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/recipes.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/recipes.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.556994+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 8012,
+      "body_sha256": "9099e390dee2f3562ed21b085932a8fe08aa99ff9cdab8093001d2ace3e933be",
+      "title": "\u6309\u4efb\u52a1\u9009\u62e9\u7528\u6cd5 \u00b7 Jev Filter",
+      "description": "\u9009\u62e9\u914d\u65b9\u3001\u5199\u597d\u5206\u6790\u5951\u7ea6\uff0c\u518d\u66ff\u6362\u91c7\u96c6\u5668\u6216\u8f93\u5165\u8def\u5f84\u3002\u4e3b\u6a21\u578b\u5e94\u770b\u5230\u5904\u7406\u540e\u7684\u7ed3\u679c\u5305\uff0c\u800c\u4e0d\u662f\u5148\u63a5\u6536\u5168\u91cf\u539f\u6587\u3002",
+      "og_description": "\u9009\u62e9\u914d\u65b9\u3001\u5199\u597d\u5206\u6790\u5951\u7ea6\uff0c\u518d\u66ff\u6362\u91c7\u96c6\u5668\u6216\u8f93\u5165\u8def\u5f84\u3002\u4e3b\u6a21\u578b\u5e94\u770b\u5230\u5904\u7406\u540e\u7684\u7ed3\u679c\u5305\uff0c\u800c\u4e0d\u662f\u5148\u63a5\u6536\u5168\u91cf\u539f\u6587\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u6309\u4efb\u52a1\u9009\u62e9\u7528\u6cd5",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/recipes.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/recipes.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/recipes.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html",
+      "captured_at_utc": "2026-10-04T13:34:20.627578+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10900,
+      "body_sha256": "3f64ba8b67b233bc8d3817dbbc9060fb2d66b820034428e75649088352b7c132",
+      "title": "Filter RAG search results into typed, traceable evidence \u00b7 Jev Filter",
+      "description": "Jev Filter can screen passages after retrieval and before a main model reads them. Give it stable source IDs, the task's context and separate inclusion conditions. It returns selected IDs, review\u2026",
+      "og_description": "Jev Filter can screen passages after retrieval and before a main model reads them. Give it stable source IDs, the task's context and separate inclusion conditions. It returns selected IDs, review\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Filter RAG search results into typed, traceable evidence",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:20.629950+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10800,
+      "body_sha256": "95df028d0b1bdebbc3d2ac2f648ce000ec7549c312fd8f3ebb8dc12ac757655e",
+      "title": "\u5c06 RAG \u641c\u7d22\u7ed3\u679c\u7b5b\u6210\u7c7b\u578b\u5316\u3001\u53ef\u56de\u67e5\u7684\u8bc1\u636e \u00b7 Jev Filter",
+      "description": "Jev Filter \u53ef\u4ee5\u653e\u5728\u68c0\u7d22\u4e4b\u540e\u3001\u4e3b\u6a21\u578b\u9605\u8bfb\u4e4b\u524d\uff0c\u7b5b\u9009\u5df2\u7ecf\u627e\u5230\u7684\u6bb5\u843d\u3002 \u7a0b\u5e8f\u63d0\u4f9b\u7a33\u5b9a\u7684\u6765\u6e90 ID\u3001\u4efb\u52a1\u4e0a\u4e0b\u6587\u548c\u72ec\u7acb\u7684\u7eb3\u5165\u6761\u4ef6\uff1b\u5b83\u8fd4\u56de\u9009\u4e2d ID\u3001\u5f85\u590d\u6838 ID \u4e0e\u7cbe\u7b80\u8bc1\u636e\uff0c\u540c\u65f6\u5728\u672c\u5730\u4fdd\u7559\u4f20\u5165\u539f\u6587\u3002\u5b83\u4e0d\u6293\u53d6\u6574\u4e2a\u8bed\u6599\u5e93\uff0c\u4e5f\u4e0d\u66ff\u4ee3\u68c0\u7d22\u5668\u3002",
+      "og_description": "Jev Filter \u53ef\u4ee5\u653e\u5728\u68c0\u7d22\u4e4b\u540e\u3001\u4e3b\u6a21\u578b\u9605\u8bfb\u4e4b\u524d\uff0c\u7b5b\u9009\u5df2\u7ecf\u627e\u5230\u7684\u6bb5\u843d\u3002 \u7a0b\u5e8f\u63d0\u4f9b\u7a33\u5b9a\u7684\u6765\u6e90 ID\u3001\u4efb\u52a1\u4e0a\u4e0b\u6587\u548c\u72ec\u7acb\u7684\u7eb3\u5165\u6761\u4ef6\uff1b\u5b83\u8fd4\u56de\u9009\u4e2d ID\u3001\u5f85\u590d\u6838 ID \u4e0e\u7cbe\u7b80\u8bc1\u636e\uff0c\u540c\u65f6\u5728\u672c\u5730\u4fdd\u7559\u4f20\u5165\u539f\u6587\u3002\u5b83\u4e0d\u6293\u53d6\u6574\u4e2a\u8bed\u6599\u5e93\uff0c\u4e5f\u4e0d\u66ff\u4ee3\u68c0\u7d22\u5668\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u5c06 RAG \u641c\u7d22\u7ed3\u679c\u7b5b\u6210\u7c7b\u578b\u5316\u3001\u53ef\u56de\u67e5\u7684\u8bc1\u636e",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/search-result-filtering.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html",
+      "captured_at_utc": "2026-10-04T13:34:20.718527+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10779,
+      "body_sha256": "0b0dc017bcf69ba755ca3fe296af448a72b043ded6b794820e8ecdf5c788df1d",
+      "title": "Add semantic code search to an AI coding agent \u00b7 Jev Filter",
+      "description": "Jev Filter's code-search uses a lexical query to collect code candidates, expands hits to complete functions or methods, then applies typed semantic conditions. An AI coding agent receives\u2026",
+      "og_description": "Jev Filter's code-search uses a lexical query to collect code candidates, expands hits to complete functions or methods, then applies typed semantic conditions. An AI coding agent receives\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Add semantic code search to an AI coding agent",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:21.156162+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10446,
+      "body_sha256": "d137cc8b525553a1cdf2c6e322eac4cd4e968813f84f9037fc364030a4362be8",
+      "title": "\u4e3a AI \u7f16\u7a0b Agent \u589e\u52a0\u8bed\u4e49\u4ee3\u7801\u641c\u7d22 \u00b7 Jev Filter",
+      "description": "Jev Filter \u7684 code-search \u5148\u7528\u8bcd\u6cd5\u67e5\u8be2\u91c7\u96c6\u5019\u9009\uff0c\u518d\u628a\u547d\u4e2d\u6269\u5c55\u4e3a\u5b8c\u6574\u51fd\u6570\u6216\u65b9\u6cd5\uff0c \u6700\u540e\u6309\u7c7b\u578b\u5316\u8bed\u4e49\u6761\u4ef6\u7b5b\u9009\u3002AI \u7f16\u7a0b Agent \u6536\u5230\u9009\u4e2d\u7684\u6765\u6e90 ID \u548c\u6709\u754c\u8bc1\u636e\uff0c \u539f\u6587\u4ecd\u53ef\u56de\u67e5\uff0c\u8fd4\u56de\u5339\u914d\u524d\u8fd8\u4f1a\u68c0\u67e5\u6765\u6e90\u7248\u672c\u3002",
+      "og_description": "Jev Filter \u7684 code-search \u5148\u7528\u8bcd\u6cd5\u67e5\u8be2\u91c7\u96c6\u5019\u9009\uff0c\u518d\u628a\u547d\u4e2d\u6269\u5c55\u4e3a\u5b8c\u6574\u51fd\u6570\u6216\u65b9\u6cd5\uff0c \u6700\u540e\u6309\u7c7b\u578b\u5316\u8bed\u4e49\u6761\u4ef6\u7b5b\u9009\u3002AI \u7f16\u7a0b Agent \u6536\u5230\u9009\u4e2d\u7684\u6765\u6e90 ID \u548c\u6709\u754c\u8bc1\u636e\uff0c \u539f\u6587\u4ecd\u53ef\u56de\u67e5\uff0c\u8fd4\u56de\u5339\u914d\u524d\u8fd8\u4f1a\u68c0\u67e5\u6765\u6e90\u7248\u672c\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u4e3a AI \u7f16\u7a0b Agent \u589e\u52a0\u8bed\u4e49\u4ee3\u7801\u641c\u7d22",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/semantic-code-search.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.html",
+      "captured_at_utc": "2026-10-04T13:34:21.232942+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10351,
+      "body_sha256": "a4ed1d6bf13962af40333b70599291f011ec46e2c307e77e31c5d25cfb5ca4d2",
+      "title": "Recorded runs \u00b7 Jev Filter",
+      "description": "These are recordings of real runs: live Jev (jev-1.13.0), the same executor jev-filter browse and desktop use, on the synthetic fixtures in benchmarks/sites. The frames are the screenshots taken\u2026",
+      "og_description": "These are recordings of real runs: live Jev (jev-1.13.0), the same executor jev-filter browse and desktop use, on the synthetic fixtures in benchmarks/sites. The frames are the screenshots taken\u2026",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/showcase.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Recorded runs",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/showcase.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/showcase.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:21.287146+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10719,
+      "body_sha256": "84c79030549ab1a5f9ee6be6384ca81035ad0cd41495dfeef2915db1941da489",
+      "title": "\u5f55\u5236\u56de\u653e \u00b7 Jev Filter",
+      "description": "\u8fd9\u4e9b\u662f\u771f\u5b9e\u8fd0\u884c\u7684\u5f55\u50cf\uff1a\u771f\u5b9e Jev\uff08jev-1.13.0\uff09\uff0c\u7528\u7684\u5c31\u662f jev-filter browse \u548c desktop \u80cc\u540e\u7684\u6267\u884c\u5668\uff0c\u8dd1\u5728 benchmarks/sites \u7684\u5408\u6210\u5939\u5177\u4e0a\u3002\u753b\u9762\u662f\u6bcf\u6b21\u89c2\u5bdf\u540e\u622a\u4e0b\u7684\u5c4f\u5e55\uff0c\u6982\u7387\u662f\u90a3\u4e00\u6b65 Jev \u5b9e\u9645\u8fd4\u56de\u7684\u503c\uff0c\u6ca1\u6709\u91cd\u65b0\u751f\u6210\u6216\u4fee\u6539\u3002",
+      "og_description": "\u8fd9\u4e9b\u662f\u771f\u5b9e\u8fd0\u884c\u7684\u5f55\u50cf\uff1a\u771f\u5b9e Jev\uff08jev-1.13.0\uff09\uff0c\u7528\u7684\u5c31\u662f jev-filter browse \u548c desktop \u80cc\u540e\u7684\u6267\u884c\u5668\uff0c\u8dd1\u5728 benchmarks/sites \u7684\u5408\u6210\u5939\u5177\u4e0a\u3002\u753b\u9762\u662f\u6bcf\u6b21\u89c2\u5bdf\u540e\u622a\u4e0b\u7684\u5c4f\u5e55\uff0c\u6982\u7387\u662f\u90a3\u4e00\u6b65 Jev \u5b9e\u9645\u8fd4\u56de\u7684\u503c\uff0c\u6ca1\u6709\u91cd\u65b0\u751f\u6210\u6216\u4fee\u6539\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u5f55\u5236\u56de\u653e",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/showcase.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/showcase.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/showcase.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.html",
+      "captured_at_utc": "2026-10-04T13:34:21.288593+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 10069,
+      "body_sha256": "d0c452354958484ef634a6b8ef7c1970084a6e1d2693ace7dae47554e02b1570",
+      "title": "Local statistics and dashboard \u00b7 Jev Filter",
+      "description": "Jev Filter can record a numeric-only local ledger and show it in a read-only browser dashboard. Recording is opt-in. It does not change selection, cache inference, or run the primary model.",
+      "og_description": "Jev Filter can record a numeric-only local ledger and show it in a read-only browser dashboard. Recording is opt-in. It does not change selection, cache inference, or run the primary model.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/statistics.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Local statistics and dashboard",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/statistics.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/statistics.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:21.290104+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 9225,
+      "body_sha256": "8147f9166aaf007c7658418dd5bd50c31a1f1b88c61b368e088d274b225c2936",
+      "title": "\u672c\u5730\u7edf\u8ba1\u4e0e\u770b\u677f \u00b7 Jev Filter",
+      "description": "Jev Filter \u652f\u6301\u672c\u5730\u6570\u503c\u8d26\u672c\u548c\u53ea\u8bfb\u6d4f\u89c8\u5668\u770b\u677f\u3002\u914d\u7f6e\u540e\u542f\u7528\uff0c\u4e0d\u6539\u53d8\u7b5b\u9009\u7ed3\u679c\u3001\u4e0d\u7f13\u5b58\u63a8\u7406\uff0c\u4e5f\u4e0d\u989d\u5916\u8fd0\u884c\u4e3b\u6a21\u578b\u3002",
+      "og_description": "Jev Filter \u652f\u6301\u672c\u5730\u6570\u503c\u8d26\u672c\u548c\u53ea\u8bfb\u6d4f\u89c8\u5668\u770b\u677f\u3002\u914d\u7f6e\u540e\u542f\u7528\uff0c\u4e0d\u6539\u53d8\u7b5b\u9009\u7ed3\u679c\u3001\u4e0d\u7f13\u5b58\u63a8\u7406\uff0c\u4e5f\u4e0d\u989d\u5916\u8fd0\u884c\u4e3b\u6a21\u578b\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "\u672c\u5730\u7edf\u8ba1\u4e0e\u770b\u677f",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/docs/statistics.html",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/docs/statistics.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/docs/statistics.html"
+      },
+      "jsonld": []
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+      "captured_at_utc": "2026-10-04T13:34:21.403917+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13156,
+      "body_sha256": "b5b3b66280b61664a1017518146637248edfccf6b4f63ce8070f8a981a5bcd81",
+      "title": "Jev Filter\uff1aAI agent \u5de5\u5177\u7ed3\u679c\u7684\u8bed\u4e49\u7b5b\u9009 \u00b7 Jev Filter",
+      "description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+      "og_description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/index.zh-CN.html"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "zh-CN",
+      "h1": "Jev Filter\uff1aAI agent \u5de5\u5177\u7ed3\u679c\u7684\u8bed\u4e49\u7b5b\u9009",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter \u4e3a AI Agent \u7b5b\u9009\u68c0\u7d22\u7ed3\u679c\u3001\u4ee3\u7801\u5019\u9009\u4e0e\u65e5\u5fd7\uff0c\u8fd4\u56de\u7cbe\u7b80\u3001\u7c7b\u578b\u5316\u7684\u8bc1\u636e\u5305\uff0c\u5e76\u4fdd\u7559\u53ef\u56de\u67e5\u539f\u6587\u3002",
+          "url": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    }
+  ],
+  "additional_internal_targets": [
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/benchmarks/results/2026-10-04-live-batching.json",
+      "captured_at_utc": "2026-10-04T13:34:22.289945+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/benchmarks/results/2026-10-04-live-batching.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 31189,
+      "body_sha256": "a907a94698e7e02f7125e228c9d0433534a1280e52fe802501406e3e99bd3813"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/benchmarks/results/2026-10-04-live-selection-speed.json",
+      "captured_at_utc": "2026-10-04T13:34:22.290106+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/benchmarks/results/2026-10-04-live-selection-speed.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 25049,
+      "body_sha256": "53da9f9a51d071ece31e3c98d524232daf75d8f22abef4944a65a814df04a153"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/hero.svg",
+      "captured_at_utc": "2026-10-04T13:34:22.290240+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/hero.svg",
+      "content_type": "image/svg+xml",
+      "x_robots_tag": null,
+      "body_bytes": 6060,
+      "body_sha256": "6a3f33912993e82160947fea0e56f1b66de3532596beaf0784a51a4a08f8ea42"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/hero.zh-CN.svg",
+      "captured_at_utc": "2026-10-04T13:34:22.290691+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/hero.zh-CN.svg",
+      "content_type": "image/svg+xml",
+      "x_robots_tag": null,
+      "body_bytes": 5941,
+      "body_sha256": "70017365dd5f419dc1077f80f3b098327fb9bc0a5e65d0e511749925703225d2"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/selection-speed-live.png",
+      "captured_at_utc": "2026-10-04T13:34:22.290970+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/selection-speed-live.png",
+      "content_type": "image/png",
+      "x_robots_tag": null,
+      "body_bytes": 110834,
+      "body_sha256": "efed5d95b81a4b5ff23787e8e3049a70c23439b381c8a959f39f4839e643d7ce"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/selection-speed-live.zh-CN.png",
+      "captured_at_utc": "2026-10-04T13:34:22.291083+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/selection-speed-live.zh-CN.png",
+      "content_type": "image/png",
+      "x_robots_tag": null,
+      "body_bytes": 127109,
+      "body_sha256": "77ff6d7171170340fecbce5cd9ea9932bdea0dc50e41dc025ff01599482899ef"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/speed-live.png",
+      "captured_at_utc": "2026-10-04T13:34:22.291352+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/speed-live.png",
+      "content_type": "image/png",
+      "x_robots_tag": null,
+      "body_bytes": 115119,
+      "body_sha256": "b92a6f12b2d875afee0a76206563964a3f544c86afc7c9e30b5c43a10d981cef"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/docs/assets/speed-live.zh-CN.png",
+      "captured_at_utc": "2026-10-04T13:34:22.291564+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/docs/assets/speed-live.zh-CN.png",
+      "content_type": "image/png",
+      "x_robots_tag": null,
+      "body_bytes": 129370,
+      "body_sha256": "fd103ded7788d3a41519dcbecb3875269b8dc20db66640ac6d26d1779fbd1d87"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/analysis.json",
+      "captured_at_utc": "2026-10-04T13:34:22.291866+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/analysis.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 1184,
+      "body_sha256": "4b2db478af1d02d8b2886536d280f058ab0449f92d709951a3527edfe2ad3fcb"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/code-analysis.json",
+      "captured_at_utc": "2026-10-04T13:34:22.292143+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/code-analysis.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 1003,
+      "body_sha256": "b5b4782c7b0f58aca71d66c5ed874a2e0dac3f3da1777ccd4811db0c3d04ae57"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/code.py",
+      "captured_at_utc": "2026-10-04T13:34:22.292382+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/code.py",
+      "content_type": "application/octet-stream",
+      "x_robots_tag": null,
+      "body_bytes": 843,
+      "body_sha256": "7fab58554ee06ccfc6af8be9dc33dadba71ed7ac5b687d46d02dad9829239049"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/events.jsonl",
+      "captured_at_utc": "2026-10-04T13:34:22.292495+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/events.jsonl",
+      "content_type": "application/octet-stream",
+      "x_robots_tag": null,
+      "body_bytes": 862,
+      "body_sha256": "e0fe30bae76de2bc1fb05dd48a810a6bbd69da09acebaf356557c026277f0bf0"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/log-analysis.json",
+      "captured_at_utc": "2026-10-04T13:34:23.190123+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/log-analysis.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 1032,
+      "body_sha256": "a15c2763479dc0e98a673d89318c0b05ce8bd29c4dfaf0a873af4220e819654f"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/retrieved.json",
+      "captured_at_utc": "2026-10-04T13:34:23.228521+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/examples/search-filtering/retrieved.json",
+      "content_type": "application/json; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 1650,
+      "body_sha256": "6f9c33d1f0896dd94ea5100ed7ca40e656ca4d5307f9a2274c318e4f99a9de47"
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/style.css",
+      "captured_at_utc": "2026-10-04T13:34:23.267386+00:00",
+      "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/style.css",
+      "content_type": "text/css; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 5021,
+      "body_sha256": "56007292fc07c20b7c55beb0bc2d71b48898604fd5186283c856a0ce695fce4a"
+    }
+  ],
+  "sitemap_fetch": {
+    "requested_url": "https://apixly-ai.github.io/jev-filter/sitemap.xml",
+    "captured_at_utc": "2026-10-04T13:34:16.487763+00:00",
+    "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+    "status": 200,
+    "final_url": "https://apixly-ai.github.io/jev-filter/sitemap.xml",
+    "content_type": "application/xml",
+    "x_robots_tag": null,
+    "body_bytes": 4365,
+    "body_sha256": "5c9acdf271d013bf5d41f2c436c361abd47ca39299df5fd1f27b01dbf6a1ed5e"
+  },
+  "public_indexnow_key": {
+    "requested_url": "https://apixly-ai.github.io/jev-filter/264a156aec0bc90723d7ab90749559a3.txt",
+    "captured_at_utc": "2026-10-04T13:34:24.171346+00:00",
+    "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+    "status": 200,
+    "final_url": "https://apixly-ai.github.io/jev-filter/264a156aec0bc90723d7ab90749559a3.txt",
+    "content_type": "text/plain; charset=utf-8",
+    "x_robots_tag": null,
+    "body_bytes": 32,
+    "body_sha256": "d91db874f6b310b45b2f0c1d853c725fdd87aecd7acf7f7fd6428fdb76eacbc6",
+    "key_matches_maintained_public_file": true
+  },
+  "host_robots_fetch": {
+    "requested_url": "https://apixly-ai.github.io/robots.txt",
+    "captured_at_utc": "2026-10-04T13:34:24.979600+00:00",
+    "user_agent": "Jev-Filter-Independent-GEO-Audit/1.0",
+    "status": 404,
+    "error_kind": "http_error"
+  },
+  "crawler_user_agent_http_checks": [
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/",
+      "captured_at_utc": "2026-10-04T13:34:25.804395+00:00",
+      "user_agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13465,
+      "body_sha256": "04b70f8944bc9b25795590d101e4112991aea91da3236b4a1100b2f651b39249",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/",
+      "captured_at_utc": "2026-10-04T13:34:25.804663+00:00",
+      "user_agent": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13465,
+      "body_sha256": "04b70f8944bc9b25795590d101e4112991aea91da3236b4a1100b2f651b39249",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    },
+    {
+      "requested_url": "https://apixly-ai.github.io/jev-filter/",
+      "captured_at_utc": "2026-10-04T13:34:25.804827+00:00",
+      "user_agent": "Mozilla/5.0 (compatible; OAI-SearchBot/1.4; +https://openai.com/searchbot)",
+      "status": 200,
+      "final_url": "https://apixly-ai.github.io/jev-filter/",
+      "content_type": "text/html; charset=utf-8",
+      "x_robots_tag": null,
+      "body_bytes": 13465,
+      "body_sha256": "04b70f8944bc9b25795590d101e4112991aea91da3236b4a1100b2f651b39249",
+      "title": "Jev Filter: semantic filtering for AI agent tools \u00b7 Jev Filter",
+      "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "og_description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+      "canonical": [
+        "https://apixly-ai.github.io/jev-filter/"
+      ],
+      "og_url": "https://apixly-ai.github.io/jev-filter/",
+      "meta_refresh": null,
+      "robots_meta": null,
+      "language": "en",
+      "h1": "Jev Filter: semantic filtering for AI agent tools",
+      "alternates": {
+        "en": "https://apixly-ai.github.io/jev-filter/",
+        "zh-CN": "https://apixly-ai.github.io/jev-filter/index.zh-CN.html",
+        "x-default": "https://apixly-ai.github.io/jev-filter/"
+      },
+      "jsonld": [
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareSourceCode",
+          "name": "Jev Filter",
+          "description": "Jev Filter filters retrieved records, code candidates and logs into compact, typed evidence packets for AI agents, with recoverable originals.",
+          "url": "https://apixly-ai.github.io/jev-filter/",
+          "codeRepository": "https://github.com/apixly-ai/jev-filter",
+          "license": "https://opensource.org/license/mit/",
+          "version": "0.4.1",
+          "programmingLanguage": "Python"
+        }
+      ]
+    }
+  ],
+  "crawler_check_limitation": "These are public requests using crawler user-agent strings, not observations of genuine crawler traffic or indexed pages.",
+  "indexnow_receipt": {
+    "workflow_run_url": "https://github.com/apixly-ai/jev-filter/actions/runs/37205839607",
+    "captured_from": "gh run view --log, deployment job receipt",
+    "receipt_timestamp_utc": "2026-10-04T13:30:43.796Z",
+    "status": "received_key_validation_pending",
+    "http_status": 202,
+    "submitted_urls": 51,
+    "indexing_verified": false,
+    "resubmitted_by_validator": false
+  },
+  "live_fetch_findings": [
+    {
+      "severity": "metadata_regression",
+      "affected_urls": [
+        "https://apixly-ai.github.io/jev-filter/README.html",
+        "https://apixly-ai.github.io/jev-filter/README.zh-CN.html"
+      ],
+      "finding": "Rendered README title is a fenced shell comment; description is navigation text. Both pages appear in the sitemap. Main homepage/tutorial/FAQ metadata is correct.",
+      "cause": "Raw Markdown title extraction does not exclude fenced blocks; first paragraph selection admits README navigation.",
+      "reported_to_root": true,
+      "resolved": false
+    }
+  ]
+}
