@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "kind": "live-native-helper-routing-parity",
+  "helper_sha256": "8c5ff1dcffda837d4e2970b41ba7335e1443eb9ed096a8ba6c51d9bb35c06ba7",
+  "fixture_sha256": "822765af555b82c51a4dd7318ac5aa25284be11680f0f8e899a8526e5f0cfc42",
+  "spec_sha256": "acd218517973132fdbff9baccfbd91739807006ba6093b1789244644ff75af9a",
+  "gold": {
+    "selected_ids": [
+      "r1",
+      "r2",
+      "r3"
+    ],
+    "review_ids": [
+      "r6",
+      "r7"
+    ]
+  },
+  "runs": [
+    {
+      "arm": "native",
+      "repeat": 0,
+      "exit_code": 2,
+      "elapsed_ms": 1443.614,
+      "returned_context_bytes": 3458,
+      "selected_ids": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "review_ids": [
+        "r6",
+        "r7"
+      ],
+      "complete_correct": true,
+      "complete": false,
+      "telemetry": {
+        "ok": true,
+        "elapsed_ms": 1102,
+        "usage": {
+          "input_tokens": 3072,
+          "output_tokens": 655
+        },
+        "usage_complete": true,
+        "cache_hit_questions": 0,
+        "network_questions": 14,
+        "transport": {
+          "clients_created": 1,
+          "client_reuses": 0,
+          "requests": 1
+        },
+        "workers": 1,
+        "failed_requests": 0,
+        "unknown_usage_attempts": 0,
+        "requests": 1,
+        "plan": {
+          "mode": "filter",
+          "batch_sizes": [
+            14
+          ],
+          "deferred": {
+            "pr7:0": "NEEDS_CONTEXT"
+          }
+        },
+        "missing_record_fields": {
+          "r7": [
+            "source.source_url"
+          ]
+        },
+        "contract": {
+          "id": "skill.connection-screen",
+          "version": "1",
+          "fingerprint": "5b1e7309c1ca42699552ce19b300d5b6e9d06d4357c8eb0102b34eca56864048",
+          "model": "jev-1.13.0"
+        }
+      }
+    },
+    {
+      "arm": "helper",
+      "repeat": 0,
+      "exit_code": 2,
+      "elapsed_ms": 1277.733,
+      "returned_context_bytes": 3458,
+      "selected_ids": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "review_ids": [
+        "r6",
+        "r7"
+      ],
+      "complete_correct": true,
+      "complete": false,
+      "telemetry": {
+        "ok": true,
+        "elapsed_ms": 1061,
+        "usage": {
+          "input_tokens": 3072,
+          "output_tokens": 655
+        },
+        "usage_complete": true,
+        "cache_hit_questions": 0,
+        "network_questions": 14,
+        "transport": {
+          "clients_created": 1,
+          "client_reuses": 0,
+          "requests": 1
+        },
+        "workers": 1,
+        "failed_requests": 0,
+        "unknown_usage_attempts": 0,
+        "requests": 1,
+        "plan": {
+          "mode": "filter",
+          "batch_sizes": [
+            14
+          ],
+          "deferred": {
+            "pr7:0": "NEEDS_CONTEXT"
+          }
+        },
+        "missing_record_fields": {
+          "r7": [
+            "source.source_url"
+          ]
+        },
+        "contract": {
+          "id": "skill.connection-screen",
+          "version": "1",
+          "fingerprint": "5b1e7309c1ca42699552ce19b300d5b6e9d06d4357c8eb0102b34eca56864048",
+          "model": "jev-1.13.0"
+        }
+      }
+    },
+    {
+      "arm": "helper",
+      "repeat": 1,
+      "exit_code": 2,
+      "elapsed_ms": 1241.902,
+      "returned_context_bytes": 3458,
+      "selected_ids": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "review_ids": [
+        "r6",
+        "r7"
+      ],
+      "complete_correct": true,
+      "complete": false,
+      "telemetry": {
+        "ok": true,
+        "elapsed_ms": 1028,
+        "usage": {
+          "input_tokens": 3072,
+          "output_tokens": 655
+        },
+        "usage_complete": true,
+        "cache_hit_questions": 0,
+        "network_questions": 14,
+        "transport": {
+          "clients_created": 1,
+          "client_reuses": 0,
+          "requests": 1
+        },
+        "workers": 1,
+        "failed_requests": 0,
+        "unknown_usage_attempts": 0,
+        "requests": 1,
+        "plan": {
+          "mode": "filter",
+          "batch_sizes": [
+            14
+          ],
+          "deferred": {
+            "pr7:0": "NEEDS_CONTEXT"
+          }
+        },
+        "missing_record_fields": {
+          "r7": [
+            "source.source_url"
+          ]
+        },
+        "contract": {
+          "id": "skill.connection-screen",
+          "version": "1",
+          "fingerprint": "5b1e7309c1ca42699552ce19b300d5b6e9d06d4357c8eb0102b34eca56864048",
+          "model": "jev-1.13.0"
+        }
+      }
+    },
+    {
+      "arm": "native",
+      "repeat": 1,
+      "exit_code": 2,
+      "elapsed_ms": 1258.9,
+      "returned_context_bytes": 3458,
+      "selected_ids": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "review_ids": [
+        "r6",
+        "r7"
+      ],
+      "complete_correct": true,
+      "complete": false,
+      "telemetry": {
+        "ok": true,
+        "elapsed_ms": 1070,
+        "usage": {
+          "input_tokens": 3072,
+          "output_tokens": 655
+        },
+        "usage_complete": true,
+        "cache_hit_questions": 0,
+        "network_questions": 14,
+        "transport": {
+          "clients_created": 1,
+          "client_reuses": 0,
+          "requests": 1
+        },
+        "workers": 1,
+        "failed_requests": 0,
+        "unknown_usage_attempts": 0,
+        "requests": 1,
+        "plan": {
+          "mode": "filter",
+          "batch_sizes": [
+            14
+          ],
+          "deferred": {
+            "pr7:0": "NEEDS_CONTEXT"
+          }
+        },
+        "missing_record_fields": {
+          "r7": [
+            "source.source_url"
+          ]
+        },
+        "contract": {
+          "id": "skill.connection-screen",
+          "version": "1",
+          "fingerprint": "5b1e7309c1ca42699552ce19b300d5b6e9d06d4357c8eb0102b34eca56864048",
+          "model": "jev-1.13.0"
+        }
+      }
+    }
+  ],
+  "scope": "Same releasedCLIsemanticcore; fullprocessroutingtime and compactstdoutbytes. No primary-agent continuation, execution orbusinessworkflow. A wrapperdoesnotestablishmodelimprovement.",
+  "result_cache": false,
+  "physical_concurrency_max": 2,
+  "summary": {
+    "native": {
+      "runs": 2,
+      "correct": 2,
+      "median_ms": 1351.257,
+      "mean_context_bytes": 3458
+    },
+    "helper": {
+      "runs": 2,
+      "correct": 2,
+      "median_ms": 1259.8175,
+      "mean_context_bytes": 3458
+    }
+  },
+  "known_usage": {
+    "input_tokens": 12288,
+    "output_tokens": 2620
+  },
+  "usage_complete": true,
+  "logical_requests": 4,
+  "actual_billed_usd": null,
+  "estimated_jev_input_usd": 0.000516096,
+  "model_identity_basis": "Requested pinned model in contract; resolved provider ID not separately exposed by this adapter.",
+  "dataset_capture": "Direct native/helper subprocess parity experiment; reproduction commands and fixed fixtures published separately."
+}
