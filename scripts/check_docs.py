@@ -125,6 +125,12 @@ def check(root=ROOT):
             errors.append("sitemap.xml: URLs must match generated canonical documentation")
     except (OSError, ElementTree.ParseError) as exc:
         errors.append(f"sitemap.xml: {exc}")
+    try:
+        text_locations = (root / "sitemap.txt").read_text(encoding="utf-8").splitlines()
+        if text_locations != sorted(canonical_urls):
+            errors.append("sitemap.txt: URLs must match sorted unique canonical documentation")
+    except (OSError, UnicodeDecodeError) as exc:
+        errors.append(f"sitemap.txt: {exc}")
     return errors, len(pages)
 
 

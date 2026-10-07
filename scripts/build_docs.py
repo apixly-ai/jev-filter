@@ -278,6 +278,9 @@ def build(root=ROOT):
     ElementTree.ElementTree(sitemap).write(
         out / "sitemap.xml", encoding="utf-8", xml_declaration=True
     )
+    (out / "sitemap.txt").write_text(
+        "\n".join(sorted(locations)) + "\n", encoding="utf-8", newline="\n"
+    )
     key_file = root / "scripts/indexnow-key.txt"
     if key_file.exists():
         key = key_file.read_text(encoding="utf-8").strip()

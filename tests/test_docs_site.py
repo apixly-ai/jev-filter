@@ -226,6 +226,56 @@ def test_sitemap_contains_canonical_documents_without_aliases_or_research(built_
     assert (site / ("a" * 32 + ".txt")).read_text(encoding="utf-8") == "a" * 32
 
 
+def test_text_sitemap_lists_same_sorted_unique_canonical_urls_as_xml(built_site):
+    site = built_site / "site"
+    xml = ElementTree.parse(site / "sitemap.xml")
+    locations = [
+        node.text for node in xml.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
+    ]
+    raw = (site / "sitemap.txt").read_bytes()
+    assert raw.decode("utf-8") == "\n".join(sorted(set(locations))) + "\n"
+    lines = raw.decode("utf-8").splitlines()
+    assert lines == sorted(set(locations))
+    assert BASE + "index.html" not in lines
+    assert BASE + "docs/index.html" not in lines
+    assert BASE + "docs/index.zh-CN.html" not in lines
+    assert all("benchmarks/research" not in location for location in lines)
+    assert BASE + "google-synthetic.html" not in lines
+    assert BASE + ("a" * 32) + ".txt" not in lines
+
+
+def test_checker_rejects_missing_text_sitemap(built_site):
+    (built_site / "site/sitemap.txt").unlink(missing_ok=True)
+    checked = subprocess.run(
+        [sys.executable, str(built_site / "scripts/check_docs.py")], capture_output=True, text=True
+    )
+    assert checked.returncode != 0
+    assert "sitemap.txt" in checked.stderr
+
+
+@pytest.mark.parametrize("invalid", ("missing_url", "duplicate", "blank_line", "not_utf8"))
+def test_checker_rejects_invalid_text_sitemap(built_site, invalid):
+    site = built_site / "site"
+    xml = ElementTree.parse(site / "sitemap.xml")
+    locations = sorted(
+        node.text for node in xml.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")
+    )
+    if invalid == "missing_url":
+        content = "\n".join(locations[1:]) + "\n"
+    elif invalid == "duplicate":
+        content = "\n".join([*locations, locations[-1]]) + "\n"
+    elif invalid == "blank_line":
+        content = "\n\n".join(locations) + "\n"
+    else:
+        content = None
+    (site / "sitemap.txt").write_bytes(content.encode("utf-8") if content else b"\xff\n")
+    checked = subprocess.run(
+        [sys.executable, str(built_site / "scripts/check_docs.py")], capture_output=True, text=True
+    )
+    assert checked.returncode != 0
+    assert "sitemap.txt" in checked.stderr
+
+
 def test_checker_rejects_missing_generated_page_canonical(built_site):
     path = built_site / "site/docs/faq.html"
     text = path.read_text(encoding="utf-8")
