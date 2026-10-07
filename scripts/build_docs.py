@@ -60,7 +60,6 @@ class PageText(HTMLParser):
         self.nonlink = []
         self.links = 0
         self.link_depth = 0
-        self.aligned = False
         self.heading = None
         self.title = ""
 
@@ -70,7 +69,6 @@ class PageText(HTMLParser):
             self.current = [] if "home-actions" not in fields.get("class", "").split() else None
             self.nonlink = []
             self.links = 0
-            self.aligned = fields.get("align") == "center"
         if tag == "a":
             self.link_depth += 1
             if self.current is not None:
@@ -95,7 +93,7 @@ class PageText(HTMLParser):
         if tag == "p" and self.current is not None:
             text = re.sub(r"\s+", " ", "".join(self.current)).strip()
             only_links = self.links and re.fullmatch(r"[\s·|•—–\-→↗,:;/]*", "".join(self.nonlink))
-            navigation = only_links and (self.aligned or self.links >= 2)
+            navigation = only_links
             if (
                 text
                 and not navigation
