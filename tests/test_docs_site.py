@@ -277,6 +277,38 @@ def test_readme_description_uses_introductory_prose(built_site, filename, purpos
     assert page.meta["og:description"] == purpose
 
 
+def test_guide_description_skips_single_reference_link(built_site):
+    source = built_site / "docs/agent-quickstart.md"
+    purpose = "Jev Filter returns typed evidence while keeping original records recoverable."
+    source.write_text(
+        "# Agent quickstart\n\n[简体中文](agent-quickstart.zh-CN.md)\n\n"
+        "[Full integration reference](agents.md)\n\n" + purpose + "\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        [sys.executable, str(built_site / "scripts/build_docs.py")], check=True, capture_output=True
+    )
+    page = ParsedPage((built_site / "site/docs/agent-quickstart.html").read_text(encoding="utf-8"))
+    assert page.meta["description"] == purpose
+    assert page.meta["og:description"] == purpose
+
+
+def test_guide_description_keeps_prose_with_an_inline_link(built_site):
+    source = built_site / "docs/agent-quickstart.md"
+    source.write_text(
+        "# Agent quickstart\n\n"
+        "Review [recovered source evidence](recipes.md) before using a decision.\n",
+        encoding="utf-8",
+    )
+    subprocess.run(
+        [sys.executable, str(built_site / "scripts/build_docs.py")], check=True, capture_output=True
+    )
+    page = ParsedPage((built_site / "site/docs/agent-quickstart.html").read_text(encoding="utf-8"))
+    expected = "Review recovered source evidence before using a decision."
+    assert page.meta["description"] == expected
+    assert page.meta["og:description"] == expected
+
+
 def test_site_verification_is_copied_as_uninterpreted_artifact(built_site):
     source = built_site / "docs/site-verification/google-synthetic.html"
     target = built_site / "site/google-synthetic.html"
