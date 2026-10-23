@@ -7,6 +7,7 @@
 - 为现有本地只读 stdio 适配器准备官方 MCP Registry 元数据，包含调用方明确指定的工作目录和私有推理凭据。
 - 声明 npm MCP 命名空间与 Glama 维护人。这些文件仅用于准备目录发布，不代表已经获得 Registry 收录或安全认证。0.4.2 必须先发布到 npm，其 Registry 元数据才能通过包所有权验证。
 - 新增仅手动触发的 Registry 发布流程，使用 GitHub Actions OIDC，先核对 npm 精确版本身份、核对已有不可变版本，最多提交一次，并验证 Registry 精确记录；未确认结果保留为不确定状态。
+- 核对时包含已删除的 Registry 版本，并通过只读 Actions 历史跨 run 和此前各次 attempt 检查发布记录。编号历史缺失、journal 不可读或同版本已有发布记录时禁止提交。门禁仅支持少于 100 次 workflow run、每个 run 少于 10 次 attempt，artifact 保留 90 天；证据过期或不完整须人工核对。workflow 重跑仅可核对完全一致的 active 记录，不创建新提交。
 
 ## 0.4.1 — 2026-10-04
 

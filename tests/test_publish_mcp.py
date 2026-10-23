@@ -4,7 +4,9 @@ import copy
 import importlib.util
 import json
 import urllib.error
+import urllib.parse
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -44,8 +46,9 @@ def test_identical_existing_version_skips_without_submission(publisher, manifest
     calls = []
     result = publisher.publish_manifest(
         manifest,
-        npm_lookup=lambda _: npm_record(manifest),
+        npm_lookup=lambda _: pytest.fail("active exact Registry record must reconcile first"),
         registry_lookup=lambda _: registry_record(manifest),
+        history_guard=lambda _: pytest.fail("reconciliation must not depend on retained history"),
         submit=lambda: calls.append(True),
         state_path=tmp_path / "state.json",
     )
@@ -112,6 +115,7 @@ def test_submission_intent_is_durable_and_delayed_readback_does_not_resubmit(
         manifest,
         npm_lookup=lambda _: npm_record(manifest),
         registry_lookup=lookup,
+        history_guard=lambda _: None,
         submit=submit,
         state_path=path,
         sleep=lambda _: None,
@@ -133,6 +137,7 @@ def test_unconfirmed_submission_is_recorded_and_never_retried(publisher, manifes
             manifest,
             npm_lookup=lambda _: npm_record(manifest),
             registry_lookup=lambda _: None,
+            history_guard=lambda _: None,
             submit=submit,
             state_path=path,
             sleep=lambda _: None,
@@ -146,6 +151,7 @@ def test_unconfirmed_submission_is_recorded_and_never_retried(publisher, manifes
             manifest,
             npm_lookup=lambda _: npm_record(manifest),
             registry_lookup=lambda _: None,
+            history_guard=lambda _: None,
             submit=submit,
             state_path=path,
             sleep=lambda _: None,
@@ -165,4 +171,43 @@ def test_network_error_is_not_absence(publisher, monkeypatch):
 def test_exact_version_path_escapes_namespace_slash(publisher, manifest):
     url = publisher.registry_url(manifest)
     assert "/io.github.apixly-ai%2Fjev-filter/versions/" in url
-    assert url.endswith("/versions/" + manifest["version"])
+    parsed = urllib.parse.urlsplit(url)
+    assert parsed.path.endswith("/versions/" + manifest["version"])
+    assert urllib.parse.parse_qs(parsed.query) == {"include_deleted": ["true"]}
+
+
+def test_history_failure_stops_fresh_runner_before_submission(publisher, manifest, tmp_path):
+    calls = []
+
+    def history_guard(_):
+        raise RuntimeError("previous publication remains uncertain")
+
+    with pytest.raises(RuntimeError, match="previous publication"):
+        publisher.publish_manifest(
+            manifest,
+            npm_lookup=lambda _: npm_record(manifest),
+            registry_lookup=lambda _: None,
+            history_guard=history_guard,
+            submit=lambda: calls.append(True),
+            state_path=tmp_path / "fresh-runner-state.json",
+        )
+    assert calls == []
+
+
+def test_registry_publisher_subprocess_has_no_github_token(publisher, tmp_path, monkeypatch):
+    binary = tmp_path / "publisher"
+    binary.write_text("synthetic")
+    manifest = tmp_path / "server.json"
+    manifest.write_text("{}")
+    monkeypatch.setenv("GITHUB_TOKEN", "synthetic-github-token")
+    monkeypatch.setenv("GH_TOKEN", "synthetic-gh-token")
+    calls = []
+
+    def run(argv, **kwargs):
+        calls.append((argv, kwargs))
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(publisher.subprocess, "run", run)
+    assert publisher.submit_once(binary, manifest) == 0
+    assert "GITHUB_TOKEN" not in calls[0][1]["env"]
+    assert "GH_TOKEN" not in calls[0][1]["env"]

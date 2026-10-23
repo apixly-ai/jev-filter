@@ -15,6 +15,12 @@ of a 0.x API (minor releases may make documented breaking changes).
 - Add manually triggered Registry publication with GitHub Actions OIDC. It checks
   the exact published npm identity, reconciles existing immutable versions, submits
   at most once, and verifies the exact Registry record while retaining uncertainty.
+- Include deleted Registry versions in reconciliation and inspect read-only Actions
+  history across runs and earlier attempts. Missing numbered history, unreadable
+  journals or prior same-version publication block submission. The guard supports
+  fewer than 100 workflow runs and 10 attempts per run, with 90-day artifacts;
+  expired or incomplete evidence requires manual reconciliation. Workflow reruns
+  may reconcile an exact active record, but cannot create a new submission.
 
 ## [0.4.1] - 2026-10-04
 

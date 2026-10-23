@@ -46,6 +46,7 @@ def registry_url(manifest):
         + urllib.parse.quote(manifest["name"], safe="")
         + "/versions/"
         + urllib.parse.quote(manifest["version"], safe="")
+        + "?include_deleted=true"
     )
 
 
@@ -94,17 +95,13 @@ def publish_manifest(
     *,
     npm_lookup=npm_lookup,
     registry_lookup=registry_lookup,
+    history_guard=None,
+    journal_context=None,
     submit=None,
     state_path,
     sleep=time.sleep,
 ):
-    package = manifest["packages"][0]
-    npm = npm_lookup(manifest)
-    expected = (package["identifier"], package["version"], manifest["name"])
-    if (npm.get("name"), npm.get("version"), npm.get("mcpName")) != expected:
-        raise ValueError("Published npm name, version or mcpName does not match server.json")
     state_path = Path(state_path)
-    previous = json.loads(state_path.read_text()) if state_path.exists() else {}
     state = {
         "name": manifest["name"],
         "version": manifest["version"],
@@ -113,6 +110,7 @@ def publish_manifest(
         ).hexdigest(),
         "registry_url": registry_url(manifest),
         "publish_attempts": 0,
+        **(journal_context or {}),
     }
     existing = registry_lookup(manifest)
     if existing is not None:
@@ -120,13 +118,32 @@ def publish_manifest(
         state.update(status="already_published", publish_needed=False)
         write_state(state_path, state)
         return state
+    previous = json.loads(state_path.read_text()) if state_path.exists() else {}
     if (previous.get("name"), previous.get("version")) == (
         manifest["name"],
         manifest["version"],
-    ) and previous.get("status") in {"submission_in_progress", "execution_uncertain"}:
+    ) and previous.get("status") in {
+        "submission_in_progress",
+        "execution_uncertain",
+        "published_verified",
+        "already_published",
+        "conflicting_registry_record",
+    }:
         raise RuntimeError(
             "Previous Registry submission is unconfirmed; reconcile before publishing"
         )
+    state.update(status="checking", publish_needed=None)
+    write_state(state_path, state)
+    package = manifest["packages"][0]
+    npm = npm_lookup(manifest)
+    expected = (package["identifier"], package["version"], manifest["name"])
+    if (npm.get("name"), npm.get("version"), npm.get("mcpName")) != expected:
+        raise ValueError("Published npm name, version or mcpName does not match server.json")
+    if history_guard is None:
+        raise RuntimeError("Complete GitHub Actions publication history is required")
+    coverage = history_guard(manifest)
+    if isinstance(coverage, dict):
+        state.update(coverage)
     state.update(status="ready", publish_needed=True)
     write_state(state_path, state)
     if submit is None:
@@ -160,7 +177,23 @@ def publish_manifest(
     raise RuntimeError("Registry publication is unconfirmed; reconcile before another attempt")
 
 
+def submit_once(publisher, manifest):
+    environment = os.environ.copy()
+    for name in ("GITHUB_TOKEN", "GH_TOKEN"):
+        environment.pop(name, None)
+    result = subprocess.run(
+        [str(Path(publisher).resolve(strict=True)), "publish", str(manifest)],
+        capture_output=True,
+        timeout=90,
+        check=False,
+        env=environment,
+    )
+    return result.returncode
+
+
 def main():
+    from mcp_history import GitHubHistory
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", default="server.json")
     parser.add_argument("--state", default="mcp-publication-state.json")
@@ -184,16 +217,15 @@ def main():
         raise ValueError("Only the exact stable Jev Filter npm stdio manifest may be published")
 
     def submit():
-        result = subprocess.run(
-            [str(Path(args.publish).resolve(strict=True)), "publish", str(manifest_path)],
-            capture_output=True,
-            timeout=90,
-            check=False,
-        )
-        return result.returncode
+        return submit_once(args.publish, manifest_path)
 
+    history = GitHubHistory.from_env()
     result = publish_manifest(
-        manifest, state_path=Path(args.state), submit=submit if args.publish else None
+        manifest,
+        state_path=Path(args.state),
+        submit=submit if args.publish else None,
+        history_guard=history.assert_clear if history else None,
+        journal_context=history.context() if history else None,
     )
     if os.environ.get("GITHUB_OUTPUT"):
         with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:

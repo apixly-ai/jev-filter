@@ -46,7 +46,7 @@ def test_registry_publication_is_manual_scoped_and_uses_pinned_oidc_publisher():
     assert set(config["on"]) == {"workflow_dispatch"}
     assert config["concurrency"]["cancel-in-progress"] == "false"
     job = config["jobs"]["publish"]
-    assert job["permissions"] == {"contents": "read", "id-token": "write"}
+    assert job["permissions"] == {"contents": "read", "actions": "read", "id-token": "write"}
     assert "github.ref == 'refs/heads/main'" in job["if"]
     checkout = next(step for step in job["steps"] if "actions/checkout@" in step.get("uses", ""))
     assert checkout["with"]["ref"] == "${{ github.sha }}"
@@ -56,3 +56,10 @@ def test_registry_publication_is_manual_scoped_and_uses_pinned_oidc_publisher():
     assert "login github-oidc" in commands and "validate server.json" in commands
     assert "--token" not in commands and "GH_TOKEN" not in commands
     assert "scripts/publish_mcp.py --publish" in commands
+    token_steps = [step for step in job["steps"] if "GITHUB_TOKEN" in step.get("env", {})]
+    assert len(token_steps) == 2
+    assert all("python scripts/publish_mcp.py" in step.get("run", "") for step in token_steps)
+    upload = next(
+        step for step in job["steps"] if "actions/upload-artifact@" in step.get("uses", "")
+    )
+    assert "${{ github.run_id }}-${{ github.run_attempt }}" in upload["with"]["name"]
