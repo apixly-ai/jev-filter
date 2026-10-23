@@ -39,3 +39,27 @@ def test_tokenizer_dependencies_are_in_security_audit_and_release_sbom():
         ]
         assert any("stats" in line for line in installs)
         assert "pip_audit" in commands
+
+
+def test_registry_publication_is_manual_scoped_and_uses_pinned_oidc_publisher():
+    config = workflow("publish-mcp-registry.yml")
+    assert set(config["on"]) == {"workflow_dispatch"}
+    assert config["concurrency"]["cancel-in-progress"] == "false"
+    job = config["jobs"]["publish"]
+    assert job["permissions"] == {"contents": "read", "actions": "read", "id-token": "write"}
+    assert "github.ref == 'refs/heads/main'" in job["if"]
+    checkout = next(step for step in job["steps"] if "actions/checkout@" in step.get("uses", ""))
+    assert checkout["with"]["ref"] == "${{ github.sha }}"
+    commands = "\n".join(step.get("run", "") for step in job["steps"])
+    assert "/v1.8.2/mcp-publisher_linux_amd64.tar.gz" in commands
+    assert "d0554112d8f7affad9a10041776d63129a60b163c05036ae26caf73ecbbd89c8" in commands
+    assert "login github-oidc" in commands and "validate server.json" in commands
+    assert "--token" not in commands and "GH_TOKEN" not in commands
+    assert "scripts/publish_mcp.py --publish" in commands
+    token_steps = [step for step in job["steps"] if "GITHUB_TOKEN" in step.get("env", {})]
+    assert len(token_steps) == 2
+    assert all("python scripts/publish_mcp.py" in step.get("run", "") for step in token_steps)
+    upload = next(
+        step for step in job["steps"] if "actions/upload-artifact@" in step.get("uses", "")
+    )
+    assert "${{ github.run_id }}-${{ github.run_attempt }}" in upload["with"]["name"]

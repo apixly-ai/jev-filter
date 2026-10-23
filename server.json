@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.apixly-ai/jev-filter",
+  "title": "Jev Filter",
+  "description": "Read-only semantic filtering, code search, log triage and traceable evidence for AI agents.",
+  "repository": {
+    "url": "https://github.com/apixly-ai/jev-filter",
+    "source": "github"
+  },
+  "websiteUrl": "https://apixly-ai.github.io/jev-filter/",
+  "version": "0.4.2",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@apixly/jev-filter",
+      "version": "0.4.2",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "named",
+          "name": "--root",
+          "value": "{workspace}",
+          "variables": {
+            "workspace": {
+              "description": "Existing local directory the server is permitted to search and inspect.",
+              "format": "filepath",
+              "isRequired": true
+            }
+          }
+        }
+      ],
+      "environmentVariables": [
+        {
+          "name": "TYPESAFE_API_KEY",
+          "description": "Your TypeSafe Jev API key. Inference calls are billable; do not publish the key.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

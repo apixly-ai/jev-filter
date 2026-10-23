@@ -1,0 +1,62 @@
+name: Publish MCP Registry
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mcp-registry-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'apixly-ai/jev-filter' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - name: Require a manual run on the protected default branch
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+        run: test "$EVENT_NAME" = workflow_dispatch && test "$REF" = refs/heads/main
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Verify exact npm publication and reconcile the Registry version
+        id: preflight
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/publish_mcp.py
+      - name: Verify the pinned official publisher and validate metadata
+        run: |
+          set -euo pipefail
+          curl --fail --location --silent --show-error \
+            https://github.com/modelcontextprotocol/registry/releases/download/v1.8.2/mcp-publisher_linux_amd64.tar.gz \
+            --output publisher.tar.gz
+          printf '%s  %s\n' d0554112d8f7affad9a10041776d63129a60b163c05036ae26caf73ecbbd89c8 publisher.tar.gz | sha256sum --check
+          tar xzf publisher.tar.gz mcp-publisher
+          ./mcp-publisher --version
+          ./mcp-publisher validate server.json
+      - name: Authenticate with the temporary GitHub Actions identity
+        if: steps.preflight.outputs.publish_needed == 'true'
+        run: ./mcp-publisher login github-oidc
+      - name: Publish once and verify the exact Registry record
+        if: steps.preflight.outputs.publish_needed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/publish_mcp.py --publish ./mcp-publisher
+      - name: Preserve the public publication journal
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: mcp-registry-publication-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: mcp-publication-state.json
+          if-no-files-found: ignore
+          overwrite: false
+          retention-days: 90
