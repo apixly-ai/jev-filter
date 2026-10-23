@@ -8,6 +8,10 @@ of a 0.x API (minor releases may make documented breaking changes).
 Distributed through [GitHub Releases](https://github.com/apixly-ai/jev-filter/releases/tag/v0.4.2)
 and npm: `@apixly/jev-filter@0.4.2` with four native platform packages.
 
+Registered as [io.github.apixly-ai/jev-filter](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.apixly-ai%2Fjev-filter/versions/0.4.2?include_deleted=true)
+in the Official MCP Registry. Registration verifies namespace and package ownership;
+the listing does not establish security certification, traffic lift or adoption growth.
+
 ### Added
 - Add official MCP Registry metadata for the local, read-only stdio adapter,
   including a caller-selected workspace and a private inference credential.

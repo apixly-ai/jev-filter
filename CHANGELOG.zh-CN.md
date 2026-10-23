@@ -6,6 +6,8 @@
 
 已通过 [GitHub Releases](https://github.com/apixly-ai/jev-filter/releases/tag/v0.4.2) 和 npm 分发：`@apixly/jev-filter@0.4.2` 及四个原生平台包。
 
+已在官方 MCP Registry 登记为 [io.github.apixly-ai/jev-filter](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.apixly-ai%2Fjev-filter/versions/0.4.2?include_deleted=true)。Registry 核验命名空间与包所有权；收录本身不构成安全认证，也不能证明曝光、流量或采用增长。
+
 - 为现有本地只读 stdio 适配器提供官方 MCP Registry 元数据，包含调用方明确指定的工作目录和私有推理凭据。
 - 声明 npm MCP 命名空间与 Glama 维护人，用于目录所有权验证和分发。
 - 新增仅手动触发的 Registry 发布流程，使用 GitHub Actions OIDC，先核对 npm 精确版本身份、核对已有不可变版本，最多提交一次，并验证 Registry 精确记录；未确认结果保留为不确定状态。
