@@ -3,15 +3,20 @@
 The format follows Keep a Changelog; versions follow SemVer within the limitations
 of a 0.x API (minor releases may make documented breaking changes).
 
-## [Unreleased] - 0.4.2
+## [0.4.2] - 2026-10-24
+
+Distributed through [GitHub Releases](https://github.com/apixly-ai/jev-filter/releases/tag/v0.4.2)
+and npm: `@apixly/jev-filter@0.4.2` with four native platform packages.
+
+Registered as [io.github.apixly-ai/jev-filter](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.apixly-ai%2Fjev-filter/versions/0.4.2?include_deleted=true)
+in the Official MCP Registry. Registration verifies namespace and package ownership;
+the listing does not establish security certification, traffic lift or adoption growth.
 
 ### Added
-- Prepare official MCP Registry metadata for the local, read-only stdio adapter,
+- Add official MCP Registry metadata for the local, read-only stdio adapter,
   including a caller-selected workspace and a private inference credential.
-- Declare the npm MCP namespace and Glama maintainers. These files prepare
-  directory publication; they do not establish a published Registry listing or a
-  security certification. Version 0.4.2 must be released to npm before its Registry
-  metadata can pass package-ownership verification.
+- Declare the npm MCP namespace and Glama maintainers for directory ownership
+  verification and distribution.
 - Add manually triggered Registry publication with GitHub Actions OIDC. It checks
   the exact published npm identity, reconciles existing immutable versions, submits
   at most once, and verifies the exact Registry record while retaining uncertainty.
