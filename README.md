@@ -7,7 +7,7 @@
   <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="Latest release" height="20"></a>
   <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm version" height="20"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license" height="20"></a>
-  <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f" alt="M8ven Score" height="20"></a>
+  <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f&amp;variant=verified" alt="M8ven Live monitoring" height="20"></a>
 </p>
 
 <p align="center">
