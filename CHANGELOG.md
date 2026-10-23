@@ -12,6 +12,9 @@ of a 0.x API (minor releases may make documented breaking changes).
   directory publication; they do not establish a published Registry listing or a
   security certification. Version 0.4.2 must be released to npm before its Registry
   metadata can pass package-ownership verification.
+- Add manually triggered Registry publication with GitHub Actions OIDC. It checks
+  the exact published npm identity, reconciles existing immutable versions, submits
+  at most once, and verifies the exact Registry record while retaining uncertainty.
 
 ## [0.4.1] - 2026-10-04
 
