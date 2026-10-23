@@ -3,49 +3,26 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="Latest release"></a>
-  <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm version"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
+  <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI" height="20"></a>
+  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="Latest release" height="20"></a>
+  <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm version" height="20"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license" height="20"></a>
+  <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f&amp;variant=verified" alt="M8ven Live monitoring" height="20"></a>
 </p>
-
-[![M8ven Score](https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f)](https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme)
 
 <p align="center">
-  <a href="README.zh-CN.md">简体中文</a> · <a href="#quick-start">Quick start</a> · <a href="https://apixly-ai.github.io/jev-filter/">Documentation</a> · <a href="docs/agent-quickstart.md">Agent setup</a> · <a href="docs/benchmarks.md">Benchmarks</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">Releases</a>
+  <a href="README.zh-CN.md">简体中文</a> · <a href="#quick-start">Quick start</a> · <a href="https://apixly-ai.github.io/jev-filter/">Documentation</a> · <a href="docs/agent-quickstart.md">Agent setup</a> · <a href="docs/benchmarks.md">Benchmarks</a>
 </p>
 
-# Jev Filter: semantic filtering for AI agent tools
+# Jev Filter
 
-**Give your agent the signal. Keep the evidence.** Jev Filter turns large tool outputs into compact, typed decisions before they enter your agent's context. Commands, code, logs and page records stay inside the program; your agent receives relevant evidence and the IDs that need its attention.
+**Semantic filtering for AI agent tool results.** Turn large tool outputs into compact, typed decisions before they enter your agent's context. Keep source records inside your program, return relevant evidence and unresolved IDs, and recover originals by ID.
 
-**Semantic filtering for retrieved evidence and agent tool results.** Maintained by Apixly as an independent MIT project, the official package is **`@apixly/jev-filter`**. Use it after a search or collector produces candidates: screen them against your task and supplied facts, keep unresolved cases visible, and recover originals by ID. [What it does and when to use it](docs/faq.md).
+- **Filter with context.** Screen search results, complete code symbols and correlated logs against your task and supplied facts.
+- **Keep decisions traceable.** Return typed answers, source IDs and review items; preserve missing facts and partial failures.
+- **Verify actions in your program.** For short browser and desktop goals, Jev selects observed controls; the program owns execution, safety gates and final-state checks.
 
-**96 records screened in 1.31 seconds. The same exact result.** Paid same-output A/B: Jev's batched API path took a median **1.313 s**, versus **13.421 s** for Luna and **14.543 s** for Astra through signed-in Codex CLI. All **9/9** runs selected the same correct 48 IDs. Three repetitions per path on synthetic inputs; CLI startup is included, and no primary-agent continuation follows Jev. [Compare the measured paths →](#measured-advantages)
-
-**91.6–97.2% less returned tool context. 24/24 exact ID sets.** A separate whole-agent A/B on **2026-10-04** measured three synthetic scenarios, two primary models and two repetitions per arm. Every original remains recoverable by ID. [Live evidence and trade-offs →](#measured-advantages)
-
-## More signal. Less work for your agent.
-
-| **Focus the agent** | **Make every decision traceable** | **Let the program finish the job** |
-|---|---|---|
-| Filter large batches against the task and supplied context. The primary model spends its attention on the selected evidence and difficult cases. | Typed answers, source IDs, local originals and receipts. Missing facts, uncertain choices and partial failures stay visible. | For short browser and desktop goals, Jev chooses from observed controls; the program owns execution, safety gates and final-state verification. |
-
-The result is a useful division of labor: **programs collect and verify; Jev makes repeated semantic judgments; your agent plans, reasons and writes.** Automatic batching reduces repeated input, up to 30 requests run concurrently, and no result cache hides a new observation.
-
-## Proven where your agent actually works
-
-**Do the repeated judgments together.** The program shares task context across each bounded batch: a separate batching A/B used **2 requests instead of 96**, with **56.5% fewer Jev input tokens** and **2.58× filtering speed** compared with single-record parallel Jev calls. You get the same labeled result in less waiting time, without a result cache.
-
-**Put the signal in the conversation, keep the full trace within reach.** In the fresh whole-operation A/B, the filtered agent completed **12/12** runs; raw context completed **11/12**. All 24 runs returned the expected ID sets. This measures collection, real primary-agent tool use and continuation together.
-
-**Find more of the behavior you meant.** Opt-in code recall plus native Jev filtering recovered **10/12** labeled matches, versus **4/12** for exact candidates, with zero false positives. Bounded diff triage selected all four target changes in both repetitions. Originals and source freshness remain independently checkable.
-
-**Use the route you already have.** **13/13 paid interface checks** passed across the Python CLI, a fresh published npm install, JavaScript, official MCP, local page extraction and survey. You get the same evidence contract without rebuilding your agent.
-
-The context gain is the strongest result. **Five of six whole-operation cells were slower; a cheap-model `exec` cell cost 1.1% more in the cold API-equivalent estimate.** Smaller context does not guarantee lower latency or billing. [Numbers, methods and negative results →](docs/benchmarks.md)
-
-[Agent integration examples →](docs/agent-quickstart.md#javascript-and-mcp) · [Command reference →](docs/cli.md)
+An independent MIT project maintained by Apixly. Official npm package: **`@apixly/jev-filter`**. [What it does and when to use it](docs/faq.md).
 
 ## Quick start
 
@@ -95,7 +72,18 @@ Copyable synthetic inputs and analysis contracts are included. [Read the tutoria
 
 ## Measured advantages
 
-Fresh **paid live evidence · 2026-10-04**. Inputs, source hashes, per-run tokens, complete timing and failures are public. Each result belongs to its stated scope.
+Paid live evidence from **2026-10-04**, using synthetic inputs. Source hashes, per-run usage, timing and failures are public; each result belongs to its stated scope.
+
+- **Returned tool context:** **91.6–97.2% less** across 24 real agent runs. Filtered completion was **12/12**, raw completion **11/12**, and all **24/24** ID sets were correct.
+- **Same-output selection:** Jev's batched API path screened 96 records in a median **1.313 s**, versus **13.421 s** for Luna and **14.543 s** for Astra through signed-in Codex CLI. All **9/9** runs selected the same 48 IDs; CLI startup is included, and no primary-agent continuation follows Jev.
+- **Jev-stage batching:** **2 requests instead of 96**, **56.5% fewer input tokens** and **2.58× filtering speed** versus single-record parallel Jev calls. This measures the Jev stage, not a whole-agent speedup.
+
+**Latency and cost vary.** Five of six whole-operation cells were slower by **0.1–18.4%**; cold API-equivalent cost ranged from **23.2% lower to 1.1% higher**. Subscription billing remains unknown. Smaller context does not guarantee lower latency or billing.
+
+[Methods, negative results and reproduction](docs/benchmarks.md) · [Per-run whole-operation data](benchmarks/results/2026-10-04-live-operations.json)
+
+<details>
+<summary><strong>Selection paths, measured results and scope</strong></summary>
 
 **Fast semantic selection, checked against the same expected answer.** All paths screened 96 records against two semantic conditions and returned exactly the same 48 matching IDs.
 
@@ -120,8 +108,10 @@ This compares available **execution paths**, including CLI startup and the prima
 
 ![96-record Jev filtering: 3.22 seconds to 1.25 seconds with automatic batching, 12/12 exact runs](docs/assets/speed-live.png)
 
+</details>
+
 <details>
-<summary><strong>See the new whole-operation chart and reproduce the results</strong></summary>
+<summary><strong>Whole-operation chart and reproduction</strong></summary>
 
 ![Fresh whole-operation context reduction, API-equivalent cost and latency changes](docs/assets/operations-live.png)
 

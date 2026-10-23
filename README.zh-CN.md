@@ -3,49 +3,26 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="最新版本"></a>
-  <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm 版本"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT 许可证"></a>
+  <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI" height="20"></a>
+  <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="最新版本" height="20"></a>
+  <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm 版本" height="20"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT 许可证" height="20"></a>
+  <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f&amp;variant=verified" alt="M8ven 实时监测" height="20"></a>
 </p>
-
-[![M8ven Score](https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f)](https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme)
 
 <p align="center">
-  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">版本发布</a>
+  <a href="README.md">English</a> · <a href="#快速开始">快速开始</a> · <a href="https://apixly-ai.github.io/jev-filter/index.zh-CN.html">中文文档</a> · <a href="docs/agent-quickstart.zh-CN.md">接入 AI</a> · <a href="docs/benchmarks.zh-CN.md">Benchmark</a>
 </p>
 
-# Jev Filter：AI agent 工具结果的语义筛选
+# Jev Filter
 
-**把关键信号交给 AI，把判断证据留给你。** Jev Filter 在整批工具输出进入主模型之前，将它变成精简、类型化的判断结果。命令、代码、日志和网页记录保留在程序内部；主模型只接收相关证据，以及需要它接管的 ID。
+**AI agent 工具结果的语义筛选。** 将大量工具输出转成精简、类型化的判断，再交给主模型。原文保存在程序内部，返回相关证据与待复核 ID，完整记录仍可按 ID 回查。
 
-**检索证据与 agent 工具结果的语义筛选。** 项目由 Apixly 独立维护，采用 MIT 许可证；官方 npm 包为 **`@apixly/jev-filter`**。在搜索或采集器生成候选之后，根据任务与明确提供的事实筛选，保留未知项，并按 ID 回查原文。[功能与适用条件](docs/faq.zh-CN.md)。
+- **结合上下文筛选。** 根据任务与有来源的事实，筛选搜索结果、完整代码符号和关联日志。
+- **每个判断都有出处。** 返回类型化答案、来源 ID 与待复核项，保留缺失事实和部分失败。
+- **由程序验证动作。** 对短浏览器与桌面目标，Jev 选择观察到的控件；程序负责执行、安全门禁和终态检查。
 
-**96 条记录，1.31 秒筛完，选中结果完全一致。** 最新付费同输出 A/B：Jev 合批 API 路径中位 **1.313 秒**，已登录 Codex CLI 的 Luna 为 **13.421 秒**、Astra 为 **14.543 秒**；全部 **9/9** 次都选对同样的 48 个 ID。合成输入、每条路径重复三次；CLI 包含启动耗时，Jev 后面没有主模型续跑。[核对实测路径 →](#实测优势)
-
-**返回工具上下文减少 91.6–97.2%，24/24 组选中 ID 全部正确。** 另一组 **2026-10-04** 整轮 agent A/B 覆盖三个合成场景、两个主模型、每个实验臂重复两次。完整原文仍可按 ID 回查。[真实调用证据与代价 →](#实测优势)
-
-## 让主模型的每一分注意力都更有价值
-
-| **聚焦关键内容** | **每个判断都有出处** | **让程序完成并验证目标** |
-|---|---|---|
-| 按任务与上下文筛选大量记录，主模型把注意力放在选中的证据与困难项。 | 类型化答案、来源 ID、本地原文和收据。缺事实、不确定与部分失败都明确保留。 | 对短浏览器或桌面目标，Jev 在观察到的控件中选择；程序拥有执行权、安全门禁与终态验证。 |
-
-形成清楚的分工：**程序采集与验证，Jev 做重复语义判断，主模型规划、推理与写作。** 自动合批减少重复输入，最多 30 个请求并发，不用结果缓存掩盖新观察。
-
-## 在 AI 实际工作的地方，证明价值
-
-**把重复判断一起做完。** 程序把共享上下文装入有界批次，另一组合批 A/B 从 **96 个请求变成 2 个**，Jev 输入 tokens **减少 56.5%**，筛选速度为单条并发 Jev 调用的 **2.58 倍**。同样的标注结果，更短的等待，不依赖结果缓存。
-
-**让对话接收信号，让完整轨迹随时可查。** 最新整段 A/B 中，过滤后的 agent **12/12** 次完整完成任务，原文臂为 **11/12**；全部 24 次运行都返回了正确 ID 集。测量包含采集、真实主模型调用工具及后续处理。
-
-**找到更多你真正要查的行为。** 可选代码召回结合 Jev 原生筛选，正确匹配 **4/12 → 10/12**，误报为零。有界 diff 筛查在两次重复中都选对全部四个目标变更，原文与来源新鲜度仍可独立核对。
-
-**沿用你已有的接入方式。** Python CLI、全新安装的已发布 npm 包、JavaScript、官方 MCP、本地网页提取与 survey 的 **13/13 项付费 E2E 检查通过**。共享证据契约，直接接进现有 agent。
-
-最强的实测收益是上下文缩减。**六个整段对比单元中有五个更慢；低价主模型的 `exec` 冷输入 API 等价费用高了 1.1%。** 上下文变小，不保证耗时或实际账单下降。[数字、方法与负面结果 →](docs/benchmarks.zh-CN.md)
-
-[接入示例 →](docs/agent-quickstart.zh-CN.md#javascript-与-mcp) · [命令参考 →](docs/cli.zh-CN.md)
+由 Apixly 独立维护的 MIT 项目。官方 npm 包：**`@apixly/jev-filter`**。[功能与适用条件](docs/faq.zh-CN.md)。
 
 ## 快速开始
 
@@ -95,7 +72,18 @@ jev-filter exec --task '找出尚未恢复的网络故障' \
 
 ## 实测优势
 
-最新 **付费真实调用 · 2026-10-04**。公开固定输入、源码哈希、逐次用量、整段耗时与失败；每个结果对应明确范围。
+以下为 **2026-10-04** 使用合成输入的付费真实调用。公开源码哈希、逐次用量、耗时与失败；每个结果对应明确范围。
+
+- **返回工具上下文：** 24 次真实 agent 运行中**减少 91.6–97.2%**。过滤臂完整完成 **12/12**，原文臂 **11/12**，**24/24** 组 ID 全对。
+- **同输出筛选：** Jev 合批 API 路径筛选 96 条记录的耗时中位为 **1.313 秒**，已登录 Codex CLI 的 Luna 为 **13.421 秒**、Astra 为 **14.543 秒**。全部 **9/9** 次选中同样的 48 个 ID；CLI 包含启动耗时，Jev 后面没有主模型续跑。
+- **Jev 阶段合批：** 相比单条并发 Jev 调用，**96 个请求变成 2 个**，输入 tokens **减少 56.5%**，筛选速度为 **2.58 倍**。只测 Jev 阶段，不是整轮 agent 提速。
+
+**耗时和费用各有得失。** 六个整段对比单元中有五个慢了 **0.1–18.4%**；冷输入 API 等价费用从**下降 23.2% 到增加 1.1%**。订阅实际账单未知。上下文变小，不保证耗时或实际账单下降。
+
+[方法、负面结果与复现](docs/benchmarks.zh-CN.md) · [整段任务逐次数据](benchmarks/results/2026-10-04-live-operations.json)
+
+<details>
+<summary><strong>筛选路径、实测结果与适用范围</strong></summary>
 
 **更快的语义筛选，用相同的预期答案核验。** 三条路径都按两个语义条件筛选 96 条记录，精确返回同样的 48 个匹配 ID。
 
@@ -120,8 +108,10 @@ jev-filter exec --task '找出尚未恢复的网络故障' \
 
 ![96 条记录 Jev 筛选：自动合批从 3.22 秒缩短至 1.25 秒，12/12 次结果精确](docs/assets/speed-live.zh-CN.png)
 
+</details>
+
 <details>
-<summary><strong>查看最新整段图表与可复现数据</strong></summary>
+<summary><strong>整段任务图表与可复现数据</strong></summary>
 
 ![最新整段任务的上下文缩减、API 等价费用与耗时变化](docs/assets/operations-live.zh-CN.png)
 
