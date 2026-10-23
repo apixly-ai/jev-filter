@@ -8,6 +8,9 @@
   <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm version"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license"></a>
 </p>
+
+[![M8ven Score](https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f)](https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme)
+
 <p align="center">
   <a href="README.zh-CN.md">简体中文</a> · <a href="#quick-start">Quick start</a> · <a href="https://apixly-ai.github.io/jev-filter/">Documentation</a> · <a href="docs/agent-quickstart.md">Agent setup</a> · <a href="docs/benchmarks.md">Benchmarks</a> · <a href="https://github.com/apixly-ai/jev-filter/releases">Releases</a>
 </p>
