@@ -3,6 +3,16 @@
 The format follows Keep a Changelog; versions follow SemVer within the limitations
 of a 0.x API (minor releases may make documented breaking changes).
 
+## [Unreleased] - 0.4.2
+
+### Added
+- Prepare official MCP Registry metadata for the local, read-only stdio adapter,
+  including a caller-selected workspace and a private inference credential.
+- Declare the npm MCP namespace and Glama maintainers. These files prepare
+  directory publication; they do not establish a published Registry listing or a
+  security certification. Version 0.4.2 must be released to npm before its Registry
+  metadata can pass package-ownership verification.
+
 ## [0.4.1] - 2026-10-04
 
 ### Fixed
