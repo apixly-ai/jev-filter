@@ -6,6 +6,7 @@
   <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI" height="20"></a>
   <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="Latest release" height="20"></a>
   <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm version" height="20"></a>
+  <a href="https://mcpservers.org/servers/apixly-ai/jev-filter"><img src="https://mcpservers.org/badge.svg" alt="Listed on MCP Servers" height="20"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT license" height="20"></a>
   <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f&amp;variant=verified" alt="M8ven Live monitoring" height="20"></a>
 </p>
@@ -23,6 +24,8 @@
 - **Verify actions in your program.** For short browser and desktop goals, Jev selects observed controls; the program owns execution, safety gates and final-state checks.
 
 An independent MIT project maintained by Apixly. Official npm package: **`@apixly/jev-filter`**. [What it does and when to use it](docs/faq.md).
+
+**Discover and connect:** [View the MCP Servers listing ↗](https://mcpservers.org/servers/apixly-ai/jev-filter) · [Set up a client and four read-only tools →](docs/agent-quickstart.md#javascript-and-mcp)
 
 ## Quick start
 

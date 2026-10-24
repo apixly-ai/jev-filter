@@ -6,6 +6,7 @@
   <a href="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml"><img src="https://github.com/apixly-ai/jev-filter/actions/workflows/ci.yml/badge.svg" alt="CI" height="20"></a>
   <a href="https://github.com/apixly-ai/jev-filter/releases"><img src="https://img.shields.io/github/v/release/apixly-ai/jev-filter?color=10b981" alt="最新版本" height="20"></a>
   <a href="https://www.npmjs.com/package/@apixly/jev-filter"><img src="https://img.shields.io/npm/v/%40apixly%2Fjev-filter?color=8b5cf6" alt="npm 版本" height="20"></a>
+  <a href="https://mcpservers.org/servers/apixly-ai/jev-filter"><img src="https://mcpservers.org/badge.svg" alt="MCP Servers 已收录" height="20"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-64748b" alt="MIT 许可证" height="20"></a>
   <a href="https://m8ven.ai/mcp/apixly-ai-jev-filter-12dtd6?s=readme"><img src="https://m8ven.ai/badge/mcp/apixly-ai-jev-filter-12dtd6?v=ce4b1d6d2ebc0e1042f16a2c3b61818f&amp;variant=verified" alt="M8ven 实时监测" height="20"></a>
 </p>
@@ -23,6 +24,8 @@
 - **由程序验证动作。** 对短浏览器与桌面目标，Jev 选择观察到的控件；程序负责执行、安全门禁和终态检查。
 
 由 Apixly 独立维护的 MIT 项目。官方 npm 包：**`@apixly/jev-filter`**。[功能与适用条件](docs/faq.zh-CN.md)。
+
+**发现与接入 MCP：** [查看 MCP Servers 收录页 ↗](https://mcpservers.org/servers/apixly-ai/jev-filter) · [配置客户端与四个只读工具 →](docs/agent-quickstart.zh-CN.md#javascript-与-mcp)
 
 ## 快速开始
 
